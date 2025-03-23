@@ -8,11 +8,12 @@ const Board = lazy(() => import('src/components/main/board'));
 const Instruction = lazy(() => import('src/components/main/instruction'));
 const Error = lazy(() => import('src/components/main/error'));
 
-const Login = lazy(() => import('src/components/main/forms/login'));
-const Registration = lazy(() => import('src/components/main/forms/registration'));
+const Login = lazy(() => import('src/components/main/authentication/login'));
+const Registration = lazy(() => import('src/components/main/authentication/registration'));
 
 const About = lazy(() => import('src/components/main/info/about'));
 const Legal = lazy(() => import('src/components/main/info/legal'));
+const AGB = lazy(() => import('src/components/main/info/agb'));
 
 /*
 Dashboard
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: 'instruction', element: <Instruction /> },
       { path: 'about', element: <About /> },
       { path: 'legal', element: <Legal /> },
+      { path: 'Agb', element: <AGB /> },
       { path: 'login', element: <Login /> },
       { path: 'registration', element: <Registration /> },
       { path: '404', element: <Error /> },

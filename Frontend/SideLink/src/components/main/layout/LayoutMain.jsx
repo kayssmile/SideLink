@@ -13,7 +13,7 @@ const LayoutMain = () => {
     justifyContent: 'space-between',
     minHeight: '100vh',
     width: '100%',
-    backgroundColor: theme.palette.background.white,
+    backgroundColor: theme.palette.background.main,
   }));
 
   return (

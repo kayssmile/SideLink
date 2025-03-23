@@ -7,3 +7,17 @@ body {
   }
   //background-color: red;
 }
+
+:root {
+  /* Farbpalette */
+  --color-main: #293345;
+  --color-font-primary: #ffffff;
+  --color-font-secondary: #7c8fac;
+
+  /* Hintergrundfarben */
+  --bg-main: #293345;
+  --bg-primary: #253662;
+  --bg-secondary: #5d87ff;
+  --bg-third: rgb(28, 69, 93);
+  --bg-white: #ffffff;
+}

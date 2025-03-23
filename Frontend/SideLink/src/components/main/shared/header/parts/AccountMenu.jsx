@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Profile from 'src/components/shared/header/Profile';
 
 const AccountMenu = () => {
-  const isLoggedIn = useSelector(state => state.account.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.accountManagment.isLoggedIn);
 
   return (
     <>

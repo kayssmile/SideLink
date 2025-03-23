@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleSidebar, toggleThemeMode } from 'src/store/dashboard/DashboardManagment';
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 
-import Profile from 'src/views/shared/header/Profile';
+import Profile from 'src/components/shared/header/Profile';
 
 import { useTheme } from '@mui/material/styles';
 
 const Header = () => {
   const theme = useTheme();
+
   //const lgUp = useMediaQuery(theme => theme.breakpoints.up('md'));
   //const lgDown = useMediaQuery(theme => theme.breakpoints.down('md'));
 
