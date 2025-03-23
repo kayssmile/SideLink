@@ -50,12 +50,11 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        
         data = response.data
 
         response.set_cookie(
             key='refreshToken',
-            value=data.pop('refresh_token'),
+            value=data['refresh_token'], # in production use data.pop('refresh_token')
             httponly=True,  # Verhindert den Zugriff durch JavaScript
             samesite='None',  # oder 'Strict' für strengere Sicherheitsvorgaben
             secure=True,  # Setze auf False, um Cookies auch über HTTP zu erlauben (bei Verwendung von HTTPS sollte dies auf True gesetzt werden)
@@ -68,13 +67,11 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         # Try to get refresh token from cookies first
-        print(request.data)
         refresh_token = request.COOKIES.get('refreshToken')
-        
         # If not in cookies, try to get from request body
         if not refresh_token:
             refresh_token = request.data.get('refresh')
-            
+
         if not refresh_token:
             raise ValidationError({"refresh": "Refresh token is missing"})
 

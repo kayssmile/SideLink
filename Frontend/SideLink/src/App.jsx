@@ -6,20 +6,21 @@ import router from 'src/routes/router';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import axios from 'axios';
-import { axiosInstanceFormData } from 'src/store/usermanagment/services/AxiosInstance';
+import { axiosInstanceBasic } from 'src/store/usermanagment/services/AxiosInstance';
 
 function App() {
   async function checkAuth() {
     try {
-      const { data } = await axiosInstanceFormData.post('api/auth/refresh/', {});
-      console.log(data);
+      /* For development use refreshToken from localStorage
+      const refresh_token = localStorage.getItem('refreshToken'); */
+
+      const { data } = await axiosInstanceBasic.post('api/auth/refresh/', {});
     } catch (error) {
       const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
       console.log(errorMessage);
     }
   }
-  ///api/auth/refresh/
+
   checkAuth();
 
   return (

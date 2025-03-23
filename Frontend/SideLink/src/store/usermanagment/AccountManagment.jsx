@@ -46,6 +46,9 @@ const accountManagment = createSlice({
         state.userInfo = payload.user;
         localStorage.setItem('userToken', payload.access);
         localStorage.setItem('userInfo', JSON.stringify(payload.user));
+
+        /* for development, production is http-only cookie */
+        localStorage.setItem('refreshToken', payload.refresh_token);
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
         state.loading = false;
