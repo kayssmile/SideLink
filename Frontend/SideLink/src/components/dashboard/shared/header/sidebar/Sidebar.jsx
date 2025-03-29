@@ -18,6 +18,7 @@ const Sidebar = () => {
 
   return (
     <Box
+      data-testid="dashboard-sidebar"
       sx={{
         width: toggleWidth,
         position: 'relative',

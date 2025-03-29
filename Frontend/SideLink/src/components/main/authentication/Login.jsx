@@ -29,12 +29,13 @@ const schema = yup.object().shape({
 function Login() {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
-  const { loading, userInfo, error } = useSelector(state => state.accountManagment);
+  const { loading, userInfo, error } = useSelector(state => state.userManagment);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userInfo.email) {
+    /* */
+    if (userInfo?.email) {
       //navigate('/dashboard');
     }
   }, [navigate, userInfo]);

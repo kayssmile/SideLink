@@ -1,9 +1,9 @@
-import { axiosInstanceFormData } from 'src/api/AxiosInstance';
+import { axiosInstanceAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const registerUser = createAsyncThunk('auth/registerUser', async (formData, { rejectWithValue }) => {
+const getUser = createAsyncThunk('auth/getUser', async (token, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstanceFormData.post('/api/auth/register/', formData);
+    const { data } = await axiosInstanceAuth(token).get(`/api/auth/registereduser/`);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
@@ -14,4 +14,4 @@ const registerUser = createAsyncThunk('auth/registerUser', async (formData, { re
   }
 });
 
-export default registerUser;
+export default getUser;

@@ -18,7 +18,7 @@ const LayoutMain = () => {
 
   return (
     <>
-      <MainWrapper>
+      <MainWrapper data-testid="layout-main">
         <div>
           <Header />
           <Container maxWidth="lg">

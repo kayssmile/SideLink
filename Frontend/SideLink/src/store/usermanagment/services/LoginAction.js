@@ -1,4 +1,4 @@
-import { axiosInstanceBasic } from './AxiosInstance';
+import { axiosInstanceBasic } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const userLogin = createAsyncThunk('auth/userLogin', async ({ email, password }, { rejectWithValue }) => {

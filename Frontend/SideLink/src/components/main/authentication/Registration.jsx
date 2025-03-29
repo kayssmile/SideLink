@@ -47,7 +47,7 @@ function Registration() {
   const theme = useTheme();
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
-  const { loading, error, success } = useSelector(state => state.accountManagment);
+  const { loading, error, success } = useSelector(state => state.userManagment);
   const [showPassword, setShowPassword] = useState(false);
 
   const {

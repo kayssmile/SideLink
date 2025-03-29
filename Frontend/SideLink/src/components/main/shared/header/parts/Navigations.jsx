@@ -1,27 +1,13 @@
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
-
-export const NavLinks = [
-  {
-    title: 'Home',
-    to: '/home',
-  },
-  {
-    title: 'Board',
-    to: '/board',
-  },
-  {
-    title: 'Anleitung',
-    to: '/instruction',
-  },
-];
+import { navLinks } from 'src/components/shared/configuration/Configuration';
 
 const Navigations = () => {
   const StyledButton = styled(Button)(({ theme }) => ({
     fontSize: '1rem',
     color: theme.palette.font.secondary,
-    borderRadius: `10px`,
+    borderRadius: `5px`,
     fontWeight: 500,
     padding: '0.3rem 2rem',
     [theme.breakpoints.down('md')]: {
@@ -44,7 +30,7 @@ const Navigations = () => {
 
   return (
     <>
-      {NavLinks.map((navLink, i) => (
+      {navLinks.map((navLink, i) => (
         <StyledButton component={NavLink} to={navLink.to} className={({ isActive }) => (isActive ? 'active' : '')} variant="text" key={i}>
           {navLink.title}
         </StyledButton>

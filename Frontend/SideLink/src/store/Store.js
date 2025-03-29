@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import accountManagmentReducer from './usermanagment/AccountManagment';
+import userManagmentReducer from './usermanagment/UserManagment';
 import DashboardManagment from './dashboard/DashboardManagment';
 
 export const store = configureStore({
   reducer: {
-    accountManagment: accountManagmentReducer,
+    userManagment: userManagmentReducer,
     dashboard: DashboardManagment,
   },
 });

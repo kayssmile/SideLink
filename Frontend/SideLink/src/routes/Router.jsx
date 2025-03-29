@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
+import routerGuard from 'src/services/RouterGuard';
 
 const LayoutMain = lazy(() => import('src/components/main/layout/layoutmain'));
 
@@ -18,7 +19,7 @@ const AGB = lazy(() => import('src/components/main/info/agb'));
 /*
 Dashboard
 */
-const LayoutFull = lazy(() => import('src/components/dashboard/layout/layoutfull'));
+const LayoutFull = lazy(() => import('src/components/dashboard/layout/LayoutFull'));
 const Dashboard = lazy(() => import('src/components/dashboard/dashboard'));
 const Offers = lazy(() => import('src/components/dashboard/offers'));
 const PublicProfile = lazy(() => import('src/components/dashboard/PublicProfile'));
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <LayoutFull />,
+    //element: routerGuard(<LayoutFull />),
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'offers', element: <Offers /> },

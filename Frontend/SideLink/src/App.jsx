@@ -1,27 +1,22 @@
+import { RouterProvider } from 'react-router';
+import router from 'src/routes/router';
 import { theme } from 'src/theme/theme.js';
 import { ThemeProvider } from '@emotion/react';
 
-import { RouterProvider } from 'react-router';
-import router from 'src/routes/router';
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import { axiosInstanceBasic } from 'src/store/usermanagment/services/AxiosInstance';
+import { useDispatch } from 'react-redux';
+import { checkAuth } from 'src/services/CheckAuth';
+import getUser from 'src/store/usermanagment/services/GetUserAction';
 
 function App() {
-  async function checkAuth() {
-    try {
-      /* For development use refreshToken from localStorage
-      const refresh_token = localStorage.getItem('refreshToken'); */
-
-      const { data } = await axiosInstanceBasic.post('api/auth/refresh/', {});
-    } catch (error) {
-      const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
-      console.log(errorMessage);
+  const dispatch = useDispatch();
+  const checkLoggedIn = async () => {
+    const { token, id } = await checkAuth();
+    if (token && id) {
+      dispatch(getUser(token));
     }
-  }
+  };
 
-  checkAuth();
+  checkLoggedIn();
 
   return (
     <>

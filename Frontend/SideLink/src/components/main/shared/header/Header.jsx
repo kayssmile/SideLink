@@ -1,22 +1,18 @@
 import { useState } from 'react';
 
-import { AppBar, Container, Drawer, IconButton, Stack, Toolbar, useMediaQuery } from '@mui/material';
-
 import Logo from 'src/components/shared/logo/logo';
 import Navigations from './parts/Navigations';
 import MobileSidebar from './parts/MobileSidebar';
-import { IconMenu2 } from '@tabler/icons-react';
 
+import { AppBar, Container, Drawer, IconButton, Stack, Toolbar, useMediaQuery } from '@mui/material';
+import { IconMenu2 } from '@tabler/icons-react';
 import { useTheme } from '@mui/material/styles';
 
 import AccountMenu from './parts/AccountMenu';
 
 const Header = () => {
   const theme = useTheme();
-
   const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
-  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
-
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -29,6 +25,7 @@ const Header = () => {
 
   return (
     <AppBar
+      data-testid="main-header"
       position="sticky"
       sx={{
         justifyContent: 'center',
@@ -48,20 +45,18 @@ const Header = () => {
           >
             <Logo />
 
-            {mdDown ? (
-              <IconButton color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
-                <IconMenu2 size="30" />
-              </IconButton>
-            ) : null}
             {mdUp ? (
               <>
                 <Stack spacing={1} direction="row" alignItems="center">
                   <Navigations />
                 </Stack>
-
-                <AccountMenu />
+                <AccountMenu mdUp={mdUp} />
               </>
-            ) : null}
+            ) : (
+              <IconButton color="inherit" aria-label="menu" onClick={handleDrawerOpen} data-testid="hamburger">
+                <IconMenu2 size="30" />
+              </IconButton>
+            )}
           </Toolbar>
         </nav>
       </Container>

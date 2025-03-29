@@ -17,4 +17,14 @@ const axiosInstanceBasic = axios.create({
   },
 });
 
-export { axiosInstanceBasic, axiosInstanceFormData };
+function axiosInstanceAuth(token) {
+  return axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export { axiosInstanceBasic, axiosInstanceFormData, axiosInstanceAuth };

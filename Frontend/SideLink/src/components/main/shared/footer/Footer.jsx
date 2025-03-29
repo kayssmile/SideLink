@@ -83,7 +83,7 @@ const Footer = () => {
   }));
 
   return (
-    <MainFooter>
+    <MainFooter data-testid="main-footer">
       <Container maxWidth="lg">
         <Grid container justifyContent="space-between" pt={8}>
           <Grid size={4}>

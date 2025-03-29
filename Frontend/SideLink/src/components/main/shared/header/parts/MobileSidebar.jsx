@@ -1,16 +1,13 @@
-import React from 'react';
-
-import { Box, Button, Stack } from '@mui/material';
-
 import Logo from 'src/components/shared/logo/logo';
 import Navigations from './Navigations';
-
 import AccountMenu from 'src/components/main/shared/header/parts/AccountMenu';
+
+import { Box } from '@mui/material';
 
 const MobileSidebar = () => {
   return (
     <>
-      <Box px={3} py={3}>
+      <Box p={3}>
         <Logo />
       </Box>
 
@@ -22,8 +19,10 @@ const MobileSidebar = () => {
         p={3}
         sx={{
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          maxWidth: '100%',
         }}
       >
         <AccountMenu />

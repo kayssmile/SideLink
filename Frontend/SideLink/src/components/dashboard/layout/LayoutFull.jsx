@@ -36,7 +36,7 @@ const LayoutFull = () => {
 
   return (
     <>
-      <MainWrapper className="main-wrapper">
+      <MainWrapper data-testid="layout-full">
         <Sidebar />
 
         <PageWrapper className="page-wrapper" sx={{}}>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleSidebar, toggleThemeMode } from 'src/store/dashboard/DashboardManagment';
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 
-import Profile from 'src/components/shared/header/Profile';
+import ProfileMenuDesktop from 'src/components/shared/header/ProfileMenuDesktop';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -26,7 +26,7 @@ const Header = () => {
   }));
 
   return (
-    <AppBarStyled position="sticky" color="default">
+    <AppBarStyled position="sticky" color="default" data-testid="dashboard-header">
       <ToolbarStyled>
         <IconButton color="inherit" aria-label="menu" onClick={() => dispatch(toggleSidebar())}>
           <IconMenu2 size="25" />
@@ -44,7 +44,7 @@ const Header = () => {
             </IconButton>
           )}
 
-          <Profile />
+          <ProfileMenuDesktop />
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

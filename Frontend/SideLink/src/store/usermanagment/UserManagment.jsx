@@ -1,38 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 import registerUser from './services/RegisterAction';
 import userLogin from './services/LoginAction';
-
-const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
+import getUser from './services/GetUserAction';
 
 const initialState = {
   loading: false,
-  userInfo: {},
-  userToken,
+  userInfo: null,
   error: null,
   success: false,
 };
 
-// melde mich an prüfe ob ein token vorhanden ist -
-// wenn ein token vorhanden ist prüfe ich ob es noch gültig ist
-// wenn es gültig ist sende ich eine anfrage für die benutzerdaten mit user_id
-// wenn nicht gültig ein neues token - gleichzeitig
-
-const accountManagment = createSlice({
-  name: 'accountManagment',
+const userManagment = createSlice({
+  name: 'userManagment',
   initialState,
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
     },
     logout: state => {
-      state.userInfo = {};
-      state.userToken = null;
+      state.userInfo = false;
+      //state.userToken = null;
       state.success = false;
       localStorage.removeItem('userInfo');
-      localStorage.removeItem('userToken');
+      localStorage.removeItem('accessToken');
     },
     setLoggedIn: (state, action) => {
-      state.user = True;
+      state.user = true;
     },
   },
   extraReducers: builder => {
@@ -44,8 +37,8 @@ const accountManagment = createSlice({
       .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.userInfo = payload.user;
-        localStorage.setItem('userToken', payload.access);
-        localStorage.setItem('userInfo', JSON.stringify(payload.user));
+        localStorage.setItem('accessToken', payload.access);
+        localStorage.setItem('userInfo', JSON.stringify(payload.user.id));
 
         /* for development, production is http-only cookie */
         localStorage.setItem('refreshToken', payload.refresh_token);
@@ -58,18 +51,30 @@ const accountManagment = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state, { payload }) => {
+      .addCase(registerUser.fulfilled, state => {
         state.loading = false;
         state.success = true;
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
-        console.log(payload);
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(getUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.success = true;
+        state.userInfo = payload;
+      })
+      .addCase(getUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
   },
 });
 
-export const { login, logout, setLoggedIn } = accountManagment.actions;
+export const { login, logout, setLoggedIn } = userManagment.actions;
 
-export default accountManagment.reducer;
+export default userManagment.reducer;
