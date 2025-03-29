@@ -1,5 +1,9 @@
 from django.forms import ValidationError
 from django.shortcuts import render, get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,7 +12,7 @@ from .serializers import RegisteredUserSerializer, CustomTokenObtainPairSerializ
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-class RegisteredUserView(APIView):
+class RegisterUserView(APIView):
 
     def post(self, request):
         
@@ -24,7 +28,7 @@ class RegisteredUserView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+    ''' 
     def get(self, request):
         user = RegisteredUser.objects.all()
         serializer = RegisteredUserSerializer(user, many=True)
@@ -43,8 +47,36 @@ class RegisteredUserView(APIView):
     def delete(self, request, pk):
         user = self.get_object(pk)
         user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT) '''
  
+
+class RegisteredUser(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        user_data = {
+            'id': user.id,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'profession': user.profession,
+            'phone_number': user.phone_number,
+            'street_address': user.street_address,
+            'postal_code': user.postal_code,
+            'place': user.place,
+            'region': user.region,
+            'profile_picture': user.profile_picture.url if user.profile_picture else None,
+            'public_profile': user.public_profile.public_profile_id if user.public_profile else None,
+        }
+        return Response(user_data, status=status.HTTP_200_OK)
+
+
+
+
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 

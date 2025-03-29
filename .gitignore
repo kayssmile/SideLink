@@ -1,3 +1,4 @@
+
 __pycache__/
 *.pyc
 *.pyo
@@ -7,6 +8,7 @@ venv/
 .venv/
 env/
 .env/
+.env
 
 .vscode/
 .idea/
@@ -42,3 +44,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test coverage directory
+/coverage/
+__snapshots__/

@@ -11,17 +11,16 @@ class RegisteredUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = RegisteredUser.objects.create_user(**validated_data)
-
-
         return user
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        try:
+        
+        try:  
             user = RegisteredUser.objects.get(email=attrs['email'])
         except RegisteredUser.DoesNotExist:
             raise AuthenticationFailed('user not available')
-    
+        
         data = super().validate(attrs)
 
         refresh_token = data.pop('refresh')
