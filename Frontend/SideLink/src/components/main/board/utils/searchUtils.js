@@ -8,36 +8,23 @@ function filterServicesBySearch(publicServices, keyword) {
       if (shouldAdd) break;
       if (typeof value === 'string') {
         if (value.toLowerCase().includes(keyword.toLowerCase())) {
-          //console.log(`Found ${key}: ${value}`);
-          //console.log(publicService);
-          //console.log('here we others');
           shouldAdd = true;
-          //result.push(publicService);
           break;
         }
       }
-      /* */
       if (key === 'sub_categories_details' && Array.isArray(value)) {
         for (const sub_category of value) {
           if (typeof sub_category.name === 'string' && sub_category.name.toLowerCase().includes(keyword.toLowerCase())) {
-            // console.log('Found', key, value);
-            //console.log(publicService);
-            //console.log('here we subcategroei');
             shouldAdd = true;
-            //result.push(publicService);
-            //console.log('we break');
             break;
           }
         }
       }
-
-      //console.log('and do next service');
     }
     if (shouldAdd) {
       result.push(publicService);
     }
   });
-  //console.log('result', result);
   return result;
 }
 
