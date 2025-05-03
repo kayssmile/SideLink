@@ -7,10 +7,9 @@ class PublicProfile(TimestampMixin, models.Model):
         'usermanagment.RegisteredUser',
         on_delete=models.CASCADE,
     )
-    
-    username = models.CharField(max_length=250, null=True)
-    description = models.TextField(null=True)
-    contact_info = models.TextField(null=True)
+    showed_name = models.CharField(max_length=250, null=True)
+    description = models.TextField(max_length=500, null=True)
+    contact_info = models.TextField(max_length=500, null=True)
     public_profile_picture = models.ImageField(upload_to='public_profile_pictures/', null=True)
     
     def __str__(self):
