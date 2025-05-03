@@ -20,6 +20,9 @@ Thumbs.db
 *.bak
 *.swp
 
+*.sqlite3
+db.sglite3
+
 # Logs
 logs
 *.log

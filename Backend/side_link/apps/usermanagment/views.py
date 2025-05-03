@@ -2,14 +2,15 @@ from django.forms import ValidationError
 from django.shortcuts import render, get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.contrib.auth.password_validation import validate_password
 
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import RegisteredUser
-from .serializers import RegisteredUserSerializer, CustomTokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from .serializers import RegisteredUserSerializer, CustomUserSerializer, CustomTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
 
 
 class RegisterUserView(APIView):
@@ -27,54 +28,49 @@ class RegisterUserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    ''' 
-    def get(self, request):
-        user = RegisteredUser.objects.all()
-        serializer = RegisteredUserSerializer(user, many=True)
-        return Response(serializer.data)
-
-
-    def put(self, request, pk):
-        user = self.get_object(pk)
-        serializer = RegisteredUserSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
-
-
-    def delete(self, request, pk):
-        user = self.get_object(pk)
-        user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT) '''
  
-
-class RegisteredUser(APIView):
+class RegisteredUserView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         user = request.user
-        user_data = {
-            'id': user.id,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'email': user.email,
-            'profession': user.profession,
-            'phone_number': user.phone_number,
-            'street_address': user.street_address,
-            'postal_code': user.postal_code,
-            'place': user.place,
-            'region': user.region,
-            'profile_picture': user.profile_picture.url if user.profile_picture else None,
-            'public_profile': user.public_profile.public_profile_id if user.public_profile else None,
-        }
+
+        # check if user is available
+        user_data = CustomUserSerializer(user).data
         return Response(user_data, status=status.HTTP_200_OK)
+    
+    def patch(self, request):
+        
+        user = request.user
+        serializer = CustomUserSerializer(user, data=request.data, partial=True)
 
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class ChangePasswordView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def patch(self, request):
+        user = request.user
+        current_password = request.data.get("current_password")
+        new_password = request.data.get("new_password")
+        
+        if not user.check_password(current_password):
+            return Response({"detail": "Actual Password is wrong"}, status=status.HTTP_400_BAD_REQUEST)
 
+        try:
+            validate_password(new_password, user=user)
+        except Exception as e:
+            return Response({"detail": list(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+        user.set_password(new_password)
+        user.save()
+
+        return Response(status=status.HTTP_200_OK)
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -95,6 +91,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         )
 
         return response
+    
 
 class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
@@ -127,4 +124,21 @@ class CustomTokenRefreshView(TokenRefreshView):
                 max_age=7 * 24 * 60 * 60  # 7 days
             )
             
+        return response
+
+class CustomTokenBlacklistView(TokenBlacklistView):
+    def post(self, request, *args, **kwargs):
+        # Get refresh token from cookies
+        refresh_token = request.COOKIES.get('refreshToken')
+
+        if not refresh_token:
+            return Response({"detail": "Refresh token is missing"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Add the refresh token to the blacklist
+        request.data['refresh'] = refresh_token
+        response = super().post(request, *args, **kwargs)
+
+        # Clear the cookie after blacklisting
+        response.delete_cookie('refreshToken')
+
         return response

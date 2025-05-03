@@ -13,6 +13,13 @@ class RegisteredUserSerializer(serializers.ModelSerializer):
         user = RegisteredUser.objects.create_user(**validated_data)
         return user
 
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegisteredUser
+        fields = ['id', 'first_name', 'last_name', 'email', 'profession', 'phone_number', 'street_address', 'postal_code', 'place', 'region', 'public_profile']
+
+
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         
@@ -25,26 +32,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         refresh_token = data.pop('refresh')
 
-        data['user'] = {
-            'id': user.id,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'email': user.email,
-            'profession': user.profession,
-            'phone_number': user.phone_number,
-            'street_address': user.street_address,
-            'postal_code': user.postal_code,
-            'place': user.place,
-            'region': user.region,
-            'profile_picture': user.profile_picture.url if user.profile_picture else None,
-            'public_profile': user.public_profile.public_profile_id if user.public_profile else None,
-        }
-
+        data['user'] = CustomUserSerializer(user).data
+      
         return {
             'access': data['access'],
             'user': data['user'],
             'refresh_token': refresh_token
         }
-
-
-

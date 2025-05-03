@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -29,12 +29,12 @@ class RegisteredUserManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
         return self.create_user(email, password, **extra_fields)
 
-class RegisteredUser(TimestampMixin, AbstractBaseUser):
-    GENDER_CHOICES = [
+class RegisteredUser(TimestampMixin, AbstractBaseUser, PermissionsMixin):
+    '''GENDER_CHOICES = [
         ('male', 'Male'),
         ('female', 'Female'),
         ('other', 'Other'),
-    ]
+    ]'''
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -47,7 +47,7 @@ class RegisteredUser(TimestampMixin, AbstractBaseUser):
     postal_code = models.CharField(max_length=100)
     place = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True)
+    #profile_picture = models.ImageField(upload_to='profile_pictures/', null=True)
     public_profile = models.OneToOneField(
         'publicprofile.PublicProfile', 
         on_delete=models.SET_NULL,
@@ -66,20 +66,7 @@ class RegisteredUser(TimestampMixin, AbstractBaseUser):
     
     def __str__(self):
         return self.email
-        
-    def get_full_name(self):
-        return f"{self.first_name} {self.last_name}"
-        
-    def get_short_name(self):
-        return self.first_name
-        
-    def has_perm(self, perm, obj=None):
-        return self.is_superuser
-        
-    def has_module_perms(self, app_label):
-        return self.is_superuser
-
-
+    
 @receiver(post_save, sender='usermanagment.RegisteredUser')
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
