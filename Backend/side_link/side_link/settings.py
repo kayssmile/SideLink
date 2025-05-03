@@ -54,12 +54,12 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=45),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7), #timedelta(minutes=1), 
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     "AUTH_COOKIE": "refreshToken",
-    "AUTH_COOKIE_SECURE": True,  # Setze auf False, wenn du HTTP verwendest (HTTPS ist in der Produktion sicherer)
+    "AUTH_COOKIE_SECURE": True,  # Setze auf False, wenn kein HTTPS
     "AUTH_COOKIE_SAMESITE": "None",  # "None" für Cross-Site-Requests, "Lax" oder "Strict" für mehr Sicherheit
     "AUTH_COOKIE_HTTPONLY": True, 
 }
@@ -87,11 +87,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://127.0.0.1:5173",
     "https://localhost:5175",
     "https://127.0.0.1:5175",
-    "http://localhost:8000",  # React App
-    "http://127.0.0.1:8000",
+    
 ]
 
-CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
 CORS_ALLOW_HEADERS = [
     "Authorization",
     "Content-Type",
@@ -112,14 +111,7 @@ SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:5175",
-    "http://127.0.0.1:5175",
-    "https://localhost:5173",
-    "https://127.0.0.1:5173",
-    "https://localhost:5175",
-    "https://127.0.0.1:5175",
+    
 ]
 
 ROOT_URLCONF = 'side_link.urls'
@@ -161,14 +153,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+     {
+        'NAME': 'apps.usermanagment.validators.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'apps.usermanagment.validators.UppercaseValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'apps.usermanagment.validators.SpecialCharacterValidator',
     },
 ]
 

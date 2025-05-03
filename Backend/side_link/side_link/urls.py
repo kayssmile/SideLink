@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('apps.usermanagment.urls')),
     path('api/', include('apps.publicprofile.urls')),
+    path('api/', include('apps.publicservices.urls')),
+    path('api/', include('apps.core.urls')),
 ]
 
 if settings.DEBUG:
