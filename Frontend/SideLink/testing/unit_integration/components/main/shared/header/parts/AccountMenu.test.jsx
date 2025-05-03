@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import AccountMenu from 'src/components/main/shared/header/parts/AccountMenu';
 import { MemoryRouter } from 'react-router-dom';
-import renderWithRedux from '/testing/utility/RenderWithRedux';
+import renderWithRedux from '/testing/unit_integration/utility/RenderWithRedux';
 import { theme } from 'src/theme/theme.js';
 import { ThemeProvider } from '@emotion/react';
 
@@ -35,7 +35,7 @@ describe('AccountMenu Component', () => {
     renderAccountMenu({ userManagment: mockStateLoggedOut });
   });
 
-  it('shows login button when no user is logged in', () => {
+  it('shows login button when user is logged out', () => {
     renderAccountMenu({ userManagment: mockStateLoggedOut });
     expect(screen.getByText('Log In')).toBeInTheDocument();
   });

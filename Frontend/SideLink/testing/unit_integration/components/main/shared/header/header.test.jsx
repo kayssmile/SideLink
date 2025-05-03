@@ -3,7 +3,7 @@ import Header from 'src/components/main/shared/header/header';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from 'src/theme/theme.js';
 //import * as MuiMaterial from '@mui/material';
-import renderWithRedux from '/testing/utility/RenderWithRedux';
+import renderWithRedux from '/testing/unit_integration/utility/RenderWithRedux';
 
 import { MemoryRouter } from 'react-router-dom';
 

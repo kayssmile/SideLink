@@ -1,6 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react';
 import ProfileMenuDesktop from '/src/components/shared/header/ProfileMenuDesktop';
-import renderWithRedux from '/testing/utility/RenderWithRedux';
+import renderWithRedux from '/testing/unit_integration/utility/RenderWithRedux';
 import { theme } from 'src/theme/theme.js';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
@@ -46,13 +46,17 @@ describe('ProfileMenuDesktop Component', () => {
     const profileMenuBtn = container.querySelector('.MuiButtonBase-root');
     fireEvent.click(profileMenuBtn);
     expect(screen.getByText('mindflow@react.ch')).toBeInTheDocument();
-    /*
-    expect(screen.getByText('Profile')).toBeInTheDocument();
-    expect(screen.getByText('Settings')).toBeInTheDocument();
-    expect(screen.getByText('Logout')).toBeInTheDocument(); */
+    expect(screen.getByText('Meine Dienstleistungen')).toBeInTheDocument();
   });
 
-  /* */
+  it('contains menuoptions when clicked', () => {
+    const { container } = renderProfileMenuDesktop({ userManagment: mockStateLoggedIn });
+    const profileMenuBtn = container.querySelector('.MuiButtonBase-root');
+    fireEvent.click(profileMenuBtn);
+    expect(screen.getByText('Meine Dienstleistungen')).toBeInTheDocument();
+    expect(screen.getByText('Dienstleistungen')).toBeInTheDocument();
+  });
+
   it('dispatches logout action when logout clicked', () => {
     const { container, store } = renderProfileMenuDesktop({ userManagment: mockStateLoggedIn });
     const profileMenuBtn = container.querySelector('.MuiButtonBase-root');
