@@ -24,7 +24,7 @@ const NavItem = ({ item, level }) => {
   }));
 
   return (
-    <List component="li" key={item.id}>
+    <List component="li" key={item.title}>
       <ListItemStyled button="true" component={NavLink} to={item.to}>
         <ListItemIcon
           sx={{

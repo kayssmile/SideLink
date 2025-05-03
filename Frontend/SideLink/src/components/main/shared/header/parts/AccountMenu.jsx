@@ -6,7 +6,8 @@ import ProfileMenuDesktop from 'src/components/shared/header/ProfileMenuDesktop'
 import ProfileMenuMobile from 'src/components/shared/header/ProfileMenuMobile';
 
 const AccountMenu = ({ mdUp = false }) => {
-  const isLoggedIn = useSelector(state => state.userManagment.userInfo);
+  const { dashboardData } = useSelector(state => state.dashboard);
+  const isLoggedIn = dashboardData.user.email;
 
   return (
     <>

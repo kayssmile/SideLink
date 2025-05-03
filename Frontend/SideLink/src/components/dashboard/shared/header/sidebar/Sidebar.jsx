@@ -1,20 +1,21 @@
-import { useMediaQuery, Box, Drawer, useTheme } from '@mui/material';
-import SidebarItems from './SidebarItems';
-import Logo from 'src/components/shared/logo/logo';
-
+import { useMediaQuery, Box, Drawer, useTheme, IconButton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { IconCircleDashedX } from '@tabler/icons-react';
 
-import { Logout } from './Logout';
+import { toggleSidebar } from 'src/store/dashboard/main/DashboardManagment';
+
+import SidebarMenu from './parts/SidebarMenu';
+import Logo from 'src/components/shared/logo/logo';
+import Logout from 'src/components/shared/header/Logout';
 
 const Sidebar = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
 
-  //const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
-
+  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
+  const lgDown = useMediaQuery(theme => theme.breakpoints.down('lg'));
   const SidebarOpen = useSelector(state => state.dashboard.sidebar);
-  //const dispatch = useDispatch();
-
-  const toggleWidth = SidebarOpen ? 400 : 0;
+  const toggleWidth = SidebarOpen ? (lgDown ? 300 : 400) : 0;
 
   return (
     <Box
@@ -22,16 +23,18 @@ const Sidebar = () => {
       sx={{
         width: toggleWidth,
         position: 'relative',
-        transition: 'width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+        transition: 'width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms', // 'width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms'
+        flexShrink: 0,
       }}
     >
       <Drawer
         anchor="left"
-        variant="persistent"
+        variant={mdDown ? 'temporary' : 'persistent'}
         open={SidebarOpen}
+        onClose={() => dispatch(toggleSidebar())}
         sx={{
           backgroundColor: theme.palette.colors.main,
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '400px', backgroundColor: 'inherit' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: toggleWidth, backgroundColor: 'inherit', flexShrink: 0 },
         }}
       >
         <Box
@@ -45,14 +48,19 @@ const Sidebar = () => {
           }}
         >
           <Box>
-            <Box px={3} py={3}>
+            <Box px={3} py={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Logo />
+              {mdDown ? (
+                <IconButton color="inherit" aria-label="menu" onClick={() => dispatch(toggleSidebar())}>
+                  <IconCircleDashedX size="25" />
+                </IconButton>
+              ) : null}
             </Box>
 
-            <SidebarItems />
+            <SidebarMenu />
           </Box>
 
-          <Logout />
+          <Logout usage="sidebar" />
         </Box>
       </Drawer>
     </Box>

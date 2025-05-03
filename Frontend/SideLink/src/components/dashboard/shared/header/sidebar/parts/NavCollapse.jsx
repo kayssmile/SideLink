@@ -10,7 +10,7 @@ const NavCollapse = ({ menu, level }) => {
 
   const [open, setOpen] = useState(false);
   const menuIcon = level > 1 ? <Icon stroke={1.5} size="1rem" /> : <Icon stroke={1.5} size="1.3rem" />;
-
+  console.log(menu);
   const handleCollapse = () => {
     setOpen(!open);
   };
@@ -29,7 +29,7 @@ const NavCollapse = ({ menu, level }) => {
   }));
 
   return (
-    <React.Fragment key={menu.id}>
+    <React.Fragment key={menu.title}>
       <ListItemStyled button="true" component="li" onClick={handleCollapse}>
         <ListItemIcon
           sx={{
@@ -44,8 +44,8 @@ const NavCollapse = ({ menu, level }) => {
       </ListItemStyled>
 
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {menu.children?.map(item => {
-          return <NavItem key={item.id} item={item} level={level + 1} />;
+        {menu.children?.map((item, i) => {
+          return <NavItem key={item.title + i} item={item} level={level + 1} />;
         })}
       </Collapse>
     </React.Fragment>

@@ -1,13 +1,10 @@
 import { useState } from 'react';
+import { AppBar, Container, Drawer, IconButton, Stack, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { IconMenu2 } from '@tabler/icons-react';
 
 import Logo from 'src/components/shared/logo/logo';
 import Navigations from './parts/Navigations';
 import MobileSidebar from './parts/MobileSidebar';
-
-import { AppBar, Container, Drawer, IconButton, Stack, Toolbar, useMediaQuery } from '@mui/material';
-import { IconMenu2 } from '@tabler/icons-react';
-import { useTheme } from '@mui/material/styles';
-
 import AccountMenu from './parts/AccountMenu';
 
 const Header = () => {
@@ -33,7 +30,7 @@ const Header = () => {
         backgroundColor: theme.palette.background.main,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <nav>
           <Toolbar
             sx={{
@@ -47,7 +44,7 @@ const Header = () => {
 
             {mdUp ? (
               <>
-                <Stack spacing={1} direction="row" alignItems="center">
+                <Stack spacing={1} direction="row" alignItems="center" sx={{ maxWidth: '40%' }}>
                   <Navigations />
                 </Stack>
                 <AccountMenu mdUp={mdUp} />

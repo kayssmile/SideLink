@@ -22,13 +22,18 @@ const footerLinks = [
       },
       {
         title: false,
-        titleText: 'Board',
-        to: '/board',
+        titleText: 'Dashboard',
+        to: '/dashboard',
       },
       {
         title: false,
-        titleText: 'Anleitung',
-        to: '/instruction',
+        titleText: 'Login',
+        to: '/login',
+      },
+      {
+        title: false,
+        titleText: 'Registriere DDD',
+        to: '/registration',
       },
     ],
   },
@@ -97,37 +102,31 @@ const Footer = () => {
           </Grid>
 
           {footerLinks.map((footerItem, i) => (
-            <Grid size={{ xs: 6, sm: 4, lg: 2 }} key={footerItem.id}>
-              {footerItem.elements.map(element => {
-                {
-                  return element.title ? (
-                    <>
-                      <Typography fontSize="17px" fontWeight="600" mb="22px">
-                        {element.titleText}
-                      </Typography>
-                    </>
-                  ) : (
-                    <>
-                      <NavLink to={element.to}>
-                        <Typography
-                          sx={{
-                            display: 'block',
-                            padding: '10px 0',
-                            fontSize: '15px',
-                            color: theme.palette.font.primary,
-                            '&:hover': {
-                              color: theme.palette.primary.main,
-                            },
-                          }}
-                          component="p"
-                        >
-                          {element.titleText}
-                        </Typography>
-                      </NavLink>
-                    </>
-                  );
-                }
-              })}
+            <Grid size={{ xs: 6, sm: 4, lg: 2 }} key={i}>
+              {footerItem.elements.map((element, index) =>
+                element.title ? (
+                  <Typography key={index} fontSize="17px" fontWeight="600" mb="22px">
+                    {element.titleText}
+                  </Typography>
+                ) : (
+                  <NavLink to={element.to} key={index}>
+                    <Typography
+                      sx={{
+                        display: 'block',
+                        padding: '10px 0',
+                        fontSize: '15px',
+                        color: theme.palette.font.primary,
+                        '&:hover': {
+                          color: theme.palette.primary.main,
+                        },
+                      }}
+                      component="p"
+                    >
+                      {element.titleText}
+                    </Typography>
+                  </NavLink>
+                )
+              )}
             </Grid>
           ))}
 

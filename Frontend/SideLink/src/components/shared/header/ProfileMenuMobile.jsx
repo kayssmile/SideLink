@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
-import { profileMenu as profileMenuConfiguration } from 'src/components/shared/configuration/Configuration';
-
-import { Box, Avatar, Typography, Divider, Button } from '@mui/material';
+import { Box, Avatar, Typography, Divider, useTheme } from '@mui/material';
 import { IconMail } from '@tabler/icons-react';
 import { Stack } from '@mui/system';
-import { useTheme } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 
-import { logout } from 'src/store/usermanagment/UserManagment';
-import { useDispatch, useSelector } from 'react-redux';
+import { profileMenu as profileMenuConfiguration } from 'src/config/NavigationConfigurations';
+
+import Logout from 'src/components/shared/header/Logout';
 
 const ProfileMenuMobile = () => {
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.userManagment.userInfo);
+  //const userInfo = useSelector(state => state.userManagment.userInfo);
+  const { dashboardData } = useSelector(state => state.dashboard);
 
   return (
     <>
@@ -26,14 +25,14 @@ const ProfileMenuMobile = () => {
         }}
       >
         <Typography variant="subtitle1" color="white" fontWeight={600}>
-          {userInfo?.first_name} {userInfo?.last_name}
+          {dashboardData.user?.first_name} {userInfo?.last_name}
         </Typography>
         <Typography variant="subtitle1" color="white">
-          {userInfo?.profession}
+          {dashboardData.user?.profession}
         </Typography>
         <Typography variant="subtitle1" color="white" display="flex" alignItems="center" gap={1}>
           <IconMail width={15} height={15} />
-          {userInfo?.email}
+          {dashboardData.user?.email}
         </Typography>
       </Stack>
 
@@ -91,11 +90,7 @@ const ProfileMenuMobile = () => {
           </Link>
         </Box>
       ))}
-      <Box mt={5}>
-        <Button onClick={() => dispatch(logout())} variant="outlined" color="primary" fullWidth>
-          Logout
-        </Button>
-      </Box>
+      <Logout usage="profilemenu" />
     </>
   );
 };

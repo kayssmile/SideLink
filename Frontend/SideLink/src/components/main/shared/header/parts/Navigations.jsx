@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
-import { navLinks } from 'src/components/shared/configuration/Configuration';
+import { navLinks } from 'src/config/NavigationConfigurations';
 
 const Navigations = () => {
   const StyledButton = styled(Button)(({ theme }) => ({

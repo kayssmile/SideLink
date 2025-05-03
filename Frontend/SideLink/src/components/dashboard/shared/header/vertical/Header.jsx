@@ -1,19 +1,19 @@
-import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleSidebar, toggleThemeMode } from 'src/store/dashboard/DashboardManagment';
+import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack, useTheme } from '@mui/material';
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { toggleSidebar, toggleThemeMode } from 'src/store/dashboard/main/DashboardManagment';
 
 import ProfileMenuDesktop from 'src/components/shared/header/ProfileMenuDesktop';
-
-import { useTheme } from '@mui/material/styles';
 
 const Header = () => {
   const theme = useTheme();
 
   //const lgUp = useMediaQuery(theme => theme.breakpoints.up('md'));
-  //const lgDown = useMediaQuery(theme => theme.breakpoints.down('md'));
+  //const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
 
-  const themeMode = useSelector(state => state.dashboard.themeMode);
+  const { themeMode } = useSelector(state => state.dashboard);
+
   const dispatch = useDispatch();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <AppBarStyled position="sticky" color="default" data-testid="dashboard-header">
       <ToolbarStyled>
-        <IconButton color="inherit" aria-label="menu" onClick={() => dispatch(toggleSidebar())}>
+        <IconButton color="inherit" data-testid="dashboard-header-hamburger" aria-label="menu" onClick={() => dispatch(toggleSidebar())}>
           <IconMenu2 size="25" />
         </IconButton>
 
