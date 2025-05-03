@@ -1,22 +1,30 @@
+import { useEffect } from 'react';
 import { RouterProvider } from 'react-router';
-import router from 'src/routes/router';
-import { theme } from 'src/theme/theme.js';
 import { ThemeProvider } from '@emotion/react';
-
 import { useDispatch } from 'react-redux';
-import { checkAuth } from 'src/services/CheckAuth';
-import getUser from 'src/store/usermanagment/services/GetUserAction';
+
+import { theme } from 'src/config/theme.js';
+import { checkAuth, getToken } from 'src/services/AuthService';
+import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
+import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
+
+import router from 'src/routes/router';
 
 function App() {
   const dispatch = useDispatch();
-  const checkLoggedIn = async () => {
-    const { token, id } = await checkAuth();
-    if (token && id) {
-      dispatch(getUser(token));
-    }
-  };
 
-  checkLoggedIn();
+  useEffect(() => {
+    dispatch(getPublicData());
+    const checkLoggedIn = async () => {
+      if (await checkAuth()) {
+        const token = getToken();
+        if (token) {
+          dispatch(getDashboardData(token));
+        }
+      }
+    };
+    checkLoggedIn();
+  }, [dispatch]);
 
   return (
     <>

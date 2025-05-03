@@ -8,9 +8,11 @@ import store from 'src/store/store';
 import { Provider } from 'react-redux';
 
 createRoot(document.getElementById('spa')).render(
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
+
+{
+  /* <StrictMode></StrictMode> */
+}
