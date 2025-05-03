@@ -1,80 +1,78 @@
 import { createSlice } from '@reduxjs/toolkit';
-import registerUser from './services/RegisterAction';
-import userLogin from './services/LoginAction';
-import getUser from './services/GetUserAction';
+import registerUser from './actions/RegisterAction';
+import login from './actions/LoginAction';
+import getUser from './actions/GetUserAction';
+import { setToken } from 'src/services/AuthService';
 
 const initialState = {
-  loading: false,
+  loading: { login: false, register: false, init: false },
   userInfo: null,
-  error: null,
-  success: false,
+  error: { login: false, register: false, init: false },
+  success: { login: false, register: false, init: false },
 };
 
 const userManagment = createSlice({
   name: 'userManagment',
   initialState,
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload;
-    },
-    logout: state => {
-      state.userInfo = false;
-      //state.userToken = null;
-      state.success = false;
-      localStorage.removeItem('userInfo');
-      localStorage.removeItem('accessToken');
-    },
-    setLoggedIn: (state, action) => {
-      state.user = true;
+    userLogout: state => {
+      state.userInfo = initialState.userInfo;
+      state.loading = initialState.loading;
+      state.success = initialState.success;
+      state.error = initialState.error;
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(userLogin.pending, state => {
-        state.loading = true;
-        state.error = null;
+      .addCase(login.pending, state => {
+        state.loading.login = true;
+        state.error.login = null;
       })
-      .addCase(userLogin.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.userInfo = payload.user;
-        localStorage.setItem('accessToken', payload.access);
-        localStorage.setItem('userInfo', JSON.stringify(payload.user.id));
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.loading.login = false;
+        state.error.login = false;
+        state.success.login = true;
+        //state.userInfo = payload.user;
+        setToken(payload.access);
+        //localStorage.setItem('accessToken', payload.access);
+        //localStorage.setItem('userInfo', JSON.stringify(payload.user.id));
 
         /* for development, production is http-only cookie */
         localStorage.setItem('refreshToken', payload.refresh_token);
       })
-      .addCase(userLogin.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
+      .addCase(login.rejected, (state, { payload }) => {
+        state.loading.login = false;
+        state.success.login = false;
+        state.error.login = payload;
       })
       .addCase(registerUser.pending, state => {
-        state.loading = true;
-        state.error = null;
+        state.loading.register = true;
+        state.error.register = null;
       })
       .addCase(registerUser.fulfilled, state => {
-        state.loading = false;
-        state.success = true;
+        state.loading.register = false;
+        state.success.register = true;
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
+        state.loading.register = false;
+        state.error.register = payload;
       })
       .addCase(getUser.pending, state => {
-        state.loading = true;
-        state.error = null;
+        state.loading.init = true;
+        state.error.init = null;
       })
       .addCase(getUser.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.success = true;
+        state.loading.init = false;
+        state.success.init = true;
         state.userInfo = payload;
       })
       .addCase(getUser.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
+        state.loading.init = false;
+        state.error.init = payload;
       });
   },
 });
 
-export const { login, logout, setLoggedIn } = userManagment.actions;
+export const { userLogout } = userManagment.actions;
 
 export default userManagment.reducer;

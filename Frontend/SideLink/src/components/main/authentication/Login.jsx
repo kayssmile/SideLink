@@ -1,55 +1,52 @@
 import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { StyledTextField } from 'src/components/shared/forms/formelements';
-import userLogin from 'src/store/usermanagment/services/LoginAction';
-
-import Typography from '@mui/material/Typography';
-import { Button, Box, Link, IconButton, InputAdornment, CircularProgress } from '@mui/material';
+import { Button, Box, Link, IconButton, InputAdornment, CircularProgress, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+import login from 'src/store/usermanagment/actions/LoginAction';
+import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
+import { loginSchema } from 'src/config/Schemas';
+import { getLoginErrorMessage } from 'src/components/shared/ErrorHandling';
+import { getToken } from 'src/services/AuthService';
 
-const schema = yup.object().shape({
-  email: yup.string().matches(emailRegex, 'Ungültige E-Mail').email('Ungültige E-Mail').required('E-Mail ist erforderlich'),
-  password: yup
-    .string()
-    .min(3, 'Mindestens 6 Zeichen')
-    //.matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
-    //.matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
-    .required('Passwort ist erforderlich'),
-});
+import { StyledTextField } from 'src/components/shared/forms/formelements';
 
 function Login() {
-  const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
-  const { loading, userInfo, error } = useSelector(state => state.userManagment);
+  const { loading, success, error } = useSelector(state => state.userManagment);
+  const { dashboardData } = useSelector(state => state.dashboard);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    /* */
-    if (userInfo?.email) {
-      //navigate('/dashboard');
+    if (success.login) {
+      const token = getToken();
+      if (token) {
+        dispatch(getDashboardData(token));
+      }
     }
-  }, [navigate, userInfo]);
+  }, [success.login, dispatch]);
+
+  useEffect(() => {
+    if (dashboardData.success) {
+      navigate('/dashboard');
+    }
+  }, [dashboardData.success, navigate]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = data => {
-    dispatch(userLogin(data));
+    dispatch(login(data));
   };
 
   return (
@@ -67,7 +64,7 @@ function Login() {
         Login
       </Typography>
 
-      <Box sx={{}}>
+      <Box>
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -80,7 +77,7 @@ function Login() {
             maxWidth: 600,
             mx: 'auto',
             marginBottom: '4rem',
-            backgroundColor: theme.palette.background.primary,
+            backgroundColor: theme => theme.palette.background.primary,
           }}
         >
           <Typography
@@ -121,28 +118,14 @@ function Login() {
             color="primary"
             type="submit"
             sx={{ height: '45px', fontSize: '1rem', margin: '1rem 0', padding: '10px 0', color: 'white', '&.Mui-disabled': { backgroundColor: 'primary' } }}
-            disabled={loading}
+            disabled={loading.login}
           >
-            {loading ? <CircularProgress size="25px" /> : 'Login'}
+            {loading.login ? <CircularProgress size="25px" /> : 'Login'}
           </Button>
 
-          {error && (
+          {error.login && (
             <Typography color="error" sx={{ textAlign: 'center', mb: '1rem' }}>
-              {error.status === 401 && error.detail === 'user not available' ? (
-                'Diese Email ist keinem Benutzer zugewiesen'
-              ) : error.status === 401 ? (
-                'Bitte überprüfe deine Eingaben.'
-              ) : (
-                <>
-                  Technische Störungen, bitte versuche es später nochmals oder{' '}
-                  <Typography sx={{ color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
-                    <Link component={RouterLink} to="/contact">
-                      kontaktiere uns
-                    </Link>
-                  </Typography>
-                  {error.detail}
-                </>
-              )}
+              {getLoginErrorMessage(error.login)}
             </Typography>
           )}
 
