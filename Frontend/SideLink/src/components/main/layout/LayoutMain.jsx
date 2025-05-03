@@ -1,13 +1,13 @@
-import { Outlet, Link } from 'react-router-dom'; // Für das Einfügen von Kinder-Routen
+import { useTheme, Container } from '@mui/material';
+import { styled } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+
 import Header from 'src/components/main/shared/header/header';
 import Footer from 'src/components/main/shared/footer/footer';
-import Container from '@mui/material/Container';
-import { styled } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 const LayoutMain = () => {
   const theme = useTheme();
-  const MainWrapper = styled('div')(() => ({
+  const SiteWrapper = styled('div')(() => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -18,10 +18,10 @@ const LayoutMain = () => {
 
   return (
     <>
-      <MainWrapper data-testid="layout-main">
+      <SiteWrapper data-testid="layout-main">
         <div>
           <Header />
-          <Container maxWidth="lg">
+          <Container maxWidth="xl">
             <main>
               <Outlet />
             </main>
@@ -29,7 +29,7 @@ const LayoutMain = () => {
         </div>
 
         <Footer />
-      </MainWrapper>
+      </SiteWrapper>
     </>
   );
 };
