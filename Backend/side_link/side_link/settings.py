@@ -190,3 +190,56 @@ MEDIA_ROOT = BASE_DIR /'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'usermanagment.RegisteredUser'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_CONSOLE_FORMAT = '=== EMAIL KONSOLE (DEV) ===\n\n{email}\n\n=== ENDE ==='
+DEFAULT_FROM_EMAIL = 'noreply@sidelink.ch'
+
+
+# Logging settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file_error': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/django_errors.log',
+            'formatter': 'verbose',
+        },
+        'file_email': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/email_service.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file_error', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'email_service': { 
+            'handlers': ['file_email', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
