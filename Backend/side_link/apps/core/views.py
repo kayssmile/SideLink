@@ -10,6 +10,8 @@ from apps.publicservices.models import PublicService
 from apps.usermanagment.serializers import CustomUserSerializer
 from apps.publicprofile.serializers import PublicProfileSerializer
 from apps.publicservices.serializers import PublicServiceSerializer
+from .serializers import ContactMessageSerializer
+from apps.core.services import email_service
 
 class UserDashboardData(APIView):
     """
@@ -51,17 +53,29 @@ class UserDashboardData(APIView):
 @api_view(['GET'])
 def get_public_data(request):
     """
-    Get public data for all.
+    Get public data.
     """
-    
     public_services_data = PublicService.objects.all()
     public_profiles_data = PublicProfile.objects.all()
     public_services_data = PublicServiceSerializer(public_services_data, many=True).data
     public_profiles_data = PublicProfileSerializer(public_profiles_data, many=True).data
     
-    
-
     public_data = {'public_profiles_data' : public_profiles_data, 'public_services_data': public_services_data}
     
     return Response(public_data, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def process_message(request):
+    """
+    Receive contac message from the user and send it via email to the admin.
+    """
+    serializer = ContactMessageSerializer(data=request.data)
+
+    if serializer.is_valid():
+        sent_message = email_service.EmailService.send_email({"to_email": 'admin@sidelink.ch', "subject": serializer.validated_data['subject'], "text_content": serializer.validated_data['message']})
+        if not sent_message:
+            return Response({"message": "E-Mail konnte nicht gesendet werden"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   

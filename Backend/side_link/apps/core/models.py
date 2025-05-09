@@ -39,3 +39,14 @@ class Location(TimestampMixin, models.Model):
     
     def __str__(self):
         return self.name
+    
+class ContactMessage(TimestampMixin, models.Model):
+    id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

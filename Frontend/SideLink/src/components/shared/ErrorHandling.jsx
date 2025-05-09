@@ -138,6 +138,21 @@ const getDeletePublicServiceErrorMessage = error => {
   );
 };
 
+const basicErrorMessage = error => {
+  if (error.status === 400)
+    return (
+      <Typography color="error" marginTop={'40px'}>
+        Bitte überprüfe deine Eingaben.
+      </Typography>
+    );
+  return (
+    <Typography color="error" sx={{ textAlign: 'center', marginTop: '40px' }}>
+      Technische Störungen, bitte versuche es später nochmals.
+      {error.detail}
+    </Typography>
+  );
+};
+
 export {
   getLoginErrorMessage,
   getRegisterErrorMessage,
@@ -148,4 +163,5 @@ export {
   getChangePublicServiceErrorMessage,
   getNewPublicServiceErrorMessage,
   getDeletePublicServiceErrorMessage,
+  basicErrorMessage,
 };

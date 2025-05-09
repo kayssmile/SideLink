@@ -9,8 +9,8 @@ const loginSchema = yup.object().shape({
   password: yup
     .string()
     .min(3, 'Mindestens 6 Zeichen')
-    //.matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
-    //.matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
+    .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
+    .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
 });
 
@@ -42,6 +42,37 @@ const registerSchema = yup.object().shape({
     .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
     .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
+});
+
+const contactSchema = yup.object().shape({
+  first_name: yup
+    .string()
+    .required('Vorname ist erforderlich')
+    .matches(/^[A-Za-z\s]+$/, 'Nur Buchstaben sind erlaubt'),
+  last_name: yup.string(),
+  email: yup.string().matches(emailRegex, 'Ungültige E-Mail').email('Ungültige E-Mail').required('E-Mail ist erforderlich'),
+  subject: yup.string().required('Anliegen ist erforderlich').min(5, 'Mindestens 5 Zeichen').max(200, 'Maximal 200 Zeichen'),
+  message: yup.string().required('Nachricht ist erforderlich').min(10, 'Mindestens 10 Zeichen').max(2000, 'Maximal 2000 Zeichen'),
+  honeypot: yup.string().test('is-empty', 'Dieses Feld muss leer bleiben.', value => !value || value.trim() === ''),
+});
+
+const passwordForgotSchema = yup.object().shape({
+  email: yup.string().matches(emailRegex, 'Ungültige E-Mail').email('Ungültige E-Mail').required('E-Mail ist erforderlich'),
+  honeypot: yup.string().test('is-empty', 'Dieses Feld muss leer bleiben.', value => !value || value.trim() === ''),
+});
+
+const passwordResetSchema = yup.object().shape({
+  password: yup
+    .string()
+    .min(6, 'Mindestens 6 Zeichen')
+    .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
+    .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
+    .required('Passwort ist erforderlich'),
+  confirm_password: yup
+    .string()
+    .required('Bitte wiederhole dein neues Passwort')
+    .oneOf([yup.ref('password')], 'Die Passwörter stimmen nicht überein'),
+  honeypot: yup.string().test('is-empty', 'Dieses Feld muss leer bleiben.', value => !value || value.trim() === ''),
 });
 
 const editAccountSchema = yup.object().shape({
@@ -140,4 +171,4 @@ const publicServiceSchema = yup.object().shape({
   description: yup.string().required('Beschreibung ist erforderlich').max(500, 'Maximal 350 Zeichen'),
 });
 
-export { loginSchema, registerSchema, editAccountSchema, changeEmailSchema, changePasswordSchema, publicProfileSchema, publicServiceSchema };
+export { loginSchema, registerSchema, contactSchema, editAccountSchema, changeEmailSchema, changePasswordSchema, publicProfileSchema, publicServiceSchema, passwordForgotSchema, passwordResetSchema };

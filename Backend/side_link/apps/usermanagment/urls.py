@@ -1,20 +1,9 @@
-from .views import RegisterUserView  
+ 
 from django.urls import path  
+from rest_framework_simplejwt.views import TokenVerifyView
 
-
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-    TokenBlacklistView,
-)
-
-from .views import CustomTokenObtainPairView
-from .views import CustomTokenRefreshView
-from .views import CustomTokenBlacklistView
-from .views import RegisteredUserView
-from .views import ChangePasswordView
-
+from apps.usermanagment.views.user import RegisterUserView, RegisteredUserView
+from apps.usermanagment.views.auth import CustomTokenObtainPairView, CustomTokenRefreshView, CustomTokenBlacklistView, ChangePasswordView, ForgotPasswordView, PasswordResetView
 
 urlpatterns = [  
 
@@ -23,6 +12,8 @@ urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register_user'),
 
     path('change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('password-forgot/', ForgotPasswordView.as_view(), name='forgot_password'),
+    path('password-reset/', PasswordResetView.as_view(), name='password_reset'),
 
     # Login (gibt Access- und Refresh-Token zurück)
     path('login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),

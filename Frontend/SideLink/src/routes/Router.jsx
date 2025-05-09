@@ -6,22 +6,25 @@ const LayoutMain = lazy(() => import('src/components/main/layout/layoutmain'));
 
 const Home = lazy(() => import('src/components/main/home/home'));
 const Board = lazy(() => import('src/components/main/board/board'));
+const ServiceWithProfile = lazy(() => import('src/components/main/detail/ServiceWithProfile'));
 const Instruction = lazy(() => import('src/components/main/instruction'));
 const Error = lazy(() => import('src/components/main/error'));
 
-const Login = lazy(() => import('src/components/main/authentication/login'));
-const Registration = lazy(() => import('src/components/main/authentication/registration'));
+const Login = lazy(() => import('src/components/main/authentication/Login'));
+const Registration = lazy(() => import('src/components/main/authentication/Registration'));
+const PasswordForgot = lazy(() => import('src/components/main/authentication/PasswordForgot'));
+const PasswordReset = lazy(() => import('src/components/main/authentication/PasswordReset'));
 
 const About = lazy(() => import('src/components/main/info/about'));
 const Legal = lazy(() => import('src/components/main/info/legal'));
 const AGB = lazy(() => import('src/components/main/info/agb'));
+const Contact = lazy(() => import('src/components/main/info/contact'));
 
 /*
 Dashboard
 */
 const LayoutFull = lazy(() => import('src/components/dashboard/layout/LayoutFull'));
 const Dashboard = lazy(() => import('src/components/dashboard/dashboard'));
-//const Offers = lazy(() => import('src/components/dashboard/offers'));
 const ServiceManagerOffer = lazy(() => import('src/components/dashboard/servicemanager/ServiceManagerOffer'));
 const ServiceManagerSearch = lazy(() => import('src/components/dashboard/servicemanager/ServiceManagerSearch'));
 
@@ -36,7 +39,16 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="/home" /> }, // Root leitet auf Home um
       { path: 'home', element: <Home /> },
       { path: 'board', element: <Board /> },
+      {
+        path: 'service-profile/:id',
+        element: (
+          <RouterGuard>
+            <ServiceWithProfile />
+          </RouterGuard>
+        ),
+      },
       { path: 'instruction', element: <Instruction /> },
+      { path: 'contact', element: <Contact /> },
       { path: 'about', element: <About /> },
       { path: 'legal', element: <Legal /> },
       { path: 'Agb', element: <AGB /> },
@@ -45,6 +57,14 @@ const router = createBrowserRouter([
       { path: '404', element: <Error /> },
       { path: '*', element: <Navigate to="/404" /> }, // Alle unbekannten Routen leiten auf 404
     ],
+  },
+  {
+    path: '/password-forgot',
+    element: <PasswordForgot />,
+  },
+  {
+    path: '/password-reset/:uid/:token',
+    element: <PasswordReset />,
   },
   {
     path: '/dashboard',

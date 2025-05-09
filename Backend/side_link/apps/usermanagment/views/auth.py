@@ -1,54 +1,21 @@
 from django.forms import ValidationError
-from django.shortcuts import render, get_object_or_404
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.password_validation import validate_password
 
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import RegisteredUser
-from .serializers import RegisteredUserSerializer, CustomUserSerializer, CustomTokenObtainPairSerializer
+
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
+from apps.usermanagment.serializers import CustomTokenObtainPairSerializer
+from apps.usermanagment.models import RegisteredUser
+from apps.core.services import email_service
 
-
-class RegisterUserView(APIView):
-
-    def post(self, request):
-        
-        if RegisteredUser.objects.filter(email=request.data.get('email')).exists():
-            return Response(
-            {"error": "A user with this email already exists"},
-            status=status.HTTP_400_BAD_REQUEST
-            )
-        serializer = RegisteredUserSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
- 
-class RegisteredUserView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-
-        # check if user is available
-        user_data = CustomUserSerializer(user).data
-        return Response(user_data, status=status.HTTP_200_OK)
-    
-    def patch(self, request):
-        
-        user = request.user
-        serializer = CustomUserSerializer(user, data=request.data, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
 
 class ChangePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -58,19 +25,58 @@ class ChangePasswordView(APIView):
         user = request.user
         current_password = request.data.get("current_password")
         new_password = request.data.get("new_password")
-        
         if not user.check_password(current_password):
             return Response({"detail": "Actual Password is wrong"}, status=status.HTTP_400_BAD_REQUEST)
-
         try:
             validate_password(new_password, user=user)
         except Exception as e:
             return Response({"detail": list(e)}, status=status.HTTP_400_BAD_REQUEST)
-
         user.set_password(new_password)
         user.save()
-
         return Response(status=status.HTTP_200_OK)
+
+class ForgotPasswordView(APIView):
+    '''
+    This view is used to send a password reset link to the user's email.
+    The link contains token and userid to verify the link and user.
+    '''
+    def post(self, request):
+        email = request.data.get('email')
+        if not email:
+            return Response({'detail': 'Email ist erforderlich.'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = RegisteredUser.objects.get(email=email)
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.id))
+            reset_link = f"https://localhost:5173/password-reset/{uid}/{token}/"
+            sent_message = email_service.EmailService.send_email({"to_email": [user.email], "subject": "Passwort zurücksetzen", "text_content": f"Klicke auf den folgenden Link, um dein Passwort zurückzusetzen: {reset_link}"})
+            if not sent_message:
+                return Response({"message": "E-Mail konnte nicht gesendet werden"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)    
+        except RegisteredUser.DoesNotExist:
+            pass 
+        return Response({'detail': 'Falls die E-Mail registriert ist, wurde ein Link gesendet.'}, status=status.HTTP_200_OK)
+
+class PasswordResetView(APIView):
+    '''
+    This view is used to reset the password of a user.
+    To reset the password, the request must provide the token and uid from the email link.
+    '''
+    def post(self, request):
+        try:
+            uid = urlsafe_base64_decode(request.data.get('uidb64')).decode()
+            user = RegisteredUser.objects.get(id=uid)
+        except (RegisteredUser.DoesNotExist, ValueError, TypeError):
+            return Response({"detail": "Ungültiger Link"}, status=status.HTTP_400_BAD_REQUEST)
+        if not default_token_generator.check_token(user, request.data.get('token')):
+            return Response({"detail": "Token ist ungültig oder abgelaufen."}, status=status.HTTP_400_BAD_REQUEST)
+        new_password = request.data.get('password')
+        try:
+            validate_password(new_password, user=user)
+        except Exception as e:
+            return Response({"detail": list(e)}, status=status.HTTP_400_BAD_REQUEST)
+        user.set_password(new_password)
+        user.save()
+        return Response({"detail": "Passwort wurde erfolgreich zurückgesetzt."}, status=status.HTTP_200_OK)
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -142,3 +148,5 @@ class CustomTokenBlacklistView(TokenBlacklistView):
         response.delete_cookie('refreshToken')
 
         return response
+    
+
