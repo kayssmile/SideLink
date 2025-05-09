@@ -25,7 +25,7 @@ function SearchRegion() {
 
   const handleSelectedRegion = selectedRegion => {
     setSelectedRegion(selectedRegion);
-
+    removeUrlParams(['search']);
     let newSerachEngineData = [];
     if (selectedRegion === null) {
       removeUrlParams(['region']);

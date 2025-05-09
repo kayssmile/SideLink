@@ -25,7 +25,7 @@ function checkActiveMaskFilters(searchMask) {
   }
 
   if (searchMask?.serviceType?.data && searchMask.serviceType.data !== '') {
-    activeFilters.push({ type: 'serviceType', value: searchMask.serviceType.data });
+    activeFilters.push({ type: 'type', value: searchMask.serviceType.data });
   }
 
   return activeFilters;

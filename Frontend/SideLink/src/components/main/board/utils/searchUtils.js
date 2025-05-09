@@ -84,7 +84,7 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
   let categoryFilter = activeFilters.find(filter => filter.type === 'category');
   let subCategoryFilter = activeFilters.find(filter => filter.type === 'subCategories');
   let regionFilter = activeFilters.find(filter => filter.type === 'region');
-  let serviceTypeFilter = activeFilters.find(filter => filter.type === 'serviceType');
+  let serviceTypeFilter = activeFilters.find(filter => filter.type === 'type');
 
   /*
    * Check if category filter is active, if true we filter services by category
@@ -136,7 +136,6 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
    */
   if (regionFilter) {
     if (isAnyFilterActive) {
-      console.log('result', result);
       result = result.filter(publicService => publicService.region_details === regionFilter.value);
     } else {
       publicServices.forEach(publicService => {

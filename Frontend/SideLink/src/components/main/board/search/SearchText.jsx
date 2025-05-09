@@ -25,10 +25,10 @@ function SearchText() {
   //const urlTextSearchParam = useGetUrlParam('search');
 
   const urlTextSearchParam = useGetUrlParamReaktiv('search');
+
   /*
    * New filtering starts after 300ms break
    */
-
   const handleNewSearchValue = debounce(newSearchValue => {
     let newSerachEngineData = [];
 
@@ -82,40 +82,39 @@ function SearchText() {
   }, [urlTextSearchParam]);
 
   return (
-    <Box component="article" sx={{ marginTop: '2rem' }}>
-      <TextField
-        fullWidth
-        placeholder="Suche starten..."
-        variant="outlined"
-        value={searchValue || ''}
-        onChange={event => {
-          handleNewSearch(event.target.value);
-        }}
-        sx={{
-          borderRadius: '8px',
-          margin: '4rem 0',
-          '& .MuiInputBase-input': {
-            color: theme.palette.text.dark,
-            fontSize: '1.5rem',
-            fontWeight: '500',
-          },
-          '& .MuiInputBase-root': {
-            backgroundColor: theme.palette.background.white,
-          },
-        }}
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => handleNewSearch('')}>
-                  <IconX size="36" color="black" />
-                </IconButton>
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
-    </Box>
+    <TextField
+      fullWidth
+      placeholder="Suche starten..."
+      variant="outlined"
+      value={searchValue || ''}
+      onChange={event => {
+        handleNewSearch(event.target.value);
+      }}
+      sx={{
+        borderRadius: '8px',
+        marginTop: '1rem',
+        marginBottom: '2rem',
+        '& .MuiInputBase-input': {
+          color: theme.palette.text.dark,
+          fontSize: '1.5rem',
+          fontWeight: '500',
+        },
+        '& .MuiInputBase-root': {
+          backgroundColor: theme.palette.background.lightgrey,
+        },
+      }}
+      slotProps={{
+        input: {
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={() => handleNewSearch('')}>
+                <IconX size="36" color="black" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        },
+      }}
+    />
   );
 }
 

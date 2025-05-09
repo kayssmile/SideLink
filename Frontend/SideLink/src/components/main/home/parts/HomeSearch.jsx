@@ -25,6 +25,11 @@ function HomeSearch() {
           onChange={event => {
             setSearchValue(event.target.value);
           }}
+          onKeyDown={event => {
+            if (event.key === 'Enter') {
+              handleSearch();
+            }
+          }}
           sx={{
             borderRadius: '8px',
             margin: '4rem 0',

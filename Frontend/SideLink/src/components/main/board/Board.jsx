@@ -3,7 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { debounce } from 'lodash';
 import { Link, Chip, Typography, Button, Box, useTheme, useMediaQuery, Stack, Tooltip, IconButton, TextField, InputAdornment } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
+import { CardContent } from '@mui/material';
+import Grid from '@mui/material/Grid2';
+import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { filterServicesBySearch } from './utils/searchUtils';
@@ -15,6 +17,8 @@ import { filterServicesByType, filterServicesByActiveMaskFilters } from 'src/com
 import Listing from './listing/Listing';
 import SearchMask from './search/SearchMask';
 import GradientCircularProgress from 'src/components/shared/Spinner';
+
+import 'src/assets/styles/main/board/board.scss';
 
 //import { setSearchEngineData, loading, error, success, init } from 'src/store/publicdata/PublicDataManagment';
 
@@ -155,7 +159,32 @@ function Board() {
           />
         </Box>
       
-  ) :*/}
+  ) :
+        {init || loading ? (
+          <GradientCircularProgress />
+        ) : error ? (
+          <Typography color="error" sx={{ textAlign: 'center', margin: '6rem 0' }}>
+            Technische Störungen, bitte versuche es später nochmals oder{' '}
+            <Typography sx={{ marginTop: '1rem', color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
+              <Link component={RouterLink} to="/contact">
+                kontaktiere uns
+              </Link>
+            </Typography>
+            {error}
+          </Typography>
+        ) : !init && success ? (
+          
+          <>
+            <Box component="article" sx={{ marginTop: '2rem' }}>
+              <SearchMask />
+            </Box>
+            <Listing />
+          </>
+
+        ) : (
+          ''
+        )} */}
+
         {init || loading ? (
           <GradientCircularProgress />
         ) : error ? (
@@ -170,10 +199,16 @@ function Board() {
           </Typography>
         ) : !init && success ? (
           <>
-            <Box component="article" sx={{ marginTop: '2rem' }}>
-              <SearchMask />
-            </Box>
-            <Listing />
+            <Grid container sx={{ backgroundColor: '' }}>
+              <Grid size={12}>
+                <StyledCard variant={'outlined'} sx={{ backgroundColor: theme.palette.background.main, marginTop: '2rem' }}>
+                  <CardContent>
+                    <SearchMask />
+                    <Listing />
+                  </CardContent>
+                </StyledCard>
+              </Grid>
+            </Grid>
           </>
         ) : (
           ''

@@ -21,24 +21,25 @@ function SearchSubCategories({ subCategories }) {
   const handleSelectedSubCategory = newSubCategories => {
     setSelectedSubCategories(newSubCategories);
     let newSerachEngineData = [];
+    removeUrlParams(['search']);
     if (newSubCategories.length === 0) {
       removeUrlParams(['subcategories']);
       dispatch(setSearchMask({ type: 'subCategories', data: false }));
 
       if (isAnyMaskFilterActive({ ...searchMask, subCategories: { data: false } })) {
         const activeFilters = checkActiveMaskFilters({ ...searchMask, subCategories: { data: false } });
-        let newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
+        newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
         dispatch(setSearchEngineData(newSerachEngineData));
       } else {
         dispatch(setSearchEngineData(publicServices));
       }
     } else {
       if (isAnyMaskFilterActive(searchMask)) {
-        newSerachEngineData = filterServicesBySubCategories(searchEngineData, newSubCategories);
+        const activeFilters = checkActiveMaskFilters({ ...searchMask, subCategories: { data: newSubCategories } });
+        newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
       } else {
         newSerachEngineData = filterServicesBySubCategories(publicServices, newSubCategories);
       }
-
       dispatch(setSearchMask({ type: 'subCategories', data: newSubCategories }));
       dispatch(setSearchEngineData(newSerachEngineData));
       setUrlParam('subcategories', newSubCategories);

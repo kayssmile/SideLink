@@ -23,7 +23,7 @@ function SearchType() {
   const handleSelectedType = selectedType => {
     setSelectedType(selectedType);
     let newSearchEngineData = [];
-
+    removeUrlParams(['search']);
     if (selectedType === '') {
       removeUrlParams(['type']);
       dispatch(setSearchMask({ type: 'type', data: false }));
@@ -55,7 +55,6 @@ function SearchType() {
   useEffect(() => {
     if (urlTypeParam) {
       setSelectedType(urlTypeParam);
-      // handleSelectedType(urlTypeParam);
     }
   }, []);
 

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getPublicData from './actions/GetPublicDataAction';
+import getPublicprofile from './actions/GetPublicProfileAction';
 
 const initialState = {
   publicData: {
@@ -13,7 +14,7 @@ const initialState = {
       text: { type: 'text', data: false },
     },
     publicServices: [],
-    publicProfiles: [],
+    publicProfiles: { data: [], loading: false, success: false, error: false },
     loading: false,
     success: false,
     error: false,
@@ -59,6 +60,14 @@ const PublicDataManagment = createSlice({
         state.publicData.searchMask.text.data = payload.data;
       } /* */
     },
+    resetPublicProfilesProcess: state => {
+      state.publicData.publicProfiles = {
+        ...state.publicData.publicProfiles,
+        loading: false,
+        success: false,
+        error: false,
+      };
+    },
   },
   extraReducers: builder => {
     builder
@@ -70,7 +79,8 @@ const PublicDataManagment = createSlice({
           ...state.publicData,
           searchEngineData: payload.public_services_data,
           publicServices: payload.public_services_data,
-          publicProfiles: payload.public_services_data,
+
+          //  publicProfiles: payload.public_services_data,
           loading: false,
           success: true,
           error: false,
@@ -80,10 +90,37 @@ const PublicDataManagment = createSlice({
       .addCase(getPublicData.rejected, (state, { payload }) => {
         state.publicData = { ...state.publicData, loading: false, success: false, error: payload };
         //console.log('payloadPublicDataError', payload);
+      })
+      .addCase(getPublicprofile.pending, state => {
+        state.publicData.publicProfiles = {
+          ...state.publicData.publicProfiles,
+          loading: true,
+          success: false,
+          error: false,
+        };
+      })
+      .addCase(getPublicprofile.fulfilled, (state, { payload }) => {
+        const profiles = state.publicData.publicProfiles.data;
+        profiles.push(payload);
+        state.publicData.publicProfiles = {
+          data: profiles,
+          loading: false,
+          success: true,
+          error: false,
+        };
+      })
+      .addCase(getPublicprofile.rejected, (state, { payload }) => {
+        state.publicData.publicProfiles = {
+          ...state.publicData.publicProfiles,
+          loading: false,
+          success: false,
+          error: payload,
+        };
+        console.log('payloadPublicDataError', payload);
       });
   },
 });
 
-export const { setSearchEngineData, setSearchMask, setInit } = PublicDataManagment.actions;
+export const { setSearchEngineData, setSearchMask, setInit, resetPublicProfilesProcess } = PublicDataManagment.actions;
 
 export default PublicDataManagment.reducer;
