@@ -13,7 +13,7 @@ import { checkAuth } from 'src/services/AuthService';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
 import { getChangePasswordErrorMessage } from 'src/components/shared/ErrorHandling';
 
-import Modal from 'src/components/dashboard/shared/Modal';
+import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';
 

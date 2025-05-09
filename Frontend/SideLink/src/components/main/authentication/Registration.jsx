@@ -31,28 +31,47 @@ function Registration() {
   };
 
   return (
-    <>
+    <Box component="section" data-testid="" sx={{ padding: '2rem 0' }}>
       <Typography
-        variant="h4"
-        component="h2"
+        variant="h1"
+        fontWeight={700}
+        lineHeight="1.2"
+        color={theme.palette.text.primary}
         sx={{
-          fontWeight: '400 !important',
-          margin: '4rem 0',
-          textAlign: 'center',
-          color: 'white',
+          fontSize: {
+            xs: '40px',
+            sm: '56px',
+          },
         }}
       >
-        Registration
+        Registration.{' '}
+      </Typography>
+
+      <Typography
+        variant="body1"
+        color={theme.palette.text.primary}
+        sx={{
+          fontSize: {
+            xs: '22px',
+            sm: '24px',
+            opacity: '0.7',
+          },
+        }}
+        fontWeight={700}
+      >
+        Starte deine Suche oder teile dein Können – Registriere dich kostenlos.
       </Typography>
 
       <Box
         component="form"
+        noValidate
         onSubmit={handleSubmit(onSubmit)}
         sx={{
           display: 'flex',
           flexDirection: 'column',
           padding: '6rem 10rem',
           paddingTop: '2rem',
+          marginTop: '2rem',
           width: 'auto',
           gap: '35px',
           marginBottom: '4rem',
@@ -126,6 +145,7 @@ function Registration() {
 
           <StyledFormControlLabel required control={<StyledCheckbox />} label="Ich habe die AGBs gelesen und bin damit einverstanden" />
         </Box>
+        <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
         <Button
           variant="contained"
@@ -151,7 +171,7 @@ function Registration() {
           </RouterLink>
         )}
       </Box>
-    </>
+    </Box>
   );
 }
 

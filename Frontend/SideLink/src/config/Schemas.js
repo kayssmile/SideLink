@@ -12,6 +12,7 @@ const loginSchema = yup.object().shape({
     .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
     .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
+  honeypot: yup.string().test('is-empty', 'Dieses Feld muss leer bleiben.', value => !value || value.trim() === ''),
 });
 
 const registerSchema = yup.object().shape({
@@ -42,6 +43,7 @@ const registerSchema = yup.object().shape({
     .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
     .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
+  honeypot: yup.string().test('is-empty', 'Dieses Feld muss leer bleiben.', value => !value || value.trim() === ''),
 });
 
 const contactSchema = yup.object().shape({

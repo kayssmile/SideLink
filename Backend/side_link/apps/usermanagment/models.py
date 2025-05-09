@@ -30,24 +30,16 @@ class RegisteredUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class RegisteredUser(TimestampMixin, AbstractBaseUser, PermissionsMixin):
-    '''GENDER_CHOICES = [
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('other', 'Other'),
-    ]'''
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    #gender = models.CharField(max_length=6, choices=GENDER_CHOICES, default='Male')
     email = models.EmailField(max_length=100, unique=True)
     profession = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=100)
     street_address = models.CharField(max_length=100)
-    #city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=100)
     place = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
-    #profile_picture = models.ImageField(upload_to='profile_pictures/', null=True)
     public_profile = models.OneToOneField(
         'publicprofile.PublicProfile', 
         on_delete=models.SET_NULL,

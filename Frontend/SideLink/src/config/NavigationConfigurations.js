@@ -1,7 +1,8 @@
 import icon1 from 'src/assets/images/svgs/icon-account.svg';
 import ddIcon3 from 'src/assets/images/svgs/icon-dd-invoice.svg';
 import settingsIcon from 'src/assets/images/svgs/settings.svg';
-import { IconPoint, IconCurrencyDollar, IconUserCircle, IconUserCheck } from '@tabler/icons-react';
+
+import { IconPoint, IconCurrencyDollar, IconUserCircle, IconUserCheck, IconChartHistogram } from '@tabler/icons-react';
 
 const navLinks = [
   {
@@ -9,7 +10,7 @@ const navLinks = [
     to: '/home',
   },
   {
-    title: 'Connect',
+    title: 'Übersicht',
     to: '/board',
   },
   {
@@ -49,7 +50,6 @@ const breadcrumpConfig = {
       title: 'Account Verwaltung',
     },
   ],
-
   publicProfile: [
     {
       to: '/dashboard',
@@ -75,6 +75,15 @@ const breadcrumpConfig = {
     },
     {
       title: 'Dienstleistungs Angebote',
+    },
+  ],
+  analysis: [
+    {
+      to: '/dashboard',
+      title: 'Dashboard',
+    },
+    {
+      title: 'Analysen',
     },
   ],
 };
@@ -114,6 +123,15 @@ const sideBarMenuItems = [
     title: 'Account Verwaltung',
     icon: IconUserCircle,
     to: '/dashboard/account',
+  },
+  {
+    navlabel: true,
+    subheader: 'Allgemeines',
+  },
+  {
+    title: 'Auswertungen',
+    icon: IconChartHistogram,
+    to: '/dashboard/analyses',
   },
 ];
 

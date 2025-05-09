@@ -35,6 +35,11 @@ const footerLinks = [
         titleText: 'Registriere DDD',
         to: '/registration',
       },
+      {
+        title: false,
+        titleText: 'Kontakt',
+        to: '/contact',
+      },
     ],
   },
   {

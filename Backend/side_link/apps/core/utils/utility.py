@@ -1,6 +1,6 @@
 from apps.core.models import Category, SubCategory, Region, Location
 
-def check_exist_or_create (request):
+def check_exist_or_create(request):
     ''' 
     Check if the category, sub_category, region, and location exist in the database, if not create them.
     '''
