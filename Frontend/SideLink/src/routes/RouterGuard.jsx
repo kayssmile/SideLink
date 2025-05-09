@@ -1,34 +1,36 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { checkAuth } from 'src/services/AuthService';
-import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
+import Loading from 'src/components/shared/Loading';
 
+/*
+ * RouterGuard as wrapper for protected routes, initialstate null is used for loading-component
+ */
 const RouterGuard = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null); // `null` steht für den Ladezustand
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const dashboardData = useSelector(state => state.dashboard.dashboardData);
-  // const { dashboardData } = useSelector(state => state.dashboard);
-  const dispatch = useDispatch();
 
-  // useEffect, um den Auth-Status zu prüfen
   useEffect(() => {
     if (dashboardData.user.email) {
       setIsLoggedIn(true);
-    } else {
+    }
+    if (dashboardData.loading) {
+      setIsLoggedIn(null);
+    }
+    if (dashboardData.error) {
       setIsLoggedIn(false);
     }
   }, [dashboardData]);
 
   if (isLoggedIn === null) {
-    // Ladezustand: Vielleicht ein Spinner oder ähnliches anzeigen
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (isLoggedIn) {
-    return children; // Wenn der User eingeloggt ist, zeige die geschützte Seite
+    return children;
   } else {
-    return <Navigate to="/home" replace />; // Wenn nicht eingeloggt, zum Home weiterleiten
+    return <Navigate to="/home" replace />;
   }
 };
 

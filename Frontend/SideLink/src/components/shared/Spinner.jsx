@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function GradientCircularProgress() {
+function GradientCircularProgress({ size }) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
       <svg width={0} height={0}>
@@ -15,7 +13,7 @@ function GradientCircularProgress() {
           </linearGradient>
         </defs>
       </svg>
-      <CircularProgress sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
+      <CircularProgress size={size} sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
     </Box>
   );
 }

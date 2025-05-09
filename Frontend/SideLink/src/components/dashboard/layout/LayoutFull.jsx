@@ -2,6 +2,8 @@ import { Outlet } from 'react-router-dom'; // Für das Einfügen von Kinder-Rout
 import { useState, useEffect } from 'react';
 import { styled, Container, Box, useTheme, useMediaQuery } from '@mui/material';
 
+import { ScrollToTop } from 'src/components/shared/utils/utils';
+
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar';
 import Header from 'src/components/dashboard/shared/header/vertical/Header';
 
@@ -68,25 +70,20 @@ const LayoutFull = () => {
   }));
 
   return (
-    <>
-      {dashboardData ? (
-        <SiteWrapper data-testid="layout-full">
-          <Sidebar />
-          {/*  */}
-          <PageWrapper className="page-wrapper">
-            <Header />
+    <SiteWrapper data-testid="layout-full">
+      <Sidebar />
 
-            <MainWrapper>
-              <main>
-                <Outlet />
-              </main>
-            </MainWrapper>
-          </PageWrapper>
-        </SiteWrapper>
-      ) : (
-        <p>....Loadingf</p>
-      )}
-    </>
+      <PageWrapper className="page-wrapper">
+        <Header />
+
+        <MainWrapper>
+          <main>
+            <ScrollToTop />
+            <Outlet />
+          </main>
+        </MainWrapper>
+      </PageWrapper>
+    </SiteWrapper>
   );
 };
 

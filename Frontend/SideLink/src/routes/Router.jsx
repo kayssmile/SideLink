@@ -30,6 +30,7 @@ const ServiceManagerSearch = lazy(() => import('src/components/dashboard/service
 
 const PublicProfile = lazy(() => import('src/components/dashboard/publicprofile/PublicProfile'));
 const Account = lazy(() => import('src/components/dashboard/account/Account'));
+const Analyses = lazy(() => import('src/components/dashboard/analyses/Analyses'));
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'registration', element: <Registration /> },
       { path: '404', element: <Error /> },
-      { path: '*', element: <Navigate to="/404" /> }, // Alle unbekannten Routen leiten auf 404
+      { path: '*', element: <Navigate to="/404" /> },
     ],
   },
   {
@@ -75,14 +76,12 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <Dashboard /> },
-
-      // { index: true, element: <Navigate to="/login" /> },
       { path: 'services-search', element: <ServiceManagerSearch /> },
       { path: 'services-offer', element: <ServiceManagerOffer /> },
       { path: 'publicprofile', element: <PublicProfile /> },
       { path: 'account', element: <Account /> },
-      { path: '404', element: <Error /> },
-      { path: '*', element: <Navigate to="/404" /> }, // Alle unbekannten Routen leiten auf 404
+      { path: 'analyses', element: <Analyses /> },
+      { path: '*', element: <Navigate to="/404" /> },
     ],
   },
 ]);

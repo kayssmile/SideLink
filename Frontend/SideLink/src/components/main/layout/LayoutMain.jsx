@@ -2,11 +2,14 @@ import { useTheme, Container } from '@mui/material';
 import { styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
+import { ScrollToTop } from 'src/components/shared/utils/utils';
+
 import Header from 'src/components/main/shared/header/header';
 import Footer from 'src/components/main/shared/footer/footer';
 
 const LayoutMain = () => {
   const theme = useTheme();
+
   const SiteWrapper = styled('div')(() => ({
     display: 'flex',
     flexDirection: 'column',
@@ -23,6 +26,7 @@ const LayoutMain = () => {
           <Header />
           <Container maxWidth="xl">
             <main>
+              <ScrollToTop />
               <Outlet />
             </main>
           </Container>
