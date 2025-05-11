@@ -7,7 +7,7 @@ import { contactSchema } from 'src/config/Schemas';
 import basicPostRequest from 'src/services/BasicRequest';
 import { basicErrorMessage } from 'src/components/shared/ErrorHandling';
 
-import { StyledTextField } from 'src/components/shared/forms/formelements';
+import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
 function Contact() {
   const theme = useTheme();

@@ -2,7 +2,7 @@ import { Box, Typography, IconButton, Tooltip, useTheme, Button } from '@mui/mat
 import { IconPower } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import invalidateToken from 'src/services/Tokeninvalidator';
+import invalidateToken from 'src/services/TokenInvalidator';
 import { removeToken } from 'src/services/AuthService';
 
 import { userLogout } from 'src/store/usermanagment/UserManagment';

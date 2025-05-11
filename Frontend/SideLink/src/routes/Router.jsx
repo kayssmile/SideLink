@@ -2,29 +2,29 @@ import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import RouterGuard from 'src/routes/RouterGuard';
 
-const LayoutMain = lazy(() => import('src/components/main/layout/layoutmain'));
+const LayoutMain = lazy(() => import('src/components/main/layout/LayoutMain'));
 
-const Home = lazy(() => import('src/components/main/home/home'));
-const Board = lazy(() => import('src/components/main/board/board'));
+const Home = lazy(() => import('src/components/main/home/Home'));
+const Board = lazy(() => import('src/components/main/board/Board'));
 const ServiceWithProfile = lazy(() => import('src/components/main/detail/ServiceWithProfile'));
-const Instruction = lazy(() => import('src/components/main/instruction'));
-const Error = lazy(() => import('src/components/main/error'));
+const Instruction = lazy(() => import('src/components/main/Instruction'));
+const Error = lazy(() => import('src/components/main/Error'));
 
 const Login = lazy(() => import('src/components/main/authentication/Login'));
 const Registration = lazy(() => import('src/components/main/authentication/Registration'));
 const PasswordForgot = lazy(() => import('src/components/main/authentication/PasswordForgot'));
 const PasswordReset = lazy(() => import('src/components/main/authentication/PasswordReset'));
 
-const About = lazy(() => import('src/components/main/info/about'));
-const Legal = lazy(() => import('src/components/main/info/legal'));
-const AGB = lazy(() => import('src/components/main/info/agb'));
-const Contact = lazy(() => import('src/components/main/info/contact'));
+const About = lazy(() => import('src/components/main/info/About'));
+const Legal = lazy(() => import('src/components/main/info/Legal'));
+const AGB = lazy(() => import('src/components/main/info/AGB'));
+const Contact = lazy(() => import('src/components/main/info/Contact'));
 
 /*
 Dashboard
 */
 const LayoutFull = lazy(() => import('src/components/dashboard/layout/LayoutFull'));
-const Dashboard = lazy(() => import('src/components/dashboard/dashboard'));
+const Dashboard = lazy(() => import('src/components/dashboard/Dashboard'));
 const ServiceManagerOffer = lazy(() => import('src/components/dashboard/servicemanager/ServiceManagerOffer'));
 const ServiceManagerSearch = lazy(() => import('src/components/dashboard/servicemanager/ServiceManagerSearch'));
 
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
           </RouterGuard>
         ),
       },
-      { path: 'instruction', element: <Instruction /> },
+      { path: 'instructions', element: <Instruction /> },
       { path: 'contact', element: <Contact /> },
       { path: 'about', element: <About /> },
       { path: 'legal', element: <Legal /> },

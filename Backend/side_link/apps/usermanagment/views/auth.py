@@ -88,6 +88,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         response = super().post(request, *args, **kwargs)
         data = response.data
 
+        '''
         response.set_cookie(
             key='refreshToken',
             value=data['refresh_token'], # in production use data.pop('refresh_token')
@@ -96,7 +97,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             secure=True,  # Setze auf False, um Cookies auch über HTTP zu erlauben (bei Verwendung von HTTPS sollte dies auf True gesetzt werden)
             path='/',
             
-        )
+        ) '''
 
         return response
     
@@ -106,6 +107,7 @@ class CustomTokenRefreshView(TokenRefreshView):
         # Try to get refresh token from cookies first
         refresh_token = request.COOKIES.get('refreshToken')
         # If not in cookies, try to get from request body
+        
         if not refresh_token:
             refresh_token = request.data.get('refresh')
 
@@ -114,9 +116,10 @@ class CustomTokenRefreshView(TokenRefreshView):
 
         # Update request data with refresh token
         request.data['refresh'] = refresh_token
-
+            
         response = super().post(request, *args, **kwargs)
         
+
         # Get new refresh token if rotation is enabled
         new_refresh_token = response.data.pop('refresh', None)
         
@@ -131,7 +134,7 @@ class CustomTokenRefreshView(TokenRefreshView):
                 path='/',
                 max_age=7 * 24 * 60 * 60  # 7 days
             )
-            
+        
         return response
 
 class CustomTokenBlacklistView(TokenBlacklistView):

@@ -143,6 +143,7 @@ const footerLinks = [
         title: true,
         titleText: 'Quicklinks',
       },
+
       {
         title: false,
         titleText: 'Home',
@@ -150,18 +151,23 @@ const footerLinks = [
       },
       {
         title: false,
-        titleText: 'Login',
-        to: '/login',
-      },
-      {
-        title: false,
-        titleText: 'Registriere DDD',
-        to: '/registration',
+        titleText: 'Board',
+        to: '/board',
       },
       {
         title: false,
         titleText: 'Kontakt',
         to: '/contact',
+      },
+      {
+        title: false,
+        titleText: 'Hilfe',
+        to: '/instructions',
+      },
+      {
+        title: false,
+        titleText: 'Registrierung',
+        to: '/registration',
       },
     ],
   },

@@ -3,12 +3,12 @@ import { RouterProvider } from 'react-router';
 import { ThemeProvider } from '@emotion/react';
 import { useDispatch } from 'react-redux';
 
-import { theme } from 'src/config/theme.js';
+import { theme } from 'src/config/Theme.js';
 import { checkAuth, getToken } from 'src/services/AuthService';
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
 
-import router from 'src/routes/router';
+import router from 'src/routes/Router';
 
 function App() {
   const dispatch = useDispatch();

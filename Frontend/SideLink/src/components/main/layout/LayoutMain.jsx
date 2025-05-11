@@ -2,10 +2,10 @@ import { useTheme, Container } from '@mui/material';
 import { styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-import { ScrollToTop } from 'src/components/shared/utils/utils';
+import { ScrollToTop } from 'src/components/shared/utils/Utils';
 
-import Header from 'src/components/main/shared/header/header';
-import Footer from 'src/components/main/shared/footer/footer';
+import Header from 'src/components/main/shared/header/Header';
+import Footer from 'src/components/main/shared/footer/Footer';
 
 const LayoutMain = () => {
   const theme = useTheme();

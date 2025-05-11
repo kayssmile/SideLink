@@ -1,4 +1,4 @@
-import Logo from 'src/components/shared/logo/logo';
+import Logo from 'src/components/shared/logo/Logo';
 import Navigations from './Navigations';
 import AccountMenu from 'src/components/main/shared/header/parts/AccountMenu';
 

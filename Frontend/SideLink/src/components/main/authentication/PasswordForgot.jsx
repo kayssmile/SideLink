@@ -9,8 +9,8 @@ import { passwordForgotSchema } from 'src/config/Schemas';
 import basicPostRequest from 'src/services/BasicRequest';
 import { basicErrorMessage } from 'src/components/shared/ErrorHandling';
 
-import Logo from 'src/components/shared/logo/logo';
-import { StyledTextField } from 'src/components/shared/forms/formelements';
+import Logo from 'src/components/shared/logo/Logo';
+import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
 function PasswordForgot() {
   const theme = useTheme();

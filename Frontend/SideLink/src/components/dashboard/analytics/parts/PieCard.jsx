@@ -1,5 +1,5 @@
 import { CardHeader, CardContent, Divider, useTheme } from '@mui/material';
-import { PieChart } from '@mui/x-charts';
+import { PieChart, chartsTooltipClasses } from '@mui/x-charts';
 import Grid from '@mui/material/Grid2';
 
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
@@ -14,7 +14,24 @@ function PieCard({ chartData, title }) {
 
         <CardContent>
           <PieChart
-            sx={{ color: 'black' }}
+            slotProps={{
+              tooltip: {
+                sx: {
+                  [`& .${chartsTooltipClasses.title}`]: {
+                    color: 'black',
+                    fontWeight: 'bold',
+                    fontSize: '14px',
+                    paddingBottom: '4px',
+                  },
+                  [`&.${chartsTooltipClasses.root} .${chartsTooltipClasses.valueCell}`]: {
+                    color: 'black',
+                  },
+                  [`&.${chartsTooltipClasses.root} .${chartsTooltipClasses.labelCell}`]: {
+                    color: 'black',
+                  },
+                },
+              },
+            }}
             series={[
               {
                 data: chartData,

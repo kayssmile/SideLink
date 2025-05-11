@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { profileMenu as profileMenuConfiguration } from 'src/config/NavigationConfigurations';
 
 import Logout from 'src/components/shared/header/Logout';
-import MenuItem from './parts/menuItem';
+import MenuItem from './parts/MenuItem';
 
 const ProfileMenuDesktop = () => {
   const theme = useTheme();

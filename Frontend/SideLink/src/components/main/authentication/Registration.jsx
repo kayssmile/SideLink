@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 
-import registerUser from 'src/store/usermanagment/actions/registerAction';
+import registerUser from 'src/store/usermanagment/actions/RegisterAction';
 import { registerSchema } from 'src/config/Schemas';
 import { getRegisterErrorMessage } from 'src/components/shared/ErrorHandling';
 
-import { StyledTextField, StyledFormControlLabel, StyledCheckbox } from 'src/components/shared/forms/formelements';
+import { StyledTextField, StyledFormControlLabel, StyledCheckbox } from 'src/components/shared/forms/FormElements';
 
 function Registration() {
   const theme = useTheme();

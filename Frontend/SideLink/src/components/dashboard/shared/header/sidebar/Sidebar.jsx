@@ -5,7 +5,7 @@ import { IconCircleDashedX } from '@tabler/icons-react';
 import { toggleSidebar } from 'src/store/dashboard/main/DashboardManagment';
 
 import SidebarMenu from './parts/SidebarMenu';
-import Logo from 'src/components/shared/logo/logo';
+import Logo from 'src/components/shared/logo/Logo';
 import Logout from 'src/components/shared/header/Logout';
 
 const Sidebar = () => {

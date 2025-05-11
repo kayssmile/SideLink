@@ -12,7 +12,7 @@ import { loginSchema } from 'src/config/Schemas';
 import { getLoginErrorMessage } from 'src/components/shared/ErrorHandling';
 import { getToken } from 'src/services/AuthService';
 
-import { StyledTextField } from 'src/components/shared/forms/formelements';
+import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
 function Login() {
   const theme = useTheme();

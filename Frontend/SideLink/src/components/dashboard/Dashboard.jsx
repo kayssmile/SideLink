@@ -2,7 +2,7 @@
 import { Box, Grid, Typography, Button, IconButton, InputAdornment, Stack, FormGroup } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-import { StyledTextField } from 'src/components/shared/forms/formelements';
+import { StyledTextField } from 'src/components/shared/forms/FormElements';
 import { useState } from 'react';
 
 function Dashboard() {

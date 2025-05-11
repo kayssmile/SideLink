@@ -14,26 +14,38 @@ import GradientCircularProgress from 'src/components/shared/Spinner';
 function Analytics() {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { analytics } = useSelector(state => state.dashboard);
+  const { analytics, dashboardData } = useSelector(state => state.dashboard);
 
   const initAnalyticsData = async () => {
     try {
-      if (await checkAuth()) {
+      if (!analytics.loading && (await checkAuth())) {
         const token = getToken();
         if (token) {
           dispatch(getAnalyticsData(token));
         }
+      } else {
+        console.log('No token found or user not authenticated');
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  if (!analytics.success && !analytics.error && !analytics.loading) {
+    initAnalyticsData();
+  }
+
   useEffect(() => {
+    console.log('Analytics useEffect', analytics);
     if (!analytics.success && !analytics.error && !analytics.loading) {
       initAnalyticsData();
     }
   }, [analytics]);
+
+  useEffect(() => {
+    console.log('Analytics useEffect services effect', analytics);
+    initAnalyticsData();
+  }, [dashboardData.publicServices]);
 
   return (
     <>

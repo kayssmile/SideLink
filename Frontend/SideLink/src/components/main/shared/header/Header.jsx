@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AppBar, Container, Drawer, IconButton, Stack, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { IconMenu2 } from '@tabler/icons-react';
 
-import Logo from 'src/components/shared/logo/logo';
+import Logo from 'src/components/shared/logo/Logo';
 import Navigations from './parts/Navigations';
 import MobileSidebar from './parts/MobileSidebar';
 import AccountMenu from './parts/AccountMenu';
