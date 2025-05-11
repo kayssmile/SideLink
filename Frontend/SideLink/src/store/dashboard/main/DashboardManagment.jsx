@@ -3,6 +3,7 @@ import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDat
 import patchAccountDetails from './actions/PatchAccountDataAction';
 import patchAccountEmail from './actions/PatchAccountEmailAction';
 import patchAccountPassword from './actions/PatchAccountPasswordAction';
+import getAnalyticsData from './actions/GetAnalyticsDataAction';
 
 const initialState = {
   sidebar: window.innerWidth > 768,
@@ -26,6 +27,12 @@ const initialState = {
     loading: false,
   },
   changePassword: {
+    success: false,
+    error: false,
+    loading: false,
+  },
+  analytics: {
+    data: false,
     success: false,
     error: false,
     loading: false,
@@ -105,6 +112,15 @@ const dashboardManagment = createSlice({
       })
       .addCase(patchAccountPassword.rejected, (state, { payload }) => {
         state.changePassword = { ...state.changePassword, loading: false, success: false, error: payload };
+      })
+      .addCase(getAnalyticsData.pending, state => {
+        state.analytics = { ...state.analytics, loading: true, error: false, success: false };
+      })
+      .addCase(getAnalyticsData.fulfilled, (state, { payload }) => {
+        state.analytics = { loading: false, success: true, error: false, data: payload };
+      })
+      .addCase(getAnalyticsData.rejected, (state, { payload }) => {
+        state.analytics = { ...state.analytics, loading: false, success: false, error: payload };
       });
   },
 });

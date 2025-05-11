@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/', include('apps.publicprofile.urls')),
     path('api/', include('apps.publicservices.urls')),
     path('api/', include('apps.core.urls')),
+    path('api/', include('apps.analytics.urls')),
 ]
 
 if settings.DEBUG:

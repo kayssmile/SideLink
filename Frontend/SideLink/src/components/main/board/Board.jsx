@@ -18,8 +18,6 @@ import Listing from './listing/Listing';
 import SearchMask from './search/SearchMask';
 import GradientCircularProgress from 'src/components/shared/Spinner';
 
-import 'src/assets/styles/main/board/board.scss';
-
 //import { setSearchEngineData, loading, error, success, init } from 'src/store/publicdata/PublicDataManagment';
 
 function Board() {

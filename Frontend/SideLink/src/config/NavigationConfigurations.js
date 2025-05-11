@@ -131,8 +131,74 @@ const sideBarMenuItems = [
   {
     title: 'Auswertungen',
     icon: IconChartHistogram,
-    to: '/dashboard/analyses',
+    to: '/dashboard/analytics',
   },
 ];
 
-export { navLinks, profileMenu, breadcrumpConfig, sideBarMenuItems };
+const footerLinks = [
+  {
+    id: 1,
+    elements: [
+      {
+        title: true,
+        titleText: 'Quicklinks',
+      },
+      {
+        title: false,
+        titleText: 'Home',
+        to: '/home',
+      },
+      {
+        title: false,
+        titleText: 'Login',
+        to: '/login',
+      },
+      {
+        title: false,
+        titleText: 'Registriere DDD',
+        to: '/registration',
+      },
+      {
+        title: false,
+        titleText: 'Kontakt',
+        to: '/contact',
+      },
+    ],
+  },
+  {
+    id: 2,
+    elements: [
+      {
+        title: true,
+        titleText: 'Kategorien',
+      },
+      {
+        title: false,
+        titleText: 'Haushalt',
+        to: '/board/?category=Haushalt',
+      },
+      {
+        title: false,
+        titleText: 'Garten',
+        to: '/board/?category=Garten',
+      },
+      {
+        title: false,
+        titleText: 'Handwerk',
+        to: '/board/?category=Handwerk',
+      },
+      {
+        title: false,
+        titleText: 'Umzug',
+        to: 'board/?category=Umzug',
+      },
+      {
+        title: false,
+        titleText: 'IT & Technik',
+        to: `board/?category=IT+%26+Technik`,
+      },
+    ],
+  },
+];
+
+export { navLinks, profileMenu, breadcrumpConfig, sideBarMenuItems, footerLinks };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function GradientCircularProgress({ size }) {
+function Spinner({ size = '4rem' }) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
       <svg width={0} height={0}>
@@ -18,4 +18,4 @@ function GradientCircularProgress({ size }) {
   );
 }
 
-export default GradientCircularProgress;
+export default Spinner;

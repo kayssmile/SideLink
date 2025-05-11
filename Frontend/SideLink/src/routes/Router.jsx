@@ -30,7 +30,7 @@ const ServiceManagerSearch = lazy(() => import('src/components/dashboard/service
 
 const PublicProfile = lazy(() => import('src/components/dashboard/publicprofile/PublicProfile'));
 const Account = lazy(() => import('src/components/dashboard/account/Account'));
-const Analyses = lazy(() => import('src/components/dashboard/analyses/Analyses'));
+const Analytics = lazy(() => import('src/components/dashboard/analytics/Analytics'));
 
 const router = createBrowserRouter([
   {
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
       { path: 'services-offer', element: <ServiceManagerOffer /> },
       { path: 'publicprofile', element: <PublicProfile /> },
       { path: 'account', element: <Account /> },
-      { path: 'analyses', element: <Analyses /> },
+      { path: 'analytics', element: <Analytics /> },
       { path: '*', element: <Navigate to="/404" /> },
     ],
   },

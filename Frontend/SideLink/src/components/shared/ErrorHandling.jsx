@@ -153,6 +153,15 @@ const basicErrorMessage = error => {
   );
 };
 
+const errorMessage = error => {
+  return (
+    <Typography color="error" sx={{ textAlign: 'center', marginTop: '40px' }}>
+      Technische Störungen, bitte versuche es später nochmals.
+      {error.detail}
+    </Typography>
+  );
+};
+
 export {
   getLoginErrorMessage,
   getRegisterErrorMessage,
@@ -164,4 +173,5 @@ export {
   getNewPublicServiceErrorMessage,
   getDeletePublicServiceErrorMessage,
   basicErrorMessage,
+  errorMessage,
 };
