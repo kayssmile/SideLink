@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.conf import settings
 
 from apps.publicprofile.models import PublicProfile
 from apps.publicservices.models import PublicService
@@ -15,7 +16,7 @@ from apps.core.services import email_service
 
 class UserDashboardData(APIView):
     """
-    Get dashboard data for the authenticated user.
+    Get dashboard data for authenticated user.
     """
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -26,14 +27,14 @@ class UserDashboardData(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         
         user_data = CustomUserSerializer(user).data
-        public_profile_data = self.getPublicProfileData(user)
-        public_services_data = self.getPublicServicesData(user)
+        public_profile_data = self.get_publicprofile_data(user)
+        public_services_data = self.get_publicservices_data(user)
         dashboard_data = {'user_data': user_data , 'public_profile_data' : public_profile_data, 'public_services_data': public_services_data}
         
         return Response(dashboard_data, status=status.HTTP_200_OK)
     
 
-    def getPublicProfileData(self, user):
+    def get_publicprofile_data(self, user):
         try:
             public_profile = PublicProfile.objects.get(user=user)
             public_profile_data = PublicProfileSerializer(public_profile).data
@@ -42,7 +43,7 @@ class UserDashboardData(APIView):
             return None
         
 
-    def getPublicServicesData(self, user):
+    def get_publicservices_data(self, user):
         public_services = PublicService.objects.filter(user=user)
         if (not public_services.exists()):
             return []
@@ -67,12 +68,13 @@ def get_public_data(request):
 @api_view(['POST'])
 def process_message(request):
     """
-    Receive contac message from the user and send it via email to the admin.
+    Receive contact message from the client and send it via email to the admin.
     """
     serializer = ContactMessageSerializer(data=request.data)
 
     if serializer.is_valid():
-        sent_message = email_service.EmailService.send_email({"to_email": 'admin@sidelink.ch', "subject": serializer.validated_data['subject'], "text_content": serializer.validated_data['message']})
+        admin_email = settings.ADMIN_EMAIL
+        sent_message = email_service.EmailService.send_email({"to_email": admin_email, "subject": serializer.validated_data['subject'], "text_content": serializer.validated_data['message']})
         if not sent_message:
             return Response({"message": "E-Mail konnte nicht gesendet werden"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         serializer.save()

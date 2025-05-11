@@ -22,6 +22,7 @@ const theme = createTheme({
       third: 'rgb(28, 69, 93)',
       white: '#ffffff',
       lightgrey: '#eaeaea',
+      dark: '#000',
     },
     form: {
       background: '#1a1f29',

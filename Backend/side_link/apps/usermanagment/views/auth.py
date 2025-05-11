@@ -7,6 +7,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.conf import settings
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
 from apps.usermanagment.serializers import CustomTokenObtainPairSerializer
@@ -48,7 +49,8 @@ class ForgotPasswordView(APIView):
             user = RegisteredUser.objects.get(email=email)
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.id))
-            reset_link = f"https://localhost:5173/password-reset/{uid}/{token}/"
+            client_url = settings.CLIENT_URL
+            reset_link = f"{client_url}/password-reset/{uid}/{token}/"
             sent_message = email_service.EmailService.send_email({"to_email": [user.email], "subject": "Passwort zurücksetzen", "text_content": f"Klicke auf den folgenden Link, um dein Passwort zurückzusetzen: {reset_link}"})
             if not sent_message:
                 return Response({"message": "E-Mail konnte nicht gesendet werden"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)    

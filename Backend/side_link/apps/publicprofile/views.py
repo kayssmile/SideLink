@@ -18,7 +18,6 @@ class PublicProfileView(APIView):
         user = request.user
         public_profile = user.public_profile
         serializer = PublicProfileSerializer(public_profile, data=request.data,  partial=True)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -36,13 +35,10 @@ class PublicProfileView(APIView):
         serializer = PublicProfileSerializer(public_profile, many=True)
         return Response(serializer.data)
 
-
     def delete(self, request, pk):
         public_profile = self.get_object(pk)
         public_profile.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
-
 
 @api_view(['GET'])
 def get_public_profile(request):
@@ -53,10 +49,8 @@ def get_public_profile(request):
     if not request_id:
         return Response({'detail': 'ID is required'}, status=status.HTTP_400_BAD_REQUEST)
     try:
-        print("public_profile_id", request_id)
         public_profile = PublicProfile.objects.get(public_profile_id=request_id)
     except public_profile.DoesNotExist:
-            return Response({'detail': 'Public profile not found'}, status=status.HTTP_404_NOT_FOUND)
-        
+            return Response({'detail': 'Public profile not found'}, status=status.HTTP_404_NOT_FOUND)    
     public_profile_data = PublicProfileSerializer(public_profile, many=False).data
     return Response(public_profile_data, status=status.HTTP_200_OK)
