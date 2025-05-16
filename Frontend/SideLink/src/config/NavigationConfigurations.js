@@ -15,7 +15,7 @@ const navLinks = [
   },
   {
     title: 'Anleitung',
-    to: '/instruction',
+    to: '/instructions',
   },
 ];
 
@@ -168,6 +168,11 @@ const footerLinks = [
         title: false,
         titleText: 'Registrierung',
         to: '/registration',
+      },
+      {
+        title: false,
+        titleText: 'AGB',
+        to: '/agb',
       },
     ],
   },

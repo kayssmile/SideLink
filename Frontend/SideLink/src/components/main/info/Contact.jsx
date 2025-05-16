@@ -7,6 +7,7 @@ import { contactSchema } from 'src/config/Schemas';
 import basicPostRequest from 'src/services/BasicRequest';
 import { basicErrorMessage } from 'src/components/shared/ErrorHandling';
 
+import Heading from 'src/components/main/shared/Heading';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
 function Contact() {
@@ -35,35 +36,7 @@ function Contact() {
 
   return (
     <Box component="section" sx={{ padding: '2rem 0' }}>
-      <Typography
-        variant="h1"
-        fontWeight={700}
-        lineHeight="1.2"
-        color={theme.palette.text.primary}
-        sx={{
-          fontSize: {
-            xs: '40px',
-            sm: '56px',
-          },
-        }}
-      >
-        Kontakt.{' '}
-      </Typography>
-
-      <Typography
-        variant="body1"
-        color={theme.palette.text.primary}
-        sx={{
-          fontSize: {
-            xs: '22px',
-            sm: '24px',
-            opacity: '0.7',
-          },
-        }}
-        fontWeight={700}
-      >
-        Du hast ein Anliegen oder eine Frage? Wir helfen dir gerne weiter.
-      </Typography>
+      <Heading titleKey1={'Kontakt.'} subTitle={'Du hast ein Anliegen oder eine Frage? Wir helfen dir gerne weiter.'} />
 
       <Box
         component="form"

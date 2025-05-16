@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Heading from 'src/components/main/shared/Heading';
 import registerUser from 'src/store/usermanagment/actions/RegisterAction';
 import { registerSchema } from 'src/config/Schemas';
 import { getRegisterErrorMessage } from 'src/components/shared/ErrorHandling';
@@ -32,35 +33,7 @@ function Registration() {
 
   return (
     <Box component="section" data-testid="" sx={{ padding: '2rem 0' }}>
-      <Typography
-        variant="h1"
-        fontWeight={700}
-        lineHeight="1.2"
-        color={theme.palette.text.primary}
-        sx={{
-          fontSize: {
-            xs: '40px',
-            sm: '56px',
-          },
-        }}
-      >
-        Registration.{' '}
-      </Typography>
-
-      <Typography
-        variant="body1"
-        color={theme.palette.text.primary}
-        sx={{
-          fontSize: {
-            xs: '22px',
-            sm: '24px',
-            opacity: '0.7',
-          },
-        }}
-        fontWeight={700}
-      >
-        Starte deine Suche oder teile dein Können – Registriere dich kostenlos.
-      </Typography>
+      <Heading titleKey1={'Registration.'} subTitle={'Starte deine Suche oder teile dein Können – Registriere dich kostenlos.'} />
 
       <Box
         component="form"
@@ -147,29 +120,29 @@ function Registration() {
         </Box>
         <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={loading.register || success.register}
-          sx={{ height: '45px', marginTop: '40px', color: 'white', fontSize: '1rem', width: '250px', left: 'calc(100% - 250px)' }}
-        >
-          {loading.register ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Registrieren'}
-        </Button>
-
         {error.register && (
-          <Typography color="error" sx={{ textAlign: 'center', mb: '1rem' }}>
+          <Typography color="error" sx={{ textAlign: 'center' }}>
             {getRegisterErrorMessage(error.register)}
           </Typography>
         )}
 
         {success.register && (
           <RouterLink to="/login">
-            <Typography color="white" sx={{ textAlign: 'center', mt: '2rem', fontSize: '20px', textDecoration: 'underline' }}>
+            <Typography color="white" sx={{ textAlign: 'center', mt: '1rem', fontSize: '20px', textDecoration: 'underline' }}>
               Registrierung erfolgreich ! Login
             </Typography>
           </RouterLink>
         )}
+
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={loading.register || success.register}
+          sx={{ height: '45px', marginTop: '30px', color: 'white', fontSize: '1rem', width: '250px', left: 'calc(100% - 250px)' }}
+        >
+          {loading.register ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Registrieren'}
+        </Button>
       </Box>
     </Box>
   );

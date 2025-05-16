@@ -13,7 +13,7 @@ function useGetUrlParamReaktiv(paramName) {
   return useMemo(() => {
     const params = new URLSearchParams(search);
     return params.get(paramName);
-  }, [search, paramName]); // <--- wichtig
+  }, [search, paramName]);
 }
 
 function useAddUrlParam() {
@@ -23,7 +23,6 @@ function useAddUrlParam() {
   return (paramName, paramValue) => {
     const params = new URLSearchParams(search);
     params.set(paramName, paramValue);
-    //navigate(`${pathname}?${params.toString()}`, { replace: true });
     navigate(`${window.location.pathname}?${params.toString()}`, { replace: true });
   };
 }
@@ -36,8 +35,6 @@ function useRemoveUrlParams() {
     paramNames.forEach(paramName => {
       currentParams.delete(paramName);
     });
-    //console.log('currentParams', currentParams);
-    //navigate(`${pathname}?${currentParams.toString()}`, { replace: true });
     navigate(`${window.location.pathname}?${currentParams.toString()}`, { replace: true });
   };
 }

@@ -1,10 +1,10 @@
 import { Box, Stack, Typography, AvatarGroup, Avatar, Container, Button, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Link } from 'react-router-dom';
 
 import { likedCategories } from 'src/config/CategoriesConfigurations';
 
+import Heading from 'src/components/main/shared/Heading';
 import CategoryItem from './parts/CategoryItem';
 import HomeSearch from './parts/HomeSearch';
 
@@ -15,49 +15,8 @@ function Home() {
   return (
     <>
       <Box component="section" data-testid="home-component" sx={{ padding: '2rem 0' }}>
-        <Typography
-          variant="h1"
-          fontWeight={700}
-          lineHeight="1.2"
-          color={theme.palette.text.primary}
-          sx={{
-            fontSize: {
-              xs: '40px',
-              sm: '56px',
-            },
-          }}
-        >
-          Create.{' '}
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: {
-                xs: '40px',
-                sm: '56px',
-              },
-            }}
-            fontWeight={700}
-            component="span"
-          >
-            Connect.
-          </Typography>{' '}
-          Complete.
-        </Typography>
+        <Heading titleKey1={'Create.'} titleKey2={'Connect.'} titleKey3={'Complete.'} />
 
-        <Typography
-          variant="body1"
-          color={theme.palette.text.primary}
-          sx={{
-            fontSize: {
-              xs: '22px',
-              sm: '24px',
-              opacity: '0.7',
-            },
-          }}
-          fontWeight={700}
-        >
-          Starte deine Suche oder teile dein Können – alles an einem Ort.
-        </Typography>
         <Box component="article" sx={{ marginTop: '2rem' }}>
           <HomeSearch />
         </Box>

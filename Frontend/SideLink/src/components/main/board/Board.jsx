@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { filterServicesBySearch } from './utils/searchUtils';
 import { setSearchEngineData, setSearchMask, setInit } from 'src/store/publicdata/PublicDataManagment';
+import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
 
 import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
 import { filterServicesByType, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
 
+import Heading from 'src/components/main/shared/Heading';
 import Listing from './listing/Listing';
 import SearchMask from './search/SearchMask';
 import GradientCircularProgress from 'src/components/shared/Spinner';
@@ -74,127 +76,22 @@ function Board() {
         dispatch(setInit(false));
       }
     }
-  }, [success]);
+    if (error) {
+      dispatch(setInit(false));
+    }
+    console.log(error);
+    console.log('init', init);
+  }, [success, error]);
 
   return (
     <>
       <Box component="section" sx={{ padding: '2rem 0' }}>
-        <Typography
-          variant="h1"
-          fontWeight={700}
-          lineHeight="1.2"
-          color={theme.palette.text.primary}
-          sx={{
-            fontSize: {
-              xs: '40px',
-              sm: '56px',
-            },
-          }}
-        >
-          Search.{' '}
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: {
-                xs: '40px',
-                sm: '56px',
-              },
-            }}
-            fontWeight={700}
-            component="span"
-          >
-            Connect.
-          </Typography>{' '}
-          Complete.
-        </Typography>
-        <Typography
-          variant="body1"
-          color={theme.palette.text.primary}
-          sx={{
-            fontSize: {
-              xs: '22px',
-              sm: '24px',
-              opacity: '0.7',
-            },
-          }}
-          fontWeight={700}
-        >
-          Hier findest du was du suchst
-        </Typography>
-        {/* 
-        <Box component="article" sx={{ marginTop: '2rem' }}>
-          <TextField
-            fullWidth
-            placeholder="Suche starten..."
-            variant="outlined"
-            value={searchValue}
-            onChange={event => {
-              handleNewSearch(event.target.value);
-            }}
-            sx={{
-              borderRadius: '8px',
-              margin: '4rem 0',
-              '& .MuiInputBase-input': {
-                color: theme.palette.text.dark,
-                fontSize: '1.5rem',
-                fontWeight: '500',
-              },
-              '& .MuiInputBase-root': {
-                backgroundColor: theme.palette.background.white,
-              },
-            }}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={() => handleNewSearch('')}>
-                      <IconX size="36" color="black" />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
-        </Box>
-      
-  ) :
-        {init || loading ? (
-          <GradientCircularProgress />
-        ) : error ? (
-          <Typography color="error" sx={{ textAlign: 'center', margin: '6rem 0' }}>
-            Technische Störungen, bitte versuche es später nochmals oder{' '}
-            <Typography sx={{ marginTop: '1rem', color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
-              <Link component={RouterLink} to="/contact">
-                kontaktiere uns
-              </Link>
-            </Typography>
-            {error}
-          </Typography>
-        ) : !init && success ? (
-          
-          <>
-            <Box component="article" sx={{ marginTop: '2rem' }}>
-              <SearchMask />
-            </Box>
-            <Listing />
-          </>
-
-        ) : (
-          ''
-        )} */}
+        <Heading titleKey1={'Search.'} titleKey2={'Connect.'} titleKey3={'Complete.'} subTitle={'Hier findest du was du suchst.'} />
 
         {init || loading ? (
           <GradientCircularProgress />
         ) : error ? (
-          <Typography color="error" sx={{ textAlign: 'center', margin: '6rem 0' }}>
-            Technische Störungen, bitte versuche es später nochmals oder{' '}
-            <Typography sx={{ marginTop: '1rem', color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
-              <Link component={RouterLink} to="/contact">
-                kontaktiere uns
-              </Link>
-            </Typography>
-            {error}
-          </Typography>
+          basicErrorMessageLink(error)
         ) : !init && success ? (
           <>
             <Grid container sx={{ backgroundColor: '' }}>

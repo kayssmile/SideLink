@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { passwordForgotSchema } from 'src/config/Schemas';
 import basicPostRequest from 'src/services/BasicRequest';
-import { basicErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
 
 import Logo from 'src/components/shared/logo/Logo';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
@@ -80,7 +80,8 @@ function PasswordForgot() {
               <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
               <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                {passwordForgot.error && basicErrorMessage(passwordForgot.error)}
+                {passwordForgot.error && basicErrorMessageLink(passwordForgot.error)}
+
                 {passwordForgot.success && (
                   <Typography marginTop={'40px'} color="success">
                     Der Link zum zurücksetzen des Passworts wurde erfolgreich versendet

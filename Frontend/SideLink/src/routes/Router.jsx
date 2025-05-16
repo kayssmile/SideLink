@@ -2,32 +2,31 @@ import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import RouterGuard from 'src/routes/RouterGuard';
 
+/* Main */
+
 const LayoutMain = lazy(() => import('src/components/main/layout/LayoutMain'));
 
 const Home = lazy(() => import('src/components/main/home/Home'));
 const Board = lazy(() => import('src/components/main/board/Board'));
 const ServiceWithProfile = lazy(() => import('src/components/main/detail/ServiceWithProfile'));
-const Instruction = lazy(() => import('src/components/main/Instruction'));
+const Instruction = lazy(() => import('src/components/main/info/Instruction'));
 const Error = lazy(() => import('src/components/main/Error'));
-
 const Login = lazy(() => import('src/components/main/authentication/Login'));
 const Registration = lazy(() => import('src/components/main/authentication/Registration'));
 const PasswordForgot = lazy(() => import('src/components/main/authentication/PasswordForgot'));
 const PasswordReset = lazy(() => import('src/components/main/authentication/PasswordReset'));
-
-const About = lazy(() => import('src/components/main/info/About'));
-const Legal = lazy(() => import('src/components/main/info/Legal'));
-const AGB = lazy(() => import('src/components/main/info/AGB'));
+const DataPrivacy = lazy(() => import('src/components/main/info/legal/DataPrivacy'));
+const Imprint = lazy(() => import('src/components/main/info/legal/Imprint'));
+const AGB = lazy(() => import('src/components/main/info/legal/AGB'));
 const Contact = lazy(() => import('src/components/main/info/Contact'));
 
-/*
-Dashboard
-*/
+/* Dashboard */
+
 const LayoutFull = lazy(() => import('src/components/dashboard/layout/LayoutFull'));
+
 const Dashboard = lazy(() => import('src/components/dashboard/Dashboard'));
 const ServiceManagerOffer = lazy(() => import('src/components/dashboard/servicemanager/ServiceManagerOffer'));
 const ServiceManagerSearch = lazy(() => import('src/components/dashboard/servicemanager/ServiceManagerSearch'));
-
 const PublicProfile = lazy(() => import('src/components/dashboard/publicprofile/PublicProfile'));
 const Account = lazy(() => import('src/components/dashboard/account/Account'));
 const Analytics = lazy(() => import('src/components/dashboard/analytics/Analytics'));
@@ -50,9 +49,9 @@ const router = createBrowserRouter([
       },
       { path: 'instructions', element: <Instruction /> },
       { path: 'contact', element: <Contact /> },
-      { path: 'about', element: <About /> },
-      { path: 'legal', element: <Legal /> },
-      { path: 'Agb', element: <AGB /> },
+      { path: 'data-privacy', element: <DataPrivacy /> },
+      { path: 'imprint', element: <Imprint /> },
+      { path: 'agb', element: <AGB /> },
       { path: 'login', element: <Login /> },
       { path: 'registration', element: <Registration /> },
       { path: '404', element: <Error /> },

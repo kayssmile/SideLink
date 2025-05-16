@@ -12,6 +12,7 @@ import { loginSchema } from 'src/config/Schemas';
 import { getLoginErrorMessage } from 'src/components/shared/ErrorHandling';
 import { getToken } from 'src/services/AuthService';
 
+import Heading from 'src/components/main/shared/Heading';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
 function Login() {
@@ -52,35 +53,7 @@ function Login() {
 
   return (
     <Box component="section" data-testid="" sx={{ padding: '2rem 0' }}>
-      <Typography
-        variant="h1"
-        fontWeight={700}
-        lineHeight="1.2"
-        color={theme.palette.text.primary}
-        sx={{
-          fontSize: {
-            xs: '40px',
-            sm: '56px',
-          },
-        }}
-      >
-        Login.{' '}
-      </Typography>
-
-      <Typography
-        variant="body1"
-        color={theme.palette.text.primary}
-        sx={{
-          fontSize: {
-            xs: '22px',
-            sm: '24px',
-            opacity: '0.7',
-          },
-        }}
-        fontWeight={700}
-      >
-        Weiter gehts, schön dass du wieder da bist.
-      </Typography>
+      <Heading titleKey1={'Login.'} subTitle={'Weiter gehts, schön dass du wieder da bist.'} />
 
       <Box
         component="form"

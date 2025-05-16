@@ -148,6 +148,7 @@ const basicErrorMessage = error => {
   return (
     <Typography color="error" sx={{ textAlign: 'center', marginTop: '40px' }}>
       Technische Störungen, bitte versuche es später nochmals.
+      <br />
       {error.detail}
     </Typography>
   );
@@ -157,6 +158,20 @@ const errorMessage = error => {
   return (
     <Typography color="error" sx={{ textAlign: 'center', marginTop: '40px' }}>
       Technische Störungen, bitte versuche es später nochmals.
+      {error.detail}
+    </Typography>
+  );
+};
+
+const basicErrorMessageLink = error => {
+  return (
+    <Typography color="error" sx={{ textAlign: 'center', margin: '1rem 0' }}>
+      Technische Störungen, bitte versuche es später nochmals oder{' '}
+      <Typography sx={{ margin: '1rem 0', color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
+        <Link component={RouterLink} to="/contact">
+          kontaktiere uns
+        </Link>
+      </Typography>
       {error.detail}
     </Typography>
   );
@@ -174,4 +189,5 @@ export {
   getDeletePublicServiceErrorMessage,
   basicErrorMessage,
   errorMessage,
+  basicErrorMessageLink,
 };

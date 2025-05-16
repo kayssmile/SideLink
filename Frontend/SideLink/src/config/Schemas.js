@@ -28,7 +28,7 @@ const registerSchema = yup.object().shape({
   phone_number: yup
     .string()
     .required('Telefonnummer ist erforderlich')
-    .matches(/^\+?[0-9]{7,15}$/, 'Ungültige Telefonnummer'),
+    .matches(/^\+?[0-9\s]{7,20}$/, 'Ungültige Telefonnummer'),
   street_address: yup.string().required('Strasse ist erforderlich'),
   postal_code: yup
     .string()
