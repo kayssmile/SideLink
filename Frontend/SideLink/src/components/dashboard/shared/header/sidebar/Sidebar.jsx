@@ -1,6 +1,6 @@
 import { useMediaQuery, Box, Drawer, useTheme, IconButton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { IconCircleDashedX } from '@tabler/icons-react';
+import { IconX } from '@tabler/icons-react';
 
 import { toggleSidebar } from 'src/store/dashboard/main/DashboardManagment';
 
@@ -48,11 +48,11 @@ const Sidebar = () => {
           }}
         >
           <Box>
-            <Box px={3} py={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box px={{ xs: 3, sm: 3 }} py={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Logo />
               {mdDown ? (
-                <IconButton color="inherit" aria-label="menu" onClick={() => dispatch(toggleSidebar())}>
-                  <IconCircleDashedX size="25" />
+                <IconButton sx={{ color: theme => theme.palette.colors.white, marginTop: '-45px', marginRight: '10px' }} onClick={() => dispatch(toggleSidebar())}>
+                  <IconX size="30" />
                 </IconButton>
               ) : null}
             </Box>

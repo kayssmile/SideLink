@@ -1,19 +1,13 @@
-import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack, useTheme } from '@mui/material';
+import { IconButton, Box, AppBar, Toolbar, styled, Stack } from '@mui/material';
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { toggleSidebar, toggleThemeMode } from 'src/store/dashboard/main/DashboardManagment';
 
-import ProfileMenuDesktop from 'src/components/shared/header/ProfileMenuDesktop';
+import ProfileMenu from 'src/components/shared/header/ProfileMenu';
 
 const Header = () => {
-  const theme = useTheme();
-
-  //const lgUp = useMediaQuery(theme => theme.breakpoints.up('md'));
-  //const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
-
   const { themeMode } = useSelector(state => state.dashboard);
-
   const dispatch = useDispatch();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
@@ -44,7 +38,7 @@ const Header = () => {
             </IconButton>
           )}
 
-          <ProfileMenuDesktop />
+          <ProfileMenu />
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

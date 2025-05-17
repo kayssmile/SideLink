@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Menu, Typography, Divider, Button, useTheme } from '@mui/material';
+import { Box, Menu, Typography, Divider, Button, useTheme, useMediaQuery } from '@mui/material';
 import { IconChevronDown, IconChevronUp, IconMail } from '@tabler/icons-react';
 import { Stack } from '@mui/system';
 import { useSelector } from 'react-redux';
@@ -9,9 +9,10 @@ import { profileMenu as profileMenuConfiguration } from 'src/config/NavigationCo
 import Logout from 'src/components/shared/header/Logout';
 import MenuItem from './parts/MenuItem';
 
-const ProfileMenuDesktop = () => {
+const ProfileMenu = () => {
   const theme = useTheme();
-  //const userInfo = useSelector(state => state.userManagment.userInfo);
+  const xbs = useMediaQuery(theme.breakpoints.down('xbs'));
+
   const { dashboardData } = useSelector(state => state.dashboard);
   const [profileMenu, setProfileMenu] = useState(false);
 
@@ -26,11 +27,11 @@ const ProfileMenuDesktop = () => {
   return (
     <Box>
       <Button size="large" color="inherit" aria-controls="msgs-menu" aria-haspopup="true" onClick={handleProfileMenu}>
-        <Typography variant="subtitle2" color="white" fontWeight={600} mr={2}>
+        <Typography variant="subtitle2" sx={{ color: 'white', fontWeight: 600, marginRight: 2, fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
           {`Guten Tag, ${dashboardData.user?.first_name} ${dashboardData.user?.last_name}`}
         </Typography>
 
-        {profileMenu ? <IconChevronUp size="1.5rem" /> : <IconChevronDown size="1.5rem" />}
+        {profileMenu ? <IconChevronUp size={xbs ? '3rem' : '2rem'} /> : <IconChevronDown size={xbs ? '3rem' : '2rem'} />}
       </Button>
 
       <Menu
@@ -74,4 +75,4 @@ const ProfileMenuDesktop = () => {
   );
 };
 
-export default ProfileMenuDesktop;
+export default ProfileMenu;

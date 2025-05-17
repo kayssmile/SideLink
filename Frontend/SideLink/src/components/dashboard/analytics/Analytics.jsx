@@ -6,10 +6,11 @@ import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
 import { errorMessage } from 'src/components/shared/ErrorHandling';
 import getAnalyticsData from 'src/store/dashboard/main/actions/GetAnalyticsDataAction';
 import { checkAuth, getToken } from 'src/services/AuthService';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
 import AnalyticsCards from './parts/AnalyticsCards';
-import GradientCircularProgress from 'src/components/shared/Spinner';
+import Spinner from 'src/components/shared/Spinner';
 
 function Analytics() {
   const dispatch = useDispatch();
@@ -21,19 +22,21 @@ function Analytics() {
       if (!analytics.loading && (await checkAuth())) {
         const token = getToken();
         if (token) {
+          console.log('wecall analytics');
           dispatch(getAnalyticsData(token));
         }
       } else {
-        console.log('No token found or user not authenticated');
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  /*
   if (!analytics.success && !analytics.error && !analytics.loading) {
     initAnalyticsData();
-  }
+  } */
 
   useEffect(() => {
     console.log('Analytics useEffect', analytics);
@@ -42,16 +45,11 @@ function Analytics() {
     }
   }, [analytics]);
 
-  useEffect(() => {
-    console.log('Analytics useEffect services effect', analytics);
-    initAnalyticsData();
-  }, [dashboardData.publicServices]);
-
   return (
     <>
-      <Box component="section" sx={{ flexGrow: 1, padding: '20px' }}>
+      <Box component="section" sx={{ flexGrow: 1, padding: { xs: '5px', sm: '20px' } }}>
         <Breadcrumb title="Analysen" items={breadcrumpConfig.analysis} sx={{ margin: '30px 0' }} />
-        {analytics.loading ? <GradientCircularProgress size="4rem" /> : analytics.error ? errorMessage(analytics.error) : <AnalyticsCards analyticsData={analytics.data} />}
+        {analytics.loading ? <Spinner size="4rem" /> : analytics.error ? errorMessage(analytics.error) : <AnalyticsCards analyticsData={analytics.data} />}
       </Box>
     </>
   );

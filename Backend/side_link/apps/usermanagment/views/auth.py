@@ -119,7 +119,6 @@ class CustomTokenRefreshView(TokenRefreshView):
             
         response = super().post(request, *args, **kwargs)
         
-
         # Get new refresh token if rotation is enabled
         new_refresh_token = response.data.pop('refresh', None)
         

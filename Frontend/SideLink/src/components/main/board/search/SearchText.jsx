@@ -14,7 +14,7 @@ import { setSearchEngineData } from 'src/store/publicdata/PublicDataManagment';
 function SearchText() {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -96,7 +96,7 @@ function SearchText() {
         marginBottom: '2rem',
         '& .MuiInputBase-input': {
           color: theme.palette.text.dark,
-          fontSize: '1.5rem',
+          fontSize: mdDown ? '1.2rem' : '1.5rem',
           fontWeight: '500',
         },
         '& .MuiInputBase-root': {
@@ -108,7 +108,7 @@ function SearchText() {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton onClick={() => handleNewSearch('')}>
-                <IconX size="36" color="black" />
+                <IconX size={mdDown ? '26' : '36'} color="black" />
               </IconButton>
             </InputAdornment>
           ),

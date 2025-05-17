@@ -10,7 +10,6 @@ import Logout from 'src/components/shared/header/Logout';
 
 const ProfileMenuMobile = () => {
   const theme = useTheme();
-  //const userInfo = useSelector(state => state.userManagment.userInfo);
   const { dashboardData } = useSelector(state => state.dashboard);
 
   return (
@@ -25,7 +24,7 @@ const ProfileMenuMobile = () => {
         }}
       >
         <Typography variant="subtitle1" color="white" fontWeight={600}>
-          {dashboardData.user?.first_name} {userInfo?.last_name}
+          {dashboardData.user?.first_name} {dashboardData.user?.last_name}
         </Typography>
         <Typography variant="subtitle1" color="white">
           {dashboardData.user?.profession}

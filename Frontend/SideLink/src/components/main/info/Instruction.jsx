@@ -10,7 +10,7 @@ function Instruction() {
   return (
     <Box component="section" sx={{ padding: '2rem 0' }}>
       <Heading titleKey1={'Read.'} titleKey2={'Make.'} titleKey3={'Start.'} subTitle={'Willkommen! Hier erfährst du Schritt für Schritt, wie du loslegst.'} />
-      <Box sx={{ margin: '8rem 0' }}>
+      <Box sx={{ margin: { sx: '0 0', sm: '2rem 0', xl: '6rem 0' } }}>
         <InstructionsAccordion />
       </Box>
 
@@ -29,17 +29,14 @@ function Instruction() {
       >
         <Typography
           variant="body1"
-          color={theme.palette.text.primary}
           sx={{
+            color: theme.palette.text.primary,
+            fontWeight: '700',
             textAlign: 'center',
-            fontSize: {
-              xs: '22px',
-              sm: '28px',
-              opacity: '0.7',
-              marginBottom: '6rem',
-            },
+            fontSize: { xs: '1.4rem', sm: '1.6rem' },
+            opacity: '0.7',
+            margin: { xs: '2rem', sm: '6rem' },
           }}
-          fontWeight={700}
         >
           Hast du noch Fragen ? Gerne helfen wir dir weiter!
         </Typography>

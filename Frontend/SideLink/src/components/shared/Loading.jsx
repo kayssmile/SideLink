@@ -1,9 +1,11 @@
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
+import { useLocation } from 'react-router';
 
 import Spinner from 'src/components/shared/Spinner';
 
 function Loading() {
-  const theme = useTheme();
+  const location = useLocation();
+  const isInDashboardLayout = location.pathname.includes('dashboard');
 
   return (
     <Box
@@ -13,11 +15,11 @@ function Loading() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh',
-        minWidth: '100vw',
+        minHeight: isInDashboardLayout ? '100vh' : 'auto',
+        minWidth: isInDashboardLayout ? '100vw' : 'auto',
         '&:before': {
           content: '""',
-          background: 'radial-gradient(#7c1cf0, #192cd7, #e80707)',
+          background: isInDashboardLayout ? 'radial-gradient(#7c1cf0, #192cd7, #e80707)' : 'transparent',
           backgroundSize: '400% 400%',
           position: 'absolute',
           height: '100%',

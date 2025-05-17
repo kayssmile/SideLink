@@ -24,7 +24,7 @@ const Logout = ({ usage }) => {
   return (
     <>
       {usage === 'sidebar' ? (
-        <Box display={'flex'} alignItems="center" gap={2} sx={{ m: 3, p: 2, bgcolor: theme.palette.background.third, borderRadius: '5px' }}>
+        <Box gap={2} sx={{ display: 'flex', m: 3, p: 2, bgcolor: theme.palette.background.third, borderRadius: '5px', alignItems: 'center' }}>
           <Box>
             <Typography variant="h6" color="white">
               {dashboardData.user?.first_name} {dashboardData.user?.last_name}

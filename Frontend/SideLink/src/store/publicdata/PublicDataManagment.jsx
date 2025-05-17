@@ -20,6 +20,7 @@ const initialState = {
     error: false,
     init: true,
   },
+  mobileSidebar: false,
 };
 
 const PublicDataManagment = createSlice({
@@ -67,6 +68,9 @@ const PublicDataManagment = createSlice({
         success: false,
         error: false,
       };
+    },
+    toggleMobileSidebar: state => {
+      state.mobileSidebar = !state.mobileSidebar;
     },
   },
   extraReducers: builder => {
@@ -121,6 +125,6 @@ const PublicDataManagment = createSlice({
   },
 });
 
-export const { setSearchEngineData, setSearchMask, setInit, resetPublicProfilesProcess } = PublicDataManagment.actions;
+export const { setSearchEngineData, setSearchMask, setInit, resetPublicProfilesProcess, toggleMobileSidebar } = PublicDataManagment.actions;
 
 export default PublicDataManagment.reducer;

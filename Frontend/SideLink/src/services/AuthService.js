@@ -1,9 +1,11 @@
 import { axiosInstanceBasicAuth } from 'src/api/AxiosInstance';
 
 const ACCESS_TOKEN_KEY = 'accessToken';
+const REFRESH_TOKEN_KEY = 'refreshToken';
 
 async function checkAuth() {
-  let accessToken = localStorage.getItem('accessToken');
+  let accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+  let refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
 
   //const userId = JSON.parse(localStorage.getItem('userInfo') || '{}');
   if (!accessToken) {
@@ -11,18 +13,25 @@ async function checkAuth() {
   }
 
   if (isTokenExpired(accessToken)) {
-    try {
-      const newAccessToken = await refreshAccessToken();
-      setToken(newAccessToken);
-      return true; //{ token: newAccessToken, id: userId };
-    } catch (error) {
-      if (getToken) {
-        removeToken();
+    if (refreshToken && !isTokenExpired(refreshToken)) {
+      try {
+        console.log('Token expired, refreshing...');
+
+        const newAccessToken = await refreshAccessToken();
+
+        return true; //{ token: newAccessToken, id: userId };
+      } catch (error) {
+        console.log('Error refreshing token:', error);
+        if (getToken) {
+          removeToken();
+        }
+        /*
+        if (localStorage.getItem('userInfo')) {
+          localStorage.removeItem('userInfo');
+        } */
+        return false;
       }
-      /*
-      if (localStorage.getItem('userInfo')) {
-        localStorage.removeItem('userInfo');
-      } */
+    } else {
       return false;
     }
   }
@@ -36,6 +45,7 @@ async function refreshAccessToken() {
     const response = await axiosInstanceBasicAuth.post('/api/auth/refresh/', { refresh: refreshToken });
     const newAccessToken = response.data.access;
     setToken(newAccessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refresh);
     return newAccessToken;
   } catch (error) {
     console.error('Fehler beim Refresh des Tokens:', error);
@@ -50,6 +60,8 @@ function isTokenExpired(token) {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const currentTime = Date.now() / 1000;
+    console.log('istokenexpired', payload.exp, currentTime);
+    console.log('istokenexpiredresult', payload.exp < currentTime);
     return payload.exp < currentTime;
   } catch (e) {
     return true;

@@ -1,23 +1,8 @@
 body {
   margin: 0 0;
   padding: 0 0;
-
+  hyphens: auto;
   a {
     text-decoration: none;
   }
-  //background-color: red;
-}
-
-:root {
-  /* Farbpalette */
-  --color-main: #293345;
-  --color-font-primary: #ffffff;
-  --color-font-secondary: #7c8fac;
-
-  /* Hintergrundfarben */
-  --bg-main: #293345;
-  --bg-primary: #253662;
-  --bg-secondary: #5d87ff;
-  --bg-third: rgb(28, 69, 93);
-  --bg-white: #ffffff;
 }

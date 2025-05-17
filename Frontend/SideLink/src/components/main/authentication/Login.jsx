@@ -24,6 +24,18 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const onSubmit = data => {
+    dispatch(login(data));
+  };
+
   useEffect(() => {
     if (success.login) {
       const token = getToken();
@@ -39,20 +51,8 @@ function Login() {
     }
   }, [dashboardData.success, navigate]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(loginSchema),
-  });
-
-  const onSubmit = data => {
-    dispatch(login(data));
-  };
-
   return (
-    <Box component="section" data-testid="" sx={{ padding: '2rem 0' }}>
+    <Box component="section" data-testid="login-section" sx={{ padding: '2rem 0' }}>
       <Heading titleKey1={'Login.'} subTitle={'Weiter gehts, schön dass du wieder da bist.'} />
 
       <Box
@@ -63,7 +63,7 @@ function Login() {
           display: 'flex',
           flexDirection: 'column',
           gap: 2,
-          padding: '6rem 10rem',
+          padding: { xs: '1rem 0.3rem', md: '2rem 2rem', lg: '4rem 5rem', xl: '6rem 10rem' },
           marginTop: '2rem',
           mx: 'auto',
           marginBottom: '4rem',
@@ -92,6 +92,12 @@ function Login() {
         />
         <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
+        {error.login && (
+          <Typography color="error" sx={{ textAlign: 'center', mb: '1rem' }}>
+            {getLoginErrorMessage(error.login)}
+          </Typography>
+        )}
+
         <Button
           variant="contained"
           color="primary"
@@ -101,12 +107,6 @@ function Login() {
         >
           {loading.login ? <CircularProgress size="25px" /> : 'Login'}
         </Button>
-
-        {error.login && (
-          <Typography color="error" sx={{ textAlign: 'center', mb: '1rem' }}>
-            {getLoginErrorMessage(error.login)}
-          </Typography>
-        )}
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, color: 'white' }}>
           <Link component={RouterLink} to="/password-forgot" sx={{ color: 'white', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>

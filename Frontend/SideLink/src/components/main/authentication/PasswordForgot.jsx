@@ -27,12 +27,17 @@ function PasswordForgot() {
 
   const onSubmit = async data => {
     setPasswordForgot({ ...passwordForgot, loading: true });
-    const response = await basicPostRequest('api/auth/password-forgot/', data);
-    if (response.status) {
-      setPasswordForgot({ loading: false, success: true, error: false });
-      reset();
-    } else {
-      setPasswordForgot({ loading: false, error: response.data, success: false });
+    try {
+      const response = await basicPostRequest('api/auth/password-forgot/', data);
+      if (response.status) {
+        setPasswordForgot({ loading: false, success: true, error: false });
+        reset();
+      } else {
+        setPasswordForgot({ loading: false, error: response.data, success: false });
+      }
+    } catch (error) {
+      console.error('Request failed:', error);
+      setPasswordForgot({ loading: false, error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.', success: false });
     }
   };
 
@@ -68,12 +73,9 @@ function PasswordForgot() {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                //padding: '6rem 10rem',
                 marginTop: '2rem',
                 width: 'auto',
-                //gap: '35px',
                 marginBottom: '4rem',
-                //backgroundColor: theme.palette.background.primary,
               }}
             >
               <StyledTextField required label="Email" type="email" name="email" {...register('email')} error={!!errors.email} helperText={errors.email?.message} />
@@ -89,10 +91,23 @@ function PasswordForgot() {
                 )}
               </Box>
 
-              <Button variant="contained" disabled={passwordForgot.success} color="primary" type="submit" sx={{ height: '45px', marginTop: '40px', color: 'white', fontSize: '1rem' }}>
+              <Button
+                variant="contained"
+                disabled={passwordForgot.success}
+                color="primary"
+                type="submit"
+                sx={{ height: '45px', marginTop: '40px', color: 'white', fontSize: { xs: '0.8rem', sm: '1.1rem' } }}
+              >
                 {passwordForgot.loading ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Passwort zurücksetzen'}
               </Button>
-              <Button component={Link} to="/login" variant="contained" color="primary" type="submit" sx={{ height: '45px', marginTop: '1rem', color: 'white', fontSize: '1rem' }}>
+              <Button
+                component={Link}
+                to="/login"
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ height: '45px', marginTop: '1rem', color: 'white', fontSize: { xs: '0.8rem', sm: '1.1rem' } }}
+              >
                 Zurück zum Login
               </Button>
             </Box>

@@ -11,7 +11,7 @@ function SearchMask() {
 
   return (
     <>
-      <Box component="article">
+      <Box component="aside">
         <SerachText />
         <Box>
           <Grid container spacing={smDown ? 4 : 6}>

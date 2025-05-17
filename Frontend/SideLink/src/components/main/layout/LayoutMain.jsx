@@ -1,11 +1,11 @@
-import { useTheme, Container } from '@mui/material';
-import { styled } from '@mui/material';
+import { useTheme, Container, styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
 import { ScrollToTop } from 'src/components/shared/utils/Utils';
 
 import Header from 'src/components/main/shared/header/Header';
 import Footer from 'src/components/main/shared/footer/Footer';
+import InfoModal from 'src/components/shared/InfoModal';
 
 const LayoutMain = () => {
   const theme = useTheme();
@@ -22,17 +22,15 @@ const LayoutMain = () => {
   return (
     <>
       <SiteWrapper data-testid="layout-main">
-        <div>
-          <Header />
-          <Container maxWidth="xl">
-            <main>
-              <ScrollToTop />
-              <Outlet />
-            </main>
-          </Container>
-        </div>
+        <Header />
+
+        <Container maxWidth="xl" component="main">
+          <ScrollToTop />
+          <Outlet />
+        </Container>
 
         <Footer />
+        <InfoModal />
       </SiteWrapper>
     </>
   );

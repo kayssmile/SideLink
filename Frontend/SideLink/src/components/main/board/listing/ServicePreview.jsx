@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Chip, Typography, Box, useTheme, useMediaQuery, Stack, TableCell, TableRow } from '@mui/material';
+import { Chip, Typography, useTheme, useMediaQuery, Stack, TableCell, TableRow } from '@mui/material';
 
 function ServicePreview({ title, category_details, sub_categories_details, region_details, location_details, onClick }) {
   const theme = useTheme();

@@ -6,6 +6,7 @@ import { ScrollToTop } from 'src/components/shared/utils/Utils';
 
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar';
 import Header from 'src/components/dashboard/shared/header/vertical/Header';
+import InfoModal from 'src/components/shared/InfoModal';
 
 //import { SiteWrapper, PageWrapper, MainWrapper } from 'src/components/main/styledelements/StyledElements';
 
@@ -83,6 +84,7 @@ const LayoutFull = () => {
           </main>
         </MainWrapper>
       </PageWrapper>
+      <InfoModal />
     </SiteWrapper>
   );
 };

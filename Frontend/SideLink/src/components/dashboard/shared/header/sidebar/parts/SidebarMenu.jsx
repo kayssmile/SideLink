@@ -18,7 +18,7 @@ const SidebarMenu = () => {
   }));
 
   return (
-    <Box sx={{ px: 3 }}>
+    <Box px={{ xs: 3 }}>
       <List sx={{ pt: 0 }} className="sidebarNav">
         {sideBarMenuItems.map((item, i) => {
           if (item.subheader) {

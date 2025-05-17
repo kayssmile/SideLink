@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 function Modal({ modalTitle, modalContent, modalState, handleAgree, handleCancel, usage = 'standard' }) {
   return (

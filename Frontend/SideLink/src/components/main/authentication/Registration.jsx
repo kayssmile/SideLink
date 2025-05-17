@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Button, Box, IconButton, InputAdornment, FormGroup, CircularProgress, Typography, useTheme } from '@mui/material';
+import { Button, Box, FormHelperText, IconButton, InputAdornment, CircularProgress, Typography, useTheme } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,103 +33,113 @@ function Registration() {
   };
 
   return (
-    <Box component="section" data-testid="" sx={{ padding: '2rem 0' }}>
+    <Box component="section" data-testid="registration-form" sx={{ padding: '2rem 0' }}>
       <Heading titleKey1={'Registration.'} subTitle={'Starte deine Suche oder teile dein Können – Registriere dich kostenlos.'} />
 
-      <Box
+      <Grid
+        container
+        spacing={{ xs: 4, md: 5 }}
         component="form"
         noValidate
         onSubmit={handleSubmit(onSubmit)}
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '6rem 10rem',
-          paddingTop: '2rem',
+          padding: { xs: '2rem 0.3rem', md: '2rem 2rem', lg: '4rem 5rem', xl: '6rem 10rem' },
           marginTop: '2rem',
-          width: 'auto',
-          gap: '35px',
-          marginBottom: '4rem',
+          marginBottom: '2rem',
           backgroundColor: theme.palette.background.primary,
         }}
       >
         <Typography
           variant="h5"
-          component="h3"
+          component="h2"
           sx={{
-            fontWeight: '300',
-            margin: '0.5rem 0',
+            fontWeight: '400',
             textAlign: 'left',
-            color: 'white',
+            color: theme.palette.text.primary,
             width: '100%',
           }}
         >
           Welcome to SideLink
         </Typography>
 
-        <FormGroup sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <StyledTextField required label="Vorname" type="text" name="Vorname" {...register('first_name')} error={!!errors.first_name} helperText={errors.first_name?.message} sx={{ width: '48%' }} />
-          <StyledTextField required label="Nachname" type="text" name="Nachname" {...register('last_name')} error={!!errors.last_name} helperText={errors.last_name?.message} sx={{ width: '48%' }} />
-        </FormGroup>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <StyledTextField required label="Vorname" type="text" name="Vorname" {...register('first_name')} error={!!errors.first_name} helperText={errors.first_name?.message} />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <StyledTextField required label="Nachname" type="text" name="Nachname" {...register('last_name')} error={!!errors.last_name} helperText={errors.last_name?.message} />
+        </Grid>
 
-        <StyledTextField required label="Beruf" type="text" name="profession" {...register('profession')} error={!!errors.profession} helperText={errors.profession?.message} />
-        <StyledTextField required label="Telefon" type="tel" name="phone_number" {...register('phone_number')} error={!!errors.phone_number} helperText={errors.phone_number?.message} />
-        <StyledTextField
-          required
-          label="Strasse / Hausnummer"
-          type="text"
-          name="street_address"
-          {...register('street_address')}
-          error={!!errors.street_address}
-          helperText={errors.street_address?.message}
-        />
+        <Grid size={12}>
+          <StyledTextField required label="Beruf" type="text" name="profession" {...register('profession')} error={!!errors.profession} helperText={errors.profession?.message} />
+        </Grid>
+        <Grid size={12}>
+          <StyledTextField required label="Telefon" type="tel" name="phone_number" {...register('phone_number')} error={!!errors.phone_number} helperText={errors.phone_number?.message} />
+        </Grid>
+        <Grid size={12}>
+          <StyledTextField
+            required
+            label="Strasse / Hausnummer"
+            type="text"
+            name="street_address"
+            {...register('street_address')}
+            error={!!errors.street_address}
+            helperText={errors.street_address?.message}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <StyledTextField required label="Postleitzahl" name="postal_code" {...register('postal_code')} error={!!errors.postal_code} helperText={errors.postal_code?.message} />
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <StyledTextField required label="Ort" type="text" name="place" {...register('place')} error={!!errors.place} helperText={errors.place?.message} />
+        </Grid>
+        <Grid size={12}>
+          <StyledTextField required label="Region" type="text" name="region" {...register('region')} error={!!errors.region} helperText={errors.region?.message} />
+        </Grid>
+        <Grid size={12}>
+          <StyledTextField required label="Email" type="email" name="email" {...register('email')} error={!!errors.email} helperText={errors.email?.message} />
+        </Grid>
+        <Grid size={12}>
+          <StyledTextField
+            required
+            label="Password"
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            {...register('password')}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" sx={{ color: 'white' }}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
 
-        <FormGroup sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <StyledTextField required label="Postleitzahl" name="postal_code" {...register('postal_code')} error={!!errors.postal_code} helperText={errors.postal_code?.message} sx={{ width: '30%' }} />
-          <StyledTextField required label="Ort" type="text" name="place" {...register('place')} error={!!errors.place} helperText={errors.place?.message} sx={{ width: '30%' }} />
-          <StyledTextField required label="Region" type="text" name="region" {...register('region')} error={!!errors.region} helperText={errors.region?.message} sx={{ width: '30%' }} />
-        </FormGroup>
-
-        <StyledTextField required label="Email" type="email" name="email" {...register('email')} error={!!errors.email} helperText={errors.email?.message} />
-
-        <StyledTextField
-          required
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          name="password"
-          {...register('password')}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" sx={{ color: 'white' }}>
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        <Box>
+        <Grid size={12}>
           <RouterLink to="/agb">
-            <Typography color="white" sx={{ fontSize: 20, textDecoration: 'underline' }}>
+            <Typography color="white" sx={{ fontSize: '1.2rem', textDecoration: 'underline' }}>
               Bitte lese die AGBs
             </Typography>
           </RouterLink>
+          <StyledFormControlLabel required {...register('agb')} control={<StyledCheckbox />} label="Ich habe die AGBs gelesen und bin damit einverstanden" />
+          {errors.agb && <FormHelperText error>{errors.agb?.message}</FormHelperText>}
+        </Grid>
 
-          <StyledFormControlLabel required control={<StyledCheckbox />} label="Ich habe die AGBs gelesen und bin damit einverstanden" />
-        </Box>
         <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
         {error.register && (
-          <Typography color="error" sx={{ textAlign: 'center' }}>
+          <Typography color="error" sx={{ textAlign: 'center', width: '100%' }}>
             {getRegisterErrorMessage(error.register)}
           </Typography>
         )}
 
         {success.register && (
           <RouterLink to="/login">
-            <Typography color="white" sx={{ textAlign: 'center', mt: '1rem', fontSize: '20px', textDecoration: 'underline' }}>
+            <Typography color="white" sx={{ textAlign: 'center', mt: '1rem', fontSize: '1.3rem', textDecoration: 'underline', width: '100%' }}>
               Registrierung erfolgreich ! Login
             </Typography>
           </RouterLink>
@@ -139,11 +150,11 @@ function Registration() {
           color="primary"
           type="submit"
           disabled={loading.register || success.register}
-          sx={{ height: '45px', marginTop: '30px', color: 'white', fontSize: '1rem', width: '250px', left: 'calc(100% - 250px)' }}
+          sx={{ display: 'block', height: '45px', color: 'white', fontSize: { xs: '1rem', md: '1.3rem' }, width: '250px' }}
         >
           {loading.register ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Registrieren'}
         </Button>
-      </Box>
+      </Grid>
     </Box>
   );
 }

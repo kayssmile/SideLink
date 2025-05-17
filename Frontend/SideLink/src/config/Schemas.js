@@ -43,6 +43,7 @@ const registerSchema = yup.object().shape({
     .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
     .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
+  agb: yup.boolean().oneOf([true], 'AGB müssen akzeptiert werden'),
   honeypot: yup.string().test('is-empty', 'Dieses Feld muss leer bleiben.', value => !value || value.trim() === ''),
 });
 

@@ -1,0 +1,11 @@
+.no-results {
+  img {
+    width: 90vw;
+    aspect-ratio: 1 / 0.7;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    @media (min-width: 576px) {
+      width: 400px;
+    }
+  }
+}

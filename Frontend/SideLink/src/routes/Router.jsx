@@ -3,7 +3,6 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import RouterGuard from 'src/routes/RouterGuard';
 
 /* Main */
-
 const LayoutMain = lazy(() => import('src/components/main/layout/LayoutMain'));
 
 const Home = lazy(() => import('src/components/main/home/Home'));
@@ -21,7 +20,6 @@ const AGB = lazy(() => import('src/components/main/info/legal/AGB'));
 const Contact = lazy(() => import('src/components/main/info/Contact'));
 
 /* Dashboard */
-
 const LayoutFull = lazy(() => import('src/components/dashboard/layout/LayoutFull'));
 
 const Dashboard = lazy(() => import('src/components/dashboard/Dashboard'));
@@ -36,7 +34,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <LayoutMain />,
     children: [
-      { index: true, element: <Navigate to="/home" /> }, // Root leitet auf Home um
+      { index: true, element: <Navigate to="/home" /> },
       { path: 'home', element: <Home /> },
       { path: 'board', element: <Board /> },
       {

@@ -2,47 +2,50 @@ import React from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Stack, useTheme, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
-export default function InstructionsAccordion() {
+
+function InstructionsAccordion() {
   const theme = useTheme();
 
   return (
-    <Stack spacing={3} sx={{ padding: '4rem' }}>
+    <Stack spacing={3} sx={{ padding: { xs: '2rem 0', xl: '0 0' } }}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} aria-controls="panel1-content" sx={{ backgroundColor: theme.palette.form.background }}>
-          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: '1.3rem', fontWeight: '600' }}>
+          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: { xs: '1.1rem', md: '1.3rem' }, fontWeight: '600' }}>
             Wie funktioniert alles?
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ backgroundColor: theme.palette.background.lightgrey, padding: '2rem' }}>
-          <Box component="ul" sx={{ pl: 3, color: theme.palette.text.dark, fontSize: '1.2rem', margin: '0 0' }}>
-            <li>
+          <Box component="ul" sx={{ pl: 3, color: theme.palette.text.dark, margin: '0 0' }}>
+            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
               Registriere dich kostenlos über{' '}
               <Link to={'/registration'} underline="hover" color="primary">
                 Registration
               </Link>
               .
-            </li>
-            <li>
+            </Typography>
+            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
               Logge dich anschließend hier ein:{' '}
               <Link to={'/login'} underline="hover" color="primary">
                 Login
               </Link>
               .
-            </li>
-            <li>
+            </Typography>
+            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
               Im Dashboard angekommen, erstelle dein <strong>öffentliches Profil</strong>. Es hilft anderen, dich zu finden und mehr über deine Angebote oder Suchen zu erfahren.
-            </li>
-            <li>
+            </Typography>
+            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
               Lege direkt los mit deinem ersten <strong>Service</strong> – dieser wird automatisch auf der Plattform sichtbar und ist bereit für Anfragen.
-            </li>
-            <li>Du kannst jederzeit Änderungen vornehmen und Services aktualisieren – ganz flexibel.</li>
+            </Typography>
+            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
+              Du kannst jederzeit Änderungen vornehmen und Services aktualisieren – ganz flexibel.{' '}
+            </Typography>
           </Box>
         </AccordionDetails>
       </Accordion>
 
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} aria-controls="panel2-content" sx={{ backgroundColor: theme.palette.form.background }}>
-          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: '1.3rem', fontWeight: '600' }}>
+          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: { xs: '1.1rem', md: '1.3rem' }, fontWeight: '600' }}>
             Begin – Dein öffentliches Profil
           </Typography>
         </AccordionSummary>
@@ -60,7 +63,7 @@ export default function InstructionsAccordion() {
 
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} aria-controls="panel3-content" sx={{ backgroundColor: theme.palette.form.background }}>
-          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: '1.3rem', fontWeight: '600' }}>
+          <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: { xs: '1.1rem', md: '1.3rem' }, fontWeight: '600' }}>
             Complete – Services erstellen & anbieten
           </Typography>
         </AccordionSummary>
@@ -77,3 +80,5 @@ export default function InstructionsAccordion() {
     </Stack>
   );
 }
+
+export default InstructionsAccordion;

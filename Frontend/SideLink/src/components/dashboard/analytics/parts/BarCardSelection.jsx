@@ -4,13 +4,13 @@ import Grid from '@mui/material/Grid2';
 import { BarChart, chartsTooltipClasses } from '@mui/x-charts';
 
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
+import Scrollbar from 'src/components/shared/custom-scroll/Scrollbar';
 
 function BarChartSelection({ barChartData, title }) {
   const theme = useTheme();
   const [year, setYear] = useState(barChartData[0].year);
   const [chartData, setChartData] = useState({ xAxis: barChartData[0].xAxis, yAxis: barChartData[0].yAxis });
 
-  console.log('barChartData', barChartData[0].xAxis);
   const handleSelectionChange = value => {
     setYear(value);
     let newChartData = barChartData.find(data => data.year === value);
@@ -35,7 +35,7 @@ function BarChartSelection({ barChartData, title }) {
             value={year}
             onChange={event => handleSelectionChange(event.target.value)}
             sx={{
-              width: '20%',
+              width: { xs: '60%', md: '20%' },
               margin: '0.7rem 0',
               color: '#7C8FAC',
               '& .MuiSelect-icon': {
@@ -73,25 +73,27 @@ function BarChartSelection({ barChartData, title }) {
             ))}
           </Select>
           {chartData ? (
-            <BarChart
-              series={[{ data: chartData.yAxis, label: 'Registrationen' }]}
-              height={290}
-              xAxis={[{ data: chartData.xAxis }]}
-              yAxis={[{ tickMinStep: 1 }]}
-              slotProps={{
-                tooltip: {
-                  trigger: 'item',
-                  sx: {
-                    [`&.${chartsTooltipClasses.root} .${chartsTooltipClasses.valueCell}`]: {
-                      color: 'black',
-                    },
-                    [`&.${chartsTooltipClasses.root} .${chartsTooltipClasses.labelCell}`]: {
-                      color: 'black',
+            <Scrollbar>
+              <BarChart
+                series={[{ data: chartData.yAxis, label: 'Registrationen' }]}
+                height={290}
+                xAxis={[{ data: chartData.xAxis }]}
+                yAxis={[{ tickMinStep: 1 }]}
+                slotProps={{
+                  tooltip: {
+                    trigger: 'item',
+                    sx: {
+                      [`&.${chartsTooltipClasses.root} .${chartsTooltipClasses.valueCell}`]: {
+                        color: 'black',
+                      },
+                      [`&.${chartsTooltipClasses.root} .${chartsTooltipClasses.labelCell}`]: {
+                        color: 'black',
+                      },
                     },
                   },
-                },
-              }}
-            />
+                }}
+              />{' '}
+            </Scrollbar>
           ) : (
             <Typography variant="h6" color="textSecondary" align="center">
               Keine Daten gefunden.

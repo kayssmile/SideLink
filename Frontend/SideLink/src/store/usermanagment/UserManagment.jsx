@@ -9,6 +9,7 @@ const initialState = {
   userInfo: null,
   error: { login: false, register: false, init: false },
   success: { login: false, register: false, init: false },
+  infoModal: false,
 };
 
 const userManagment = createSlice({
@@ -20,6 +21,9 @@ const userManagment = createSlice({
       state.loading = initialState.loading;
       state.success = initialState.success;
       state.error = initialState.error;
+    },
+    toggleInfoModal: state => {
+      state.infoModal = !state.infoModal;
     },
   },
   extraReducers: builder => {
@@ -73,6 +77,6 @@ const userManagment = createSlice({
   },
 });
 
-export const { userLogout } = userManagment.actions;
+export const { userLogout, toggleInfoModal } = userManagment.actions;
 
 export default userManagment.reducer;

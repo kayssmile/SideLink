@@ -9,6 +9,7 @@ const theme = createTheme({
     font: {
       primary: '#ffffff',
       secondary: '#7C8FAC',
+      hover: '##0202f7',
     },
     text: {
       primary: '#ffffff',
@@ -34,6 +35,7 @@ const theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
+      xbs: 400,
       sm: 576,
       md: 768,
       lg: 992,
@@ -43,3 +45,9 @@ const theme = createTheme({
 });
 
 export { theme };
+
+/*
+font-size / mobile : 1.2rem
+font-size / tablet : 1.4rem
+font-size / desktop : 1.5rem
+*/

@@ -7,14 +7,18 @@ import StyledCard from 'src/components/dashboard/shared/StyledCard';
 function PieCard({ chartData, title }) {
   const theme = useTheme();
   return (
-    <Grid size={6}>
+    <Grid size={{ xs: 12, md: 6 }}>
       <StyledCard sx={{ padding: 0 }} elevation={9} variant={'outlined'}>
         <CardHeader title={title} />
         <Divider sx={{ border: '1px solid', borderColor: theme.palette.border.main }} />
 
         <CardContent>
           <PieChart
+            sx={{ '.css-1fse7q7-MuiChartsWrapper-root': { flexDirection: 'column !important' } }}
             slotProps={{
+              legend: {
+                direction: 'column',
+              },
               tooltip: {
                 sx: {
                   [`& .${chartsTooltipClasses.title}`]: {
@@ -39,6 +43,7 @@ function PieCard({ chartData, title }) {
             ]}
             width={200}
             height={200}
+            layout="vertical"
           />
         </CardContent>
       </StyledCard>
