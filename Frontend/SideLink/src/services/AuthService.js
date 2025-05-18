@@ -4,10 +4,9 @@ const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
 
 async function checkAuth() {
-  let accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-  let refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+  let accessToken = getToken();
+  let refreshToken = getRefreshToken();
 
-  //const userId = JSON.parse(localStorage.getItem('userInfo') || '{}');
   if (!accessToken) {
     return false;
   }
@@ -17,21 +16,21 @@ async function checkAuth() {
       try {
         console.log('Token expired, refreshing...');
 
-        const newAccessToken = await refreshAccessToken();
+        const newAccessToken = await refreshAccessToken(refreshToken);
 
-        return true; //{ token: newAccessToken, id: userId };
+        return true;
       } catch (error) {
         console.log('Error refreshing token:', error);
-        if (getToken) {
+        if (getToken()) {
           removeToken();
         }
-        /*
-        if (localStorage.getItem('userInfo')) {
-          localStorage.removeItem('userInfo');
-        } */
         return false;
       }
     } else {
+      if (getRefreshToken()) {
+        removeRefreshToken();
+      }
+
       return false;
     }
   }
@@ -39,13 +38,12 @@ async function checkAuth() {
   return true; //{ token: accessToken, id: userId };
 }
 
-async function refreshAccessToken() {
+async function refreshAccessToken(refreshToken) {
   try {
-    const refreshToken = localStorage.getItem('refreshToken');
     const response = await axiosInstanceBasicAuth.post('/api/auth/refresh/', { refresh: refreshToken });
     const newAccessToken = response.data.access;
     setToken(newAccessToken);
-    localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refresh);
+    setRefreshToken(response.data.refresh);
     return newAccessToken;
   } catch (error) {
     console.error('Fehler beim Refresh des Tokens:', error);
@@ -69,11 +67,22 @@ function isTokenExpired(token) {
 }
 
 const getToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
+
 const setToken = token => {
   localStorage.setItem(ACCESS_TOKEN_KEY, token);
 };
 const removeToken = () => {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
+};
+
+const getRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
+
+const setRefreshToken = token => {
+  localStorage.setItem(REFRESH_TOKEN_KEY, token);
+};
+
+const removeRefreshToken = () => {
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
 };
 
 export { checkAuth, refreshAccessToken, getToken, setToken, removeToken };
