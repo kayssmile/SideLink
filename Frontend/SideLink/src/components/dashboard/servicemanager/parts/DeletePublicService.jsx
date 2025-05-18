@@ -1,9 +1,10 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, CircularProgress, useTheme } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, CircularProgress, useTheme } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { checkAuth } from 'src/services/AuthService';
 import deletePublicService from 'src/store/dashboard/publicservices/actions/DeletePublicServiceAction';
 import { getDeletePublicServiceErrorMessage } from 'src/components/shared/ErrorHandling';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, modalState, type }) {
   const theme = useTheme();
@@ -14,6 +15,8 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
     try {
       if (await checkAuth()) {
         dispatch(deletePublicService(service.id));
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -44,14 +47,21 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
             Schliessen
           </Button>
         ) : (
-          <>
-            <Button onClick={handleCancel} disabled={publicServices.loading} variant="outlined" color={'error'} size="large">
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'flex-end', width: '100%' }}>
+            <Button
+              onClick={handleCancel}
+              disabled={publicServices.loading}
+              variant="outlined"
+              color={'error'}
+              size="large"
+              sx={{ marginBottom: { xs: '0.5rem', sm: '0' }, marginRight: { xs: 0, sm: '1rem' } }}
+            >
               Abbrechen
             </Button>
             <Button onClick={handleDeletePublicService} disabled={publicServices.loading} autoFocus variant="outlined" size="large">
               {publicServices.loading ? <CircularProgress size="25px" sx={{ color: theme.palette.text.dark }} /> : 'Bestätigen'}
             </Button>
-          </>
+          </Box>
         )}
       </DialogActions>
     </Dialog>

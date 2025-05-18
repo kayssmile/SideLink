@@ -1,9 +1,10 @@
 import { Box, Typography, IconButton, Tooltip, useTheme, Button } from '@mui/material';
 import { IconPower } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import invalidateToken from 'src/services/TokenInvalidator';
-import { removeToken } from 'src/services/AuthService';
+import { removeToken, removeRefreshToken } from 'src/services/AuthService';
 
 import { userLogout } from 'src/store/usermanagment/UserManagment';
 import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
@@ -11,14 +12,16 @@ import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
 const Logout = ({ usage }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  //const userInfo = useSelector(state => state.userManagment.userInfo);
   const { dashboardData } = useSelector(state => state.dashboard);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await invalidateToken();
     removeToken();
+    removeRefreshToken();
     dispatch(userLogout());
     dispatch(dashboardLogout());
+    navigate('/home');
   };
 
   return (

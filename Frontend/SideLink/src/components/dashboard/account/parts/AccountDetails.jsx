@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { CardContent, Typography, Box, Button, CircularProgress, useMediaQuery } from '@mui/material';
+import { CardContent, Typography, Box, Button, CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { editAccountSchema } from 'src/config/Schemas';
@@ -11,6 +10,7 @@ import { checkAuth } from 'src/services/AuthService';
 import patchAccountDetails from 'src/store/dashboard/main/actions/PatchAccountDataAction';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
 import { getAccountErrorMessage } from 'src/components/shared/ErrorHandling';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
@@ -19,7 +19,6 @@ import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/Fo
 const AccountDetails = () => {
   const dispatch = useDispatch();
   const { dashboardData, accountDetails } = useSelector(state => state.dashboard);
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const {
     register,
     handleSubmit,
@@ -40,6 +39,8 @@ const AccountDetails = () => {
     try {
       if (await checkAuth()) {
         dispatch(patchAccountDetails(data));
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -71,7 +72,7 @@ const AccountDetails = () => {
     <Grid container>
       <Grid size={12}>
         <StyledCard variant={'outlined'} sx={{ height: '100%', border: 'none', boxShadow: 'none' }}>
-          <CardContent component="form" onSubmit={handleSubmit(onSubmit)}>
+          <CardContent component="form" onSubmit={handleSubmit(onSubmit)} sx={{ padding: { xs: '5px', sm: '16px' }, paddingTop: { xs: '20px' } }}>
             <Typography variant="h5" mb={1}>
               Account
             </Typography>
@@ -80,7 +81,7 @@ const AccountDetails = () => {
             </Typography>
 
             <Box>
-              <Grid container spacing={smDown ? 1 : 2}>
+              <Grid container spacing={{ xs: 1, sm: 2 }}>
                 <Grid size={{ xs: 12, sm: 6 }}>
                   <StyledFormLabel htmlFor="first_name" sx={{ mt: 0 }}>
                     Vorname
@@ -97,7 +98,7 @@ const AccountDetails = () => {
                 </Grid>
 
                 <Grid size={{ xs: 12, sm: 6 }}>
-                  <StyledFormLabel htmlFor="last_name" sx={{ mt: smDown ? '1' : 0 }}>
+                  <StyledFormLabel htmlFor="last_name" sx={{ mt: { xs: 1, sm: 0 } }}>
                     Nachname
                   </StyledFormLabel>
                   <StyledTextField type="text" name="last_name" id="last_name" {...register('last_name')} error={!!errors.last_name} helperText={errors.last_name?.message} />
@@ -137,7 +138,7 @@ const AccountDetails = () => {
                 color="primary"
                 type="submit"
                 disabled={accountDetails.loading}
-                sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: smDown ? '100%' : '250px' }}
+                sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: { xs: '100%', sm: '250px' } }}
               >
                 {accountDetails.loading ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Speichern'}
               </Button>

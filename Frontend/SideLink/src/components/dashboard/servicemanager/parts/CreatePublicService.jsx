@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CardContent, Typography, Box, Button, CircularProgress, useMediaQuery } from '@mui/material';
+import { CardContent, Typography, Box, Button, CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,6 +11,7 @@ import { checkAuth } from 'src/services/AuthService';
 import createPublicService from 'src/store/dashboard/publicservices/actions/CreatePublicServiceAction';
 import { resetStatus } from 'src/store/dashboard/publicservices/PublicServicesManagment';
 import { getNewPublicServiceErrorMessage } from 'src/components/shared/ErrorHandling';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
@@ -21,7 +22,6 @@ import CategorySubcategorySelect from './CategorySubcategorySelect';
 const CreatePublicService = ({ type }) => {
   const dispatch = useDispatch();
   const publicServices = useSelector(state => state.publicservices.publicServices);
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const regions = regionsConfiguration.map(region => region.name);
   const {
     register,
@@ -46,6 +46,8 @@ const CreatePublicService = ({ type }) => {
       if (await checkAuth()) {
         data.service_type = type;
         dispatch(createPublicService(data));
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -67,7 +69,7 @@ const CreatePublicService = ({ type }) => {
       <Grid container>
         <Grid size={12}>
           <StyledCard variant={'outlined'} component="form" onSubmit={handleSubmit(onSubmit)} sx={{ border: 'none', boxShadow: 'none' }}>
-            <CardContent>
+            <CardContent sx={{ padding: 0 }}>
               <Typography variant="h5" mb={1}>
                 {type === 'offer' ? 'Neues Angebot erstellen' : 'Neue Suchanfrage erstellen'}
               </Typography>
@@ -75,7 +77,7 @@ const CreatePublicService = ({ type }) => {
                 {type === 'offer' ? 'Das neue Angebot ist öffentlich sichtbar !' : 'Die neue Suche ist öffentlich sichtbar !'}
               </Typography>
               <Box>
-                <Grid container spacing={smDown ? 4 : 6}>
+                <Grid container spacing={{ xs: 4, sm: 6 }}>
                   <CategorySubcategorySelect register={register} setValue={setValue} clearErrors={clearErrors} errors={errors} />
 
                   <Grid size={{ xs: 12, xl: 6 }}>
@@ -136,7 +138,7 @@ const CreatePublicService = ({ type }) => {
                   color="primary"
                   type="submit"
                   disabled={publicServices.loading}
-                  sx={{ height: '45px', marginTop: '1rem', color: 'white', fontSize: '1rem', width: smDown ? '100%' : '250px' }}
+                  sx={{ height: '45px', marginTop: '1rem', color: 'white', fontSize: '1rem', width: { xs: '100%', sm: '250px' } }}
                 >
                   {publicServices.loading ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Erstellen'}
                 </Button>

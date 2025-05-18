@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, Box, CircularProgress, useMediaQuery } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, Box, CircularProgress, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,9 +14,10 @@ import { getChangePublicServiceErrorMessage } from 'src/components/shared/ErrorH
 import CategorySubcategorySelect from './CategorySubcategorySelect';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';
 import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 function EditPublicService({ service, handleCancel, modalState, type }) {
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const theme = useTheme();
   const publicServices = useSelector(state => state.publicservices.publicServices);
   const dispatch = useDispatch();
   const {
@@ -38,6 +39,8 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
         data.service_type = type;
         data.public_service_id = service.id;
         dispatch(putPublicService(data));
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -68,7 +71,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
       }}
     >
       <DialogTitle id="edit-service-title" color={'black'} sx={{ color: 'black', margin: '1rem 0' }}>
-        <Typography variant="p" color={'white'}>
+        <Typography variant="p" sx={{ color: theme.palette.text.primary }}>
           Eintrag bearbeiten:
           <br />
           <strong>{service.title}</strong>
@@ -77,7 +80,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box>
-            <Grid container spacing={smDown ? 4 : 6}>
+            <Grid container spacing={{ xs: 4, sm: 6 }}>
               <CategorySubcategorySelect register={register} setValue={setValue} clearErrors={clearErrors} errors={errors} initCategory={initCategory} initSubCategories={initSubCategories} />
 
               <Grid size={{ xs: 12, xl: 6 }}>
@@ -140,7 +143,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
             </Grid>
           </Box>
 
-          <Box sx={{ mb: '1rem', mt: smDown ? '1rem' : '2rem' }}>
+          <Box sx={{ mb: '1rem', mt: { xs: '1rem', sm: '2rem' } }}>
             {publicServices.error && getChangePublicServiceErrorMessage(publicServices.error)}
 
             {publicServices.success && (
@@ -152,7 +155,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
 
           <Box mt={1} sx={{ display: 'flex', justifyContent: 'end' }}>
             {publicServices.success ? (
-              <Button variant="contained" color="primary" onClick={handleCancel} sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: smDown ? '100%' : '200px' }}>
+              <Button variant="contained" color="primary" onClick={handleCancel} sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: { xs: '100%', sm: '200px' } }}>
                 Schliessen
               </Button>
             ) : (
@@ -161,7 +164,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
                 color="primary"
                 type="submit"
                 disabled={publicServices.loading}
-                sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: smDown ? '100%' : '200px' }}
+                sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: { xs: '100%', sm: '200px' } }}
               >
                 {publicServices.loading ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Speichern'}
               </Button>

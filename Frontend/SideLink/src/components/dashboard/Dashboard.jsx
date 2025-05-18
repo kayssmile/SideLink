@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
-import { Box, Grid, Typography, Button, IconButton, InputAdornment, Stack, FormGroup } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
-import { StyledTextField } from 'src/components/shared/forms/FormElements';
-import { useState } from 'react';
 
 function Dashboard() {
   const navigate = useNavigate();

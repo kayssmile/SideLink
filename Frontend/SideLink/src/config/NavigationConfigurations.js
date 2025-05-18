@@ -143,7 +143,11 @@ const footerLinks = [
         title: true,
         titleText: 'Quicklinks',
       },
-
+      {
+        title: false,
+        titleText: 'Dashboard',
+        to: '/dashboard',
+      },
       {
         title: false,
         titleText: 'Home',

@@ -162,9 +162,19 @@ function Listing() {
           handleCancel={handleShouldRegisterModalAgree}
           modalTitle="Registrierung erforderlich"
           modalContent={
-            <Typography color="success" align={'center'}>
-              Passendes Angebot gefunden ?{' '}
-              <Typography sx={{ marginTop: '1rem', color: 'black', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' }, width: '100%' }}>
+            <Typography component="div" color="success" align="center">
+              Passendes Angebot gefunden?{' '}
+              <Typography
+                component="div"
+                sx={{
+                  marginTop: '1rem',
+                  color: 'black',
+                  textDecoration: 'underline',
+                  textAlign: 'center',
+                  a: { color: 'inherit' },
+                  width: '100%',
+                }}
+              >
                 <Link to="/registration">Registriere dich kostenlos</Link>
               </Typography>
             </Typography>

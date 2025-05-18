@@ -22,7 +22,11 @@ const SidebarMenu = () => {
       <List sx={{ pt: 0 }} className="sidebarNav">
         {sideBarMenuItems.map((item, i) => {
           if (item.subheader) {
-            return <ListSubheaderStyled key={item.subheader + i}>{item.subheader}</ListSubheaderStyled>;
+            return (
+              <ListSubheaderStyled sx={{ marginTop: '20px' }} key={item.subheader + i}>
+                {item.subheader}
+              </ListSubheaderStyled>
+            );
           } else if (item.children) {
             return <NavCollapse menu={item} level={1} key={item.title + i} />;
           } else {

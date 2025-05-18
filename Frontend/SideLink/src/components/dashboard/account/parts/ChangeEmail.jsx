@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CardContent, Typography, Box, Button, CircularProgress, useMediaQuery } from '@mui/material';
+import { CardContent, Typography, Box, Button, CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,6 +10,7 @@ import { checkAuth } from 'src/services/AuthService';
 import patchAccountEmail from 'src/store/dashboard/main/actions/PatchAccountEmailAction';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
 import { getChangeEmailErrorMessage } from 'src/components/shared/ErrorHandling';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
@@ -18,7 +19,6 @@ import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/Fo
 const ChangeEmail = () => {
   const dispatch = useDispatch();
   const { dashboardData, changeEmail } = useSelector(state => state.dashboard);
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   const {
     register,
@@ -45,6 +45,8 @@ const ChangeEmail = () => {
         data = { email: data.email_new };
         dispatch(patchAccountEmail(data));
         reset();
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -92,13 +94,13 @@ const ChangeEmail = () => {
             disabled={changeEmail.loading}
             sx={{
               height: '45px',
-              marginTop: smDown ? '0' : '40px',
+              marginTop: { xs: '0', sm: '40px' },
               color: 'white',
               fontSize: '1rem',
-              width: smDown ? '100%' : '250px',
+              width: { xs: '100%', sm: '250px' },
               marginRight: '1rem',
               marginBottom: '1rem',
-              marginLeft: smDown ? '1rem' : 'auto',
+              marginLeft: { xs: '1rem', sm: 'auto' },
             }}
           >
             {changeEmail.success ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Speichern'}
@@ -108,7 +110,7 @@ const ChangeEmail = () => {
           <Modal
             modalState={confirmModal}
             handleCancel={handleConfirmModalAgree}
-            modalTitle="Bestätigung erforderlich"
+            modalTitle="Information"
             modalContent={changeEmail.error ? getChangeEmailErrorMessage(changeEmail.error) : changeEmail.success ? <Typography color="success">Email erfolgreich aktualisiert!</Typography> : ''}
             handleAgree={handleConfirmModalAgree}
             usage="single-btn"

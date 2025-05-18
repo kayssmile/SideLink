@@ -11,17 +11,6 @@ import AccountDetails from 'src/components/dashboard/account/parts/AccountDetail
 import Credentials from 'src/components/dashboard/account/parts/Credentials';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
-/* 
-TODOS:
-Saubere Rahmen
-prüfen der 404 route für dashboard
-prüfen der sauberen Fehlermeldungen
-checken ob es besser ist mit der zeitsignatur das token zu validieren 
-router guard prüfen und flackern beim laden. 
-sidebar animieren
-checkauth prüfen wenn kein token zurückgegeben wird
- */
-
 const Account = () => {
   const [activeTab, setActiveTab] = useState(0);
   const theme = useTheme();
@@ -48,9 +37,6 @@ const Account = () => {
                   allowScrollButtonsMobile
                   sx={{
                     '& .MuiTabs-indicator': { backgroundColor: 'white' },
-                    //display: 'flex',
-                    //flexDirection: 'column',
-                    //width: '100%',
                   }}
                 >
                   <Tab
@@ -72,6 +58,7 @@ const Account = () => {
               <Divider />
               <CardContent
                 sx={{
+                  padding: { xs: '5px', sm: '16px' },
                   '&.cardcontent': { backgroundColor: theme.palette.background.main, border: '2px solid', borderColor: theme.palette.border.main, borderRadius: '8px' },
                 }}
               >

@@ -1,20 +1,18 @@
 import { Link } from 'react-router-dom';
-import { Box, Avatar, Typography, useMediaQuery } from '@mui/material';
+import { Box, Avatar, Typography } from '@mui/material';
 
 import { Stack } from '@mui/system';
 
 const MenuItem = ({ menuItem }) => {
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
-
   return (
     <Box key={menuItem.title}>
-      <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
+      <Box sx={{ paddingTop: { xs: 2 }, px: 0 }} className="hover-text-primary">
         <Link to={menuItem.to}>
-          <Stack direction={smDown ? 'column' : 'row'} spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <Box
               sx={{
-                width: smDown ? '30px' : '45px',
-                height: smDown ? '30px' : '45px',
+                width: { xs: '30px', sm: '45px' },
+                height: { xs: '30px', sm: '45px' },
                 bgcolor: theme => theme.palette.background.main,
                 display: 'flex',
                 alignItems: 'center',

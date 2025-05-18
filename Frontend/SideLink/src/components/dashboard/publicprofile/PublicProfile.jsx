@@ -11,6 +11,7 @@ import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
 import patchPublicProfile from 'src/store/dashboard/publicprofile/actions/PatchPublicProfileAction';
 import { resetProcess } from 'src/store/dashboard/publicprofile/PublicProfileManagment';
 import { getChangePublicProfileErrorMessage } from 'src/components/shared/ErrorHandling';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
@@ -18,6 +19,7 @@ import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';
 
 function PublicProfile() {
+  const [confirmModal, setConfirmModal] = useState(false);
   const dispatch = useDispatch();
   const { publicProfile } = useSelector(state => state.publicprofile);
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -36,16 +38,9 @@ function PublicProfile() {
   let publicProfileImageUrl = '';
   const fileInputRef = useRef(null);
 
-  if (publicProfile.data.public_profile_picture) {
+  if (publicProfile?.data?.public_profile_picture) {
     publicProfileImageUrl = `${baseURL}${publicProfile.data.public_profile_picture}`;
   }
-
-  /*
-prüfen weshalb beim bearbeiten eine andere service angezeigt wird
-prüfen wie ich alle reduxthunks vereinheitlichen kann 
-*/
-
-  const [confirmModal, setConfirmModal] = useState(false);
 
   const handleConfirmModalAgree = () => {
     setConfirmModal(false);
@@ -59,7 +54,7 @@ prüfen wie ich alle reduxthunks vereinheitlichen kann
   };
 
   /*
-   * @description: create formdata to send image-file-data to backend
+   * create formdata to send image-file-data to backend
    */
   const onSubmit = async data => {
     const formData = new FormData();
@@ -76,6 +71,8 @@ prüfen wie ich alle reduxthunks vereinheitlichen kann
     try {
       if (await checkAuth()) {
         dispatch(patchPublicProfile(formData));
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -101,27 +98,23 @@ prüfen wie ich alle reduxthunks vereinheitlichen kann
       <Breadcrumb title="Dein öffentliches Profil" items={breadcrumpConfig.publicProfile} sx={{ margin: '30px 0' }} />
       <Grid container>
         <Grid size={12}>
-          <StyledCard sx={{ padding: '24px', paddingTop: '0' }}>
-            <Box sx={{ position: 'relative', display: 'inline-block' }}></Box>
-
+          <StyledCard sx={{ padding: { xs: '5px', sm: '24px' } }}>
             <CardContent component="form" onSubmit={handleSubmit(onSubmit)}>
               <Typography variant="h5" mb={1}>
                 Öffentliches Profil
               </Typography>
-              <Typography color="textSecondary" mb={3}>
-                Erstelle hier dein öffentliches Profil, es ist für andere registrierte Benutzer sichtbar. Du kannst es jederzeit anpassen.
-              </Typography>
+              <Typography color="textSecondary">Erstelle hier dein öffentliches Profil, es ist für andere registrierte Benutzer sichtbar. Du kannst es jederzeit anpassen.</Typography>
 
-              <Box mt={8}>
+              <Box mt={{ xs: 4, sm: 8 }}>
                 <Typography component="label" htmlFor="profile_picture" sx={{ color: 'white', fontSize: 20, display: 'block', mb: 1 }}>
                   Profilbild
                 </Typography>
                 <Avatar src={publicProfileImageUrl} alt="Publicprofile image" sx={{ width: 150, height: 150, margin: '0 auto' }} />
-                <Stack sx={{ display: 'flex', flexDirection: smDown ? 'column' : 'row', justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
-                  <Button variant="contained" color="primary">
+                <Stack sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
+                  <Button variant="contained" color="primary" sx={{ maxWidth: '100%' }}>
                     <input ref={fileInputRef} accept="image/*" name="profile_picture" type="file" multiple={false} style={{ maxWidth: '100%' }} {...register('profile_picture')} />
                   </Button>
-                  <Button variant="outlined" color="error" onClick={handleReset} sx={{ px: 3, fontSize: '1rem', marginLeft: smDown ? '0' : '1rem', marginTop: smDown ? '1rem' : '0' }}>
+                  <Button variant="outlined" color="error" onClick={handleReset} sx={{ px: 3, fontSize: '1rem', marginLeft: { xs: 0, sm: '1rem' }, marginTop: { xs: '1rem', sm: '0' } }}>
                     Reset
                   </Button>
                 </Stack>
@@ -187,12 +180,14 @@ prüfen wie ich alle reduxthunks vereinheitlichen kann
               <Modal
                 modalState={confirmModal}
                 handleCancel={handleConfirmModalAgree}
-                modalTitle="Bestätigung erforderlich"
+                modalTitle="Information"
                 modalContent={
                   publicProfile.error ? (
                     getChangePublicProfileErrorMessage(publicProfile.error)
                   ) : publicProfile.success ? (
-                    <Typography color="success">Dein öffentliches Profil wurde erfolgreich aktualisiert.</Typography>
+                    <Typography color="success" align="center">
+                      Dein öffentliches Profil wurde erfolgreich aktualisiert.
+                    </Typography>
                   ) : (
                     ''
                   )

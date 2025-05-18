@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { CardContent, Typography, useMediaQuery } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useSelector } from 'react-redux';
 
@@ -9,7 +9,6 @@ import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
 const OverviewPublicServices = ({ type }) => {
   const publicServices = useSelector(state => state.publicservices.publicServices);
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   const publicServicesFiltered = useMemo(() => {
     if (!publicServices?.data) return [];
@@ -27,7 +26,7 @@ const OverviewPublicServices = ({ type }) => {
             <Typography color="textSecondary" mb={3}>
               {type === 'offer' ? 'Dienstleistungen Deine Angebote' : 'Dienstleistungen Deine Suche'}
             </Typography>
-            <CardContent sx={{ height: '40vh', overflow: 'scroll', overflowX: 'hidden', padding: smDown ? '0 0' : '16px' }}>
+            <CardContent sx={{ height: '40vh', overflow: 'scroll', overflowX: 'hidden', padding: { xs: '0', sm: '16px' } }}>
               {publicServicesFiltered.length == 0 ? (
                 <Typography variant="h4" component="p" color="textSecondary">
                   {type === 'offer' ? 'Keine Angebote vorhanden' : 'Keine Suche vorhanden'}

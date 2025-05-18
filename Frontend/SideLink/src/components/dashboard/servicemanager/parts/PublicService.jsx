@@ -54,7 +54,7 @@ const PublicService = ({ service, type }) => {
             backgroundColor: theme.palette.background.white,
           }}
         >
-          <Typography variant="h5" color={'black'} sx={{ opacity: '1' }}>
+          <Typography variant="h5" color={'black'} sx={{ opacity: '1', fontSize: { xs: '1.2rem', sm: '1.4rem' } }}>
             {service.title}
           </Typography>
 
@@ -70,7 +70,7 @@ const PublicService = ({ service, type }) => {
           </Stack>
 
           <Stack direction="row" justifyContent="space-between" alignItems="center" mt={0}>
-            <Typography variant="p" color={'black'}>
+            <Typography component="p" color={'black'}>
               <strong>
                 {service.region_details} | {service.location_details}
               </strong>

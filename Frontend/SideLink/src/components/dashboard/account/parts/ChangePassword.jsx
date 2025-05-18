@@ -4,7 +4,6 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { changePasswordSchema } from 'src/config/Schemas';
@@ -12,6 +11,7 @@ import patchAccountPassword from 'src/store/dashboard/main/actions/PatchAccountP
 import { checkAuth } from 'src/services/AuthService';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
 import { getChangePasswordErrorMessage } from 'src/components/shared/ErrorHandling';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
@@ -45,6 +45,8 @@ const ChangePassword = () => {
     try {
       if (await checkAuth()) {
         dispatch(patchAccountPassword(data));
+      } else {
+        dispatch(toggleInfoModal());
       }
     } catch (error) {
       console.error(error);
@@ -160,7 +162,7 @@ const ChangePassword = () => {
           <Modal
             modalState={confirmModal}
             handleCancel={handleConfirmModalAgree}
-            modalTitle="Bestätigung erforderlich"
+            modalTitle="Information"
             modalContent={
               changePassword.error ? getChangePasswordErrorMessage(changePassword.error) : changePassword.success ? <Typography color="success">Passwort erfolgreich aktualisiert!</Typography> : ''
             }

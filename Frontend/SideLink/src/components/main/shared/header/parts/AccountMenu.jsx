@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import ProfileMenuDesktop from 'src/components/shared/header/ProfileMenuDesktop';
+import ProfileMenu from 'src/components/shared/header/ProfileMenu';
 import ProfileMenuMobile from 'src/components/shared/header/ProfileMenuMobile';
 
 const AccountMenu = ({ mdUp = false }) => {
@@ -12,7 +12,7 @@ const AccountMenu = ({ mdUp = false }) => {
   return (
     <>
       {isLoggedIn && mdUp ? (
-        <ProfileMenuDesktop />
+        <ProfileMenu />
       ) : isLoggedIn && !mdUp ? (
         <ProfileMenuMobile />
       ) : (
