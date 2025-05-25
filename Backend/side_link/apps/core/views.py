@@ -5,36 +5,41 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.conf import settings
-
 from apps.publicprofile.models import PublicProfile
-from apps.publicservices.models import PublicService
+from apps.publicservice.models import PublicService
 from apps.usermanagment.serializers import CustomUserSerializer
 from apps.publicprofile.serializers import PublicProfileSerializer
-from apps.publicservices.serializers import PublicServiceSerializer
-from .serializers import ContactMessageSerializer
+from apps.publicservice.serializers import PublicServiceSerializer
 from apps.core.services import email_service
+from .serializers import ContactMessageSerializer
 
 class UserDashboardData(APIView):
     """
-    Get dashboard data for authenticated user.
+    API endpoint to retrieve dashboard data for an authenticated user.
+    Returns user account data, public profile information, and any public services 
+    the user has created.
     """
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
    
     def get(self, request):
+        """
+        Handle GET request to return dashboard data for the authenticated user.
+        Returns:
+            - 200 OK with user, public profile, and public services data if user exists
+            - 404 Not Found if user not found
+        """
         user = request.user
-        if not user:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        
         user_data = CustomUserSerializer(user).data
-        public_profile_data = self.get_publicprofile_data(user)
-        public_services_data = self.get_publicservices_data(user)
+        public_profile_data = self._get_publicprofile_data(user)
+        public_services_data = self._get_publicservices_data(user)
         dashboard_data = {'user_data': user_data , 'public_profile_data' : public_profile_data, 'public_services_data': public_services_data}
-        
         return Response(dashboard_data, status=status.HTTP_200_OK)
     
-
-    def get_publicprofile_data(self, user):
+    def _get_publicprofile_data(self, user):
+        """
+        Retrieve the serialized public profile for the given user.
+        """
         try:
             public_profile = PublicProfile.objects.get(user=user)
             public_profile_data = PublicProfileSerializer(public_profile).data
@@ -42,10 +47,12 @@ class UserDashboardData(APIView):
         except PublicProfile.DoesNotExist:
             return None
         
-
-    def get_publicservices_data(self, user):
+    def _get_publicservices_data(self, user):
+        """
+        Retrieve the serialized list of public services created by the user.
+        """
         public_services = PublicService.objects.filter(user=user)
-        if (not public_services.exists()):
+        if not public_services.exists():
             return []
         public_services_data = PublicServiceSerializer(public_services, many=True).data
         return public_services_data
@@ -54,30 +61,32 @@ class UserDashboardData(APIView):
 @api_view(['GET'])
 def get_public_data(request):
     """
-    Get public data.
+    API endpoint to retrieve all public profiles and public services.
+    Returns:
+        - 200 OK with all publicservices or [] if none exist.
     """
     public_services_data = PublicService.objects.all()
-    public_profiles_data = PublicProfile.objects.all()
     public_services_data = PublicServiceSerializer(public_services_data, many=True).data
-    public_profiles_data = PublicProfileSerializer(public_profiles_data, many=True).data
-    
-    public_data = {'public_profiles_data' : public_profiles_data, 'public_services_data': public_services_data}
-    
+    public_data = {'public_services_data': public_services_data}
     return Response(public_data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def process_message(request):
     """
-    Receive contact message from the client and send it via email to the admin.
+    API endpoint to process and send contact messages to the admin.
+    Validates input and sends an email to the given email.
+    Returns:
+        - 201 Created if the message is sent and saved
+        - 400 Bad Request if validation fails
+        - 500 Internal Server Error if sending the email fails
     """
     serializer = ContactMessageSerializer(data=request.data)
-
     if serializer.is_valid():
-        admin_email = settings.ADMIN_EMAIL
-        sent_message = email_service.EmailService.send_email({"to_email": admin_email, "subject": serializer.validated_data['subject'], "text_content": serializer.validated_data['message']})
-        if not sent_message:
-            return Response({"message": "E-Mail konnte nicht gesendet werden"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         serializer.save()
+        admin_email = settings.ADMIN_EMAIL
+        sent_message = email_service.EmailService.send_email(to_email=admin_email, subject=serializer.validated_data['subject'], body=serializer.validated_data['message'])
+        if not sent_message:
+            return Response({"message": "Email could not be sent."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
    

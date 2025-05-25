@@ -1,7 +1,9 @@
+from django.urls import path
 from .views import PublicProfileView, get_public_profile
-from django.urls import path  
-  
+""" 
+Defines urls for the publicprofile API.
+"""  
 urlpatterns = [  
-    path('publicprofile/', PublicProfileView.as_view(), name='public_profile'),
-    path('publicprofile/get/', get_public_profile, name='get_public_profile'),
+    path('', PublicProfileView.as_view(), name='public_profile'),
+    path('get/', get_public_profile, name='get_public_profile'),
 ]

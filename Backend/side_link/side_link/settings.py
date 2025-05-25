@@ -1,7 +1,6 @@
 """
 Django settings for side_link project.
 """
-
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
@@ -19,7 +18,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 CLIENT_URL = config("CLIENT_URL")
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,7 +30,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'apps.core',
     'apps.usermanagment',
-    'apps.publicservices',
+    'apps.publicservice',
     'apps.publicprofile',
     'apps.analytics',
 ]
@@ -44,14 +42,10 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=45),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7), #timedelta(minutes=1), 
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60), #timedelta(minutes=1), 
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
-    "AUTH_COOKIE": "refreshToken",
-    "AUTH_COOKIE_SECURE": True,  # Setze auf False, wenn kein HTTPS
-    "AUTH_COOKIE_SAMESITE": "None",  # "None" für Cross-Site-Requests, "Lax" oder "Strict" für mehr Sicherheit
-    "AUTH_COOKIE_HTTPONLY": True, 
 }
 
 MIDDLEWARE = [
@@ -116,10 +110,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'side_link.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -127,49 +118,36 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
+# Custom validators from apps.core.utils.validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
      {
-        'NAME': 'apps.usermanagment.validators.MinimumLengthValidator',
+        'NAME': 'apps.core.utils.validators.MinimumLengthValidator',
     },
     {
-        'NAME': 'apps.usermanagment.validators.UppercaseValidator',
+        'NAME': 'apps.core.utils.validators.UppercaseValidator',
     },
     {
-        'NAME': 'apps.usermanagment.validators.SpecialCharacterValidator',
+        'NAME': 'apps.core.utils.validators.SpecialCharacterValidator',
     },
 ]
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Zurich'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 STATIC_URL = 'static/'
-
 MEDIA_URL='/media/'
 MEDIA_ROOT = BASE_DIR /'media'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'usermanagment.RegisteredUser'
 
@@ -179,8 +157,8 @@ EMAIL_CONSOLE_FORMAT = '=== EMAIL KONSOLE (DEV) ===\n\n{email}\n\n=== ENDE ==='
 ADMIN_EMAIL = config("ADMIN_EMAIL")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
-
 # Logging settings
+# Customized logging configuration for Django and email service
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

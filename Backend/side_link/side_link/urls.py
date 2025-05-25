@@ -1,33 +1,23 @@
-"""
-URL configuration for side_link project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 
+""" 
+URL configuration for the side_link project.
 
+Defines the global URL routing including admin, authentication,
+public profile, public services, core, and analytics APIs.
+"""
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/', include('apps.usermanagment.urls')),
-    path('api/', include('apps.publicprofile.urls')),
-    path('api/', include('apps.publicservices.urls')),
     path('api/', include('apps.core.urls')),
-    path('api/', include('apps.analytics.urls')),
+    path('api/auth/', include('apps.usermanagment.urls')),
+    path('api/publicprofile/', include('apps.publicprofile.urls')),
+    path('api/publicservices/', include('apps.publicservice.urls')),
+    path('api/analytics-data/', include('apps.analytics.urls')),
 ]
 
+# Serve static and media files in development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

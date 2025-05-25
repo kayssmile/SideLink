@@ -2,6 +2,9 @@ from django.db import models
 
 
 class TimestampMixin(models.Model):
+    """
+    Abstract base model that adds created_at and updated_at timestamps to a model.
+    """
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -9,6 +12,9 @@ class TimestampMixin(models.Model):
         abstract = True
 
 class Category(TimestampMixin, models.Model):
+    """
+    Model representing a category.
+    """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     keywords = models.JSONField(default=list)
@@ -17,30 +23,42 @@ class Category(TimestampMixin, models.Model):
         return self.name
 
 class SubCategory(TimestampMixin, models.Model):
+    """
+    Model representing a sub-category that belongs to a category.
+    """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     keywords = models.JSONField(default=list)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='sub_categories')
-    
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='sub_categories') 
+
     def __str__(self):
         return self.name
     
 class Region(TimestampMixin, models.Model):
+    """
+    Model representing a region.
+    """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
-    locations = models.ManyToManyField('core.Location', related_name='regions')
+
     def __str__(self):
         return self.name    
     
 class Location(TimestampMixin, models.Model):
+    """
+    Model representing a location that belongs to a region.
+    """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='locations_set')
-    
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='locations') 
+
     def __str__(self):
         return self.name
     
 class ContactMessage(TimestampMixin, models.Model):
+    """
+    Model representing a contact/support message sent by a user.
+    """
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -49,4 +67,4 @@ class ContactMessage(TimestampMixin, models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.subject

@@ -1,10 +1,12 @@
 from django.test import TestCase
-from django.core.exceptions import ValidationError
 from apps.usermanagment.models import RegisteredUser
 
 class RegisteredUserModelTest(TestCase):
 
     def setUp(self):
+        """
+        Set up a test user instance.
+        """
         self.user = RegisteredUser.objects.create_user(
             email='test@example.com',
             password='123',
@@ -19,16 +21,28 @@ class RegisteredUserModelTest(TestCase):
         )
 
     def test_user_creation(self):
+        """
+        Test that the user is created with correct attributes and the provided password.
+        """
         self.assertEqual(self.user.email, 'test@example.com')
         self.assertTrue(self.user.check_password('123'))
         self.assertEqual(self.user.first_name, 'John')
         self.assertTrue(self.user.is_active)
         self.assertFalse(self.user.is_staff)
 
+    def test_public_profile_creation(self):
+        """
+        Test that a public profile is automatically created for the user.
+        """
+        self.assertIsNotNone(self.user.public_profile)
+
     def test_superuser_creation(self):
+        """
+        Test that a superuser is created with correct permissions.
+        """
         superuser = RegisteredUser.objects.create_superuser(
             email='admin@example.com',
-            password='adminpass'
+            password='adminPass123!'
         )
         self.assertTrue(superuser.is_staff)
         self.assertTrue(superuser.is_superuser)

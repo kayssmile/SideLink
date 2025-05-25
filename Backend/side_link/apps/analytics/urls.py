@@ -1,18 +1,10 @@
-# System libraries
-
-
-# Third-party libraries
-
-
-# Django modules
 from django.urls import path  
+from .views import AnalyticsData, create_analytics_data
 
-# Django apps
-
-
-# Current-app modules
-from .views import AnalyticsData
-
+""" 
+URL configuration for the analytics app.
+"""
 urlpatterns = [  
-    path('analytics-data/', AnalyticsData.as_view(), name='analytics_data'),
+    path('', AnalyticsData.as_view(), name='analytics_data'),
+    path('create/', create_analytics_data, name='create_analytics_data_entry'),
 ]  
