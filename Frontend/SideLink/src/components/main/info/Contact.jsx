@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { contactSchema } from 'src/config/Schemas';
-import basicPostRequest from 'src/services/BasicRequest';
+import { basicPostRequest } from 'src/services/BasicRequests';
 import { basicErrorMessage } from 'src/components/shared/ErrorHandling';
 
 import Heading from 'src/components/main/shared/Heading';

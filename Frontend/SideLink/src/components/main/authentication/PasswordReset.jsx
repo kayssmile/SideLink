@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { passwordResetSchema } from 'src/config/Schemas';
-import basicPostRequest from 'src/services/BasicRequest';
+import { basicPostRequest } from 'src/services/BasicRequests';
 import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
 
 import Logo from 'src/components/shared/logo/logo';

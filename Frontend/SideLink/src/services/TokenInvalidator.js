@@ -1,10 +1,8 @@
 import { axiosInstanceBasicAuth } from 'src/api/AxiosInstance';
 
-async function invalidateToken() {
-  //let accessToken = localStorage.getItem('accessToken');
+async function invalidateToken(token) {
   try {
-    const response = await axiosInstanceBasicAuth.post('/api/auth/logout/', {});
-    //console.log(response);
+    const response = await axiosInstanceBasicAuth.post('/api/auth/logout/', { refresh: token });
   } catch (error) {
     console.log(error);
     console.log('Token konnte nicht invalidiert werden');

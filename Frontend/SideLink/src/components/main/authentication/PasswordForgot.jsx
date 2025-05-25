@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { passwordForgotSchema } from 'src/config/Schemas';
-import basicPostRequest from 'src/services/BasicRequest';
+import { basicPostRequest } from 'src/services/BasicRequests';
 import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
 
 import Logo from 'src/components/shared/logo/Logo';
@@ -14,7 +14,7 @@ import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
 function PasswordForgot() {
   const theme = useTheme();
-  let [passwordForgot, setPasswordForgot] = useState({ loading: false, error: false, success: false });
+  const [passwordForgot, setPasswordForgot] = useState({ loading: false, error: false, success: false });
 
   const {
     register,

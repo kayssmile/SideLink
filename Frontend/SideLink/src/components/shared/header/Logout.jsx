@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import invalidateToken from 'src/services/TokenInvalidator';
-import { removeToken, removeRefreshToken } from 'src/services/AuthService';
+import { removeToken, removeRefreshToken, getRefreshToken } from 'src/services/AuthService';
 
 import { userLogout } from 'src/store/usermanagment/UserManagment';
 import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
@@ -16,7 +16,10 @@ const Logout = ({ usage }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await invalidateToken();
+    const refreshToken = getRefreshToken();
+    if (refreshToken) {
+      await invalidateToken(refreshToken);
+    }
     removeToken();
     removeRefreshToken();
     dispatch(userLogout());

@@ -138,11 +138,9 @@ function Registration() {
         )}
 
         {success.register && (
-          <RouterLink to="/login">
-            <Typography color="white" sx={{ textAlign: 'center', mt: '1rem', fontSize: '1.3rem', textDecoration: 'underline', width: '100%' }}>
-              Registrierung erfolgreich ! Login
-            </Typography>
-          </RouterLink>
+          <Typography component={RouterLink} to="/login" color="white" sx={{ textAlign: 'center', mt: '1rem', fontSize: '1.3rem', textDecoration: 'underline', width: '100%' }}>
+            Registrierung erfolgreich ! Login
+          </Typography>
         )}
 
         <Button
@@ -150,7 +148,7 @@ function Registration() {
           color="primary"
           type="submit"
           disabled={loading.register || success.register}
-          sx={{ display: 'block', height: '45px', color: 'white', fontSize: { xs: '1rem', md: '1.3rem' }, width: '250px' }}
+          sx={{ display: 'block', height: '45px', color: 'white', fontSize: { xs: '1rem', md: '1.1rem' }, width: '250px' }}
         >
           {loading.register ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Registrieren'}
         </Button>

@@ -5,8 +5,6 @@ import PieCard from './PieCard';
 import BarCardSelection from './BarCardSelection';
 
 function AnalyticsCards({ analyticsData }) {
-  const theme = useTheme();
-
   let totalServices = [];
   let offersPerCategory = [];
   let searchesPerCategory = [];

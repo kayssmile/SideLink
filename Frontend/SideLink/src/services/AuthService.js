@@ -71,6 +71,7 @@ const getToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
 const setToken = token => {
   localStorage.setItem(ACCESS_TOKEN_KEY, token);
 };
+
 const removeToken = () => {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
 };
@@ -85,4 +86,4 @@ const removeRefreshToken = () => {
   localStorage.removeItem(REFRESH_TOKEN_KEY);
 };
 
-export { checkAuth, refreshAccessToken, getToken, setToken, removeToken };
+export { checkAuth, refreshAccessToken, getToken, setToken, removeToken, removeRefreshToken, getRefreshToken };

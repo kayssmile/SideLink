@@ -49,7 +49,7 @@ function Analytics() {
     <>
       <Box component="section" sx={{ flexGrow: 1, padding: { xs: '5px', sm: '20px' } }}>
         <Breadcrumb title="Analysen" items={breadcrumpConfig.analysis} sx={{ margin: '30px 0' }} />
-        {analytics.loading ? <Spinner size="4rem" /> : analytics.error ? errorMessage(analytics.error) : <AnalyticsCards analyticsData={analytics.data} />}
+        {analytics.loading ? <Spinner size="4rem" /> : analytics.error ? errorMessage(analytics.error) : analytics.success ? <AnalyticsCards analyticsData={analytics.data} /> : ''}
       </Box>
     </>
   );

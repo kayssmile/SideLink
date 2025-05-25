@@ -32,7 +32,7 @@ const PublicDataManagment = createSlice({
     },
     setSearchEngineData: (state, action) => {
       //console.log(action);
-      console.log('here we set state', action.payload);
+      //console.log('here we set state', action.payload);
       state.publicData.searchEngineData = action.payload;
       //console.log(state.publicData);
       //console.log(state.publicData.searchEngineData);
@@ -89,7 +89,7 @@ const PublicDataManagment = createSlice({
           success: true,
           error: false,
         };
-        console.log('payloadPublicData', payload);
+        // console.log('payloadPublicData', payload);
       })
       .addCase(getPublicData.rejected, (state, { payload }) => {
         state.publicData = { ...state.publicData, loading: false, success: false, error: payload };
@@ -120,7 +120,7 @@ const PublicDataManagment = createSlice({
           success: false,
           error: payload,
         };
-        console.log('payloadPublicDataError', payload);
+        //console.log('payloadPublicDataError', payload);
       });
   },
 });

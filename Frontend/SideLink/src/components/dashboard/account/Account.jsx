@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import { Divider, CardContent, Box, Tab, Tabs, useTheme, useMediaQuery } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { IconLock, IconUserCircle } from '@tabler/icons-react';
+import { IconLock, IconUserCircle, IconPencilX } from '@tabler/icons-react';
 
 import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
 
 import TabPanel from 'src/components/dashboard/shared/TabPanel';
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
 import AccountDetails from 'src/components/dashboard/account/parts/AccountDetails';
+import AccountDelete from 'src/components/dashboard/account/parts/AccountDelete';
 import Credentials from 'src/components/dashboard/account/parts/Credentials';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState(0);
   const theme = useTheme();
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -44,13 +45,19 @@ const Account = () => {
                     iconPosition="start"
                     icon={<IconUserCircle size="22" />}
                     label="Account"
-                    sx={{ color: theme.palette.font.secondary, '&.Mui-selected': { color: 'white' }, minWidth: smDown ? '100%' : 'auto' }}
+                    sx={{ color: theme.palette.font.secondary, '&.Mui-selected': { color: 'white' }, minWidth: { xs: '100%', sm: 'auto' } }}
                   />
                   <Tab
                     iconPosition="start"
                     icon={<IconLock size="22" />}
                     label="Anmeldedaten"
-                    sx={{ color: theme.palette.font.secondary, '&.Mui-selected': { color: 'white' }, minWidth: smDown ? '100%' : 'auto' }}
+                    sx={{ color: theme.palette.font.secondary, '&.Mui-selected': { color: 'white' }, minWidth: { xs: '100%', sm: 'auto' } }}
+                  />
+                  <Tab
+                    iconPosition="start"
+                    icon={<IconPencilX size="22" />}
+                    label="Löschen"
+                    sx={{ color: theme.palette.font.secondary, '&.Mui-selected': { color: 'white' }, minWidth: { xs: '100%', sm: 'auto' } }}
                   />
                 </Tabs>
               </Box>
@@ -68,6 +75,10 @@ const Account = () => {
 
                 <TabPanel value={activeTab} index={1}>
                   <Credentials />
+                </TabPanel>
+
+                <TabPanel value={activeTab} index={2}>
+                  <AccountDelete />
                 </TabPanel>
               </CardContent>
             </StyledCard>
