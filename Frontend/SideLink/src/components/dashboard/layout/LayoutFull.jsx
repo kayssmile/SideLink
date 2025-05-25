@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'; // Für das Einfügen von Kinder-Rout
 import { useState, useEffect } from 'react';
 import { styled, Container, Box, useTheme, useMediaQuery } from '@mui/material';
 
-import { ScrollToTop } from 'src/components/shared/utils/Utils';
+import { ScrollToTop } from 'src/components/shared/utils/utils';
 
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar';
 import Header from 'src/components/dashboard/shared/header/vertical/Header';
