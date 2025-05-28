@@ -120,11 +120,12 @@ function Registration() {
         </Grid>
 
         <Grid size={12}>
-          <RouterLink to="/agb">
+          <a href="/agb" target="_blank" rel="noopener noreferrer">
             <Typography color="white" sx={{ fontSize: '1.2rem', textDecoration: 'underline' }}>
               Bitte lese die AGBs
             </Typography>
-          </RouterLink>
+          </a>
+
           <StyledFormControlLabel required {...register('agb')} control={<StyledCheckbox />} label="Ich habe die AGBs gelesen und bin damit einverstanden" />
           {errors.agb && <FormHelperText error>{errors.agb?.message}</FormHelperText>}
         </Grid>

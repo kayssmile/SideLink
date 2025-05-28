@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'apps.publicprofile',
     'apps.analytics',
 ]
+if DEBUG:
+    INSTALLED_APPS += ["silk"]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+if DEBUG:
+    MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
@@ -153,7 +157,7 @@ AUTH_USER_MODEL = 'usermanagment.RegisteredUser'
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_CONSOLE_FORMAT = '=== EMAIL KONSOLE (DEV) ===\n\n{email}\n\n=== ENDE ==='
+EMAIL_CONSOLE_FORMAT = '=== EMAIL KONSOLE (DEV) ===\n\n{email}\n\n=== END ==='
 ADMIN_EMAIL = config("ADMIN_EMAIL")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 

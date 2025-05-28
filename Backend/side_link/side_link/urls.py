@@ -18,6 +18,8 @@ urlpatterns = [
     path('api/analytics-data/', include('apps.analytics.urls')),
 ]
 
-# Serve static and media files in development
 if settings.DEBUG:
+    # Serve static and media files in development
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Add silk URLs for performance monitoring
+    urlpatterns += [path("silk/", include("silk.urls", namespace="silk"))]
