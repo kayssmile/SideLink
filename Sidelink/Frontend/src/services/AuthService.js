@@ -61,7 +61,8 @@ function isTokenExpired(token) {
     console.log('istokenexpired', payload.exp, currentTime);
     console.log('istokenexpiredresult', payload.exp < currentTime);
     return payload.exp < currentTime;
-  } catch (e) {
+  } catch (error) {
+    console.log(error);
     return true;
   }
 }

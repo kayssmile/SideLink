@@ -28,7 +28,7 @@ function Loading() {
         },
       }}
     >
-      <Spinner size={'8rem'} />
+      <Spinner size={'4rem'} />
     </Box>
   );
 }

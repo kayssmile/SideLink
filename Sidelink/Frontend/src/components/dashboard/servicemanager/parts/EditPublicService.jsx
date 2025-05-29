@@ -9,7 +9,7 @@ import { publicServiceSchema } from 'src/config/Schemas';
 import regionsConfiguration from 'src/config/LocationConfigurations';
 import { checkAuth } from 'src/services/AuthService';
 import putPublicService from 'src/store/dashboard/publicservices/actions/PutPublicServiceAction';
-import { getChangePublicServiceErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 
 import CategorySubcategorySelect from './CategorySubcategorySelect';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';
@@ -144,7 +144,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
           </Box>
 
           <Box sx={{ mb: '1rem', mt: { xs: '1rem', sm: '2rem' } }}>
-            {publicServices.error && getChangePublicServiceErrorMessage(publicServices.error)}
+            {publicServices.error && basicFormErrorMessage(publicServices.error)}
 
             {publicServices.success && (
               <Typography color="success" sx={{ textAlign: 'center', fontSize: '20px' }}>

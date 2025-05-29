@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Heading from 'src/components/main/shared/Heading';
 import registerUser from 'src/store/usermanagment/actions/RegisterAction';
 import { registerSchema } from 'src/config/Schemas';
-import { basicFormErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 
 import { StyledTextField, StyledFormControlLabel, StyledCheckbox } from 'src/components/shared/forms/FormElements';
 

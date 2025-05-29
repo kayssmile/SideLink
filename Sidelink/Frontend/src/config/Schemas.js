@@ -125,15 +125,15 @@ const changeEmailSchema = yup.object().shape({
 const changePasswordSchema = yup.object().shape({
   current_password: yup
     .string()
-    //.min(6, 'Mindestens 6 Zeichen')
-    //.matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
-    //.matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
+    .min(6, 'Mindestens 6 Zeichen')
+    .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
+    .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
   new_password: yup
     .string()
-    //.min(6, 'Mindestens 6 Zeichen')
-    //.matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
-    //.matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
+    .min(6, 'Mindestens 6 Zeichen')
+    .matches(/[A-Z]/, 'Mindestens ein Großbuchstabe erforderlich')
+    .matches(/[@$!%*?&]/, 'Mindestens ein Sonderzeichen erforderlich (@, $, !, %, *, ?, &)')
     .required('Passwort ist erforderlich'),
   confirm_password: yup
     .string()
@@ -143,7 +143,7 @@ const changePasswordSchema = yup.object().shape({
 
 const publicProfileSchema = yup.object().shape({
   /*
-   * @description: validators for publicprofile picture, validate if new file is uploaded.
+   * Validators for publicprofile picture, validate if new file is uploaded.
    */
   profile_picture: yup
     .mixed()
@@ -159,7 +159,7 @@ const publicProfileSchema = yup.object().shape({
       if (!value || value.length === 0) return true;
       return value && SUPPORTED_FORMATS.includes(value[0].type);
     }),
-  showed_name: yup.string().required('Name ist erforderlich').max(250, 'Maximal 500 Zeichen'),
+  showed_name: yup.string().required('Name ist erforderlich').max(250, 'Maximal 250 Zeichen'),
   description: yup.string().required('Beschreibung ist erforderlich').max(500, 'Maximal 500 Zeichen'),
   contact_info: yup.string().required('Kontaktinformationen sind erforderlich').max(500, 'Maximal 500 Zeichen'),
 });

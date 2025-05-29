@@ -10,7 +10,7 @@ import { checkAuth } from 'src/services/AuthService';
 import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
 import patchPublicProfile from 'src/store/dashboard/publicprofile/actions/PatchPublicProfileAction';
 import { resetProcess } from 'src/store/dashboard/publicprofile/PublicProfileManagment';
-import { getChangePublicProfileErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
@@ -183,7 +183,7 @@ function PublicProfile() {
                 modalTitle="Information"
                 modalContent={
                   publicProfile.error ? (
-                    getChangePublicProfileErrorMessage(publicProfile.error)
+                    basicFormErrorMessage(publicProfile.error)
                   ) : publicProfile.success ? (
                     <Typography color="success" align="center">
                       Dein öffentliches Profil wurde erfolgreich aktualisiert.

@@ -7,7 +7,6 @@ import getAnalyticsData from './actions/GetAnalyticsDataAction';
 
 const initialState = {
   sidebar: window.innerWidth > 768,
-  themeMode: 'light',
   dashboardData: {
     user: {},
     publicProfile: {},
@@ -48,9 +47,6 @@ const dashboardManagment = createSlice({
     },
     setSidebar: (state, action) => {
       state.sidebar = action.payload;
-    },
-    toggleThemeMode: (state, action) => {
-      state.themeMode = state.themeMode === 'light' ? 'dark' : 'light';
     },
     dashboardLogout: (state, action) => {
       return { ...state, ...initialState };
@@ -125,6 +121,6 @@ const dashboardManagment = createSlice({
   },
 });
 
-export const { toggleSidebar, setSidebar, toggleThemeMode, dashboardLogout, resetProcess } = dashboardManagment.actions;
+export const { toggleSidebar, setSidebar, dashboardLogout, resetProcess } = dashboardManagment.actions;
 
 export default dashboardManagment.reducer;

@@ -10,13 +10,9 @@ function Dashboard() {
   }, [navigate]);
 
   return (
-    <>
-      <div data-testid="dashboard-component">
-        <Typography variant="h4" gutterBottom>
-          Dashboard
-        </Typography>
-      </div>
-    </>
+    <div data-testid="dashboard-component">
+      <Typography variant="h4">Dashboard</Typography>
+    </div>
   );
 }
 

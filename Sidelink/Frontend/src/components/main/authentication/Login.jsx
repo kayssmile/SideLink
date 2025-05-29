@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Button, Box, Link, IconButton, InputAdornment, CircularProgress, Typography, useTheme } from '@mui/material';
+import { Button, Box, Link, IconButton, InputAdornment, CircularProgress, useTheme } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import login from 'src/store/usermanagment/actions/LoginAction';
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import { loginSchema } from 'src/config/Schemas';
-import { basicFormErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { getToken } from 'src/services/AuthService';
 
 import Heading from 'src/components/main/shared/Heading';

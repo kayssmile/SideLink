@@ -11,6 +11,9 @@ function AGB() {
 
       <ul className="agb-menu">
         <li>
+          <a href="#geltungsbereich">0. Wir übernehmen keine Haftung oder Garantie für die dummy Content - AGBs. Sie dienen als Vorlage für die echten AGBs</a>
+        </li>
+        <li>
           <a href="#geltungsbereich">1. Geltungsbereich</a>
         </li>
         <li>
@@ -81,11 +84,8 @@ function AGB() {
       <h3 id="geltungsbereich">1. Geltungsbereich</h3>
 
       <p>
-        <strong>1.1</strong> Diese allgemeinen Geschäftsbedingungen ("AGB") finden Anwendung, sobald ein Nutzer sich für die Webseite als Anbieter (=Erbringer/in einer Dienstleistung) und/oder Kunde
-        (=Bezieher/in einer Dienstleistung) registriert. Mit der Registrierung kommt zwischen dem Nutzer und Sidelink.ch ein Nutzungsvertrag zustande, dessen Inhalt sich nach diesen AGB richtet. Im
-        Rahmen der Teilnahme an Ausschreibungen (=Abgabe von Angeboten) sowie bei Buchung von Angeboten (=Annahme von Angeboten) ist die Zustimmung zu diesen AGB dann nochmals ausdrücklich zu
-        bestätigen. Auch bei der Einstellung einer Ausschreibung (=Erfassen eines Auftrages) und der Abgabe eines Angebotes werden Nutzer noch einmal auf die Geltung der von ihnen akzeptierten AGB
-        hingewiesen. Die jeweils geltende Fassung der AGB ist über einen Link am unteren Seitenrand der Webseite abrufbar.
+        <strong>1.1</strong> Diese allgemeinen Geschäftsbedingungen AGB finden Anwendung, sobald ein Nutzer sich für die Webseite als Anbieter und/oder Kunde (=Bezieher/in einer Dienstleistung)
+        registriert. Mit der Registrierung kommt zwischen dem Nutzer und Sidelink.ch ein Nutzungsvertrag zustande, dessen Inhalt sich nach diesen AGB richten.
       </p>
 
       <p>
@@ -131,9 +131,9 @@ function AGB() {
 
       <h3 id="vertragsgegenstand">3. Gegenstand des Nutzungsvertrags</h3>
       <p>
-        <strong>3.1</strong> Gegenstand des Nutzungsvertrages zwischen Nutzern und KnowS ist die Erbringung von Vermittlungsleistungen gegen Entgelt (siehe Ziffer "Kosten von Sidelink.ch") im Rahmen
-        und auf Grundlage der vorliegenden AGB sowie sonstiger ergänzender Regelungen. Die Vermittlungsleistung besteht in der Bereitstellung derSidelink.ch Internetplattform als Marktplatz für
-        Dienstleistungs-Ausschreibungen sowie der Übermittlung von bei Sidelink.ch hinterlegten Kontaktdaten zwischen den an einer Ausschreibung beteiligten Nutzern.
+        <strong>3.1</strong> Gegenstand des Nutzungsvertrages zwischen Nutzern und KnowS ist die Erbringung von Vermittlungsleistungen gegen Entgelt im Rahmen und auf Grundlage der vorliegenden AGB
+        sowie sonstiger ergänzender Regelungen. Die Vermittlungsleistung besteht in der Bereitstellung derSidelink.ch Internetplattform als Marktplatz für Dienstleistungs-Ausschreibungen sowie der
+        Übermittlung von bei Sidelink.ch hinterlegten Kontaktdaten zwischen den an einer Ausschreibung beteiligten Nutzern.
       </p>
       <p>
         <strong>3.2</strong> Sidelink.ch stellt die Internet-Plattform in der Form und mit den Funktionen bereit, die jeweils gerade verfügbar sind. Ein Anspruch auf Bereitstellung oder Beibehaltung

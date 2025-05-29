@@ -18,9 +18,7 @@ function InfoModal() {
         <DialogContentText>Ihre Zugangsdaten sind abgelaufen, bitte melden Sie sich erneut an.</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} autoFocus>
-          Schliessen
-        </Button>
+        <Button onClick={handleClose}>Schliessen</Button>
       </DialogActions>
     </Dialog>
   );

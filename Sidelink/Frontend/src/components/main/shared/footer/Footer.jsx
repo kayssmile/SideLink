@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Stack, Tooltip, useTheme, styled, Link, useMediaQuery } from '@mui/material';
+import { Box, Typography, Container, Stack, Tooltip, useTheme, styled, Link } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { NavLink } from 'react-router-dom';
 import IconFacebook from 'src/assets/images/icons/icon-facebook.svg';

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { checkAuth, getToken, getRefreshToken, removeRefreshToken } from 'src/services/AuthService';
 import invalidateToken from 'src/services/TokenInvalidator';
-import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
+import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal, userLogout } from 'src/store/usermanagment/UserManagment';
 import { basicDelRequest } from 'src/services/BasicRequests';
 import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';

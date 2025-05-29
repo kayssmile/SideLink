@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { RouterProvider } from 'react-router';
 import { ThemeProvider } from '@emotion/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { theme } from 'src/config/Theme.js';
+import { darkTheme, lightTheme } from 'src/config/Theme.js';
 import { checkAuth, getToken } from 'src/services/AuthService';
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
@@ -11,6 +11,8 @@ import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
 import router from 'src/routes/Router';
 
 function App() {
+  const themeMode = useSelector(state => state.publicdata.themeMode);
+  const currentTheme = themeMode === 'dark' ? darkTheme : lightTheme;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={currentTheme}>
         <RouterProvider router={router} />
       </ThemeProvider>
     </>

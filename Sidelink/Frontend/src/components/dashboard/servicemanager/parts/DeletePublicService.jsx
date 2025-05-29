@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { checkAuth } from 'src/services/AuthService';
 import deletePublicService from 'src/store/dashboard/publicservices/actions/DeletePublicServiceAction';
-import { getDeletePublicServiceErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, modalState, type }) {
@@ -34,7 +34,7 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
             Service erfolgreich gelöscht
           </Typography>
         ) : publicServices.error ? (
-          getDeletePublicServiceErrorMessage(publicServices.error)
+          basicFormErrorMessage(publicServices.error)
         ) : (
           <Typography sx={{ color: theme.palette.text.dark, textAlign: 'center' }}>
             Möchten Sie {type === 'offer' ? 'Angebot: ' : 'Suche: '} <strong>{service.title} </strong> definitiv löschen?
@@ -58,7 +58,7 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
             >
               Abbrechen
             </Button>
-            <Button onClick={handleDeletePublicService} disabled={publicServices.loading} autoFocus variant="outlined" size="large">
+            <Button onClick={handleDeletePublicService} disabled={publicServices.loading} variant="outlined" size="large">
               {publicServices.loading ? <CircularProgress size="25px" sx={{ color: theme.palette.text.dark }} /> : 'Bestätigen'}
             </Button>
           </Box>

@@ -6,9 +6,9 @@ import RouterGuard from 'src/routes/RouterGuard';
 const LayoutMain = lazy(() => import('src/components/main/layout/LayoutMain'));
 const Home = lazy(() => import('src/components/main/home/Home'));
 const Board = lazy(() => import('src/components/main/board/Board'));
-const ServiceWithProfile = lazy(() => import('src/components/main/detail/ServiceWithProfile'));
+const ServiceWithProfile = lazy(() => import('src/components/main/board/detail/ServiceWithProfile'));
 const Instruction = lazy(() => import('src/components/main/info/Instruction'));
-const Error = lazy(() => import('src/components/main/Error'));
+const Error = lazy(() => import('src/components/main/info/Error'));
 const Login = lazy(() => import('src/components/main/authentication/Login'));
 const Registration = lazy(() => import('src/components/main/authentication/Registration'));
 const PasswordForgot = lazy(() => import('src/components/main/authentication/PasswordForgot'));
@@ -16,7 +16,7 @@ const PasswordReset = lazy(() => import('src/components/main/authentication/Pass
 const DataPrivacy = lazy(() => import('src/components/main/info/legal/DataPrivacy'));
 const Imprint = lazy(() => import('src/components/main/info/legal/Imprint'));
 const AGB = lazy(() => import('src/components/main/info/legal/AGB'));
-const Contact = lazy(() => import('src/components/main/info/Contact'));
+const Contact = lazy(() => import('src/components/main/Contact'));
 
 /* Dashboard */
 const LayoutFull = lazy(() => import('src/components/dashboard/layout/LayoutFull'));

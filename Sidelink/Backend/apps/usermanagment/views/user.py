@@ -64,7 +64,14 @@ class RegisteredUserView(APIView):
             - 400 Bad Request if validation fails
             - 401 Unauthorized: If the user is not authenticated.
         """
+        
         user = request.user
+        if request.data.get('email') and request.data.get('email') != user.email:
+            if RegisteredUser.objects.filter(email=request.data.get('email')).exists():
+                return Response(
+                {"error": "A user with this email already exists"},
+                status=status.HTTP_400_BAD_REQUEST
+                )
         serializer = CustomUserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()

@@ -34,8 +34,8 @@ function DataPrivacy() {
 
       <p>
         Um unseren Internetauftritt fortlaufend zu verbessern, benötigen wir einen Überblick darüber, wie unsere Website genutzt wird. Hierzu verwenden wir Google Analytics, einen Webanalysedienst der
-        Google Inc. ("Google"). Für die Analyse verwendet Google Analytics sog. „Cookies“, Textdateien, die auf Ihrem Computer gespeichert werden und die eine Analyse der Benutzung der Website durch
-        Sie ermöglichen. Google benutzt diese Cookies, um die Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der
+        Google Inc. (Google). Für die Analyse verwendet Google Analytics sog. „Cookies“, Textdateien, die auf Ihrem Computer gespeichert werden und die eine Analyse der Benutzung der Website durch Sie
+        ermöglichen. Google benutzt diese Cookies, um die Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der
         Internetnutzung verbundene Dienstleistungen gegenüber uns als Websitebetreiber zu erbringen. Die durch das Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel
         an einen Server von Google in den USA übertragen und dort gespeichert. Im Falle der Aktivierung der IP-Anonymisierung auf dieser Website, wird Ihre IP-Adresse von Google jedoch innerhalb von
         Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum zuvor gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an

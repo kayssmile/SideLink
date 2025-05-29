@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { contactSchema } from 'src/config/Schemas';
 import { basicPostRequest } from 'src/services/BasicRequests';
-import { basicErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 
 import Heading from 'src/components/main/shared/Heading';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
@@ -25,19 +25,23 @@ function Contact() {
 
   const onSubmit = async data => {
     setContactMessage({ ...contactMessage, loading: true });
-    const response = await basicPostRequest('/api/contact-message/', data);
-    if (response.status) {
-      setContactMessage({ loading: false, success: true, error: false });
-      reset();
-    } else {
-      setContactMessage({ loading: false, error: response.data, success: false });
+    try {
+      const response = await basicPostRequest('/api/contact-message/', data);
+      if (response.status) {
+        setContactMessage({ loading: false, success: true, error: false });
+        reset();
+      } else {
+        setContactMessage({ loading: false, error: response.data, success: false });
+      }
+    } catch (error) {
+      console.error('Request failed:', error);
+      setContactMessage({ loading: false, error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.', success: false });
     }
   };
 
   return (
     <Box component="section" sx={{ padding: '2rem 0' }}>
       <Heading titleKey1={'Kontakt.'} subTitle={'Du hast ein Anliegen oder eine Frage? Wir helfen dir gerne weiter.'} />
-
       <Box
         component="form"
         noValidate

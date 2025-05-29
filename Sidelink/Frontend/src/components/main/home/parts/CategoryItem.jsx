@@ -1,12 +1,9 @@
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link } from 'react-router-dom';
 
 function CategoryItem({ urlParam, imgSrc, title, imgDesc }) {
   const theme = useTheme();
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
-  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>

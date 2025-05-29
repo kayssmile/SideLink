@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { filterServicesBySearch } from './utils/searchUtils';
 import { setSearchEngineData, setSearchMask, setInit } from 'src/store/publicdata/PublicDataManagment';
-import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
+import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
 import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
 import { filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
 
@@ -15,8 +15,6 @@ import Listing from './listing/Listing';
 import SearchMask from './search/SearchMask';
 import Spinner from 'src/components/shared/Spinner';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
-
-//import { setSearchEngineData, loading, error, success, init } from 'src/store/publicdata/PublicDataManagment';
 
 function Board() {
   const theme = useTheme();

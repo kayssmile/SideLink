@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
-import { errorMessage } from 'src/components/shared/ErrorHandling';
+import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
 import getAnalyticsData from 'src/store/dashboard/main/actions/GetAnalyticsDataAction';
 import { checkAuth, getToken } from 'src/services/AuthService';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
@@ -18,7 +18,7 @@ function Analytics() {
 
   const initAnalyticsData = async () => {
     try {
-      if (!analytics.loading  && (await checkAuth())) {
+      if (!analytics.loading && (await checkAuth())) {
         const token = getToken();
         if (token) {
           dispatch(getAnalyticsData(token));
@@ -41,7 +41,7 @@ function Analytics() {
     <>
       <Box component="section" sx={{ flexGrow: 1, padding: { xs: '5px', sm: '20px' } }}>
         <Breadcrumb title="Analysen" items={breadcrumpConfig.analysis} sx={{ margin: '30px 0' }} />
-        {analytics.loading ? <Spinner size="4rem" /> : analytics.error ? errorMessage(analytics.error) : analytics.success ? <AnalyticsCards analyticsData={analytics.data} /> : ''}
+        {analytics.loading ? <Spinner size="4rem" /> : analytics.error ? basicErrorMessageLink(analytics.error) : analytics.success ? <AnalyticsCards analyticsData={analytics.data} /> : ''}
       </Box>
     </>
   );

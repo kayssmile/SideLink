@@ -25,6 +25,7 @@ const RouterGuard = ({ children }) => {
           dispatch(dashboardLogout());
         }
       } catch (error) {
+        console.error(error);
         setIsLoggedIn(false);
       }
     };

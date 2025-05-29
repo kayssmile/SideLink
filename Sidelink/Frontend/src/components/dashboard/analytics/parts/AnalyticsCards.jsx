@@ -22,7 +22,7 @@ function AnalyticsCards({ analyticsData }) {
     if (analyticsData.offers > 0) {
       totalServices.push({ id: 0, value: analyticsData.offers, label: 'Dienstleistungen Angebote' });
     }
-    if (analyticsData.searches > 0)  {
+    if (analyticsData.searches > 0) {
       totalServices.push({ id: 1, value: analyticsData.searches, label: 'Dienstleistungen Suche' });
     }
   };

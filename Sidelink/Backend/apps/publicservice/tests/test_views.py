@@ -83,7 +83,7 @@ class PublicServiceViewTests(APITestCase):
             "title": "Test Service",
             "description": "Test Beschreibung",
         }
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {'undefined'}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer undefined')
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
     

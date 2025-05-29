@@ -10,7 +10,7 @@ import regionsConfiguration from 'src/config/LocationConfigurations';
 import { checkAuth } from 'src/services/AuthService';
 import createPublicService from 'src/store/dashboard/publicservices/actions/CreatePublicServiceAction';
 import { resetStatus } from 'src/store/dashboard/publicservices/PublicServicesManagment';
-import { getNewPublicServiceErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
@@ -150,7 +150,7 @@ const CreatePublicService = ({ type }) => {
                   modalTitle={publicServices.error ? 'Bestätigung erforderlich' : 'Erfolgreich gespeichert'}
                   modalContent={
                     publicServices.error ? (
-                      getNewPublicServiceErrorMessage(publicServices.error)
+                      basicFormErrorMessage(publicServices.error)
                     ) : publicServices.success ? (
                       <Typography color="success">Erfolgreich gespeichert. Vielen Dank für deinen Beitrag!</Typography>
                     ) : (

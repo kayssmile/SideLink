@@ -10,7 +10,7 @@ import { changePasswordSchema } from 'src/config/Schemas';
 import patchAccountPassword from 'src/store/dashboard/main/actions/PatchAccountPasswordAction';
 import { checkAuth } from 'src/services/AuthService';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
-import { getChangePasswordErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
@@ -164,7 +164,7 @@ const ChangePassword = () => {
             handleCancel={handleConfirmModalAgree}
             modalTitle="Information"
             modalContent={
-              changePassword.error ? getChangePasswordErrorMessage(changePassword.error) : changePassword.success ? <Typography color="success">Passwort erfolgreich aktualisiert!</Typography> : ''
+              changePassword.error ? basicFormErrorMessage(changePassword.error) : changePassword.success ? <Typography color="success">Passwort erfolgreich aktualisiert!</Typography> : ''
             }
             handleAgree={handleConfirmModalAgree}
             usage="single-btn"

@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { passwordResetSchema } from 'src/config/Schemas';
 import { basicPostRequest } from 'src/services/BasicRequests';
-import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 
 import Logo from 'src/components/shared/logo/logo';
 import { StyledTextField } from 'src/components/shared/forms/formelements';
@@ -125,7 +125,7 @@ function PasswordReset() {
               <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
               <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                {passwordReset.error && basicErrorMessageLink(passwordReset.error)}
+                {passwordReset.error && basicFormErrorMessage(passwordReset.error)}
                 {passwordReset.success && (
                   <Typography marginTop={'40px'} color="success">
                     Passwort wurde erfolgreich geändert

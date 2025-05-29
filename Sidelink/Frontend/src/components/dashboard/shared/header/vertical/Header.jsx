@@ -2,12 +2,13 @@ import { IconButton, Box, AppBar, Toolbar, styled, Stack } from '@mui/material';
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleSidebar, toggleThemeMode } from 'src/store/dashboard/main/DashboardManagment';
+import { toggleSidebar } from 'src/store/dashboard/main/DashboardManagment';
+import { setThemeMode } from 'src/store/publicdata/PublicDataManagment';
 
 import ProfileMenu from 'src/components/shared/header/ProfileMenu';
 
 const Header = () => {
-  const { themeMode } = useSelector(state => state.dashboard);
+  const themeMode = useSelector(state => state.publicdata.themeMode);
   const dispatch = useDispatch();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
@@ -29,11 +30,11 @@ const Header = () => {
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
           {themeMode === 'light' ? (
-            <IconButton size="large" color="inherit" onClick={() => dispatch(toggleThemeMode())}>
+            <IconButton size="large" color="inherit" onClick={() => dispatch(setThemeMode('dark'))}>
               <IconMoon size="25" stroke="1.5" />
             </IconButton>
           ) : (
-            <IconButton size="large" color="inherit" onClick={() => dispatch(toggleThemeMode())}>
+            <IconButton size="large" color="inherit" onClick={() => dispatch(setThemeMode('light'))}>
               <IconSun size="30" stroke="1.5" />
             </IconButton>
           )}

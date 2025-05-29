@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { passwordForgotSchema } from 'src/config/Schemas';
 import { basicPostRequest } from 'src/services/BasicRequests';
-import { basicErrorMessageLink } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 
 import Logo from 'src/components/shared/logo/Logo';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
@@ -82,7 +82,7 @@ function PasswordForgot() {
               <input type="hidden" name="honeypot" value="" {...register('honeypot')} />
 
               <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                {passwordForgot.error && basicErrorMessageLink(passwordForgot.error)}
+                {passwordForgot.error && basicFormErrorMessage(passwordForgot.error)}
 
                 {passwordForgot.success && (
                   <Typography marginTop={'40px'} color="success">

@@ -9,7 +9,7 @@ import { editAccountSchema } from 'src/config/Schemas';
 import { checkAuth } from 'src/services/AuthService';
 import patchAccountDetails from 'src/store/dashboard/main/actions/PatchAccountDataAction';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
-import { basicFormErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';

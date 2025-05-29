@@ -13,12 +13,12 @@ function Modal({ modalTitle, modalContent, modalState, handleAgree, handleCancel
             <Button onClick={handleCancel} variant="outlined" color={'error'}>
               Abbrechen
             </Button>
-            <Button onClick={handleAgree} autoFocus variant="outlined">
+            <Button onClick={handleAgree} variant="outlined">
               Bestätigen
             </Button>
           </>
         ) : (
-          <Button onClick={handleAgree} autoFocus variant="outlined">
+          <Button onClick={handleAgree} variant="outlined">
             Schliessen
           </Button>
         )}

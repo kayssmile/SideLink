@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Typography, MenuItem, Select, CardHeader, CardContent, Divider, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid2';
@@ -10,7 +11,7 @@ function BarChartSelection({ barChartData, title }) {
   const theme = useTheme();
   const [year, setYear] = useState(barChartData[0].year);
   const [chartData, setChartData] = useState({ xAxis: barChartData[0].xAxis, yAxis: barChartData[0].yAxis });
-
+  console.log(barChartData);
   const handleSelectionChange = value => {
     setYear(value);
     let newChartData = barChartData.find(data => data.year === value);
@@ -106,3 +107,16 @@ function BarChartSelection({ barChartData, title }) {
 }
 
 export default BarChartSelection;
+
+BarChartSelection.propTypes = {
+  barChartData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      year: PropTypes.number.isRequired,
+      total: PropTypes.number.isRequired,
+      xAxis: PropTypes.arrayOf(PropTypes.string).isRequired,
+      yAxis: PropTypes.arrayOf(PropTypes.number).isRequired,
+    })
+  ).isRequired,
+  title: PropTypes.string.isRequired,
+};

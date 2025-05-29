@@ -9,7 +9,7 @@ import { changeEmailSchema } from 'src/config/Schemas';
 import { checkAuth } from 'src/services/AuthService';
 import patchAccountEmail from 'src/store/dashboard/main/actions/PatchAccountEmailAction';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
-import { getChangeEmailErrorMessage } from 'src/components/shared/ErrorHandling';
+import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 import Modal from 'src/components/shared/Modal';
@@ -111,7 +111,7 @@ const ChangeEmail = () => {
             modalState={confirmModal}
             handleCancel={handleConfirmModalAgree}
             modalTitle="Information"
-            modalContent={changeEmail.error ? getChangeEmailErrorMessage(changeEmail.error) : changeEmail.success ? <Typography color="success">Email erfolgreich aktualisiert!</Typography> : ''}
+            modalContent={changeEmail.error ? basicFormErrorMessage(changeEmail.error) : changeEmail.success ? <Typography color="success">Email erfolgreich aktualisiert!</Typography> : ''}
             handleAgree={handleConfirmModalAgree}
             usage="single-btn"
           />

@@ -6,8 +6,6 @@ import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
 
 const SidebarMenu = () => {
-  const theme = useTheme();
-
   const ListSubheaderStyled = styled(props => <ListSubheader {...props} />)(({ theme }) => ({
     fontWeight: '700',
     color: theme.palette.font.secondary,

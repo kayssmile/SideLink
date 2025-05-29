@@ -21,6 +21,6 @@ export default defineConfig({
     globals: true,
     reporters: ['default', 'verbose'],
     environment: 'jsdom',
-    setupFiles: './testing/unit_integration/setupTests.js',
+    setupFiles: './tests/unit_integration/setupTests.js',
   },
 });

@@ -78,7 +78,7 @@ def process_message(request):
     Returns:
         - 201 Created if the message is sent and saved
         - 400 Bad Request if validation fails
-        - 500 Internal Server Error if sending the email fails
+        - 500 Internal Server Error if sending email fails
     """
     serializer = ContactMessageSerializer(data=request.data)
     if serializer.is_valid():
