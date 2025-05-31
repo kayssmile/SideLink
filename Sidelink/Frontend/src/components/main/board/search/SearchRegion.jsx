@@ -15,7 +15,7 @@ function SearchRegion() {
   const dispatch = useDispatch();
   const [selectedRegion, setSelectedRegion] = useState(null);
 
-  const { publicServices, searchMask, success } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, searchMask, success } = useSelector(state => state.publicData.publicData);
 
   const setUrlParam = useAddUrlParam();
   const removeUrlParams = useRemoveUrlParams();

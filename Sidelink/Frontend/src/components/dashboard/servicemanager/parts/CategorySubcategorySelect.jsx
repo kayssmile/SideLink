@@ -7,7 +7,7 @@ import { categoriesConfiguration } from 'src/config/CategoriesConfigurations';
 import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
 
 const CategorySubcategorySelect = ({ register, setValue, clearErrors, errors, initCategory = null, initSubCategories = [] }) => {
-  const publicServices = useSelector(state => state.publicservices.publicServices);
+  const publicServices = useSelector(state => state.publicServices.publicServices);
   const categories = categoriesConfiguration.map(category => category.name);
   const [selectedCategory, setSelectedCategory] = useState(initCategory);
   const [subCategories, setSubCategories] = useState([]);

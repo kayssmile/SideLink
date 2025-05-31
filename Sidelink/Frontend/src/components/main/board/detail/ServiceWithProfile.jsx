@@ -16,7 +16,7 @@ function ServiceWithProfile() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { publicServices, publicProfiles } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, publicProfiles } = useSelector(state => state.publicData.publicData);
 
   const publicService = publicServices.find(service => String(service.id) === String(id));
 

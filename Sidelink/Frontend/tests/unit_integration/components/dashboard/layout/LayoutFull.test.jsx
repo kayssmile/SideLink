@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import LayoutFull from 'src/components/dashboard/layout/LayoutFull';
-import { theme } from 'src/theme/theme.js';
+import { darkTheme } from 'src/config/Theme.js';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
 import store from 'src/store/store';
@@ -10,7 +10,7 @@ describe('LayoutFull Component', () => {
   const renderComponent = () => {
     return render(
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={darkTheme}>
           <MemoryRouter>
             <LayoutFull></LayoutFull>
           </MemoryRouter>

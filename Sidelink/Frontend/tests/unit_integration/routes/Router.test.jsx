@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { screen, waitFor, render } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from 'src/config/Theme';
+import { darkTheme } from 'src/config/Theme.js';
 import routes from 'src/routes/router';
 
 // Optional: Lazy-Komponenten mocken, damit sie schnell laden
@@ -20,7 +20,7 @@ describe('App Router', () => {
     });
 
     render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkTheme}>
         <RouterProvider router={router} />
       </ThemeProvider>
     );
@@ -39,7 +39,7 @@ describe('App Router', () => {
     });
 
     render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkTheme}>
         <RouterProvider router={router} />
       </ThemeProvider>
     );

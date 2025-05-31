@@ -18,7 +18,7 @@ import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
 function Board() {
   const theme = useTheme();
-  const { publicServices, searchMask, loading, error, success, init } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, searchMask, loading, error, success, init } = useSelector(state => state.publicData.publicData);
 
   const dispatch = useDispatch();
   const { search } = useLocation();

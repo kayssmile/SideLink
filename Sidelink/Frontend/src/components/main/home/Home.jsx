@@ -20,10 +20,11 @@ function Home() {
       </Box>
 
       <Box component="article" sx={{ marginTop: lgDown ? '4rem' : '2rem' }}>
-        <Typography component="h2" sx={{ fontSize: { xs: '1.4rem', lg: '1.8rem' }, mt: 4, color: theme.palette.text.primary, fontWeight: 700 }}>
+        <Typography component="h3" sx={{ fontSize: { xs: '1.4rem', lg: '1.8rem' }, mt: 4, color: theme.palette.text.primary, fontWeight: 700 }}>
           Beliebte Kategorien
         </Typography>
-        <Grid container mt={lgDown ? '1rem' : '2rem'} rowSpacing={{ xs: 2 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }}>
+
+        <Grid container component="ul" mt={lgDown ? '1rem' : '2rem'} rowSpacing={{ xs: 2 }} columnSpacing={{ xs: 1, sm: 2, md: 4 }}>
           {likedCategories.map((categoryConfig, i) => (
             <CategoryItem key={i} {...categoryConfig}></CategoryItem>
           ))}

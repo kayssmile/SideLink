@@ -1,4 +1,4 @@
-import { styled, Button } from '@mui/material';
+import { styled, Button, List, ListItem } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { navLinks } from 'src/config/NavigationConfigurations';
 
@@ -30,9 +30,11 @@ const Navigations = () => {
   return (
     <>
       {navLinks.map((navLink, i) => (
-        <StyledButton component={NavLink} to={navLink.to} className={({ isActive }) => (isActive ? 'active' : '')} variant="text" key={i}>
-          {navLink.title}
-        </StyledButton>
+        <ListItem key={i} component="li" disablePadding sx={{ a: { margin: 0 } }}>
+          <StyledButton component={NavLink} to={navLink.to} className={({ isActive }) => (isActive ? 'active' : '')} variant="text">
+            {navLink.title}
+          </StyledButton>
+        </ListItem>
       ))}
     </>
   );

@@ -4,13 +4,13 @@ import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import Account from 'src/components/dashboard/account/Account';
-import { theme } from 'src/config/Theme.js';
+import { darkTheme } from 'src/config/Theme.js';
 import store from 'src/store/store';
 
 const renderWithProviders = () => {
   return render(
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkTheme}>
         <MemoryRouter>
           <Account />
         </MemoryRouter>

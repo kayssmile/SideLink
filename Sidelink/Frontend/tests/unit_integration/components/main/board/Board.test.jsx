@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Board from 'src/components/main/Board';
+import Board from 'src/components/main/board/Board';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('Board Component', () => {

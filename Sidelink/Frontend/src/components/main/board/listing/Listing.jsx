@@ -23,7 +23,7 @@ function Listing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { searchEngineData, publicProfiles } = useSelector(state => state.publicdata.publicData);
+  const { searchEngineData, publicProfiles } = useSelector(state => state.publicData.publicData);
   const dashboardData = useSelector(state => state.dashboard.dashboardData);
 
   /* Avoid a layout jump when reaching the last page with empty rows. */

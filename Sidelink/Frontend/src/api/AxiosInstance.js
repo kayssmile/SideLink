@@ -26,15 +26,5 @@ function axiosInstanceAuth(token) {
     },
   });
 }
-/*
-function axiosInstanceFormDataAuth(token) {
-  return axios.create({
-    baseURL: baseURL,
-    withCredentials: true,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}  */
 
 export { axiosInstanceBasic, axiosInstanceBasicAuth, axiosInstanceAuth };

@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
-import { theme } from 'src/config/theme';
+import { darkTheme } from 'src/config/Theme.js';
 
 export const renderWithProviders = ui => {
   return render(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <MemoryRouter>{ui}</MemoryRouter>
     </ThemeProvider>
   );

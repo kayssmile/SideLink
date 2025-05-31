@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import renderWithProviders from '/testing/unit_integration/utils/RenderWithProviders.jsx';
+import renderWithProviders from '/tests/unit_integration/utils/RenderWithProviders.jsx';
 
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
 

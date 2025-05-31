@@ -6,11 +6,11 @@ function CategoryItem({ urlParam, imgSrc, title, imgDesc }) {
   const theme = useTheme();
 
   return (
-    <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-      <Box to={`/board/?category=${encodeURIComponent(urlParam)}`} component={Link} sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Grid size={{ xs: 12, sm: 6, md: 4 }} component="li">
+      <Box to={`/board?category=${encodeURIComponent(urlParam)}`} component={Link} sx={{ display: 'flex', flexDirection: 'column' }}>
         <img src={imgSrc} alt={imgDesc} style={{ borderRadius: '16px' }} />
         <Typography
-          component="h3"
+          component="h4"
           sx={{
             fontSize: {
               xs: '1.2rem',

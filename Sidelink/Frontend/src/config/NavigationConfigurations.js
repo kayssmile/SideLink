@@ -190,27 +190,27 @@ const footerLinks = [
       {
         title: false,
         titleText: 'Haushalt',
-        to: '/board/?category=Haushalt',
+        to: '/board?category=Haushalt',
       },
       {
         title: false,
         titleText: 'Garten',
-        to: '/board/?category=Garten',
+        to: '/board?category=Garten',
       },
       {
         title: false,
         titleText: 'Handwerk',
-        to: '/board/?category=Handwerk',
+        to: '/board?category=Handwerk',
       },
       {
         title: false,
         titleText: 'Umzug',
-        to: 'board/?category=Umzug',
+        to: '/board?category=Umzug',
       },
       {
         title: false,
         titleText: 'IT & Technik',
-        to: `board/?category=IT+%26+Technik`,
+        to: `/board?category=IT+%26+Technik`,
       },
     ],
   },

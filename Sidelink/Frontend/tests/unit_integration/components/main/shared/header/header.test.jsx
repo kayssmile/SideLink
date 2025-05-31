@@ -1,15 +1,15 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Header from 'src/components/main/shared/header/header';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from 'src/theme/theme.js';
-//import * as MuiMaterial from '@mui/material';
-import renderWithRedux from '/testing/unit_integration/utility/RenderWithRedux';
+import { darkTheme } from 'src/config/Theme.js';
+import { renderWithPublicDataReducer } from '@tests/utils/RenderWithRedux';
+import { renderWithAllReducers } from '@tests/utils/RenderWithRedux';
 
 import { MemoryRouter } from 'react-router-dom';
 
 const renderComponent = preloadedState => {
-  return renderWithRedux(
-    <ThemeProvider theme={theme}>
+  return renderWithPublicDataReducer(
+    <ThemeProvider theme={darkTheme}>
       <MemoryRouter>
         <Header />
       </MemoryRouter>
@@ -19,38 +19,46 @@ const renderComponent = preloadedState => {
 };
 
 describe('Header Component', () => {
-  const mockStateLoggedOut = {
-    loading: false,
-    userInfo: null,
-    error: null,
-    success: false,
+  const mockStatePublicData = {
+    mobileSidebar: false,
+    themeMode: 'dark',
+  };
+
+  const mockStateDashboardData = {
+    dashboardData: {
+      user: { email: 'test@admin.ch' },
+      publicProfile: {},
+      publicServices: {},
+      success: false,
+      error: false,
+      loading: false,
+    },
   };
 
   it('renders without crashing', () => {
-    renderComponent({ userManagment: mockStateLoggedOut });
+    renderComponent({ publicData: mockStatePublicData });
     expect(screen.getByTestId('main-header')).toBeInTheDocument();
   });
 
   it('renders all childcomponents', () => {
-    renderComponent({ userManagment: mockStateLoggedOut });
+    renderComponent({ publicData: mockStatePublicData });
     expect(screen.getByAltText('Logo Sidelink')).toBeInTheDocument();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
     expect(screen.getByTestId('hamburger')).toBeInTheDocument();
   });
 
   it('opens sidebar on click to hamburger', () => {
-    renderComponent({ userManagment: mockStateLoggedOut });
+    renderWithAllReducers(
+      <ThemeProvider theme={darkTheme}>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </ThemeProvider>,
+      { publicData: mockStatePublicData, dashboard: mockStateDashboardData }
+    );
+    screen.debug();
     const hamburger = screen.getByTestId('hamburger');
     fireEvent.click(hamburger);
     expect(screen.getByTestId('sentinelStart')).toBeInTheDocument();
   });
-
-  /* 
-  vi.mock('@mui/material', () => ({
-      ...MuiMaterial,
-      useMediaQuery: vi.fn(() => false),
-    }));
-
-   vi.restoreAllMocks();
-  */
 });

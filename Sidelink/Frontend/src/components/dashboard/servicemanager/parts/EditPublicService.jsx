@@ -18,7 +18,7 @@ import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 function EditPublicService({ service, handleCancel, modalState, type }) {
   const theme = useTheme();
-  const publicServices = useSelector(state => state.publicservices.publicServices);
+  const publicServices = useSelector(state => state.publicServices.publicServices);
   const dispatch = useDispatch();
   const {
     register,

@@ -1,13 +1,14 @@
-import { Button } from '@mui/material';
+import { Button, useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import ProfileMenu from 'src/components/shared/header/ProfileMenu';
 import ProfileMenuMobile from 'src/components/shared/header/ProfileMenuMobile';
 
-const AccountMenu = ({ mdUp = false }) => {
+const AccountMenu = () => {
   const { dashboardData } = useSelector(state => state.dashboard);
   const isLoggedIn = dashboardData.user.email;
+  const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
 
   return (
     <>

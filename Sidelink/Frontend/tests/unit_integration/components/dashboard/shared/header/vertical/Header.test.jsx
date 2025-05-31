@@ -2,14 +2,14 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { theme } from 'src/config/theme.js';
-import { renderWithDashboardReducer } from '/testing/unit_integration/utils/RenderWithRedux.jsx';
+import { darkTheme } from 'src/config/theme.js';
+import { renderWithAllReducers } from '@tests/utils/RenderWithRedux.jsx';
 
 import Header from 'src/components/dashboard/shared/header/vertical/Header.jsx';
 
 const renderHeaderComponent = preloadedState => {
-  return renderWithDashboardReducer(
-    <ThemeProvider theme={theme}>
+  return renderWithAllReducers(
+    <ThemeProvider theme={darkTheme}>
       <MemoryRouter>
         <Header />
       </MemoryRouter>
@@ -19,7 +19,7 @@ const renderHeaderComponent = preloadedState => {
 };
 
 describe('Header component', () => {
-  const mockState = {
+  const mockDashboardState = {
     sidebar: true,
     themeMode: 'light',
     dashboardData: {
@@ -32,8 +32,12 @@ describe('Header component', () => {
     },
   };
 
+  const mockPublicData = {
+    themeMode: 'dark',
+  };
+
   it('renders header component', () => {
-    renderHeaderComponent({ dashboard: mockState });
+    renderHeaderComponent({ dashboard: mockDashboardState, publicData: mockPublicData });
     expect(screen.getByTestId('dashboard-header')).toBeInTheDocument();
     expect(screen.getByTestId('dashboard-header-hamburger')).toBeInTheDocument();
     screen.debug();
@@ -41,10 +45,10 @@ describe('Header component', () => {
   });
 
   it('toggles state on hamburger click', () => {
-    const { store } = renderHeaderComponent({ dashboard: mockState });
+    const { store } = renderHeaderComponent({ dashboard: mockDashboardState, publicData: mockPublicData });
     const hamburgerButton = screen.getByTestId('dashboard-header-hamburger');
     fireEvent.click(hamburgerButton);
     const state = store.getState();
-    expect(state.dashboard.sidebar).not.toEqual(mockState.sidebar);
+    expect(state.dashboard.sidebar).not.toEqual(mockDashboardState.sidebar);
   });
 });

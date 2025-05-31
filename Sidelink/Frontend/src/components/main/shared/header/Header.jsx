@@ -13,7 +13,7 @@ const Header = () => {
   const theme = useTheme();
   const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
   const dispatch = useDispatch();
-  const mobileSidebar = useSelector(state => state.publicdata.mobileSidebar);
+  const mobileSidebar = useSelector(state => state.publicData.mobileSidebar);
 
   const toggleDrawer = () => {
     dispatch(toggleMobileSidebar());
@@ -42,10 +42,10 @@ const Header = () => {
 
           {mdUp ? (
             <>
-              <Stack spacing={1} direction="row" alignItems="center" sx={{ maxWidth: '50%' }}>
+              <Stack component="ul" spacing={1} direction="row" alignItems="center" sx={{ maxWidth: '50%' }}>
                 <Navigations />
               </Stack>
-              <AccountMenu mdUp={mdUp} />
+              <AccountMenu />
             </>
           ) : (
             <IconButton color="inherit" aria-label="menu" onClick={toggleDrawer} data-testid="hamburger">

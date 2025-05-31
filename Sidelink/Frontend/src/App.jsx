@@ -11,7 +11,7 @@ import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
 import router from 'src/routes/Router';
 
 function App() {
-  const themeMode = useSelector(state => state.publicdata.themeMode);
+  const themeMode = useSelector(state => state.publicData.themeMode);
   const currentTheme = themeMode === 'dark' ? darkTheme : lightTheme;
   const dispatch = useDispatch();
 

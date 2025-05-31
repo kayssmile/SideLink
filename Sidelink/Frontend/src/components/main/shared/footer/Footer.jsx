@@ -19,7 +19,7 @@ const Footer = () => {
     <MainFooter data-testid="main-footer">
       <Container maxWidth="xl">
         <Grid container justifyContent="space-between" sx={{ paddingTop: { xs: '2rem', md: '4rem', xl: '5rem' } }}>
-          <Grid size={{ xs: 12, sm: 4, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 4, md: 3 }} component="aside">
             <Typography sx={{ fontSize: { xs: '1.4rem', xl: '1.5rem' }, mb: { xs: '0.4rem', md: '1.7rem' }, color: theme.palette.text.primary, fontWeight: 600 }} component="h2">
               Sidelink
             </Typography>

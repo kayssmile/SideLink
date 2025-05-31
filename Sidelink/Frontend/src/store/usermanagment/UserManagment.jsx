@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import registerUser from './actions/RegisterAction';
 import login from './actions/LoginAction';
-import getUser from './actions/GetUserAction';
 import { setToken } from 'src/services/AuthService';
 
 const initialState = {
@@ -60,19 +59,6 @@ const userManagment = createSlice({
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.loading.register = false;
         state.error.register = payload;
-      })
-      .addCase(getUser.pending, state => {
-        state.loading.init = true;
-        state.error.init = null;
-      })
-      .addCase(getUser.fulfilled, (state, { payload }) => {
-        state.loading.init = false;
-        state.success.init = true;
-        state.userInfo = payload;
-      })
-      .addCase(getUser.rejected, (state, { payload }) => {
-        state.loading.init = false;
-        state.error.init = payload;
       });
   },
 });

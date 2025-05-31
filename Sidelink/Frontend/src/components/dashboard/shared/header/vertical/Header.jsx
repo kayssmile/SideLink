@@ -8,7 +8,7 @@ import { setThemeMode } from 'src/store/publicdata/PublicDataManagment';
 import ProfileMenu from 'src/components/shared/header/ProfileMenu';
 
 const Header = () => {
-  const themeMode = useSelector(state => state.publicdata.themeMode);
+  const themeMode = useSelector(state => state.publicData.themeMode);
   const dispatch = useDispatch();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({

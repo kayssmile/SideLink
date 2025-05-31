@@ -21,7 +21,7 @@ import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/Fo
 function PublicProfile() {
   const [confirmModal, setConfirmModal] = useState(false);
   const dispatch = useDispatch();
-  const { publicProfile } = useSelector(state => state.publicprofile);
+  const { publicProfile } = useSelector(state => state.publicProfile);
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const {
     register,

@@ -2,15 +2,27 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { theme } from 'src/config/theme.js';
-import { renderWithDashboardReducer } from '/testing/unit_integration/utils/RenderWithRedux.jsx';
-import setMediaQuery from '/testing/unit_integration/utils/setMediaQuery';
+import { darkTheme } from 'src/config/theme.js';
+import { renderWithDashboardReducer } from '@tests/utils/RenderWithRedux.jsx';
+import setMediaQuery from '@tests/utils/setMediaQuery';
 
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar.jsx';
 
-const renderHeaderComponent = preloadedState => {
+const mockNavigate = vi.fn();
+const mockUseLocation = vi.fn(() => ({ pathname: '/dashboard' }));
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+    useLocation: () => mockUseLocation,
+  };
+});
+
+const renderSidebarComponent = preloadedState => {
   return renderWithDashboardReducer(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>
@@ -35,7 +47,7 @@ describe('Sidebar component', () => {
   };
 
   it('renders sidebar component', () => {
-    renderHeaderComponent({ dashboard: mockState });
+    renderSidebarComponent({ dashboard: mockState });
     expect(screen.getByTestId('dashboard-sidebar')).toBeInTheDocument();
     const logoImg = screen.getByAltText('Logo Sidelink');
     expect(logoImg).toBeInTheDocument();
@@ -51,8 +63,8 @@ describe('Sidebar component', () => {
 
   it('toggles sidebar onclick', () => {
     const restoreMatchMedia = setMediaQuery(true);
-    renderHeaderComponent({ dashboard: mockState });
-    const toggleBtn = screen.getByLabelText('menu');
+    renderSidebarComponent({ dashboard: mockState });
+    const toggleBtn = screen.getByLabelText('toggle sidebar');
     expect(toggleBtn).toBeInTheDocument();
     fireEvent.click(toggleBtn);
     const sidebar = screen.getByTestId('dashboard-sidebar');

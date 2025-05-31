@@ -14,7 +14,7 @@ function SearchType() {
   const dispatch = useDispatch();
   const [selectedType, setSelectedType] = useState('');
 
-  const { publicServices, searchMask, loading, error, success, init } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, searchMask, loading, error, success, init } = useSelector(state => state.publicData.publicData);
 
   const setUrlParam = useAddUrlParam();
   const removeUrlParams = useRemoveUrlParams();

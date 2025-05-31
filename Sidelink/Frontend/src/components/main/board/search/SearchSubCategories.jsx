@@ -11,7 +11,7 @@ import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
 
 function SearchSubCategories({ subCategories }) {
   const dispatch = useDispatch();
-  const { publicServices, searchMask, searchEngineData, success } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, searchMask, searchEngineData, success } = useSelector(state => state.publicData.publicData);
   const [selectedSubCategories, setSelectedSubCategories] = useState([]);
 
   const setUrlParam = useAddUrlParam();

@@ -14,7 +14,7 @@ import { useGetUrlParam, useAddUrlParam, useRemoveUrlParams } from 'src/componen
 
 function SearchCategories() {
   const dispatch = useDispatch();
-  const { publicServices, searchMask, searchEngineData, success, init } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, searchMask, searchEngineData, success, init } = useSelector(state => state.publicData.publicData);
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   const categories = categoriesConfiguration.map(category => category.name);

@@ -1,5 +1,5 @@
 import App from 'src/App';
-import renderWithRedux from '/testing/utility/RenderWithRedux';
+import renderWithRedux from '/tests/utils/RenderWithRedux';
 import { MemoryRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 

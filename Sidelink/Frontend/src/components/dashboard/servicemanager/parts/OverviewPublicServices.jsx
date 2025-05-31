@@ -8,7 +8,7 @@ import PublicService from './PublicService';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
 const OverviewPublicServices = ({ type }) => {
-  const publicServices = useSelector(state => state.publicservices.publicServices);
+  const publicServices = useSelector(state => state.publicServices.publicServices);
 
   const publicServicesFiltered = useMemo(() => {
     if (!publicServices?.data) return [];

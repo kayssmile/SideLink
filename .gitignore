@@ -49,3 +49,4 @@ dist-ssr
 # Test coverage directory
 /coverage/
 __snapshots__/
+.coverage

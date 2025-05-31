@@ -21,7 +21,7 @@ import CategorySubcategorySelect from './CategorySubcategorySelect';
 
 const CreatePublicService = ({ type }) => {
   const dispatch = useDispatch();
-  const publicServices = useSelector(state => state.publicservices.publicServices);
+  const publicServices = useSelector(state => state.publicServices.publicServices);
   const regions = regionsConfiguration.map(region => region.name);
   const {
     register,

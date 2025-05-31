@@ -8,7 +8,7 @@ import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, modalState, type }) {
   const theme = useTheme();
-  const publicServices = useSelector(state => state.publicservices.publicServices);
+  const publicServices = useSelector(state => state.publicServices.publicServices);
   const dispatch = useDispatch();
 
   const handleDeletePublicService = async () => {

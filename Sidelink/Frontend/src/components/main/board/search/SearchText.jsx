@@ -18,7 +18,7 @@ function SearchText() {
 
   const [searchValue, setSearchValue] = useState('');
 
-  const { publicServices, searchMask, searchEngineData, init } = useSelector(state => state.publicdata.publicData);
+  const { publicServices, searchMask, searchEngineData, init } = useSelector(state => state.publicData.publicData);
 
   const setUrlParam = useAddUrlParam();
   const removeUrlParams = useRemoveUrlParams();

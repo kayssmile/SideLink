@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import { ListItemIcon, ListItem, List, styled, ListItemText, useTheme } from '@mui/material';
 
 const NavItem = ({ item, level }) => {

@@ -1,6 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react';
 
-import renderWithProviders from '/testing/unit_integration/utils/RenderWithProviders.jsx';
+import renderWithProviders from '/tests/unit_integration/utils/RenderWithProviders.jsx';
 
 import NavCollapse from 'src/components/dashboard/shared/header/sidebar/parts/NavCollapse';
 

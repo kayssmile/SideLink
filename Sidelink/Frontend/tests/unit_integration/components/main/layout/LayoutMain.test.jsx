@@ -1,37 +1,48 @@
 import { render, screen } from '@testing-library/react';
 import LayoutMain from 'src/components/main/layout/LayoutMain';
-import { theme } from 'src/theme/theme.js';
+import { darkTheme } from 'src/config/Theme.js';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
+import { renderWithAllReducers } from '@tests/utils/RenderWithRedux';
 
 describe('LayoutMain Component', () => {
-  const renderComponent = () => {
-    return render(
-      <ThemeProvider theme={theme}>
+  const renderComponent = preloadedState => {
+    return renderWithAllReducers(
+      <ThemeProvider theme={darkTheme}>
         <MemoryRouter>
-          <LayoutMain></LayoutMain>
+          <LayoutMain />
         </MemoryRouter>
-      </ThemeProvider>
+      </ThemeProvider>,
+      { preloadedState }
     );
   };
 
+  const mockStatePublicData = {
+    mobileSidebar: false,
+    themeMode: 'dark',
+  };
+
+  const mockStateUserMangment = {
+    infoModal: false,
+  };
+
   it('renders without crashing', () => {
-    renderComponent();
+    renderComponent({ publicData: mockStatePublicData, userManagment: mockStateUserMangment });
     expect(screen.getByTestId('layout-main')).toBeInTheDocument();
   });
 
   it('renders the header component', () => {
-    renderComponent();
+    renderComponent({ publicData: mockStatePublicData, userManagment: mockStateUserMangment });
     expect(screen.getByTestId('main-header')).toBeInTheDocument();
   });
 
   it('renders the footer component', () => {
-    renderComponent();
+    renderComponent({ publicData: mockStatePublicData, userManagment: mockStateUserMangment });
     expect(screen.getByTestId('main-footer')).toBeInTheDocument();
   });
-  /*
-  it('matches snapshot', () => {
-    const { asFragment } = renderComponent();
-    expect(asFragment()).toMatchSnapshot();
-  }); */
+
+  it('renders the main tag', () => {
+    renderComponent({ publicData: mockStatePublicData, userManagment: mockStateUserMangment });
+    expect(screen.getByRole('main')).toBeInTheDocument();
+  });
 });

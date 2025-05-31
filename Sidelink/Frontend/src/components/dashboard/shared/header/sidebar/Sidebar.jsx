@@ -50,11 +50,14 @@ const Sidebar = () => {
           <Box>
             <Box px={{ xs: 3, sm: 3 }} py={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Logo />
-              {mdDown ? (
-                <IconButton sx={{ color: theme => theme.palette.colors.white, marginTop: '-45px', marginRight: '10px' }} onClick={() => dispatch(toggleSidebar())}>
-                  <IconX size="30" />
-                </IconButton>
-              ) : null}
+
+              <IconButton
+                sx={{ display: mdDown ? 'inline-block' : 'none', color: theme => theme.palette.colors.white, marginTop: '-45px', marginRight: '10px' }}
+                onClick={() => dispatch(toggleSidebar())}
+                aria-label="toggle sidebar"
+              >
+                <IconX size="30" />
+              </IconButton>
             </Box>
 
             <SidebarMenu />

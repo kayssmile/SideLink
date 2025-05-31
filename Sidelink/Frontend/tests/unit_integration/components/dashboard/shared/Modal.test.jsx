@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Modal from 'src/components/dashboard/shared/Modal';
+import Modal from 'src/components/shared/Modal';
 
 const renderModalComponent = defaultProps => {
   return render(<Modal {...defaultProps} />);
