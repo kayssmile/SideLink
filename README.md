@@ -35,7 +35,7 @@ Im Projektverzeichnis eine Datei `.env` erstellen, Als Vorlage dient:
 Ins Projektverzeichnis wechseln und ein Terminal öffnen - docker compose ausführen
 
 ```bash
-docker-compose up --build
+docker-compose up 
 ```
 
 >Info : Beim ersten Ausführen werden alle benötigten Container, Abhängigkeiten und statischen Dateien aufgebaut und bereitgestellt. Dieser Vorgang dauert einige Minuten.
@@ -44,10 +44,10 @@ docker-compose up --build
 
 ### 4. Inbetriebnahme SideLink Projekt
 
-Wenn im Terminal die Entwicklungsserver gestartet sind. Ist das Frontend erreichbar unter: 
+Wenn im Terminal die Entwicklungsserver gestartet sind. Ist das Frontend erreichbar unter: </br>
 http://localhost:5173 
-
-Das Backend unter: 
+</br>
+Das Backend unter: </br>
 http://localhost:8000/admin
 
 

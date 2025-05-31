@@ -26,18 +26,15 @@ const publicProfileManagment = createSlice({
           ...state.dashboardData,
           data: payload.public_profile_data,
         };
-        // console.log('publicprofiledata', state.publicProfile);
       })
       .addCase(patchPublicProfile.pending, state => {
         state.publicProfile = { ...state.publicProfile, loading: true, success: false, error: false };
       })
       .addCase(patchPublicProfile.fulfilled, (state, { payload }) => {
         state.publicProfile = { ...state.publicProfile, data: payload, loading: false, success: true, error: false };
-        //  console.log('publicprofiledataState', state.publicProfile);
       })
       .addCase(patchPublicProfile.rejected, (state, { payload }) => {
         state.publicProfile = { ...state.publicProfile, loading: false, success: false, error: payload };
-        //console.log('publicprofiledataerror', state.publicProfile);
       });
   },
 });
