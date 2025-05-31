@@ -8,14 +8,15 @@ export default defineConfig({
   resolve: {
     alias: {
       src: resolve(__dirname, 'src'),
+      '@tests': resolve(__dirname, 'tests/unit_integration'),
     },
   },
-  //plugins: [react()],
   plugins: [react()],
   server: {
     host: '0.0.0.0',
     port: 5173,
-    strictPort: true, // (optional, vermeidet, dass er einen anderen Port wählt)
+    strictPort: true,
+    allowedHosts: ['react'],
   },
   test: {
     globals: true,

@@ -14,8 +14,7 @@ SECRET_KEY = 'django-insecure-5^avpma0u=ii+t%xrpoe5^xm=(cvkgk6n4p7z^1#1o^xqb-$m*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
-#CLIENT_URL = config("CLIENT_URL")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split()
 CLIENT_URL = os.environ.get("CLIENT_URL", "http://localhost:5173")
 
 
