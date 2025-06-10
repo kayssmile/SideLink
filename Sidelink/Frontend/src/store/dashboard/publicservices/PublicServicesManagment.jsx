@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import createPublicService from './actions/CreatePublicServiceAction';
 import putPublicService from './actions/PutPublicServiceAction';
@@ -38,32 +37,26 @@ const publicServicesManagment = createSlice({
           ...state.publicServices,
           data: payload.public_services_data,
         };
-        //  console.log('publicsservicesstate:', state.publicServices);
       })
       .addCase(createPublicService.pending, state => {
         state.publicServices = { ...state.publicServices, loading: true, success: false, error: false };
       })
       .addCase(createPublicService.fulfilled, (state, { payload }) => {
         state.publicServices = { ...state.publicServices, data: [...state.publicServices.data, payload], loading: false, success: true, error: false };
-        // console.log('publicservicedataState', state.publicServices);
       })
       .addCase(createPublicService.rejected, (state, { payload }) => {
         state.publicServices = { ...state.publicServices, loading: false, success: false, error: payload };
-        // console.log('publicservicedataerror', state.publicServices);
       })
       .addCase(putPublicService.pending, state => {
-        // state.publicServices = { ...state.publicServices, loading: true, success: false, error: false };
+        state.publicServices = { ...state.publicServices, loading: true, success: false, error: false };
       })
       .addCase(putPublicService.fulfilled, (state, { payload }) => {
-        //console.log('patchservicedata', payload);
         const updatedStateData = state.publicServices.data.filter(service => service.id !== parseInt(payload.id));
         updatedStateData.push(payload);
         state.publicServices = { ...state.publicServices, data: updatedStateData, loading: false, success: true, error: false };
-        // console.log('patchservicedataState', state.publicServices);
       })
       .addCase(putPublicService.rejected, (state, { payload }) => {
         state.publicServices = { ...state.publicServices, loading: false, success: false, error: payload };
-        //console.log('patchservicedataerror', state.publicServices);
       })
       .addCase(deletePublicService.pending, state => {
         state.publicServices = { ...state.publicServices, loading: true, success: false, error: false };

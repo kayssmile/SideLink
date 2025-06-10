@@ -7,10 +7,9 @@ import NavItem from './NavItem';
 const NavCollapse = ({ menu, level }) => {
   const Icon = menu.icon;
   const theme = useTheme();
-
   const [open, setOpen] = useState(false);
   const menuIcon = level > 1 ? <Icon stroke={1.5} size="1rem" /> : <Icon stroke={1.5} size="1.3rem" />;
-  console.log(menu);
+
   const handleCollapse = () => {
     setOpen(!open);
   };

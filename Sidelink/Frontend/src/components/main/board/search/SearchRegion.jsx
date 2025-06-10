@@ -1,34 +1,26 @@
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid2';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
+import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/StoreUtils';
 import regionsConfiguration from 'src/config/LocationConfigurations';
-import { filterServicesByRegion, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
+import { filterServicesByRegion, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/SearchUtils';
 import { setSearchEngineData, setSearchMask } from 'src/store/publicdata/PublicDataManagment';
-
-import { useGetUrlParam, useAddUrlParam, useRemoveUrlParams } from 'src/components/main/board/hooks/UrlHooks';
-
+import { useGetUrlParam, useUpdateUrlParams } from 'src/components/main/board/hooks/UrlHooks';
 import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
 
 function SearchRegion() {
   const dispatch = useDispatch();
   const [selectedRegion, setSelectedRegion] = useState(null);
-
   const { publicServices, searchMask, success } = useSelector(state => state.publicData.publicData);
-
-  const setUrlParam = useAddUrlParam();
-  const removeUrlParams = useRemoveUrlParams();
   const urlTypeParam = useGetUrlParam('region');
-
+  const updateUrlParams = useUpdateUrlParams();
   const regions = regionsConfiguration.map(region => region.name);
 
   const handleSelectedRegion = selectedRegion => {
     setSelectedRegion(selectedRegion);
-    removeUrlParams(['search']);
     let newSerachEngineData = [];
     if (selectedRegion === null) {
-      removeUrlParams(['region']);
+      updateUrlParams(['region', 'search']);
       dispatch(setSearchMask({ type: 'region', data: false }));
       if (isAnyMaskFilterActive({ ...searchMask, region: { data: false } })) {
         const activeFilters = checkActiveMaskFilters({ ...searchMask, region: { data: false } });
@@ -47,7 +39,7 @@ function SearchRegion() {
       }
       dispatch(setSearchMask({ type: 'region', data: selectedRegion }));
       dispatch(setSearchEngineData(newSerachEngineData));
-      setUrlParam('region', selectedRegion);
+      updateUrlParams(['search'], [{ name: 'region', value: selectedRegion }]);
     }
   };
 
@@ -61,11 +53,9 @@ function SearchRegion() {
   }, [success]);
 
   return (
-    <>
-      <Grid size={{ xs: 12, xl: 6 }}>
-        <CustomAutocomplete name="region" label="Region / Kanton" value={selectedRegion} options={regions} onChange={handleSelectedRegion} />
-      </Grid>
-    </>
+    <Grid size={{ xs: 12, xl: 6 }}>
+      <CustomAutocomplete name="region" label="Region / Kanton" value={selectedRegion} options={regions} onChange={handleSelectedRegion} />
+    </Grid>
   );
 }
 

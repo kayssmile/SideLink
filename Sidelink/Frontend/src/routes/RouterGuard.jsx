@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { checkAuth, removeToken, removeRefreshToken } from 'src/services/AuthService';
+import { checkAuth } from 'src/services/AuthService';
+import { removeToken, removeRefreshToken } from 'src/components/shared/utils/TokenUtils';
 import { userLogout } from 'src/store/usermanagment/UserManagment';
 import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
 import Loading from 'src/components/shared/Loading';
@@ -29,7 +30,6 @@ const RouterGuard = ({ children }) => {
         setIsLoggedIn(false);
       }
     };
-
     checkAuthorization();
   }, []);
 

@@ -1,4 +1,5 @@
 import pandas as pd
+import html
 from apps.core.models import Category, Region
 from apps.publicservice.models import PublicService
 from apps.core.models import Category, Region
@@ -16,7 +17,7 @@ class DataProvider:
         for category in categories:
             offers = PublicService.objects.filter(category=category, service_type='offer')
             if offers.count() > 0:
-                offers_per_category[category.name] = offers.count()
+                offers_per_category[html.unescape(category.name)] = offers.count()
         return offers_per_category           
     
     def get_all_searches_per_category(self):
@@ -28,7 +29,7 @@ class DataProvider:
         for category in categories:
             searches = PublicService.objects.filter(category=category, service_type='search')
             if searches.count() > 0:
-                searches_per_category[category.name] = searches.count()
+                searches_per_category[html.unescape(category.name)] = searches.count()
         return searches_per_category
     
     def get_all_offers_per_region(self):
@@ -83,39 +84,7 @@ class DataProvider:
                 'months': dict(zip(year_data['month_name'], year_data['count']))
             })
         return result
-       
-        """
-        Provides user registrations by year and month based on their 'updated_at' field.
-        Returns:
-            list of dict: Each dict contains 'year', 'total' count, and a 'months' dict
-                          mapping month names to registration counts.
-        
-        public_services = RegisteredUser.objects.all()
-        data_frame = pd.DataFrame(list(public_services.values('id', 'updated_at')))
-        data_frame['updated_at'] = pd.to_datetime(data_frame['updated_at'])
-        data_frame['year'] = data_frame['updated_at'].dt.year
-        data_frame['month'] = data_frame['updated_at'].dt.month
-        month_names = {
-                1: 'Januar', 2: 'Februar', 3: 'März', 4: 'April',
-                5: 'Mai', 6: 'Juni', 7: 'Juli', 8: 'August',
-                9: 'September', 10: 'Oktober', 11: 'November', 12: 'Dezember'
-            }
-        data_frame['month'] = data_frame['month'].map(month_names)
-        summary = data_frame.groupby(['year', 'month']).size().reset_index(name='count')
-        registrations_per_month_and_year = []  
-        for year in summary['year'].unique():
-            year_data = summary[summary['year'] == year]
-            months = dict((zip(year_data['month'], year_data['count'])))
-            total = year_data['count'].sum()
-            registrations_per_month_and_year.append({
-                'year': year,
-                'total': int(total),
-                'months': months
-            })
-        print(registrations_per_month_and_year)
-        return registrations_per_month_and_year
-        """
-    
+           
     def get_all_registrations_without_search_and_offer(self):
         """
         Provides user registrations without any associated public services

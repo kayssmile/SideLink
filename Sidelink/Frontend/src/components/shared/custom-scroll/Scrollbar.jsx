@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import SimpleBar from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css';
 import { Box, styled } from '@mui/material';
+import 'simplebar-react/dist/simplebar.min.css';
 
 const SimpleBarStyle = styled(SimpleBar)(() => ({
   maxHeight: '100%',
@@ -21,12 +20,6 @@ const Scrollbar = props => {
       {children}
     </SimpleBarStyle>
   );
-};
-
-Scrollbar.propTypes = {
-  children: PropTypes.node,
-  sx: PropTypes.object,
-  other: PropTypes.any,
 };
 
 export default Scrollbar;

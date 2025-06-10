@@ -1,10 +1,10 @@
-import { useRef, useEffect, useState } from 'react';
-import { CardContent, Typography, Box, Button, CircularProgress, useMediaQuery, Stack, Avatar } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { CardContent, Typography, Box, Button, CircularProgress, useMediaQuery, Stack, Avatar, styled } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Grid from '@mui/material/Grid2';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { publicProfileSchema } from 'src/config/Schemas';
 import { checkAuth } from 'src/services/AuthService';
 import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
@@ -12,7 +12,6 @@ import patchPublicProfile from 'src/store/dashboard/publicprofile/actions/PatchP
 import { resetProcess } from 'src/store/dashboard/publicprofile/PublicProfileManagment';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
-
 import Modal from 'src/components/shared/Modal';
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
@@ -20,6 +19,7 @@ import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/Fo
 
 function PublicProfile() {
   const [confirmModal, setConfirmModal] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
   const dispatch = useDispatch();
   const { publicProfile } = useSelector(state => state.publicProfile);
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -29,6 +29,7 @@ function PublicProfile() {
     setValue,
     resetField,
     clearErrors,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(publicProfileSchema),
@@ -36,7 +37,6 @@ function PublicProfile() {
 
   const baseURL = import.meta.env.BASE_URL.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000';
   let publicProfileImageUrl = '';
-  const fileInputRef = useRef(null);
 
   if (publicProfile?.data?.public_profile_picture) {
     publicProfileImageUrl = `${baseURL}${publicProfile.data.public_profile_picture}`;
@@ -50,15 +50,26 @@ function PublicProfile() {
   const handleReset = () => {
     resetField('profile_picture');
     clearErrors('profile_picture');
-    if (fileInputRef.current) fileInputRef.current.value = '';
+    setPreviewImage(null);
   };
 
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
+
   /*
-   * create formdata to send image-file-data to backend
+   * create formdata to send image-data to backend
    */
   const onSubmit = async data => {
     const formData = new FormData();
-
     Object.keys(data).forEach(key => {
       if (key !== 'profile_picture') {
         formData.append(key, data[key]);
@@ -67,7 +78,6 @@ function PublicProfile() {
     if (data.profile_picture != null && data.profile_picture[0]) {
       formData.append('public_profile_picture', data.profile_picture[0]);
     }
-
     try {
       if (await checkAuth()) {
         dispatch(patchPublicProfile(formData));
@@ -109,10 +119,31 @@ function PublicProfile() {
                 <Typography component="label" htmlFor="profile_picture" sx={{ color: 'white', fontSize: 20, display: 'block', mb: 1 }}>
                   Profilbild
                 </Typography>
-                <Avatar src={publicProfileImageUrl} alt="Publicprofile image" sx={{ width: 150, height: 150, margin: '0 auto' }} />
+                <Avatar src={previewImage ?? publicProfileImageUrl} alt="Publicprofile image" sx={{ width: 150, height: 150, margin: '0 auto' }} />
                 <Stack sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
-                  <Button variant="contained" color="primary" sx={{ maxWidth: '100%' }}>
-                    <input ref={fileInputRef} accept="image/*" name="profile_picture" type="file" multiple={false} style={{ maxWidth: '100%' }} {...register('profile_picture')} />
+                  <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
+                    Bild auswählen
+                    <Controller
+                      name="profile_picture"
+                      control={control}
+                      defaultValue={null}
+                      render={({ field }) => (
+                        <VisuallyHiddenInput
+                          type="file"
+                          accept="image/*"
+                          ref={field.ref}
+                          onChange={e => {
+                            const fileList = e.target.files;
+                            field.onChange(fileList);
+                            const file = fileList?.[0];
+                            if (file) {
+                              const previewUrl = URL.createObjectURL(file);
+                              setPreviewImage(previewUrl);
+                            }
+                          }}
+                        />
+                      )}
+                    />
                   </Button>
                   <Button variant="outlined" color="error" onClick={handleReset} sx={{ px: 3, fontSize: '1rem', marginLeft: { xs: 0, sm: '1rem' }, marginTop: { xs: '1rem', sm: '0' } }}>
                     Reset

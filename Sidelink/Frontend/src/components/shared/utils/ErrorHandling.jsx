@@ -67,10 +67,12 @@ const basicErrorMessageLink = error => {
   return (
     <Typography color="error" sx={{ textAlign: 'center', margin: '1rem 0' }}>
       Technische Störungen, bitte versuche es später nochmals oder{' '}
-      <Typography sx={{ margin: '1rem 0', color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
+      <Typography component="span" sx={{ margin: '1rem 0', color: 'white', textDecoration: 'underline', textAlign: 'center', a: { color: 'inherit' } }}>
+        <br />
         <Link component={RouterLink} to="/contact">
           kontaktiere uns
         </Link>
+        <br />
       </Typography>
       {error.detail}
     </Typography>

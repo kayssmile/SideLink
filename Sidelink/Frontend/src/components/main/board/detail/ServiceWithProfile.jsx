@@ -1,38 +1,25 @@
 import { useEffect } from 'react';
-import { Box, useTheme, CardContent, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import getPublicprofile from 'src/store/publicdata/actions/GetPublicProfileAction';
-
 import Heading from 'src/components/main/shared/Heading';
 import PublicServiceDetail from './parts/PublicServiceDetail';
 import PublicProfileView from './parts/PublicProfileView';
-import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import Spinner from 'src/components/shared/Spinner';
 
 function ServiceWithProfile() {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { publicServices, publicProfiles } = useSelector(state => state.publicData.publicData);
-
+  const { publicServices, publicProfiles, loading } = useSelector(state => state.publicData.publicData);
   const publicService = publicServices.find(service => String(service.id) === String(id));
 
   useEffect(() => {
     if (publicService && !publicProfiles.loading && !publicProfiles?.data?.some(p => p.public_profile_id === publicService.public_profile_id)) {
       dispatch(getPublicprofile(publicService.public_profile_id));
     }
-  }, [publicProfiles]);
-
-  if (!publicService) {
-    return (
-      <Typography color="error" sx={{ textAlign: 'center', mt: 4 }}>
-        Service nicht gefunden.
-      </Typography>
-    );
-  }
+  }, [publicProfiles, publicServices]);
 
   const publicProfile = publicProfiles?.data?.find(profile => profile.public_profile_id === publicService.public_profile_id);
 
@@ -40,17 +27,13 @@ function ServiceWithProfile() {
     <Box component="section" sx={{ padding: '2rem 0' }}>
       <Heading titleKey1={'Connect.'} />
 
-      {publicProfiles?.loading ? (
+      {loading || publicProfiles.loading ? (
         <Spinner />
       ) : publicProfile ? (
         <Grid container>
           <Grid size={12}>
-            <StyledCard variant="outlined" sx={{ backgroundColor: theme.palette.background.main, mt: 4 }}>
-              <CardContent>
-                <PublicProfileView publicProfile={publicProfile} />
-                <PublicServiceDetail publicService={publicService} />
-              </CardContent>
-            </StyledCard>
+            <PublicProfileView publicProfile={publicProfile} />
+            <PublicServiceDetail publicService={publicService} />
           </Grid>
         </Grid>
       ) : (

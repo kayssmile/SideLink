@@ -3,14 +3,13 @@ import { CardContent, Typography, Box, Button, CircularProgress } from '@mui/mat
 import Grid from '@mui/material/Grid2';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { checkAuth, getToken, getRefreshToken, removeRefreshToken } from 'src/services/AuthService';
+import { checkAuth } from 'src/services/AuthService';
+import { getToken, getRefreshToken, removeRefreshToken, removeToken } from 'src/components/shared/utils/TokenUtils';
 import invalidateToken from 'src/services/TokenInvalidator';
 import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal, userLogout } from 'src/store/usermanagment/UserManagment';
 import { basicDelRequest } from 'src/services/BasicRequests';
 import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
-
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
@@ -39,7 +38,7 @@ const AccountDelete = () => {
         if (response.status === 204) {
           setDeleteAccount({ loading: false, success: true, error: false });
         } else {
-          setDeleteAccount({ loading: false, error: response.data, success: false });
+          setDeleteAccount({ loading: false, error: response, success: false });
         }
       } else {
         dispatch(toggleInfoModal());
@@ -47,7 +46,6 @@ const AccountDelete = () => {
       }
     } catch (error) {
       setDeleteAccount({ loading: false, error: { detail: '' }, success: false });
-      console.error(error);
     }
   };
 
@@ -80,7 +78,7 @@ const AccountDelete = () => {
               Account
             </Typography>
             <Typography color="textSecondary">Deinen Account löschen</Typography>
-            {deleteAccount.error ? basicErrorMessageLink(deleteAccount.error.detail) : deleteAccount.success ? <Typography color="success">Account erfolgreich gelöscht</Typography> : null}
+            {deleteAccount.error ? basicErrorMessageLink(deleteAccount.error) : deleteAccount.success ? <Typography color="success">Account erfolgreich gelöscht</Typography> : null}
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Button

@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Divider, CardContent, Box, Tab, Tabs, useTheme, useMediaQuery } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { IconLock, IconUserCircle, IconPencilX } from '@tabler/icons-react';
-
 import { breadcrumpConfig } from 'src/config/NavigationConfigurations';
-
 import TabPanel from 'src/components/dashboard/shared/TabPanel';
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
 import AccountDetails from 'src/components/dashboard/account/parts/AccountDetails';

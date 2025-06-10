@@ -6,7 +6,6 @@ const getPublicData = createAsyncThunk('publicdata/getPublicData', async (_, { r
     const { data } = await axiosInstanceBasic.get(`/api/public-data/`);
     return data;
   } catch (error) {
-    console.log('getPublicDataError', error);
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
     return rejectWithValue({
       status: error.response?.status || 500,

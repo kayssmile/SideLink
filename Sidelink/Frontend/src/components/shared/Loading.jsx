@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
-import { useLocation } from 'react-router';
-
+import { useLocation } from 'react-router-dom';
 import Spinner from 'src/components/shared/Spinner';
 
 function Loading() {

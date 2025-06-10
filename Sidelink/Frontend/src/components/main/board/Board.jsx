@@ -3,13 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { Box, useTheme, CardContent } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { filterServicesBySearch } from './utils/searchUtils';
 import { setSearchEngineData, setSearchMask, setInit } from 'src/store/publicdata/PublicDataManagment';
 import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
-import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
-import { filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
-
+import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/StoreUtils';
+import { filterServicesByActiveMaskFilters, filterServicesBySearch } from 'src/components/main/board/utils/SearchUtils';
 import Heading from 'src/components/main/shared/Heading';
 import Listing from './listing/Listing';
 import SearchMask from './search/SearchMask';
@@ -18,7 +15,7 @@ import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
 function Board() {
   const theme = useTheme();
-  const { publicServices, searchMask, loading, error, success, init } = useSelector(state => state.publicData.publicData);
+  const { publicServices, loading, error, success, init } = useSelector(state => state.publicData.publicData);
 
   const dispatch = useDispatch();
   const { search } = useLocation();
@@ -50,7 +47,6 @@ function Board() {
 
       if (isAnyMaskFilterActive(newSearchMask)) {
         const activeFilters = checkActiveMaskFilters(newSearchMask);
-
         let newSearchEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
         if (params.get('search')) {
           newSearchEngineData = filterServicesBySearch(newSearchEngineData, params.get('search'));
@@ -72,32 +68,26 @@ function Board() {
   }, [success, error]);
 
   return (
-    <>
-      <Box component="section" sx={{ padding: '2rem 0' }}>
-        <Heading titleKey1={'Search.'} titleKey2={'Connect.'} titleKey3={'Complete.'} subTitle={'Hier findest du was du suchst.'} />
+    <Box component="section" sx={{ padding: '2rem 0' }}>
+      <Heading titleKey1={'Search.'} titleKey2={'Connect.'} titleKey3={'Complete.'} subTitle={'Hier findest du was du suchst.'} />
 
-        {init || loading ? (
-          <Spinner />
-        ) : error ? (
-          basicErrorMessageLink(error)
-        ) : !init && success ? (
-          <>
-            <Grid container sx={{ backgroundColor: '' }}>
-              <Grid size={12}>
-                <StyledCard variant={'outlined'} sx={{ backgroundColor: theme.palette.background.main, marginTop: '2rem' }}>
-                  <CardContent>
-                    <SearchMask />
-                    <Listing />
-                  </CardContent>
-                </StyledCard>
-              </Grid>
-            </Grid>
-          </>
-        ) : (
-          ''
-        )}
-      </Box>
-    </>
+      {init || loading ? (
+        <Spinner />
+      ) : error ? (
+        basicErrorMessageLink(error)
+      ) : !init && success ? (
+        <Grid container sx={{ backgroundColor: '' }}>
+          <Grid size={12}>
+            <StyledCard variant={'outlined'} sx={{ backgroundColor: theme.palette.background.main, marginTop: '2rem' }}>
+              <CardContent>
+                <SearchMask />
+                <Listing />
+              </CardContent>
+            </StyledCard>
+          </Grid>
+        </Grid>
+      ) : null}
+    </Box>
   );
 }
 

@@ -1,9 +1,7 @@
 import { AppBar, Container, Drawer, IconButton, Stack, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { IconMenu2 } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { toggleMobileSidebar } from 'src/store/publicdata/PublicDataManagment';
-
 import Logo from 'src/components/shared/logo/Logo';
 import Navigations from './parts/Navigations';
 import MobileSidebar from './parts/MobileSidebar';
@@ -11,7 +9,7 @@ import AccountMenu from './parts/AccountMenu';
 
 const Header = () => {
   const theme = useTheme();
-  const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const xlUp = useMediaQuery(theme => theme.breakpoints.up('xl'));
   const dispatch = useDispatch();
   const mobileSidebar = useSelector(state => state.publicData.mobileSidebar);
 
@@ -40,7 +38,7 @@ const Header = () => {
         >
           <Logo />
 
-          {mdUp ? (
+          {xlUp ? (
             <>
               <Stack component="ul" spacing={1} direction="row" alignItems="center" sx={{ maxWidth: '50%' }}>
                 <Navigations />

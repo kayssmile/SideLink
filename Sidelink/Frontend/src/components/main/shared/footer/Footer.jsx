@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid2';
 import { NavLink } from 'react-router-dom';
 import IconFacebook from 'src/assets/images/icons/icon-facebook.svg';
 import IconInstagram from 'src/assets/images/icons/icon-instagram.svg';
-
 import FooterLinks from './parts/FooterLinks';
 
 const Footer = () => {

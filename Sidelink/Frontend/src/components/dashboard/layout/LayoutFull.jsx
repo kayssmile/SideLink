@@ -1,50 +1,16 @@
-import { Outlet } from 'react-router-dom'; // Für das Einfügen von Kinder-Routen
-import { useState, useEffect } from 'react';
-import { styled, Container, Box, useTheme, useMediaQuery } from '@mui/material';
-
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { styled, useTheme, useMediaQuery } from '@mui/material';
 import { ScrollToTop } from 'src/components/shared/utils/utils';
-
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar';
 import Header from 'src/components/dashboard/shared/header/vertical/Header';
 import InfoModal from 'src/components/shared/InfoModal';
 
-//import { SiteWrapper, PageWrapper, MainWrapper } from 'src/components/main/styledelements/StyledElements';
-
-import { useSelector, useDispatch } from 'react-redux';
-//import getDashboardData from 'src/store/dashboard/actions/GetDashboardDataAction';
-//import { checkAuth } from 'src/services/CheckAuth';
-
 const LayoutFull = () => {
   const theme = useTheme();
-  const dispatch = useDispatch();
-
   const SidebarOpen = useSelector(state => state.dashboard.sidebar);
-
-  //const toggleWidth = SidebarOpen ? '0 5%' : '0 15%';
-
-  const dashboardData = useSelector(state => state.dashboard.dashboardData.success);
-
   const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
   const xlUp = useMediaQuery(theme => theme.breakpoints.up('xl'));
-  /*
-
-  const token = localStorage.getItem('accessToken');
-  dispatch(getDashboardData(token)); */
-
-  useEffect(() => {
-    /* 
-    // id aus checkauth löschen da token signatur id enthält
-    const setDashboardData = async () => {
-      const { token, id } = await checkAuth();
-      if (token && id) {
-        dispatch(getDashboardData(token));
-      }
-    };
-
-    if (!dashboardData) {
-      setDashboardData();
-    }  */
-  }, [dispatch]);
 
   const SiteWrapper = styled('div')(() => ({
     display: 'flex',

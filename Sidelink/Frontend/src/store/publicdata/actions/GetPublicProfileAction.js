@@ -6,7 +6,6 @@ const getPublicprofile = createAsyncThunk('publicdata/getPublicprofile', async (
     const { data } = await axiosInstanceBasic.get(`/api/publicprofile/get/?id=${publicProfileId}`);
     return data;
   } catch (error) {
-    console.log('getpublic profile', error);
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
     return rejectWithValue({
       status: error.response?.status || 500,

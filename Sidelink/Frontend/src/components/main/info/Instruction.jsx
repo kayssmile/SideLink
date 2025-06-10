@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { Typography, Box, useTheme, Link } from '@mui/material';
-
 import Heading from 'src/components/main/shared/Heading';
 import InstructionsAccordion from './parts/InstructionsAccordeon';
 

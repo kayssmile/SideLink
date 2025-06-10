@@ -1,10 +1,8 @@
 import { Link, Breadcrumbs, Box, Typography, useMediaQuery } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { IconCircle } from '@tabler/icons-react';
-
 import { NavLink } from 'react-router-dom';
 import breadcrumbImg from 'src/assets/images/breadcrumb/ChatBc.png';
-
 import { useTheme } from '@mui/material/styles';
 
 const Breadcrumb = ({ subtitle, items, title }) => {

@@ -3,9 +3,7 @@ import { Box, Menu, Typography, Divider, Button, useTheme, useMediaQuery } from 
 import { IconChevronDown, IconChevronUp, IconMail } from '@tabler/icons-react';
 import { Stack } from '@mui/system';
 import { useSelector } from 'react-redux';
-
 import { profileMenu as profileMenuConfiguration } from 'src/config/NavigationConfigurations';
-
 import Logout from 'src/components/shared/header/Logout';
 import MenuItem from './parts/MenuItem';
 

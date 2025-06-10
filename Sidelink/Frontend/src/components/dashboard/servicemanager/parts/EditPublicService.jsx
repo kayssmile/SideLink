@@ -1,16 +1,14 @@
 import { useEffect } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, Box, CircularProgress, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { publicServiceSchema } from 'src/config/Schemas';
 import regionsConfiguration from 'src/config/LocationConfigurations';
 import { checkAuth } from 'src/services/AuthService';
 import putPublicService from 'src/store/dashboard/publicservices/actions/PutPublicServiceAction';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
-
 import CategorySubcategorySelect from './CategorySubcategorySelect';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';
 import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
@@ -25,6 +23,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
     handleSubmit,
     setValue,
     clearErrors,
+    control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(publicServiceSchema),
@@ -79,19 +78,25 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
       </DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box>
+          <Box component="fieldset" disabled={publicServices.success} sx={{ borderColor: 'transparent' }}>
             <Grid container spacing={{ xs: 4, sm: 6 }}>
-              <CategorySubcategorySelect register={register} setValue={setValue} clearErrors={clearErrors} errors={errors} initCategory={initCategory} initSubCategories={initSubCategories} />
+              <CategorySubcategorySelect control={control} setValue={setValue} clearErrors={clearErrors} errors={errors} initCategory={initCategory} initSubCategories={initSubCategories} />
 
               <Grid size={{ xs: 12, xl: 6 }}>
-                <CustomAutocomplete
+                <Controller
                   name="region"
-                  label="Region / Kanton"
-                  register={register('region')}
-                  value={service.region_details}
-                  options={regions}
-                  error={errors.region}
-                  helperText={errors.region?.message}
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <CustomAutocomplete
+                      label="Region / Kanton"
+                      name={field.name}
+                      value={field.value}
+                      onChange={field.onChange}
+                      options={regions}
+                      error={!!fieldState.error}
+                      helperText={fieldState.error?.message}
+                    />
+                  )}
                 />
               </Grid>
 

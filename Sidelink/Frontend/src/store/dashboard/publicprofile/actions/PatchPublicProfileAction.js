@@ -1,6 +1,6 @@
 import { axiosInstanceAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getToken } from 'src/services/AuthService';
+import { getToken } from 'src/components/shared/utils/TokenUtils';
 
 const patchPublicProfile = createAsyncThunk('publicprofile/patchPublicProfile', async (newFormData, { rejectWithValue }) => {
   try {

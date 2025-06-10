@@ -56,7 +56,6 @@ describe('Header Component', () => {
       </ThemeProvider>,
       { publicData: mockStatePublicData, dashboard: mockStateDashboardData }
     );
-    screen.debug();
     const hamburger = screen.getByTestId('hamburger');
     fireEvent.click(hamburger);
     expect(screen.getByTestId('sentinelStart')).toBeInTheDocument();

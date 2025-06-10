@@ -5,14 +5,12 @@ import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { changePasswordSchema } from 'src/config/Schemas';
 import patchAccountPassword from 'src/store/dashboard/main/actions/PatchAccountPasswordAction';
 import { checkAuth } from 'src/services/AuthService';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
-
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';

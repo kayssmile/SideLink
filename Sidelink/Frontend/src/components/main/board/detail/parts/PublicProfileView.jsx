@@ -13,7 +13,7 @@ function PublicProfileView({ publicProfile }) {
     <Box
       component="article"
       sx={{
-        flexDirection: { xs: 'column', lg: 'row' },
+        flexDirection: { xs: 'column' },
         padding: '2rem 0',
         display: 'flex',
         justifyContent: 'center',
@@ -27,7 +27,7 @@ function PublicProfileView({ publicProfile }) {
       <Avatar alt={publicProfile.showed_name} src={publicProfileImageUrl} sx={{ width: 140, height: 140 }} />
 
       <Box p={{ xs: '0.6rem', sm: '1.2rem' }}>
-        <Typography variant="h6" sx={{ fontWeight: '700', fontSize: { xs: '1.3rem', md: '1.5rem' }, textAlign: { xs: 'center', sm: 'left' } }}>
+        <Typography variant="h6" sx={{ color: theme.palette.font.primary, fontWeight: '700', fontSize: { xs: '1.3rem', md: '1.5rem' }, textAlign: { xs: 'center' } }}>
           {publicProfile.showed_name}
         </Typography>
 

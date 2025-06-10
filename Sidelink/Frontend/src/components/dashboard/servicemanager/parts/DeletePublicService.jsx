@@ -1,6 +1,5 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography, CircularProgress, useTheme } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { checkAuth } from 'src/services/AuthService';
 import deletePublicService from 'src/store/dashboard/publicservices/actions/DeletePublicServiceAction';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
@@ -24,7 +23,7 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
   };
 
   return (
-    <Dialog open={modalState} onClose={handleCancel} aria-labelledby="delete-service-title" fullWidth maxWidth="xl">
+    <Dialog open={modalState} onClose={handleCancel} aria-labelledby="delete-service-title">
       <DialogTitle id="edit-service-title" sx={{ color: 'black', margin: '1rem 0', textAlign: 'center' }}>
         Bestätigung erforderlich
       </DialogTitle>

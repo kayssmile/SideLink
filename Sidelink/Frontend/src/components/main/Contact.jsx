@@ -2,11 +2,9 @@ import { useState } from 'react';
 import { Button, Box, FormGroup, CircularProgress, Typography, useTheme } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { contactSchema } from 'src/config/Schemas';
 import { basicPostRequest } from 'src/services/BasicRequests';
 import { basicErrorMessage } from 'src/components/shared/utils/ErrorHandling';
-
 import Heading from 'src/components/main/shared/Heading';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
 

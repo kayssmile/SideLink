@@ -68,7 +68,6 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-   # config("CLIENT_URL"), 
    os.environ.get("CLIENT_URL", "http://localhost:5173")
 ]
 

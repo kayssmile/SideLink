@@ -1,7 +1,6 @@
 import { Typography, useTheme, Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
-
 import { footerLinks } from 'src/config/NavigationConfigurations';
 
 const FooterLinks = () => {

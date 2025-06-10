@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Typography, MenuItem, Select, CardHeader, CardContent, Divider, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { BarChart, chartsTooltipClasses } from '@mui/x-charts';
-
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import Scrollbar from 'src/components/shared/custom-scroll/Scrollbar';
 
@@ -11,7 +9,7 @@ function BarChartSelection({ barChartData, title }) {
   const theme = useTheme();
   const [year, setYear] = useState(barChartData[0].year);
   const [chartData, setChartData] = useState({ xAxis: barChartData[0].xAxis, yAxis: barChartData[0].yAxis });
-  console.log(barChartData);
+
   const handleSelectionChange = value => {
     setYear(value);
     let newChartData = barChartData.find(data => data.year === value);
@@ -25,7 +23,7 @@ function BarChartSelection({ barChartData, title }) {
   return (
     <Grid size={12}>
       <StyledCard sx={{ padding: 0 }} elevation={9} variant={'outlined'}>
-        <CardHeader title={title} />
+        <CardHeader title={title} sx={{ '.css-16xl4zq-MuiTypography-root': { fontSize: { xs: '1.2rem' } } }} />
         <Divider sx={{ border: '1px solid', borderColor: theme.palette.border.main }} />
 
         <CardContent>
@@ -81,6 +79,11 @@ function BarChartSelection({ barChartData, title }) {
                 xAxis={[{ data: chartData.xAxis }]}
                 yAxis={[{ tickMinStep: 1 }]}
                 slotProps={{
+                  legend: {
+                    sx: {
+                      color: theme.palette.text.primary,
+                    },
+                  },
                   tooltip: {
                     trigger: 'item',
                     sx: {
@@ -107,16 +110,3 @@ function BarChartSelection({ barChartData, title }) {
 }
 
 export default BarChartSelection;
-
-BarChartSelection.propTypes = {
-  barChartData: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      year: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired,
-      xAxis: PropTypes.arrayOf(PropTypes.string).isRequired,
-      yAxis: PropTypes.arrayOf(PropTypes.number).isRequired,
-    })
-  ).isRequired,
-  title: PropTypes.string.isRequired,
-};

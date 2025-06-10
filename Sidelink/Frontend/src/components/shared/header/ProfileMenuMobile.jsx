@@ -3,9 +3,7 @@ import { Box, Avatar, Typography, Divider, useTheme } from '@mui/material';
 import { IconMail } from '@tabler/icons-react';
 import { Stack } from '@mui/system';
 import { useSelector } from 'react-redux';
-
 import { profileMenu as profileMenuConfiguration } from 'src/config/NavigationConfigurations';
-
 import Logout from 'src/components/shared/header/Logout';
 
 const ProfileMenuMobile = () => {

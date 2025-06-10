@@ -5,4 +5,25 @@ body {
   a {
     text-decoration: none;
   }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.visually-hidden-seo {
+  position: relative;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  height: 0 !important;
+  overflow: hidden;
+  white-space: nowrap;
 }

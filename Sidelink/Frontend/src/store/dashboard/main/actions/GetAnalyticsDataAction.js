@@ -1,8 +1,13 @@
 import { axiosInstanceAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { getToken } from 'src/components/shared/utils/TokenUtils';
 
-const getAnalyticsData = createAsyncThunk('dashboard/getAnalyticsData', async (token, { rejectWithValue }) => {
+const getAnalyticsData = createAsyncThunk('dashboard/getAnalyticsData', async (_, { rejectWithValue }) => {
   try {
+    const token = getToken();
+    if (!token) {
+      throw new Error('Token nicht gefunden');
+    }
     const { data } = await axiosInstanceAuth(token).get(`/api/analytics-data/`);
     return data;
   } catch (error) {

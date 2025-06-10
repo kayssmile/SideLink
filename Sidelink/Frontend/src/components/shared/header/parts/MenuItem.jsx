@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Box, Avatar, Typography } from '@mui/material';
-
 import { Stack } from '@mui/system';
 
 const MenuItem = ({ menuItem }) => {

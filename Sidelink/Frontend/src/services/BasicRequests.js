@@ -21,7 +21,7 @@ async function basicDelRequest(token) {
     const response = await axiosInstanceAuth(token).delete(`/api/auth/registereduser/`);
     return response;
   } catch (error) {
-    const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
+    const errorMessage = error.response?.data?.detail || error.message || 'Ein unbekannter Fehler ist aufgetreten';
     return {
       status: error.response?.status || 500,
       detail: errorMessage,

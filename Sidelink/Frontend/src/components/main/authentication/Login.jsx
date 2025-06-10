@@ -5,13 +5,10 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-
 import login from 'src/store/usermanagment/actions/LoginAction';
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import { loginSchema } from 'src/config/Schemas';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
-import { getToken } from 'src/services/AuthService';
-
 import Heading from 'src/components/main/shared/Heading';
 import { StyledTextField } from 'src/components/shared/forms/FormElements';
 
@@ -38,16 +35,13 @@ function Login() {
 
   useEffect(() => {
     if (success.login) {
-      const token = getToken();
-      if (token) {
-        dispatch(getDashboardData(token));
-      }
+      dispatch(getDashboardData());
     }
   }, [success.login, dispatch]);
 
   useEffect(() => {
     if (dashboardData.success) {
-      navigate('/dashboard');
+      navigate('/dashboard/publicprofile');
     }
   }, [dashboardData.success, navigate]);
 

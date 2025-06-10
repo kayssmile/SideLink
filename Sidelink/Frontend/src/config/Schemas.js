@@ -160,8 +160,8 @@ const publicProfileSchema = yup.object().shape({
       return value && SUPPORTED_FORMATS.includes(value[0].type);
     }),
   showed_name: yup.string().required('Name ist erforderlich').max(250, 'Maximal 250 Zeichen'),
-  description: yup.string().required('Beschreibung ist erforderlich').max(500, 'Maximal 500 Zeichen'),
-  contact_info: yup.string().required('Kontaktinformationen sind erforderlich').max(500, 'Maximal 500 Zeichen'),
+  description: yup.string().required('Beschreibung ist erforderlich').max(3000, 'Maximal 3000 Zeichen'),
+  contact_info: yup.string().required('Kontaktinformationen sind erforderlich').max(1500, 'Maximal 1500 Zeichen'),
 });
 
 const publicServiceSchema = yup.object().shape({
@@ -169,9 +169,12 @@ const publicServiceSchema = yup.object().shape({
   sub_categories: yup.array().max(3, 'Maximal 3 Unterkategorien erlaubt'),
   region: yup.string().required('Region ist erforderlich'),
   location: yup.string().required('Ort ist erforderlich'),
-  additional_location_info: yup.string().matches(/^[\p{L}0-9\s.,;:!?()\-äöüÄÖÜß]*$/u, 'Ungültige Zeichen enthalten'),
+  additional_location_info: yup
+    .string()
+    .required('Zusätzliche Ortsangabe ist erforderlich')
+    .matches(/^[\p{L}0-9\s.,;:!?()\-äöüÄÖÜß]*$/u, 'Ungültige Zeichen enthalten'),
   title: yup.string().required('Titel ist erforderlich').max(100, 'Maximal 100 Zeichen'),
-  description: yup.string().required('Beschreibung ist erforderlich').max(500, 'Maximal 350 Zeichen'),
+  description: yup.string().required('Beschreibung ist erforderlich').max(2000, 'Maximal 2000 Zeichen'),
 });
 
 export { loginSchema, registerSchema, contactSchema, editAccountSchema, changeEmailSchema, changePasswordSchema, publicProfileSchema, publicServiceSchema, passwordForgotSchema, passwordResetSchema };

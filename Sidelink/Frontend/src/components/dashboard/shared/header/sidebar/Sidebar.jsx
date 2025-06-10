@@ -1,9 +1,7 @@
 import { useMediaQuery, Box, Drawer, useTheme, IconButton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { IconX } from '@tabler/icons-react';
-
 import { toggleSidebar } from 'src/store/dashboard/main/DashboardManagment';
-
 import SidebarMenu from './parts/SidebarMenu';
 import Logo from 'src/components/shared/logo/Logo';
 import Logout from 'src/components/shared/header/Logout';
@@ -33,7 +31,7 @@ const Sidebar = () => {
         open={SidebarOpen}
         onClose={() => dispatch(toggleSidebar())}
         sx={{
-          backgroundColor: theme.palette.colors.main,
+          backgroundColor: theme.palette.background.main,
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: toggleWidth, backgroundColor: 'inherit', flexShrink: 0 },
         }}
       >

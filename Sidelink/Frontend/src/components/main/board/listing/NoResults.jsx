@@ -1,6 +1,5 @@
 import { Box, TableCell, TableRow, Typography } from '@mui/material';
 import 'src/assets/styles/main/noresults.scss';
-
 import NoResults from 'src/assets/images/no_results.jpg';
 
 function NoResult() {

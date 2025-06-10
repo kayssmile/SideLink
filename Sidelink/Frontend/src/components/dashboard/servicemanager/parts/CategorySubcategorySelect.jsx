@@ -1,33 +1,16 @@
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid2';
+import { Controller } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-
 import { categoriesConfiguration } from 'src/config/CategoriesConfigurations';
-
 import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
 
-const CategorySubcategorySelect = ({ register, setValue, clearErrors, errors, initCategory = null, initSubCategories = [] }) => {
+const CategorySubcategorySelect = ({ control, setValue, clearErrors, initCategory = null, initSubCategories = [] }) => {
   const publicServices = useSelector(state => state.publicServices.publicServices);
   const categories = categoriesConfiguration.map(category => category.name);
-  const [selectedCategory, setSelectedCategory] = useState(initCategory);
   const [subCategories, setSubCategories] = useState([]);
-  const [selectedSubCategories, setSelectedSubCategories] = useState(initSubCategories);
-
-  /*
-   * If we use component to edit data we set the initial values
-   */
-  if (initCategory != null && subCategories.length === 0) {
-    const category = categoriesConfiguration.find(cat => cat.name === initCategory);
-    if (category) {
-      setValue('category', initCategory);
-      setSubCategories(category.subcategories);
-    }
-    const validInitSubCategories = initSubCategories.filter(subCategory => category.subcategories.includes(subCategory));
-    setValue('sub_categories', validInitSubCategories);
-  }
 
   const resetSubCategoriesInput = () => {
-    setSelectedSubCategories([]);
     setValue('sub_categories', []);
     clearErrors('sub_categories');
   };
@@ -38,12 +21,10 @@ const CategorySubcategorySelect = ({ register, setValue, clearErrors, errors, in
    */
   const handleSelectedCategory = newValue => {
     if (!newValue) {
-      setSelectedCategory(null);
       setSubCategories([]);
       resetSubCategoriesInput();
       return;
     }
-    setSelectedCategory(newValue);
     const category = categoriesConfiguration.find(cat => cat.name === newValue);
     if (category) {
       setSubCategories(category.subcategories);
@@ -52,17 +33,19 @@ const CategorySubcategorySelect = ({ register, setValue, clearErrors, errors, in
   };
 
   /*
-   * If new subcategory is selected, we set subcategories to new value (because mui had problem to update value with multiple option we set value manual)
-   * If newValue is empty, we reset the subcategories
+   * If usage is to edit service, category and subcategories set to initvalues
    */
-  const handleSelectedSubCategory = newValue => {
-    if (!newValue) {
-      setSelectedSubCategories([]);
-      return;
+  useEffect(() => {
+    if (initCategory != null && subCategories.length === 0) {
+      const category = categoriesConfiguration.find(cat => cat.name === initCategory);
+      if (category) {
+        setValue('category', initCategory);
+        setSubCategories(category.subcategories);
+        const validInitSubCategories = initSubCategories.filter(subCategory => category.subcategories.includes(subCategory));
+        setValue('sub_categories', validInitSubCategories);
+      }
     }
-    setValue('sub_categories', newValue);
-    setSelectedSubCategories(newValue);
-  };
+  }, [initCategory, initSubCategories, setValue]);
 
   /*
    * If new service is created we reset the category and subcategories
@@ -70,7 +53,7 @@ const CategorySubcategorySelect = ({ register, setValue, clearErrors, errors, in
    */
   useEffect(() => {
     if (publicServices.success && initCategory === null) {
-      setSelectedCategory(null);
+      setValue('category', null);
       setSubCategories([]);
       resetSubCategoriesInput();
     }
@@ -79,28 +62,42 @@ const CategorySubcategorySelect = ({ register, setValue, clearErrors, errors, in
   return (
     <>
       <Grid size={{ xs: 12, xl: 6 }}>
-        <CustomAutocomplete
+        <Controller
           name="category"
-          label="Kategorie"
-          value={selectedCategory}
-          options={categories}
-          onChange={handleSelectedCategory}
-          error={errors.category}
-          helperText={errors.category?.message}
-          register={register('category')}
+          control={control}
+          render={({ field, fieldState }) => (
+            <CustomAutocomplete
+              label="Kategorie"
+              name={field.name}
+              value={field.value}
+              onChange={newValue => {
+                field.onChange(newValue);
+                handleSelectedCategory(newValue);
+              }}
+              options={categories}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+            />
+          )}
         />
       </Grid>
 
       <Grid size={{ xs: 12, xl: 6 }}>
-        <CustomAutocomplete
+        <Controller
           name="sub_categories"
-          label="Sub Kategorie"
-          value={selectedSubCategories}
-          options={subCategories}
-          onChange={handleSelectedSubCategory}
-          error={errors.sub_categories}
-          helperText={errors.sub_categories?.message}
-          multiple
+          control={control}
+          render={({ field, fieldState }) => (
+            <CustomAutocomplete
+              multiple
+              label="Sub Kategorie"
+              name={field.name}
+              value={field.value ?? []}
+              onChange={field.onChange}
+              options={subCategories}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+            />
+          )}
         />
       </Grid>
     </>

@@ -56,7 +56,7 @@ const lightTheme = createTheme({
       hover: '#0202f7',
     },
     text: {
-      primary: '#ffffff',
+      primary: '#000000',
       secondary: '#7C8FAC',
       dark: '#000',
     },

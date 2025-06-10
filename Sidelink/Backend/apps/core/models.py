@@ -1,3 +1,4 @@
+import html
 from django.db import models
 
 
@@ -20,7 +21,7 @@ class Category(TimestampMixin, models.Model):
     keywords = models.JSONField(default=list)
     
     def __str__(self):
-        return self.name
+        return html.unescape(self.name)
 
 class SubCategory(TimestampMixin, models.Model):
     """
@@ -32,7 +33,7 @@ class SubCategory(TimestampMixin, models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='sub_categories') 
 
     def __str__(self):
-        return self.name
+        return html.unescape(self.name)
     
 class Region(TimestampMixin, models.Model):
     """

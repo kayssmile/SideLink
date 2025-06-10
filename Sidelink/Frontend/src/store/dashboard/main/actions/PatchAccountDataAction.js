@@ -1,6 +1,6 @@
 import { axiosInstanceAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getToken } from 'src/services/AuthService';
+import { getToken } from 'src/components/shared/utils/TokenUtils';
 
 const patchAccountDetails = createAsyncThunk('dashboard/patchAccountDetails', async (newUserData, { rejectWithValue }) => {
   try {
@@ -12,7 +12,6 @@ const patchAccountDetails = createAsyncThunk('dashboard/patchAccountDetails', as
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
-    console.log(error);
     return rejectWithValue({
       status: error.response?.status || 500,
       detail: errorMessage,

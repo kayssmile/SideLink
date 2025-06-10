@@ -3,7 +3,6 @@ function filterServicesBySearch(publicServices, keyword) {
 
   publicServices.forEach(publicService => {
     let shouldAdd = false;
-
     for (const [key, value] of Object.entries(publicService)) {
       if (shouldAdd) break;
       if (typeof value === 'string') {
@@ -35,7 +34,6 @@ function filterServicesByCategory(publicServices, category) {
       result.push(publicService);
     }
   });
-
   return result;
 }
 
@@ -51,7 +49,6 @@ function filterServicesBySubCategories(publicServices, subCategories) {
       }
     });
   });
-
   return result;
 }
 
@@ -62,19 +59,16 @@ function filterServicesByRegion(publicServices, region) {
       result.push(publicService);
     }
   });
-
   return result;
 }
 
 function filterServicesByType(publicServices, type) {
   let result = [];
-
   publicServices.forEach(publicService => {
     if (publicService.service_type === type) {
       result.push(publicService);
     }
   });
-
   return result;
 }
 

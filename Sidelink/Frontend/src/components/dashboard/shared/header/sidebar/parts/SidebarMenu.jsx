@@ -1,7 +1,5 @@
-import { Box, List, ListSubheader, styled, useTheme } from '@mui/material';
-
+import { Box, List, ListSubheader, styled } from '@mui/material';
 import { sideBarMenuItems } from 'src/config/NavigationConfigurations';
-
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
 

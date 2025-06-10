@@ -9,34 +9,29 @@ function useGetUrlParam(paramName) {
 
 function useGetUrlParamReaktiv(paramName) {
   const { search } = useLocation();
-
   return useMemo(() => {
     const params = new URLSearchParams(search);
     return params.get(paramName);
   }, [search, paramName]);
 }
 
-function useAddUrlParam() {
+function useUpdateUrlParams() {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
-
-  return (paramName, paramValue) => {
-    const params = new URLSearchParams(search);
-    params.set(paramName, paramValue);
-    navigate(`${window.location.pathname}?${params.toString()}`, { replace: true });
-  };
-}
-
-function useRemoveUrlParams() {
-  const navigate = useNavigate();
-  const { search, pathname } = useLocation();
-  return paramNames => {
+  return (paramsToRemove = [], paramsToAdd = []) => {
     const currentParams = new URLSearchParams(search);
-    paramNames.forEach(paramName => {
+    paramsToRemove.forEach(paramName => {
       currentParams.delete(paramName);
     });
-    navigate(`${window.location.pathname}?${currentParams.toString()}`, { replace: true });
+    paramsToAdd.forEach(({ name, value }) => {
+      if (value !== undefined && value !== null) {
+        currentParams.set(name, value);
+      } else {
+        currentParams.delete(name);
+      }
+    });
+    navigate(`${pathname}?${currentParams.toString()}`, { replace: true });
   };
 }
 
-export { useGetUrlParam, useAddUrlParam, useRemoveUrlParams, useGetUrlParamReaktiv };
+export { useGetUrlParam, useGetUrlParamReaktiv, useUpdateUrlParams };

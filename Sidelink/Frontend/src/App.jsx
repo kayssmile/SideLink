@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
-import { RouterProvider } from 'react-router';
+import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { darkTheme, lightTheme } from 'src/config/Theme.js';
-import { checkAuth, getToken } from 'src/services/AuthService';
+import { checkAuth } from 'src/services/AuthService';
+import { basicPostRequest } from 'src/services/BasicRequests';
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
-
 import router from 'src/routes/Router';
 
 function App() {
@@ -16,24 +15,24 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPublicData());
-    const checkLoggedIn = async () => {
-      if (await checkAuth()) {
-        const token = getToken();
-        if (token) {
-          dispatch(getDashboardData(token));
+    const init = async () => {
+      try {
+        dispatch(getPublicData());
+        if (await checkAuth()) {
+          dispatch(getDashboardData());
         }
+        await basicPostRequest('api/analytics-data/create-visit/', {});
+      } catch (error) {
+        console.error('Error during initialization:', error);
       }
     };
-    checkLoggedIn();
+    init();
   }, [dispatch]);
 
   return (
-    <>
-      <ThemeProvider theme={currentTheme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={currentTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

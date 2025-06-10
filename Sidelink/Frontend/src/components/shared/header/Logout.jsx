@@ -2,10 +2,8 @@ import { Box, Typography, IconButton, Tooltip, useTheme, Button } from '@mui/mat
 import { IconPower } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import invalidateToken from 'src/services/TokenInvalidator';
-import { removeToken, removeRefreshToken, getRefreshToken } from 'src/services/AuthService';
-
+import { removeToken, removeRefreshToken, getRefreshToken } from 'src/components/shared/utils/TokenUtils';
 import { userLogout } from 'src/store/usermanagment/UserManagment';
 import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
 

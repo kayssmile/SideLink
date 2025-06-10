@@ -1,88 +1,84 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { debounce } from 'lodash';
-import { Box, useTheme, useMediaQuery, IconButton, TextField, InputAdornment } from '@mui/material';
-
+import { useTheme, useMediaQuery, IconButton, TextField, InputAdornment } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconX } from '@tabler/icons-react';
-import { filterServicesBySearch, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
-
-import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
-import { useGetUrlParam, useAddUrlParam, useRemoveUrlParams, useGetUrlParamReaktiv } from 'src/components/main/board/hooks/UrlHooks';
-
+import { filterServicesBySearch, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/SearchUtils';
+import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/StoreUtils';
+import { useGetUrlParamReaktiv, useUpdateUrlParams } from 'src/components/main/board/hooks/UrlHooks';
 import { setSearchEngineData } from 'src/store/publicdata/PublicDataManagment';
 
 function SearchText() {
   const dispatch = useDispatch();
   const theme = useTheme();
   const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
-
   const [searchValue, setSearchValue] = useState('');
-
-  const { publicServices, searchMask, searchEngineData, init } = useSelector(state => state.publicData.publicData);
-
-  const setUrlParam = useAddUrlParam();
-  const removeUrlParams = useRemoveUrlParams();
-  //const urlTextSearchParam = useGetUrlParam('search');
-
+  const { publicServices, searchMask, init } = useSelector(state => state.publicData.publicData);
+  const updateUrlParams = useUpdateUrlParams();
   const urlTextSearchParam = useGetUrlParamReaktiv('search');
 
   /*
-   * New filtering starts after 300ms break
+   * New search starts after 300ms break
+   * If searchmask is active we filter services by active mask filters otherwise we filter services by search value
    */
-  const handleNewSearchValue = debounce(newSearchValue => {
-    let newSerachEngineData = [];
-
-    if (isAnyMaskFilterActive(searchMask)) {
-      const activeFilters = checkActiveMaskFilters(searchMask);
-      newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
-      newSerachEngineData = filterServicesBySearch(newSerachEngineData, newSearchValue);
-    } else {
-      newSerachEngineData = filterServicesBySearch(publicServices, newSearchValue);
-    }
-
-    setUrlParam('search', newSearchValue);
-    dispatch(setSearchEngineData(newSerachEngineData));
-  }, 300);
+  const handleNewSearchValue = useMemo(
+    () =>
+      debounce(newSearchValue => {
+        let newSerachEngineData = [];
+        if (isAnyMaskFilterActive(searchMask)) {
+          const activeFilters = checkActiveMaskFilters(searchMask);
+          newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
+          newSerachEngineData = filterServicesBySearch(newSerachEngineData, newSearchValue);
+        } else {
+          newSerachEngineData = filterServicesBySearch(publicServices, newSearchValue);
+        }
+        dispatch(setSearchEngineData(newSerachEngineData));
+      }, 300),
+    []
+  );
 
   /*
-   * If search value is null we load all publicservices, otherwise we filter all publicservices upon input value
+   * If search value is null we load publicservices upon searchmask or load all public services
    */
   const handleNewSearch = newSearchValue => {
     setSearchValue(newSearchValue);
-
     if (newSearchValue == '' || newSearchValue == null) {
-      removeUrlParams(['search']);
+      updateUrlParams(['search'], []);
+      handleNewSearchValue.cancel();
       if (isAnyMaskFilterActive(searchMask)) {
         const activeFilters = checkActiveMaskFilters(searchMask);
-
         let newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
         dispatch(setSearchEngineData(newSerachEngineData));
       } else {
         dispatch(setSearchEngineData(publicServices));
       }
     } else {
+      updateUrlParams([], [{ name: 'search', value: newSearchValue }]);
       handleNewSearchValue(newSearchValue);
     }
   };
 
+  /*
+   * If we load page initially we set search results upon url params
+   */
   useEffect(() => {
     if (!init && urlTextSearchParam) {
       setSearchValue(urlTextSearchParam);
-      //handleNewSearch(urlTextSearchParam);
     }
   }, [init]);
 
+  /*
+   * If new filter from application is set we set search value to empty string
+   */
   useEffect(() => {
-    console.log('wetriggerreaktiveparams', urlTextSearchParam);
-
     if (!urlTextSearchParam) {
       setSearchValue('');
-      //handleNewSearch(urlTextSearchParam);
     }
   }, [urlTextSearchParam]);
 
   return (
     <TextField
+      component="form"
       fullWidth
       placeholder="Suche starten..."
       variant="outlined"

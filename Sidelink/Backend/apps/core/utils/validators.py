@@ -33,7 +33,7 @@ class BasicValidators:
         Args:
             attrs: The attributes to validate.
         Returns:
-            dict: The cleaned attributes if valid.
+            The cleaned attributes if valid.
         Raises:
             ValidationError: If any attribute contains potential XSS content.
         """

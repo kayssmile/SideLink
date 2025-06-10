@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 import { Box, Typography, useTheme, Table, TableBody, TableHead, TableCell, TableContainer, TableFooter, TablePagination, TableRow, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { checkAuth } from 'src/services/AuthService';
 import getPublicprofile from 'src/store/publicdata/actions/GetPublicProfileAction';
 import { resetPublicProfilesProcess } from 'src/store/publicdata/PublicDataManagment';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
-
 import ServicePreview from './ServicePreview';
 import PaginationActions from './PaginationActions';
 import NoResults from './NoResults';

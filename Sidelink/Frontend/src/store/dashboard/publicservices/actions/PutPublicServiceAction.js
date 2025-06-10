@@ -1,6 +1,6 @@
 import { axiosInstanceAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getToken } from 'src/services/AuthService';
+import { getToken } from 'src/components/shared/utils/TokenUtils';
 
 const putPublicService = createAsyncThunk('publicservice/putPublicService', async (newPublicServiceData, { rejectWithValue }) => {
   try {

@@ -1,10 +1,8 @@
 import { IconButton, Box, AppBar, Toolbar, styled, Stack } from '@mui/material';
 import { IconMenu2, IconMoon, IconSun } from '@tabler/icons-react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { toggleSidebar } from 'src/store/dashboard/main/DashboardManagment';
 import { setThemeMode } from 'src/store/publicdata/PublicDataManagment';
-
 import ProfileMenu from 'src/components/shared/header/ProfileMenu';
 
 const Header = () => {

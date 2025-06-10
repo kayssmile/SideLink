@@ -1,6 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 
 function InfoModal() {
@@ -13,12 +12,14 @@ function InfoModal() {
 
   return (
     <Dialog open={infoModal} onClose={handleClose}>
-      <DialogTitle>Information</DialogTitle>
+      <DialogTitle color={'black'}>Information</DialogTitle>
       <DialogContent>
         <DialogContentText>Ihre Zugangsdaten sind abgelaufen, bitte melden Sie sich erneut an.</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Schliessen</Button>
+        <Button onClick={handleClose} variant="contained" color="error">
+          Schliessen
+        </Button>
       </DialogActions>
     </Dialog>
   );

@@ -4,14 +4,12 @@ import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { editAccountSchema } from 'src/config/Schemas';
 import { checkAuth } from 'src/services/AuthService';
 import patchAccountDetails from 'src/store/dashboard/main/actions/PatchAccountDataAction';
 import { resetProcess } from 'src/store/dashboard/main/DashboardManagment';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
-
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/FormElements';
@@ -86,15 +84,7 @@ const AccountDetails = () => {
                   <StyledFormLabel htmlFor="first_name" sx={{ mt: 0 }}>
                     Vorname
                   </StyledFormLabel>
-                  <StyledTextField
-                    type="text"
-                    name="first_name"
-                    id="first_name"
-                    placeholder="kay the DDev"
-                    {...register('first_name')}
-                    error={!!errors.first_name}
-                    helperText={errors.first_name?.message}
-                  />
+                  <StyledTextField type="text" name="first_name" id="first_name" {...register('first_name')} error={!!errors.first_name} helperText={errors.first_name?.message} />
                 </Grid>
 
                 <Grid size={{ xs: 12, sm: 6 }}>
@@ -147,7 +137,7 @@ const AccountDetails = () => {
               <Modal
                 modalState={confirmModal}
                 handleCancel={handleConfirmModalAgree}
-                modalTitle="Bestätigung erforderlich"
+                modalTitle={accountDetails.error ? 'Bestätigung erforderlich' : 'Information'}
                 modalContent={
                   accountDetails.error ? basicFormErrorMessage(accountDetails.error) : accountDetails.success ? <Typography color="success">Account erfolgreich aktualisiert!</Typography> : ''
                 }

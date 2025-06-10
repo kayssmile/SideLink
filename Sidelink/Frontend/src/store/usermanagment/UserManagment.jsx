@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import registerUser from './actions/RegisterAction';
 import login from './actions/LoginAction';
-import { setToken } from 'src/services/AuthService';
+import { setToken } from 'src/components/shared/utils/TokenUtils';
 
 const initialState = {
   loading: { login: false, register: false, init: false },

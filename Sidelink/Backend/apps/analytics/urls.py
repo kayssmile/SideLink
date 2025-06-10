@@ -6,5 +6,5 @@ URL configuration for the analytics app.
 """
 urlpatterns = [  
     path('', AnalyticsData.as_view(), name='analytics_data'),
-    path('create/', create_analytics_data, name='create_analytics_data_entry'),
+    path('create-visit/', create_analytics_data, name='create_analytics_data_entry'),
 ]  
