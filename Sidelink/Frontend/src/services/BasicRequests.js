@@ -16,6 +16,22 @@ async function basicPostRequest(url, message) {
   }
 }
 
+async function basicGetRequest(url) {
+  try {
+    const response = await axiosInstanceBasic.get(url);
+    return {
+      status: true,
+      data: response.data,
+    };
+  } catch (error) {
+    const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
+    return {
+      status: false,
+      data: { status: error.response?.status || 500, detail: errorMessage },
+    };
+  }
+}
+
 async function basicDelRequest(token) {
   try {
     const response = await axiosInstanceAuth(token).delete(`/api/auth/registereduser/`);
@@ -29,4 +45,4 @@ async function basicDelRequest(token) {
   }
 }
 
-export { basicPostRequest, basicDelRequest };
+export { basicPostRequest, basicDelRequest, basicGetRequest };

@@ -24,6 +24,7 @@
     "@tabler/icons-react": "^3.30.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
+    "@vitejs/plugin-basic-ssl": "^2.0.0",
     "axios": "^1.8.4",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "i": "^0.3.7",

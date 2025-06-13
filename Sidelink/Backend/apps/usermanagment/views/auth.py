@@ -1,6 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
@@ -12,6 +13,10 @@ from django.utils.encoding import force_bytes
 from apps.usermanagment.serializers import CustomTokenObtainPairSerializer
 from apps.usermanagment.models import RegisteredUser
 from apps.core.services.email_service import EmailService
+
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
+from django.middleware.csrf import get_token
 
 class ChangePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -105,6 +110,7 @@ class PasswordResetView(APIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
+    @method_decorator(csrf_protect)
     def post(self, request, *args, **kwargs):
         """
         Customized TokenObtainPairView to return access/refresh tokens
@@ -143,3 +149,9 @@ class CustomTokenBlacklistView(TokenBlacklistView):
         return response
     
 
+#print(get_token(request))
+    #print(request.headers.get('X-CSRFToken'))
+@api_view(['GET'])
+def csrf_token_view(request):
+    token = get_token(request)
+    return Response({'csrfToken': token}, status=status.HTTP_200_OK) 

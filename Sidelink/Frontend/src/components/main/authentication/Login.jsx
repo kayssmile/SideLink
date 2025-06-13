@@ -30,6 +30,7 @@ function Login() {
   });
 
   const onSubmit = data => {
+    console.log(localStorage.getItem('csrfToken'));
     dispatch(login(data));
   };
 

@@ -1,9 +1,11 @@
-import { axiosInstanceBasic } from 'src/api/AxiosInstance';
+import { axiosInstanceBasic, axiosInstanceBasicAuth, axiosInstanceBasicAuthC } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const login = createAsyncThunk('auth/userLogin', async ({ email, password }, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstanceBasic.post('/api/auth/login/', { email, password });
+    let csrfToken = localStorage.getItem('csrfToken');
+    //const { data } = await axiosInstanceBasicAuthC(csrfToken).post('/api/auth/login/', { email, password });
+    const { data } = await axiosInstanceBasicAuth.post('/api/auth/login/', { email, password });
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

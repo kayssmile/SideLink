@@ -14,8 +14,20 @@ const axiosInstanceBasicAuth = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
+    'X-CSRFToken': localStorage.getItem('csrfToken') || '',
   },
 });
+
+function axiosInstanceBasicAuthC(csrf) {
+  return axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrf,
+    },
+  });
+}
 
 function axiosInstanceAuth(token) {
   return axios.create({
@@ -27,4 +39,4 @@ function axiosInstanceAuth(token) {
   });
 }
 
-export { axiosInstanceBasic, axiosInstanceBasicAuth, axiosInstanceAuth };
+export { axiosInstanceBasic, axiosInstanceBasicAuth, axiosInstanceAuth, axiosInstanceBasicAuthC };

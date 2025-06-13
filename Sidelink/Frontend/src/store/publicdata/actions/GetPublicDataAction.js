@@ -1,9 +1,9 @@
-import { axiosInstanceBasic } from 'src/api/AxiosInstance';
+import { axiosInstanceBasic, axiosInstanceBasicAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const getPublicData = createAsyncThunk('publicdata/getPublicData', async (_, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstanceBasic.get(`/api/public-data/`);
+    const { data } = await axiosInstanceBasicAuth.get(`/api/public-data/`);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

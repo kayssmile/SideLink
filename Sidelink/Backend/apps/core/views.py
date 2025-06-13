@@ -13,6 +13,7 @@ from apps.publicservice.serializers import PublicServiceSerializer
 from apps.core.services import email_service
 from .serializers import ContactMessageSerializer
 
+
 class UserDashboardData(APIView):
     """
     API endpoint to retrieve dashboard data for an authenticated user.

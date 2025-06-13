@@ -1,7 +1,7 @@
 from rest_framework_simplejwt.views import TokenVerifyView
 from django.urls import path  
 from apps.usermanagment.views.user import RegisterUserView, RegisteredUserView
-from apps.usermanagment.views.auth import CustomTokenObtainPairView, CustomTokenRefreshView, CustomTokenBlacklistView, ChangePasswordView, ForgotPasswordView, PasswordResetView
+from apps.usermanagment.views.auth import CustomTokenObtainPairView, CustomTokenRefreshView, CustomTokenBlacklistView, ChangePasswordView, ForgotPasswordView, PasswordResetView, csrf_token_view
 
 """ 
 URL configuration for the usermanagement app.
@@ -20,6 +20,7 @@ urlpatterns = [
     path('password-reset/', PasswordResetView.as_view(), name='password_reset'),
 
     # JWT authentication and token management
+    path('csrf/', csrf_token_view, name='csrf_obtain'),
     path('login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
     path('verify/', TokenVerifyView.as_view(), name='token_verify'),
