@@ -3,8 +3,8 @@ import { debounce } from 'lodash';
 import { useTheme, useMediaQuery, IconButton, TextField, InputAdornment } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconX } from '@tabler/icons-react';
-import { filterServicesBySearch, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/SearchUtils';
-import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/StoreUtils';
+import { filterServicesBySearch, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
+import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
 import { useGetUrlParamReaktiv, useUpdateUrlParams } from 'src/components/main/board/hooks/UrlHooks';
 import { setSearchEngineData } from 'src/store/publicdata/PublicDataManagment';
 

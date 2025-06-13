@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import Grid from '@mui/material/Grid2';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterServicesBySubCategories, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/SearchUtils';
+import { filterServicesBySubCategories, filterServicesByActiveMaskFilters } from 'src/components/main/board/utils/searchUtils';
 import { setSearchEngineData, setSearchMask } from 'src/store/publicdata/PublicDataManagment';
-import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/StoreUtils';
+import { isAnyMaskFilterActive, checkActiveMaskFilters } from 'src/components/main/board/utils/storeUtils';
 import { useGetUrlParam, useUpdateUrlParams } from 'src/components/main/board/hooks/UrlHooks';
 import CustomAutocomplete from 'src/components/shared/forms/CustomAutocomplete';
 

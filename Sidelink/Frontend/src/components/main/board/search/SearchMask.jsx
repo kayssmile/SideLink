@@ -1,4 +1,5 @@
-import { Box, useMediaQuery } from '@mui/material';
+import { useState, useRef } from 'react';
+import { Box, useMediaQuery, Switch, Slide, FormControlLabel } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import SerachText from './SearchText';
 import SearchRegion from './SearchRegion';
@@ -7,18 +8,28 @@ import SearchCategories from './SearchCategories';
 
 function SearchMask() {
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const [checked, setChecked] = useState(false);
+  const containerRef = useRef(null);
+
+  const handleChange = () => {
+    setChecked(prev => !prev);
+  };
 
   return (
     <Box component="aside">
       <SerachText />
-      <Box>
-        <Grid container spacing={smDown ? 4 : 6}>
-          <SearchCategories />
 
-          <SearchRegion />
+      <Box sx={{ p: 2, height: checked ? '250px' : '30px', overflow: 'hidden' }} ref={containerRef}>
+        <FormControlLabel sx={{ position: 'relative', left: '85%' }} control={<Switch checked={checked} onChange={handleChange} />} label="Filter anzeigen" />
+        <Slide in={checked} container={containerRef.current}>
+          <Grid container spacing={smDown ? 4 : 6}>
+            <SearchCategories />
 
-          <SearchType />
-        </Grid>
+            <SearchRegion />
+
+            <SearchType />
+          </Grid>
+        </Slide>
       </Box>
     </Box>
   );

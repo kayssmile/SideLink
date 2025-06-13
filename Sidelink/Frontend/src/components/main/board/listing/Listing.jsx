@@ -71,7 +71,7 @@ function Listing() {
     <Box component="article">
       <Scrollbar>
         <TableContainer component={Paper} sx={{ backgroundColor: theme.palette.background.main, boxShadow: 'none' }}>
-          <Table sx={{ minWidth: 500, backgroundColor: theme.palette.background.main, marginTop: { xs: '1rem', lg: '5rem' } }} aria-label="Tabelle Suche und Angebote">
+          <Table sx={{ minWidth: 500, backgroundColor: theme.palette.background.main, marginTop: { xs: '1rem', lg: '2rem' } }} aria-label="Tabelle Suche und Angebote">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ borderColor: theme.palette.border.main, minWidth: '200px' }}>
