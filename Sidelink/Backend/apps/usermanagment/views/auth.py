@@ -2,8 +2,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
+from rest_framework import status, serializers
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView, TokenVerifyView
+from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer
 from django.contrib.auth.password_validation import validate_password
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
@@ -13,18 +14,40 @@ from apps.usermanagment.serializers import CustomTokenObtainPairSerializer
 from apps.usermanagment.models import RegisteredUser
 from apps.core.services.email_service import EmailService
 
+
 class ChangePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
+    @extend_schema(
+        request=inline_serializer(
+            name="PasswordChangeRequest",
+            fields={
+                "current_password": serializers.CharField(
+                    help_text="Aktuelles Passwort",
+                    style={'input_type': 'password'},
+                ),
+                "new_password": serializers.CharField(
+                    help_text="Neues Passwort",
+                    style={'input_type': 'password'},
+                )
+            }
+        ),
+        responses={
+            200: OpenApiResponse(
+                description="Password changed successfully",
+                response=None
+            ),
+            400: OpenApiResponse(
+                description="Invalid current password or new password validation failed",    
+            ),
+            401: OpenApiResponse(description="Unauthorized"),
+            404: OpenApiResponse(description="User not found")
+        },
+        description="Handle PATCH request to change the user's password.",
+        tags=["Authorisation"]
+    )
     def patch(self, request):
-        """
-        Handle PATCH request to change the user's password.
-        Returns:
-            - 200 OK if password change is successful
-            - 400 Bad Request if current password is incorrect or new password is invalid
-            - 401 Unauthorized if the user is not authenticated
-        """
         user = request.user
         current_password = request.data.get("current_password")
         new_password = request.data.get("new_password")
@@ -38,18 +61,33 @@ class ChangePasswordView(APIView):
         user.save()
         return Response(status=status.HTTP_200_OK)
 
+
 class ForgotPasswordView(APIView):
     
+    @extend_schema(
+        request=inline_serializer(
+            name="ForgotPasswordRequest",
+            fields={
+                "email": serializers.EmailField(
+                    help_text="Registered email address of the user",
+                )
+            }
+        ),
+        responses={
+            200: OpenApiResponse(
+                description="If the email is registered, a password reset link is sent.",
+            ),
+            400: OpenApiResponse(
+                description="Email field is missing or invalid.",
+            ),
+            500: OpenApiResponse(
+                description="Internal server error if email sending fails."
+            )
+        },
+        description="Sends a password reset link to the user's email address if it exists in the system.",
+        tags=["Authorisation"]
+    )
     def post(self, request):
-        """
-        Sends a password reset link to the user's email address if it exists in the system.
-        Request body:
-            - email: The user's registered email address.
-        Returns:
-            200 OK: If the process was triggered (even if the email doesn't exist, for security).
-            400 Bad Request: If the email field is missing.
-            500 Internal Server Error: If the email sending fails unexpectedly.
-        """
         email = request.data.get('email')
         if not email:
             return Response({'detail': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -70,19 +108,37 @@ class ForgotPasswordView(APIView):
             pass 
         return Response({'detail': 'If Email is registered in our system, the link is sent.'}, status=status.HTTP_200_OK)
 
+
 class PasswordResetView(APIView):
    
+    @extend_schema(
+        tags=["Authorisation"],
+        description="Resets the password of a user using the token and UID from the password-reset email.",
+        request=inline_serializer(
+            name="PasswordResetConfirmRequest",
+            fields={
+                "uidb64": serializers.CharField(
+                    help_text="Base64-kodierte User-ID",
+                ),
+                "token": serializers.CharField(
+                    help_text="Token aus der Passwort-Zurücksetzen-Mail",
+                ),
+                "password": serializers.CharField(
+                    help_text="Neues Passwort",
+                    style={'input_type': 'password'},
+                )
+            }
+        ),
+        responses={
+            200: OpenApiResponse(
+                description="Password was successfully reset.",
+            ),
+            400: OpenApiResponse(
+                description="Invalid token, malformed data, or password validation error.",
+            ),
+        }
+    )
     def post(self, request):
-        """
-        Resets the password of a user using the token and UID from the password-reset-email.
-        Request body:
-            - uidb64: Base64-encoded user ID from reset link.
-            - token: Token from reset link.
-            - password: New password to be set.
-        Returns:
-            200 OK: If password is successfully reset.
-            400 Bad Request: If token is invalid, link is malformed, or password validation fails.
-        """
         try:
             # Decode the UID and retrieve the user
             uid = urlsafe_base64_decode(request.data.get('uidb64')).decode()
@@ -105,21 +161,21 @@ class PasswordResetView(APIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
+    @extend_schema(
+        description="Customized TokenObtainPairView to return access/refresh tokens",
+        tags=["Authorisation"]
+    )
     def post(self, request, *args, **kwargs):
-        """
-        Customized TokenObtainPairView to return access/refresh tokens
-        """
         response = super().post(request, *args, **kwargs)
         return response
     
 class CustomTokenRefreshView(TokenRefreshView):
     
+    @extend_schema(
+        description="Handle the POST request to obtain JWT tokens.",
+        tags=["Authorisation"]
+    )
     def post(self, request, *args, **kwargs):
-        """
-        Handle the POST request to obtain JWT tokens.
-        Returns:
-            Response: Contains access and refresh tokens.
-        """
         refresh_token = request.data.get('refresh')
         if not refresh_token:
             return Response({"detail": "Refresh token is missing"}, status=status.HTTP_400_BAD_REQUEST)          
@@ -128,18 +184,26 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 class CustomTokenBlacklistView(TokenBlacklistView):
     
+    @extend_schema(
+        description="Handle the POST request to blacklist/invalidate JWT tokens.",
+        tags=["Authorisation"]
+    )
     def post(self, request, *args, **kwargs):
-        """
-        Handle the POST request to refresh JWT tokens.
-        Raises:
-            ValidationError: If no refresh token is provided in the request.
-        Returns:
-            Response: Contains new access and refresh tokens.
-        """
         refresh_token = request.data.get('refresh')
         if not refresh_token:
             return Response({"detail": "Refresh token is missing"}, status=status.HTTP_400_BAD_REQUEST)
         response = super().post(request, *args, **kwargs)
         return response
-    
+
+
+@extend_schema(
+    description="Verify the validity of a JWT token.",
+    responses={
+        200: OpenApiResponse(description="Token is valid."),
+        401: OpenApiResponse(description="Token is invalid or expired.")
+    },
+    tags=["Authorisation"]
+)
+class CustomTokenVerifyView(TokenVerifyView):
+    pass
 

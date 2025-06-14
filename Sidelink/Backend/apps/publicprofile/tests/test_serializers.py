@@ -7,7 +7,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from apps.usermanagment.models import RegisteredUser
 from apps.publicprofile.serializers import PublicProfileSerializer
 
-# Use temp directory for media files, avoiding saving files in actual MEDIA_ROOT
+# We use temporary directory for media files in tests
 @override_settings(MEDIA_ROOT=tempfile.gettempdir())
 class PublicProfileSerializerTests(TestCase):
     def setUp(self):
@@ -122,7 +122,7 @@ class PublicProfileSerializerTests(TestCase):
         self.assertIn("Upload a valid image.", serializer.errors["public_profile_picture"][0])
 
     def tearDown(self):
-        # Cleanup all files in temp dir
+        # Cleanup all files in tempporary direcoty
         media_root = tempfile.gettempdir()
         for f in os.listdir(media_root):
             path = os.path.join(media_root, f)

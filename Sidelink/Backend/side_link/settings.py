@@ -5,18 +5,12 @@ from pathlib import Path
 from datetime import timedelta
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-5^avpma0u=ii+t%xrpoe5^xm=(cvkgk6n4p7z^1#1o^xqb-$m*'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split()
 CLIENT_URL = os.environ.get("CLIENT_URL", "http://localhost:5173")
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -29,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'drf_spectacular',
     'apps.core',
     'apps.usermanagment',
     'apps.publicservice',
@@ -42,6 +37,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'SideLink API',
+    'DESCRIPTION': 'Documentation for the SideLink API',
+    'VERSION': 'not versioned',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 SIMPLE_JWT = {
@@ -147,7 +150,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Zurich'
@@ -171,8 +173,7 @@ EMAIL_CONSOLE_FORMAT = '=== EMAIL KONSOLE (DEV) ===\n\n{email}\n\n=== END ==='
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@sidelink.ch')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@sidelink.ch')
 
-# Logging settings
-# Customized logging configuration for Django and email service
+# Customized logging configuration for Django and email-service
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

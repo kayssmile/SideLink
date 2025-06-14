@@ -59,7 +59,6 @@ class DataProvider:
     def get_all_registrations_per_month_and_year(self):
         """
         Returns a list of dictionaries with registration statistics grouped by year and month.
-        Prepare panda for further data analysis
         """
         qs = RegisteredUser.objects.values('updated_at')
         if not qs.exists():

@@ -1,7 +1,9 @@
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+
 
 """ 
 URL configuration for the side_link project.
@@ -10,6 +12,8 @@ Defines the global URL routing including admin, authentication,
 public profile, public services, core, and analytics APIs.
 """
 urlpatterns = [
+    path('', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('admin/', admin.site.urls),
     path('api/', include('apps.core.urls')),
     path('api/auth/', include('apps.usermanagment.urls')),

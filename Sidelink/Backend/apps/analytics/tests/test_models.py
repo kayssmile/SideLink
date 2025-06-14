@@ -7,7 +7,7 @@ class CoreModelTests(TestCase):
         """
         Create a analtics data entry.
         """
-        self.analytics_entry = AnalyticsDataEntry.objects.create(page_visit=1)
+        self.analytics_entry = AnalyticsDataEntry.objects.create(page_visit=True)
         
     def test_entry_exists(self):
         """

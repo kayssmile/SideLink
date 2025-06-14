@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer, OpenApiExample
+from drf_spectacular.types import OpenApiTypes
 from django.conf import settings
 from apps.publicprofile.models import PublicProfile
 from apps.publicservice.models import PublicService
@@ -13,22 +15,31 @@ from apps.publicservice.serializers import PublicServiceSerializer
 from apps.core.services import email_service
 from .serializers import ContactMessageSerializer
 
+
 class UserDashboardData(APIView):
-    """
-    API endpoint to retrieve dashboard data for an authenticated user.
-    Returns user account data, public profile information, and any public services 
-    the user has created.
-    """
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
    
+    @extend_schema(
+        responses={
+            200: OpenApiResponse(
+                description="Aggregated dashboard data for the authenticated user.",
+                response=inline_serializer(
+                    name='Dashboard Data Response',
+                    fields={
+                        'user_data': CustomUserSerializer(),
+                        'public_profile_data': PublicProfileSerializer(),
+                        'public_services_data': PublicServiceSerializer(many=True)
+                    }
+                ),
+            ),
+            401: OpenApiResponse(description="Unauthorized"),
+            404: OpenApiResponse(description="User not found.")
+        },
+        description="API endpoint to retrieve dashboard data for an authenticated user.",
+        tags=["Core"]
+    )
     def get(self, request):
-        """
-        Handle GET request to return dashboard data for the authenticated user.
-        Returns:
-            - 200 OK with user, public profile, and public services data if user exists
-            - 404 Not Found if user not found
-        """
         user = request.user
         user_data = CustomUserSerializer(user).data
         public_profile_data = self._get_publicprofile_data(user)
@@ -58,28 +69,67 @@ class UserDashboardData(APIView):
         return public_services_data
     
 
+@extend_schema(
+    responses={
+        200: OpenApiResponse(
+            description="Delivers all public services.",
+            response=inline_serializer(
+                name='Public Data Response',
+                fields={
+                    'public_services_data': PublicServiceSerializer(many=True)
+                }
+            ),
+        ),
+    },
+    description="Delivers all public services.",
+    tags=["Core"]
+)
 @api_view(['GET'])
 def get_public_data(request):
-    """
-    API endpoint to retrieve all public profiles and public services.
-    Returns:
-        - 200 OK with all publicservices or [] if none exist.
-    """
     public_services_data = PublicService.objects.all()
     public_services_data = PublicServiceSerializer(public_services_data, many=True).data
     public_data = {'public_services_data': public_services_data}
     return Response(public_data, status=status.HTTP_200_OK)
 
+
+@extend_schema(
+    request=ContactMessageSerializer,
+    responses={
+        201: OpenApiResponse(
+            description="Message successfully processed and sent",
+            response=ContactMessageSerializer
+        ),
+        400: OpenApiResponse(
+            description="Invalid input data",
+            response=OpenApiTypes.OBJECT,
+            examples=[
+                OpenApiExample(
+                    "Validation Error Example",
+                    value={
+                        "subject": ["This field is required."],
+                        "message": ["This field is required."],
+                    },
+                    status_codes=['400']
+                )
+            ]
+        ),
+        500: OpenApiResponse(
+            description="Email sending failed",
+            response=OpenApiTypes.OBJECT,
+            examples=[
+                OpenApiExample(
+                    "Email Error Example",
+                    value={"message": "Email could not be sent."},
+                    status_codes=['500']
+                )
+            ]
+        )
+    },
+    description="API endpoint to process and send contact messages to the admin. Validates input and sends an email to the given email.",
+    tags=["Core"]
+)
 @api_view(['POST'])
 def process_message(request):
-    """
-    API endpoint to process and send contact messages to the admin.
-    Validates input and sends an email to the given email.
-    Returns:
-        - 201 Created if the message is sent and saved
-        - 400 Bad Request if validation fails
-        - 500 Internal Server Error if sending email fails
-    """
     serializer = ContactMessageSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
