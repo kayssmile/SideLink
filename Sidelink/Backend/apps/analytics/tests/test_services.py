@@ -90,9 +90,9 @@ class DataProviderTests(TestCase):
         """
         Test that the DataProvider returns the correct registration statistics grouped by year and month.
         """
-        self.user1.updated_at = timezone.now()
-        self.user1.save()
-        RegisteredUser.objects.filter(id=self.user2.id).update(updated_at=timezone.now() - timedelta(days=365))
+        fixed_date = timezone.datetime(2025, 5, 25, 12, 0, tzinfo=timezone.get_current_timezone())
+        RegisteredUser.objects.filter(id=self.user1.id).update(updated_at=fixed_date)
+        RegisteredUser.objects.filter(id=self.user2.id).update(updated_at=fixed_date - timedelta(days=365))
         result = self.provider.get_all_registrations_per_month_and_year()
         self.assertEqual(len(result), 2)
         self.assertEqual(result[0]['year'], 2024)
@@ -102,7 +102,7 @@ class DataProviderTests(TestCase):
         self.assertIn('Mai', result[0]['months'])
         self.assertIn('Mai', result[1]['months'])
         self.assertEqual(result[0]['months']['Mai'], 1)
-        self.assertEqual(result[1]['months']['Mai'], 2)
+        self.assertEqual(result[1]['months']['Mai'], 1)
     
     def test_get_all_registrations_per_month_and_year_no_registrations(self):
         """
