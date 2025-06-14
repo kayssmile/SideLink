@@ -1,9 +1,9 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
-from django.urls import reverse
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.conf import settings
 from unittest import mock
+from django.urls import reverse
+from django.conf import settings
 from apps.usermanagment.models import RegisteredUser
 from apps.publicservice.models import PublicService
 

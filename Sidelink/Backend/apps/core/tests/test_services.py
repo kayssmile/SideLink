@@ -1,7 +1,6 @@
 from rest_framework.exceptions import ValidationError
 from unittest.mock import patch, Mock
 from django.test import TestCase
-from django.test import TestCase
 from apps.core.services.db_service import DbService
 from apps.core.models import Category, SubCategory, Region, Location
 from apps.core.services.email_service import EmailService

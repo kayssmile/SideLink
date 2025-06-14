@@ -68,7 +68,11 @@ class ForgotPasswordViewTest(APITestCase):
             last_name="Doe"
         )
 
-    def test_forgot_password(self):
+    # To prevent real logging we mock the logger
+    @patch('apps.core.services.email_service.logger')
+    # to prevent real email sending, we mock the EmailMessage class
+    @patch('apps.core.services.email_service.EmailMessage')
+    def test_forgot_password(self, mock_send_email_system, mock_logger):
         """Test sending password reset email."""
         url = reverse('forgot_password')
         data = {
@@ -76,9 +80,10 @@ class ForgotPasswordViewTest(APITestCase):
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(mail.outbox), 1)
-        body = mail.outbox[0].body
-        self.assertIn("password-reset", body)
+        mock_logger.info.assert_called_once()
+        log_msg = mock_logger.info.call_args[0][0]
+        self.assertIn('Sent email to auth@example.com', log_msg)
+        self.assertIn('Passwort zurücksetzen', log_msg)
 
     def test_forgot_password_invalid_request(self):
         """Test sending password reset email with invalid email."""
