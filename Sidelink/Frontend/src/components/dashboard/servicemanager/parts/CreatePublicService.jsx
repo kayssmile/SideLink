@@ -63,7 +63,7 @@ const CreatePublicService = ({ type }) => {
       setValue('category', null);
       setValue('sub_categories', []);
     }
-  }, [publicServices.error, publicServices.success]);
+  }, [publicServices.error, publicServices.success, reset, setValue]);
 
   return (
     <Grid container>

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import LayoutMain from 'src/components/main/layout/LayoutMain';
 import { darkTheme } from 'src/config/Theme.js';
 import { ThemeProvider } from '@emotion/react';

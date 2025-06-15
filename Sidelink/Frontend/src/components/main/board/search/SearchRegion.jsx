@@ -50,6 +50,7 @@ function SearchRegion() {
     if (urlTypeParam) {
       setSelectedRegion(urlTypeParam);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
   return (

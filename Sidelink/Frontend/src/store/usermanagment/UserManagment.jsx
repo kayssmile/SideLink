@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import registerUser from './actions/RegisterAction';
 import login from './actions/LoginAction';
-import { setToken } from 'src/components/shared/utils/TokenUtils';
+import { setToken, setRefreshToken } from 'src/components/shared/utils/TokenUtils';
 
 const initialState = {
   loading: { login: false, register: false, init: false },
-  userInfo: null,
   error: { login: false, register: false, init: false },
   success: { login: false, register: false, init: false },
   infoModal: false,
@@ -16,7 +15,6 @@ const userManagment = createSlice({
   initialState,
   reducers: {
     userLogout: state => {
-      state.userInfo = initialState.userInfo;
       state.loading = initialState.loading;
       state.success = initialState.success;
       state.error = initialState.error;
@@ -35,13 +33,8 @@ const userManagment = createSlice({
         state.loading.login = false;
         state.error.login = false;
         state.success.login = true;
-        //state.userInfo = payload.user;
         setToken(payload.access);
-        //localStorage.setItem('accessToken', payload.access);
-        //localStorage.setItem('userInfo', JSON.stringify(payload.user.id));
-
-        /* for development, production is http-only cookie */
-        localStorage.setItem('refreshToken', payload.refresh_token);
+        setRefreshToken(payload.refresh_token);
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading.login = false;

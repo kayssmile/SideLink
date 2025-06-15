@@ -155,7 +155,6 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
       });
     }
   }
-
   return result;
 }
 

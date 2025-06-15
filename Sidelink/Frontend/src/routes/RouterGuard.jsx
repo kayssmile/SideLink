@@ -11,7 +11,7 @@ import Loading from 'src/components/shared/Loading';
  * RouterGuard as wrapper for protected routes, initialstate null is used to indicate loading
  */
 const RouterGuard = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null); // null = lädt
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const RouterGuard = ({ children }) => {
       }
     };
     checkAuthorization();
-  }, []);
+  }, [dispatch]);
 
   if (isLoggedIn === null) {
     return <Loading />;

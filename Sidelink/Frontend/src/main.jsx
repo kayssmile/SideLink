@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import 'src/assets/styles/globals.scss';
@@ -10,7 +9,3 @@ createRoot(document.getElementById('spa')).render(
     <App />
   </Provider>
 );
-
-{
-  /* <StrictMode></StrictMode> */
-}

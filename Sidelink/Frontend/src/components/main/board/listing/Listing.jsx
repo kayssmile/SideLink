@@ -65,7 +65,7 @@ function Listing() {
       dispatch(resetPublicProfilesProcess());
       navigate('/service-profile/' + selectedService.id);
     }
-  }, [publicProfiles.success]);
+  }, [publicProfiles.success, selectedService, dispatch, navigate]);
 
   return (
     <Box component="article">

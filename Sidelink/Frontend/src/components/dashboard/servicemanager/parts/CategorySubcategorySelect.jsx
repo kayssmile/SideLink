@@ -45,7 +45,7 @@ const CategorySubcategorySelect = ({ control, setValue, clearErrors, initCategor
         setValue('sub_categories', validInitSubCategories);
       }
     }
-  }, [initCategory, initSubCategories, setValue]);
+  }, [initCategory, initSubCategories, setValue, subCategories.length]);
 
   /*
    * If new service is created we reset the category and subcategories
@@ -57,6 +57,7 @@ const CategorySubcategorySelect = ({ control, setValue, clearErrors, initCategor
       setSubCategories([]);
       resetSubCategoriesInput();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicServices.success]);
 
   return (

@@ -23,6 +23,7 @@ function SearchMask() {
         <FormControlLabel sx={{ position: 'relative', left: '85%' }} control={<Switch checked={checked} onChange={handleChange} />} label="Filter anzeigen" />
         <Slide in={checked} container={containerRef.current}>
           <Grid container spacing={smDown ? 4 : 6}>
+            {/*  */}
             <SearchCategories />
 
             <SearchRegion />

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import Header from 'src/components/main/shared/header/header';
 import { ThemeProvider } from '@emotion/react';
 import { darkTheme } from 'src/config/Theme.js';

@@ -13,10 +13,8 @@ function SearchCategories() {
   const dispatch = useDispatch();
   const { publicServices, searchMask } = useSelector(state => state.publicData.publicData);
   const categories = categoriesConfiguration.map(category => category.name);
-
   const [selectedCategory, setSelectedCategory] = useState('');
   const [subCategories, setSubCategories] = useState([]);
-
   const urlCategoryParam = useGetUrlParam('category');
   const updateUrlParams = useUpdateUrlParams();
 
@@ -64,6 +62,7 @@ function SearchCategories() {
     if (urlCategoryParam) {
       handleNewCategory(urlCategoryParam);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

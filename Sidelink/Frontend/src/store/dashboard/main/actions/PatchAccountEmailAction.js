@@ -12,7 +12,6 @@ const patchAccountEmail = createAsyncThunk('dashboard/patchAccountEmail', async 
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
-    console.log(error);
     return rejectWithValue({
       status: error.response?.status || 500,
       detail: errorMessage,

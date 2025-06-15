@@ -32,35 +32,24 @@ const PublicDataManagment = createSlice({
       state.publicData.init = payload;
     },
     setSearchEngineData: (state, action) => {
-      //console.log(action);
-      //console.log('here we set state', action.payload);
       state.publicData.searchEngineData = action.payload;
-      //console.log(state.publicData);
-      //console.log(state.publicData.searchEngineData);
     },
     setSearchMask: (state, { payload }) => {
-      //console.log(payload);
-
       if (payload.type === 'category') {
-        //state.publicData.searchMask.active = true;
         state.publicData.searchMask.category.data = payload.data;
       }
       if (payload.type === 'region') {
-        //state.publicData.searchMask.active = true;
         state.publicData.searchMask.region.data = payload.data;
       }
       if (payload.type === 'type') {
-        //state.publicData.searchMask.active = true;
         state.publicData.searchMask.serviceType.data = payload.data;
       }
       if (payload.type === 'subCategories') {
-        // state.publicData.searchMask.active = true;
         state.publicData.searchMask.subCategories.data = payload.data;
-      } /* */
+      }
       if (payload.type === 'text') {
-        // state.publicData.searchMask.active = true;
         state.publicData.searchMask.text.data = payload.data;
-      } /* */
+      }
     },
     resetPublicProfilesProcess: state => {
       state.publicData.publicProfiles = {
@@ -87,17 +76,13 @@ const PublicDataManagment = createSlice({
           ...state.publicData,
           searchEngineData: payload.public_services_data,
           publicServices: payload.public_services_data,
-
-          //  publicProfiles: payload.public_services_data,
           loading: false,
           success: true,
           error: false,
         };
-        // console.log('payloadPublicData', payload);
       })
       .addCase(getPublicData.rejected, (state, { payload }) => {
         state.publicData = { ...state.publicData, loading: false, success: false, error: payload };
-        //console.log('payloadPublicDataError', payload);
       })
       .addCase(getPublicprofile.pending, state => {
         state.publicData.publicProfiles = {
@@ -124,7 +109,6 @@ const PublicDataManagment = createSlice({
           success: false,
           error: payload,
         };
-        //console.log('payloadPublicDataError', payload);
       });
   },
 });

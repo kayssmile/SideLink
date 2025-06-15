@@ -14,23 +14,22 @@ function Analytics() {
   const dispatch = useDispatch();
   const { analytics } = useSelector(state => state.dashboard);
 
-  const initAnalyticsData = async () => {
-    try {
-      if (!analytics.loading && (await checkAuth())) {
-        dispatch(getAnalyticsData());
-      } else {
-        dispatch(toggleInfoModal());
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
+    const initAnalyticsData = async () => {
+      try {
+        if (!analytics.loading && (await checkAuth())) {
+          dispatch(getAnalyticsData());
+        } else {
+          dispatch(toggleInfoModal());
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
     if (!analytics.success && !analytics.error && !analytics.loading) {
       initAnalyticsData();
     }
-  }, [analytics]);
+  }, [analytics, dispatch]);
 
   return (
     <Box component="section" sx={{ flexGrow: 1, padding: { xs: '5px', sm: '20px' } }}>

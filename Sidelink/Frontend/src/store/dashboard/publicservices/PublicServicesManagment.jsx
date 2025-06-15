@@ -61,7 +61,7 @@ const publicServicesManagment = createSlice({
       .addCase(deletePublicService.pending, state => {
         state.publicServices = { ...state.publicServices, loading: true, success: false, error: false };
       })
-      .addCase(deletePublicService.fulfilled, (state, { payload }) => {
+      .addCase(deletePublicService.fulfilled, state => {
         state.publicServices = { ...state.publicServices, loading: false, success: true, error: false };
       })
       .addCase(deletePublicService.rejected, (state, { payload }) => {

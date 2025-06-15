@@ -11,7 +11,7 @@ import { StyledFormLabel } from 'src/components/shared/forms/FormElements';
 function SearchType() {
   const dispatch = useDispatch();
   const [selectedType, setSelectedType] = useState('');
-  const { publicServices, searchMask, loading, error, success, init } = useSelector(state => state.publicData.publicData);
+  const { publicServices, searchMask } = useSelector(state => state.publicData.publicData);
   const urlTypeParam = useGetUrlParam('type');
   const updateUrlParams = useUpdateUrlParams();
 
@@ -49,7 +49,7 @@ function SearchType() {
     if (urlTypeParam) {
       setSelectedType(urlTypeParam);
     }
-  }, []);
+  }, [urlTypeParam]);
 
   return (
     <Grid size={{ xs: 12, xl: 6 }}>

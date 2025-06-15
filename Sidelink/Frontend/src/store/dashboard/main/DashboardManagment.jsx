@@ -42,13 +42,13 @@ const dashboardManagment = createSlice({
   name: 'dashboard',
   initialState,
   reducers: {
-    toggleSidebar: (state, payload) => {
+    toggleSidebar: state => {
       state.sidebar = !state.sidebar;
     },
     setSidebar: (state, action) => {
       state.sidebar = action.payload;
     },
-    dashboardLogout: (state, action) => {
+    dashboardLogout: state => {
       return { ...state, ...initialState };
     },
     resetProcess: (state, action) => {
@@ -103,7 +103,7 @@ const dashboardManagment = createSlice({
       .addCase(patchAccountPassword.pending, state => {
         state.changePassword = { ...state.changePassword, loading: true, error: false, success: false };
       })
-      .addCase(patchAccountPassword.fulfilled, (state, { payload }) => {
+      .addCase(patchAccountPassword.fulfilled, state => {
         state.changePassword = { ...state.changePassword, loading: false, success: true, error: false };
       })
       .addCase(patchAccountPassword.rejected, (state, { payload }) => {

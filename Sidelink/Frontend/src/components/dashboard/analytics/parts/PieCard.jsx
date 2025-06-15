@@ -6,8 +6,8 @@ import StyledCard from 'src/components/dashboard/shared/StyledCard';
 function PieCard({ chartData, title }) {
   const theme = useTheme();
   return (
-    <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex' }}>
-      <StyledCard sx={{ padding: 0 }} elevation={9} variant={'outlined'}>
+    <Grid size={{ xs: 12, lg: 6 }} sx={{ display: 'flex' }}>
+      <StyledCard sx={{ padding: 0, width: '100%' }} variant={'outlined'}>
         <CardHeader title={title} sx={{ '.css-16xl4zq-MuiTypography-root': { fontSize: { xs: '1.2rem' } } }} />
         <Divider sx={{ border: '1px solid', borderColor: theme.palette.border.main }} />
 

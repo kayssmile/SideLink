@@ -51,6 +51,7 @@ function SearchSubCategories({ subCategories }) {
       setSelectedSubCategories(urlParamsArray);
       initURL.current = false;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subCategories]);
 
   return (

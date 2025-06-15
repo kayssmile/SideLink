@@ -19,7 +19,7 @@ function ServiceWithProfile() {
     if (publicService && !publicProfiles.loading && !publicProfiles?.data?.some(p => p.public_profile_id === publicService.public_profile_id)) {
       dispatch(getPublicprofile(publicService.public_profile_id));
     }
-  }, [publicProfiles, publicServices]);
+  }, [publicProfiles, publicServices, dispatch, publicService]);
 
   const publicProfile = publicProfiles?.data?.find(profile => profile.public_profile_id === publicService.public_profile_id);
 

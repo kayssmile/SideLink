@@ -25,7 +25,6 @@ function Board() {
    */
   useEffect(() => {
     let params = new URLSearchParams(search);
-
     if (success) {
       const newSearchMask = {};
       if (params.has('region')) {
@@ -44,7 +43,6 @@ function Board() {
         newSearchMask.subCategories = { type: 'subCategories', data: params.get('subCategories') };
       }
       dispatch(setSearchMask({ type: 'subCategories', data: params.get('subCategories') ?? false }));
-
       if (isAnyMaskFilterActive(newSearchMask)) {
         const activeFilters = checkActiveMaskFilters(newSearchMask);
         let newSearchEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
@@ -65,6 +63,7 @@ function Board() {
     if (error) {
       dispatch(setInit(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success, error]);
 
   return (

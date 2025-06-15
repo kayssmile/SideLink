@@ -21,11 +21,16 @@ function SearchText() {
    * New search starts after 300ms break
    * If searchmask is active we filter services by active mask filters otherwise we filter services by search value
    */
+  /*
   const handleNewSearchValue = useMemo(
     () =>
       debounce(newSearchValue => {
         let newSerachEngineData = [];
+        console.log('ourmaskinmemo', checkActiveMaskFilters(searchMask));
+        console.log('is any filter active', isAnyMaskFilterActive(searchMask));
         if (isAnyMaskFilterActive(searchMask)) {
+          console.log('search mask active', checkActiveMaskFilters(searchMask));
+
           const activeFilters = checkActiveMaskFilters(searchMask);
           newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
           newSerachEngineData = filterServicesBySearch(newSerachEngineData, newSearchValue);
@@ -35,7 +40,19 @@ function SearchText() {
         dispatch(setSearchEngineData(newSerachEngineData));
       }, 300),
     []
-  );
+  ); */
+
+  const handleNewSearchValue = debounce(newSearchValue => {
+    let newSerachEngineData = [];
+    if (isAnyMaskFilterActive(searchMask)) {
+      const activeFilters = checkActiveMaskFilters(searchMask);
+      newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
+      newSerachEngineData = filterServicesBySearch(newSerachEngineData, newSearchValue);
+    } else {
+      newSerachEngineData = filterServicesBySearch(publicServices, newSearchValue);
+    }
+    dispatch(setSearchEngineData(newSerachEngineData));
+  }, 300);
 
   /*
    * If search value is null we load publicservices upon searchmask or load all public services
@@ -65,6 +82,7 @@ function SearchText() {
     if (!init && urlTextSearchParam) {
       setSearchValue(urlTextSearchParam);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [init]);
 
   /*
