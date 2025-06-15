@@ -2,27 +2,16 @@ import { Box, Typography, IconButton, Tooltip, useTheme, Button } from '@mui/mat
 import { IconPower } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import invalidateToken from 'src/services/TokenInvalidator';
-import { removeToken, removeRefreshToken, getRefreshToken } from 'src/components/shared/utils/TokenUtils';
-import { userLogout } from 'src/store/usermanagment/UserManagment';
-import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
+import { logoutService } from 'src/services/LogoutService';
 
 const Logout = ({ usage }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { dashboardData } = useSelector(state => state.dashboard);
   const navigate = useNavigate();
+  const { dashboardData } = useSelector(state => state.dashboard);
 
-  const handleLogout = async () => {
-    navigate('/home');
-    const refreshToken = getRefreshToken();
-    if (refreshToken) {
-      await invalidateToken(refreshToken);
-    }
-    removeToken();
-    removeRefreshToken();
-    dispatch(userLogout());
-    dispatch(dashboardLogout());
+  const handleLogout = () => {
+    logoutService({ dispatch, navigate });
   };
 
   return (

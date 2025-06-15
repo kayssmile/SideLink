@@ -4,12 +4,11 @@ import Grid from '@mui/material/Grid2';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { checkAuth } from 'src/services/AuthService';
-import { getToken, getRefreshToken, removeRefreshToken, removeToken } from 'src/components/shared/utils/TokenUtils';
-import invalidateToken from 'src/services/TokenInvalidator';
+import { logoutService } from 'src/services/LogoutService';
+import { getToken } from 'src/components/shared/utils/TokenUtils';
 import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
-import { toggleInfoModal, userLogout } from 'src/store/usermanagment/UserManagment';
+import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
 import { basicDelRequest } from 'src/services/BasicRequests';
-import { dashboardLogout } from 'src/store/dashboard/main/DashboardManagment';
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
@@ -31,43 +30,38 @@ const AccountDelete = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      if (await checkAuth()) {
-        const token = getToken();
-        if (!token) throw new Error('Token not found');
-        const response = await basicDelRequest(token);
-        if (response.status === 204) {
-          setDeleteAccount({ loading: false, success: true, error: false });
-        } else {
-          setDeleteAccount({ loading: false, error: response, success: false });
-        }
-      } else {
+      setDeleteAccount(prev => ({ ...prev, loading: true }));
+      const isAuthenticated = await checkAuth();
+      if (!isAuthenticated) {
         dispatch(toggleInfoModal());
-        setDeleteAccount({ loading: false, error: { detail: '' }, success: false });
+        return setDeleteAccount({ loading: false, error: null, success: false });
+      }
+      const token = getToken();
+      if (!token) {
+        throw new Error('Authentication token not available');
+      }
+      const response = await basicDelRequest(token);
+      if (response.status === 204) {
+        setDeleteAccount({ loading: false, success: true, error: null });
+      } else {
+        throw new Error(`Unexpected response status: ${response.status}`);
       }
     } catch (error) {
-      setDeleteAccount({ loading: false, error: { detail: '' }, success: false });
+      setDeleteAccount({
+        loading: false,
+        success: false,
+        error: error instanceof Error ? { detail: error.message } : { detail: 'An unknown error occurred' },
+      });
     }
-  };
-
-  const handleLogout = async () => {
-    const refreshToken = getRefreshToken();
-    if (refreshToken) {
-      await invalidateToken(refreshToken);
-    }
-    removeToken();
-    removeRefreshToken();
-    dispatch(userLogout());
-    dispatch(dashboardLogout());
-    navigate('/home');
   };
 
   useEffect(() => {
     if (deleteAccount.success) {
       setTimeout(() => {
-        handleLogout();
-      }, 5000);
+        logoutService({ dispatch, navigate });
+      }, 3000);
     }
-  }, [deleteAccount]);
+  }, [deleteAccount, dispatch, navigate]);
 
   return (
     <Grid container>
