@@ -86,9 +86,17 @@ class UserDashboardData(APIView):
 )
 @api_view(['GET'])
 def get_public_data(request):
-    public_services_data = PublicService.objects.all()
-    public_services_data = PublicServiceSerializer(public_services_data, many=True).data
-    public_data = {'public_services_data': public_services_data}
+    public_services = PublicService.objects.select_related(
+        'category',
+        'region',
+        'location',
+        'user',
+        'public_profile_id'                    
+    ).prefetch_related(
+    'sub_categories'
+    ).all()
+    serializer = PublicServiceSerializer(public_services, many=True)
+    public_data = {'public_services_data': serializer.data}
     return Response(public_data, status=status.HTTP_200_OK)
 
 

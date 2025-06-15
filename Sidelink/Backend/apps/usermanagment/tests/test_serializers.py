@@ -142,7 +142,6 @@ class CustomTokenObtainSerializerTest(TestCase):
         validated_data = serializer.validated_data
         self.assertIn("access", validated_data)
         self.assertIn("refresh_token", validated_data)
-        self.assertIn("user", validated_data)
         self.user.refresh_from_db()
         last_login_after = self.user.last_login
         self.assertNotEqual(last_login_before, last_login_after)

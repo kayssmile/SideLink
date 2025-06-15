@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, serializers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView, TokenVerifyView
-from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer
+from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer, OpenApiExample
 from django.contrib.auth.password_validation import validate_password
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
@@ -163,7 +163,25 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
     @extend_schema(
         description="Customized TokenObtainPairView to return access/refresh tokens",
-        tags=["Authorisation"]
+        tags=["Authorisation"],
+        responses={
+            200: OpenApiResponse(
+                description="Returns access and refresh tokens",
+                response=CustomTokenObtainPairSerializer(many=False),
+                examples=[
+                OpenApiExample(
+                    "Success Example",
+                    value={
+                        "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                )
+            ]
+            ),
+            400: OpenApiResponse(
+                description="If validation fails.",
+            ),
+        }
     )
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -186,7 +204,18 @@ class CustomTokenBlacklistView(TokenBlacklistView):
     
     @extend_schema(
         description="Handle the POST request to blacklist/invalidate JWT tokens.",
-        tags=["Authorisation"]
+        tags=["Authorisation"],
+        responses={
+            200: OpenApiResponse(
+                description="Token successfully blacklisted.",
+            ),
+            400: OpenApiResponse(
+                description="Invalid token or missing refresh token.",
+            ),
+            401: OpenApiResponse(
+                description="Unauthorized access, user must be authenticated.",
+            )
+        }
     )
     def post(self, request, *args, **kwargs):
         refresh_token = request.data.get('refresh')

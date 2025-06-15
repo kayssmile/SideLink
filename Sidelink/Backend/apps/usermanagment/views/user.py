@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from drf_spectacular.utils import extend_schema, OpenApiResponse
-from django.contrib.auth.password_validation import validate_password
 from apps.usermanagment.models import RegisteredUser
 from apps.usermanagment.serializers import RegisteredUserSerializer, CustomUserSerializer
 

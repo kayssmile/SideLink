@@ -52,6 +52,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     Custom serializer for obtaining JWT tokens.
     Adds user details to the token response and performs additional validation.
     """
+    
     def validate(self, attrs):
         """
         Validates user credentials and returns JWT token pair with user info.
@@ -61,7 +62,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             dict: {
                 'access': access token string,
                 'refresh_token': refresh token string,
-                'user': serialized user object
             }
         """
         email = attrs.get("email")
@@ -77,9 +77,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         user.save(update_fields=["last_login"])
         refresh_token = data.get('refresh')
         access_token = data.get('access')
-        user_data = CustomUserSerializer(user).data
         return {
             'access': access_token,
             'refresh_token': refresh_token,
-            'user': user_data,
         }
