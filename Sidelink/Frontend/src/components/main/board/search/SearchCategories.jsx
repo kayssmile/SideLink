@@ -67,7 +67,7 @@ function SearchCategories() {
 
   return (
     <>
-      <Grid size={{ xs: 12, xl: 6 }}>
+      <Grid size={{ xs: 12, md: 6 }}>
         <CustomAutocomplete name="category" label="Kategorie" value={selectedCategory} options={categories} onChange={handleSelectedCategory} />
       </Grid>
       <SearchSubCategories subCategories={subCategories} />

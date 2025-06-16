@@ -19,11 +19,10 @@ function SearchMask() {
     <Box component="aside">
       <SerachText />
 
-      <Box sx={{ p: 2, height: checked ? '250px' : '30px', overflow: 'hidden' }} ref={containerRef}>
-        <FormControlLabel sx={{ position: 'relative', left: '85%' }} control={<Switch checked={checked} onChange={handleChange} />} label="Filter anzeigen" />
+      <Box sx={{ p: 2, height: checked ? { xs: '500px', md: '250px' } : '30px', overflow: 'hidden' }} ref={containerRef}>
+        <FormControlLabel sx={{ position: 'relative', left: { xs: '0%', xl: '85%' } }} control={<Switch checked={checked} onChange={handleChange} />} label="Filter anzeigen" />
         <Slide in={checked} container={containerRef.current}>
-          <Grid container spacing={smDown ? 4 : 6}>
-            {/*  */}
+          <Grid container spacing={{ xs: 4, md: 6 }}>
             <SearchCategories />
 
             <SearchRegion />

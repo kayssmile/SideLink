@@ -52,7 +52,7 @@ function SearchType() {
   }, [urlTypeParam]);
 
   return (
-    <Grid size={{ xs: 12, xl: 6 }}>
+    <Grid size={{ xs: 12, md: 6 }}>
       <StyledFormLabel id="service-type-label" sx={{ mt: 0 }}>
         Angebotstyp
       </StyledFormLabel>

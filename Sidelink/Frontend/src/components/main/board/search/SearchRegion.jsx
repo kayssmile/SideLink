@@ -54,7 +54,7 @@ function SearchRegion() {
   }, [success]);
 
   return (
-    <Grid size={{ xs: 12, xl: 6 }}>
+    <Grid size={{ xs: 12, md: 6 }}>
       <CustomAutocomplete name="region" label="Region / Kanton" value={selectedRegion} options={regions} onChange={handleSelectedRegion} />
     </Grid>
   );
