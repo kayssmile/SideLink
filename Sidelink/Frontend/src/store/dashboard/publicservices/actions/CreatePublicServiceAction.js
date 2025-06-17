@@ -8,7 +8,7 @@ const createPublicService = createAsyncThunk('publicservice/createPublicService'
     if (!token) {
       throw new Error('Token nicht gefunden');
     }
-    const { data } = await axiosInstanceAuth(token).post(`/api/publicservices/`, newServiceData);
+    const { data } = await axiosInstanceAuth(token).post(`/api/public-service/`, newServiceData);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

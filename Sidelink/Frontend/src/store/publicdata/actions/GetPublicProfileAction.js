@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const getPublicprofile = createAsyncThunk('publicdata/getPublicprofile', async (publicProfileId, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstanceBasic.get(`/api/publicprofile/get/?id=${publicProfileId}`);
+    const { data } = await axiosInstanceBasic.get(`/api/public-profile/get/?id=${publicProfileId}`);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

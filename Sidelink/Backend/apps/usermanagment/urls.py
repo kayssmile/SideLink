@@ -10,7 +10,7 @@ and token-based JWT operations (login, logout, refresh, verify).
 """
 urlpatterns = [  
     # User registration and user
-    path('registereduser/', RegisteredUserView.as_view(), name='registered_user'),
+    path('registered-user/', RegisteredUserView.as_view(), name='registered_user'),
     path('register/', RegisterUserView.as_view(), name='register_user'),
 
     # Password management

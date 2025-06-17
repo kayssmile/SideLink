@@ -14,8 +14,8 @@ class RegisterUserViewTest(APITestCase):
             "phone_number": "123456789",
             "street_address": "Street 1",
             "postal_code": "12345",
-            "place": "Berlin",
-            "region": "Berlin"
+            "location": "Berlin",
+            "region": 1
         }
     invalid_register_data = {
             "first_name": "",
@@ -26,7 +26,7 @@ class RegisterUserViewTest(APITestCase):
             "phone_number": "",
             "street_address": "",
             "postal_code": "",
-            "place": "",
+            "location": "",
             "region": ""
         }
     
@@ -71,7 +71,7 @@ class RegisteredUserViewTest(APITestCase):
     def test_get_user_profile(self):
         """Test retrieving the authenticated user's profile."""
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
-        response = self.client.get("/api/auth/registereduser/")
+        response = self.client.get("/api/auth/registered-user/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["email"], "auth@example.com")
 
@@ -79,7 +79,7 @@ class RegisteredUserViewTest(APITestCase):
         """Test updating user's profile fields."""
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
         data = {"first_name": "Updated"}
-        response = self.client.patch("/api/auth/registereduser/", data)
+        response = self.client.patch("/api/auth/registered-user/", data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, "Updated")
@@ -87,12 +87,12 @@ class RegisteredUserViewTest(APITestCase):
     def test_delete_user_profile(self):
         """Test deleting the authenticated user's profile."""
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
-        response = self.client.delete("/api/auth/registereduser/")
+        response = self.client.delete("/api/auth/registered-user/")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         user_exists = RegisteredUser.objects.filter(id=self.user.id).exists()
         self.assertFalse(user_exists)
 
     def test_unauthenticated_access(self):
         """Test accessing user profile without authentication fails."""
-        response = self.client.get("/api/auth/registereduser/")
+        response = self.client.get("/api/auth/registered-user/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)    

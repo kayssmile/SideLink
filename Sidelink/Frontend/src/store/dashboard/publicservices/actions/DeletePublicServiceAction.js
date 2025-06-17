@@ -8,7 +8,7 @@ const deletePublicService = createAsyncThunk('publicservice/deletePublicService'
     if (!token) {
       throw new Error('Token nicht gefunden');
     }
-    const { data } = await axiosInstanceAuth(token).delete(`/api/publicservices/?id=${serviceId}`);
+    const { data } = await axiosInstanceAuth(token).delete(`/api/public-service/?id=${serviceId}`);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

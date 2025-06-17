@@ -30,7 +30,7 @@ class PublicServiceView(APIView):
     )
     def post(self, request):
         # Util function to check if the category, sub_category, region, and location exist in the database, if not create them. Provides flexibility for frontend changes.
-        data = data = DbService.check_exist_or_create(request)
+        data = DbService.check_exist_or_create(request)
         try:
             user = request.user
             public_profile = user.public_profile

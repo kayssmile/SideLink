@@ -9,8 +9,9 @@ async function checkAuth() {
     if (refreshToken && !isTokenExpired(refreshToken)) {
       try {
         console.log('Token expired, refreshing...');
-        await refreshAccessToken(refreshToken);
-        return true;
+        refresh = await refreshAccessToken(refreshToken);
+
+        return refresh;
       } catch (error) {
         console.log('Error refreshing token:', error);
         removeToken();
@@ -27,9 +28,9 @@ async function checkAuth() {
 async function refreshAccessToken(refreshToken) {
   try {
     const response = await axiosInstanceBasicAuth.post('/api/auth/refresh/', { refresh: refreshToken });
-    if (response.data.access) setToken(newAccessToken);
+    if (response.data.access) setToken(response.data.access);
     if (response.data.refresh) setRefreshToken(response.data.refresh);
-    return newAccessToken;
+    return true;
   } catch (error) {
     console.error('Fehler beim Refresh des Tokens:', error);
     return false;

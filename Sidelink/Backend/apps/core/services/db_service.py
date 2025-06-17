@@ -30,3 +30,16 @@ class DbService:
         location, _ = Location.objects.get_or_create(name=cleaned_region, region=region)
         data['location'] = location.id
         return data
+    
+    @staticmethod
+    def check_exist_or_create_region(request):
+        """
+        Check if region exists in the database, if not create it.
+        """
+        data = request.data.copy()
+        region_name = BasicValidators.validate_basic_text(data.get('region'))
+        if not region_name:
+            raise ValidationError({'region': "This field is required."})
+        region, _ = Region.objects.get_or_create(name=region_name)
+        data['region'] = region.id
+        return data

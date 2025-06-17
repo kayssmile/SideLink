@@ -8,7 +8,7 @@ const patchAccountEmail = createAsyncThunk('dashboard/patchAccountEmail', async 
     if (!token) {
       throw new Error('Token nicht gefunden');
     }
-    const { data } = await axiosInstanceAuth(token).patch(`/api/auth/registereduser/`, newEmail);
+    const { data } = await axiosInstanceAuth(token).patch(`/api/auth/registered-user/`, newEmail);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

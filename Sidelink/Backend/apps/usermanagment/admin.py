@@ -15,7 +15,7 @@ class RegisteredUserAdmin(UserAdmin):
             'fields': (
                 'street_address',
                 'postal_code',
-                'place',
+                'location',
                 'region',
                 'phone_number',
                 'profession',
@@ -38,7 +38,7 @@ class RegisteredUserAdmin(UserAdmin):
                 'phone_number',
                 'street_address',
                 'postal_code',
-                'place',
+                'location',
                 'region',
                 'is_active',
                 'is_staff',

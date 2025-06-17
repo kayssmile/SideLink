@@ -18,7 +18,7 @@ async function basicPostRequest(url, message) {
 
 async function basicDelRequest(token) {
   try {
-    const response = await axiosInstanceAuth(token).delete(`/api/auth/registereduser/`);
+    const response = await axiosInstanceAuth(token).delete(`/api/auth/registered-user/`);
     return response;
   } catch (error) {
     const errorMessage = error.response?.data?.detail || error.message || 'Ein unbekannter Fehler ist aufgetreten';

@@ -18,7 +18,6 @@ class Category(TimestampMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
-    keywords = models.JSONField(default=list)
     
     def __str__(self):
         return html.unescape(self.name)
@@ -29,7 +28,6 @@ class SubCategory(TimestampMixin, models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
-    keywords = models.JSONField(default=list)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='sub_categories') 
 
     def __str__(self):

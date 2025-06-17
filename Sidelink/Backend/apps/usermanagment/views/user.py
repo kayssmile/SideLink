@@ -6,6 +6,7 @@ from rest_framework import status
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 from apps.usermanagment.models import RegisteredUser
 from apps.usermanagment.serializers import RegisteredUserSerializer, CustomUserSerializer
+from apps.core.services.db_service import DbService
 
 
 class RegisterUserView(APIView):
@@ -26,11 +27,9 @@ class RegisterUserView(APIView):
     )
     def post(self, request):
         if RegisteredUser.objects.filter(email=request.data.get('email')).exists():
-            return Response(
-            {"error": "A user with this email already exists"},
-            status=status.HTTP_400_BAD_REQUEST
-            )
-        serializer = RegisteredUserSerializer(data=request.data)
+            return Response({"error": "A user with this email already exists"}, status=status.HTTP_400_BAD_REQUEST)
+        data = DbService.check_exist_or_create_region(request)
+        serializer = RegisteredUserSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -84,9 +83,12 @@ class RegisteredUserView(APIView):
                 {"error": "A user with this email already exists"},
                 status=status.HTTP_400_BAD_REQUEST
                 )
-        serializer = CustomUserSerializer(user, data=request.data, partial=True)
+        data = DbService.check_exist_or_create_region(request) if request.data.get('region') else request.data.copy()
+        serializer = CustomUserSerializer(user, data=data, partial=True)
+        print(data)
         if serializer.is_valid():
             serializer.save()
+            print("Serializer data:", serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

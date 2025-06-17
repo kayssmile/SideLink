@@ -36,6 +36,8 @@ const AccountDetails = () => {
   const onSubmit = async data => {
     try {
       if (await checkAuth()) {
+        data.region = data.region_name;
+        console.log('Account Details submitted:', data);
         dispatch(patchAccountDetails(data));
       } else {
         dispatch(toggleInfoModal());
@@ -61,8 +63,8 @@ const AccountDetails = () => {
       setValue('phone_number', user.phone_number);
       setValue('street_address', user.street_address);
       setValue('postal_code', user.postal_code);
-      setValue('place', user.place);
-      setValue('region', user.region);
+      setValue('location', user.location);
+      setValue('region_name', user.region_name);
     }
   }, [dashboardData, setValue]);
 
@@ -113,11 +115,11 @@ const AccountDetails = () => {
                 </Grid>
                 <Grid size={{ xs: 12, sm: 4 }}>
                   <StyledFormLabel htmlFor="place">Ort</StyledFormLabel>
-                  <StyledTextField id="place" type="text" name="place" {...register('place')} error={!!errors.place} helperText={errors.place?.message} />
+                  <StyledTextField id="place" type="text" name="location" {...register('location')} error={!!errors.location} helperText={errors.location?.message} />
                 </Grid>
                 <Grid size={{ xs: 12, sm: 4 }}>
                   <StyledFormLabel htmlFor="region">Region</StyledFormLabel>
-                  <StyledTextField id="region" type="text" name="region" {...register('region')} error={!!errors.region} helperText={errors.region?.message} />
+                  <StyledTextField id="region" type="text" name="region_name" {...register('region_name')} error={!!errors.region_name} helperText={errors.region_name?.message} />
                 </Grid>
               </Grid>
             </Box>

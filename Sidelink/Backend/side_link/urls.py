@@ -17,8 +17,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apps.core.urls')),
     path('api/auth/', include('apps.usermanagment.urls')),
-    path('api/publicprofile/', include('apps.publicprofile.urls')),
-    path('api/publicservices/', include('apps.publicservice.urls')),
+    path('api/public-profile/', include('apps.publicprofile.urls')),
+    path('api/public-service/', include('apps.publicservice.urls')),
     path('api/analytics-data/', include('apps.analytics.urls')),
 ]
 

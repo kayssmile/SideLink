@@ -3,6 +3,7 @@ from apps.usermanagment.models import RegisteredUser
 from apps.usermanagment.serializers import RegisteredUserSerializer
 from apps.usermanagment.serializers import CustomTokenObtainPairSerializer
 from apps.usermanagment.serializers import CustomUserSerializer
+from apps.core.models import Region
 
 class RegisteredUserSerializerTest(TestCase):
     
@@ -10,6 +11,7 @@ class RegisteredUserSerializerTest(TestCase):
         """
         Initializes user data for use in serializer tests.
         """
+        self.region = Region.objects.create(name="region")
         self.user_data = {
             "first_name": "Alice",
             "last_name": "Test",
@@ -19,8 +21,8 @@ class RegisteredUserSerializerTest(TestCase):
             "phone_number": "1234567890",
             "street_address": "Test Street 1",
             "postal_code": "12345",
-            "place": "Heaven",
-            "region": "SilentRiver"
+            "location": "Heaven",
+            "region": self.region.id
         }
 
     def test_serializer_valid(self):
@@ -86,6 +88,7 @@ class CustomUserSerializerTest(TestCase):
         """
         Creates a test user instance for serialization tests.
         """
+        self.region = Region.objects.create(name="region")
         self.user = RegisteredUser.objects.create_user(
             email="bob@example.com",
             password="password123",
@@ -95,8 +98,8 @@ class CustomUserSerializerTest(TestCase):
             phone_number="5555",
             street_address="Bauweg 1",
             postal_code="77777",
-            place="Baustadt",
-            region="Nord"
+            location="Baustadt",
+            region=self.region
         )
 
     def test_serialized_output(self):
@@ -115,6 +118,7 @@ class CustomTokenObtainSerializerTest(TestCase):
         """
         Creates a test user for authentication token generation tests.
         """
+        self.region = Region.objects.create(name="region")
         self.user = RegisteredUser.objects.create_user(
             email="token@test.com",
             password="jwtPass123!",
@@ -124,8 +128,8 @@ class CustomTokenObtainSerializerTest(TestCase):
             phone_number="123",
             street_address="JWT Road",
             postal_code="00000",
-            place="Token Town",
-            region="Authland"
+            location="Token Town",
+            region=self.region
         )
 
     def test_valid(self):

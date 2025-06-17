@@ -5,7 +5,9 @@ from django.core.exceptions import ValidationError as DjangoValidationError
 from django.utils.timezone import now
 from django.contrib.auth.password_validation import validate_password
 from apps.core.utils.validators import BasicValidators
+from apps.core.models import Region
 from .models import RegisteredUser
+
 
 class RegisteredUserSerializer(serializers.ModelSerializer):
     """
@@ -41,10 +43,22 @@ class CustomUserSerializer(serializers.ModelSerializer):
     """
     Serializer for public user information.
     Used to return limited user details.
-    """
+     """
+    region = serializers.PrimaryKeyRelatedField(
+        queryset=Region.objects.all(),
+        write_only=True,
+    )
+   
+    region_name = serializers.StringRelatedField(
+        many=False,
+        read_only=True,
+        source='region'
+    )
+    
+    #region = serializers.StringRelatedField(read_only=True)
     class Meta:
         model = RegisteredUser
-        fields = ['id', 'first_name', 'last_name', 'email', 'profession', 'phone_number', 'street_address', 'postal_code', 'place', 'region', 'public_profile']
+        fields = ['id', 'first_name', 'last_name', 'email', 'profession', 'phone_number', 'street_address', 'postal_code', 'location', 'region', 'region_name', 'public_profile']
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

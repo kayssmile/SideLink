@@ -51,8 +51,8 @@ class RegisteredUser(TimestampMixin, AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=100)
     street_address = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=100)
-    place = models.CharField(max_length=100)
-    region = models.CharField(max_length=100)
+    region = models.ForeignKey('core.Region', on_delete=models.SET_NULL, null=True, related_name='registered_users')
+    location = models.CharField(max_length=100)
 
     # Linked public profile (can be null if not yet created)
     public_profile = models.OneToOneField(

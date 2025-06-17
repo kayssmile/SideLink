@@ -8,7 +8,7 @@ const patchPublicProfile = createAsyncThunk('publicprofile/patchPublicProfile', 
     if (!token) {
       throw new Error('Token nicht gefunden');
     }
-    const { data } = await axiosInstanceAuth(token).patch(`/api/publicprofile/`, newFormData);
+    const { data } = await axiosInstanceAuth(token).patch(`/api/public-profile/`, newFormData);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';

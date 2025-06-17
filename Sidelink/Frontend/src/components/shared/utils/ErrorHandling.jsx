@@ -20,7 +20,7 @@ const basicFormErrorMessage = error => {
   }
   if (error.status === 400) {
     return (
-      <Typography color="error" sx={{ textAlign: 'center', mb: '1rem' }}>
+      <Typography color="error" sx={{ textAlign: 'center', mb: '1rem', width: '100%' }}>
         Bitte überprüfe deine Eingaben.
       </Typography>
     );

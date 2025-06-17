@@ -88,7 +88,7 @@ function Registration() {
           <StyledTextField required label="Postleitzahl" name="postal_code" {...register('postal_code')} error={!!errors.postal_code} helperText={errors.postal_code?.message} />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
-          <StyledTextField required label="Ort" type="text" name="place" {...register('place')} error={!!errors.place} helperText={errors.place?.message} />
+          <StyledTextField required label="Ort" type="text" name="location" {...register('location')} error={!!errors.place} helperText={errors.place?.message} />
         </Grid>
         <Grid size={12}>
           <StyledTextField required label="Region" type="text" name="region" {...register('region')} error={!!errors.region} helperText={errors.region?.message} />

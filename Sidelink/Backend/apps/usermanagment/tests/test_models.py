@@ -1,5 +1,6 @@
 from django.test import TestCase
 from apps.usermanagment.models import RegisteredUser
+from apps.core.models import Region
 
 class RegisteredUserModelTest(TestCase):
 
@@ -7,6 +8,7 @@ class RegisteredUserModelTest(TestCase):
         """
         Set up a test user instance.
         """
+        self.region = Region.objects.create(name="region")
         self.user = RegisteredUser.objects.create_user(
             email='test@example.com',
             password='123',
@@ -16,8 +18,8 @@ class RegisteredUserModelTest(TestCase):
             phone_number='123456789',
             street_address='Main Street 1',
             postal_code='8000',
-            place='Zürich',
-            region='ZH',
+            location='Zürich',
+            region=self.region,
         )
 
     def test_user_creation(self):

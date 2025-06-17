@@ -7,8 +7,8 @@ class CoreModelTests(TestCase):
         """
         Create shared test data for related models.
         """
-        self.category = Category.objects.create(name="Health", keywords=["wellness", "fitness"])
-        self.subcategory = SubCategory.objects.create(name="Yoga", category=self.category, keywords=["stretching"])
+        self.category = Category.objects.create(name="Health")
+        self.subcategory = SubCategory.objects.create(name="Yoga", category=self.category)
         self.region = Region.objects.create(name="Berne")
         self.location = Location.objects.create(name="Buxi", region=self.region)
         self.contact_message = ContactMessage.objects.create(

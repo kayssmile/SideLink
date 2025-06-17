@@ -34,7 +34,7 @@ const registerSchema = yup.object().shape({
     .string()
     .required('Postleitzahl ist erforderlich')
     .test('is-numeric', 'Nur Zahlen erlaubt', value => /^\d+$/.test(value)),
-  place: yup.string().required('Ort ist erforderlich'),
+  location: yup.string().required('Ort ist erforderlich'),
   region: yup.string().required('Region ist erforderlich'),
   email: yup.string().matches(emailRegex, 'Ungültige E-Mail').email('Ungültige E-Mail').required('E-Mail ist erforderlich'),
   password: yup
@@ -97,8 +97,8 @@ const editAccountSchema = yup.object().shape({
     .string()
     .required('Postleitzahl ist erforderlich')
     .test('is-numeric', 'Nur Zahlen erlaubt', value => /^\d+$/.test(value)),
-  place: yup.string().required('Ort ist erforderlich'),
-  region: yup.string().required('Region ist erforderlich'),
+  location: yup.string().required('Ort ist erforderlich'),
+  region_name: yup.string().required('Region ist erforderlich'),
 });
 
 const changeEmailSchema = yup.object().shape({

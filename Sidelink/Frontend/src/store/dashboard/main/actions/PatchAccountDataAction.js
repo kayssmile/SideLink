@@ -8,7 +8,7 @@ const patchAccountDetails = createAsyncThunk('dashboard/patchAccountDetails', as
     if (!token) {
       throw new Error('Token nicht gefunden');
     }
-    const { data } = await axiosInstanceAuth(token).patch(`/api/auth/registereduser/`, newUserData);
+    const { data } = await axiosInstanceAuth(token).patch(`/api/auth/registered-user/`, newUserData);
     return data;
   } catch (error) {
     const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
