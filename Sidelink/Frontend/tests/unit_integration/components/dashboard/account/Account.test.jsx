@@ -2,10 +2,9 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
-
 import Account from 'src/components/dashboard/account/Account';
 import { darkTheme } from 'src/config/Theme.js';
-import store from 'src/store/store';
+import store from 'src/store/Store';
 
 const renderWithProviders = () => {
   return render(

@@ -1,11 +1,9 @@
 import { screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
-
-import { darkTheme } from 'src/config/theme.js';
+import { darkTheme } from 'src/config/Theme.js';
 import { renderWithDashboardReducer } from '@tests/utils/RenderWithRedux.jsx';
-import setMediaQuery from '@tests/utils/setMediaQuery';
-
+import setMediaQuery from '@tests/utils/SetMediaQuery';
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar.jsx';
 
 const mockNavigate = vi.fn();

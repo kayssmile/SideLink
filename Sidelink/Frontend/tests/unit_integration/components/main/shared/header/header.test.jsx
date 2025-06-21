@@ -1,5 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react';
-import Header from 'src/components/main/shared/header/header';
+import Header from 'src/components/main/shared/header/Header';
 import { ThemeProvider } from '@emotion/react';
 import { darkTheme } from 'src/config/Theme.js';
 import { renderWithPublicDataReducer } from '@tests/utils/RenderWithRedux';

@@ -1,7 +1,7 @@
 import { screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
-import { darkTheme } from 'src/config/theme.js';
+import { darkTheme } from 'src/config/Theme.js';
 import { renderWithAllReducers } from '@tests/utils/RenderWithRedux.jsx';
 import Header from 'src/components/dashboard/shared/header/vertical/Header.jsx';
 

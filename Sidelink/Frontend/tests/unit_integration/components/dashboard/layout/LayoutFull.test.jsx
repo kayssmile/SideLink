@@ -3,7 +3,7 @@ import LayoutFull from 'src/components/dashboard/layout/LayoutFull';
 import { darkTheme } from 'src/config/Theme.js';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
-import store from 'src/store/store';
+import store from 'src/store/Store';
 import { Provider } from 'react-redux';
 
 describe('LayoutFull Component', () => {
