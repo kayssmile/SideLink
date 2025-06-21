@@ -33,15 +33,4 @@ describe('LayoutFull Component', () => {
     renderComponent();
     expect(screen.getByTestId('dashboard-header')).toBeInTheDocument();
   });
-
-  /*
-  it('renders content component', () => {
-    renderComponent();
-    expect(screen.getByTestId('main-footer')).toBeInTheDocument();
-  }); 
-
-  it('matches snapshot', () => {
-    const { asFragment } = renderComponent();
-    expect(asFragment()).toMatchSnapshot();
-  }); */
 });

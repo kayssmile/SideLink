@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { styled, useTheme, useMediaQuery } from '@mui/material';
-import { ScrollToTop } from 'src/components/shared/utils/utils';
+import ScrollToTop from 'src/components/shared/utils/ScrollToTop';
 import Sidebar from 'src/components/dashboard/shared/header/sidebar/Sidebar';
 import Header from 'src/components/dashboard/shared/header/vertical/Header';
 import InfoModal from 'src/components/shared/InfoModal';
@@ -33,7 +33,6 @@ const LayoutFull = () => {
   const MainWrapper = styled('div')(() => ({
     padding: xlUp ? (SidebarOpen ? '0 5%' : '0 15%') : '0 16px',
     maxWidth: 'clamp(0px, calc(100vw - 32px), 1200px)',
-    //maxhHeight: SidebarOpen ? (smDown ? '100vh' : '100%') : 'auto',
   }));
 
   return (

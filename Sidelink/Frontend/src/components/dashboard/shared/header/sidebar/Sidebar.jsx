@@ -36,6 +36,7 @@ const Sidebar = () => {
         }}
       >
         <Box
+          component="nav"
           sx={{
             color: 'white',
             height: '100%',

@@ -28,6 +28,7 @@ function Instruction() {
       >
         <Typography
           variant="body1"
+          component="h3"
           sx={{
             color: theme.palette.text.primary,
             fontWeight: '700',

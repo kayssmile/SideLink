@@ -11,7 +11,7 @@ function Dashboard() {
 
   return (
     <div data-testid="dashboard-component">
-      <Typography variant="h4">Dashboard</Typography>
+      <Typography variant="h3">Dashboard</Typography>
     </div>
   );
 }

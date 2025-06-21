@@ -34,6 +34,7 @@ const MenuItem = ({ menuItem }) => {
                 fontWeight={600}
                 color="textSecondary"
                 className="text-hover"
+                component="h4"
                 sx={{
                   width: '240px',
                 }}
@@ -43,6 +44,7 @@ const MenuItem = ({ menuItem }) => {
               <Typography
                 color="textSecondary"
                 variant="subtitle2"
+                component="h5"
                 sx={{
                   width: '240px',
                 }}

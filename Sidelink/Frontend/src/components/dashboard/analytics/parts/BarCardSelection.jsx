@@ -21,9 +21,9 @@ function BarChartSelection({ barChartData, title }) {
   };
 
   return (
-    <Grid size={12}>
+    <Grid size={12} component="article">
       <StyledCard sx={{ padding: 0 }} elevation={9} variant={'outlined'}>
-        <CardHeader title={title} sx={{ '.css-16xl4zq-MuiTypography-root': { fontSize: { xs: '1.2rem' } } }} />
+        <CardHeader component="h2" title={title} sx={{ '.css-16xl4zq-MuiTypography-root': { fontSize: { xs: '1.2rem' } }, margin: '0 0' }} />
         <Divider sx={{ border: '1px solid', borderColor: theme.palette.border.main }} />
 
         <CardContent>

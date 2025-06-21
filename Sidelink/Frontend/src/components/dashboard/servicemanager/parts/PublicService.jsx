@@ -40,6 +40,7 @@ const PublicService = ({ service, type }) => {
 
   return (
     <Box
+      component="article"
       p={2}
       sx={{
         position: 'relative',
@@ -52,7 +53,7 @@ const PublicService = ({ service, type }) => {
         marginBottom: '1rem !important',
       }}
     >
-      <Typography variant="h5" sx={{ color: theme.palette.text.dark, opacity: '1', fontSize: { xs: '1.2rem', sm: '1.4rem' } }}>
+      <Typography variant="h5" component="h4" sx={{ color: theme.palette.text.dark, opacity: '1', fontSize: { xs: '1.2rem', sm: '1.4rem' } }}>
         {service.title}
       </Typography>
 

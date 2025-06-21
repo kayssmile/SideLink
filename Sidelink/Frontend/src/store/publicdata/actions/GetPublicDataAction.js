@@ -1,16 +1,11 @@
-import { axiosInstanceBasic } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { genericRequest } from 'src/services/GenericRequests';
 
 const getPublicData = createAsyncThunk('publicdata/getPublicData', async (_, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstanceBasic.get(`/api/public-data/`);
-    return data;
+    return await genericRequest({ method: 'get', url: '/api/public-data/' });
   } catch (error) {
-    const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
-    return rejectWithValue({
-      status: error.response?.status || 500,
-      detail: errorMessage,
-    });
+    return rejectWithValue(error);
   }
 });
 

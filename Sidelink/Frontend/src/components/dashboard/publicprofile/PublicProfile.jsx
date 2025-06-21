@@ -20,6 +20,8 @@ import { StyledTextField, StyledFormLabel } from 'src/components/shared/forms/Fo
 function PublicProfile() {
   const [confirmModal, setConfirmModal] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
+  const [publicProfileUrl, setPublicProfileUrl] = useState('');
+  const baseURL = import.meta.env.BASE_URL.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000';
   const dispatch = useDispatch();
   const { publicProfile } = useSelector(state => state.publicProfile);
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -34,13 +36,6 @@ function PublicProfile() {
   } = useForm({
     resolver: yupResolver(publicProfileSchema),
   });
-
-  const baseURL = import.meta.env.BASE_URL.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000';
-  let publicProfileImageUrl = '';
-
-  if (publicProfile?.data?.public_profile_picture) {
-    publicProfileImageUrl = `${baseURL}${publicProfile.data.public_profile_picture}`;
-  }
 
   const handleConfirmModalAgree = () => {
     setConfirmModal(false);
@@ -94,8 +89,9 @@ function PublicProfile() {
       setValue('showed_name', publicProfile.data.showed_name);
       setValue('description', publicProfile.data.description);
       setValue('contact_info', publicProfile.data.contact_info);
+      setPublicProfileUrl(`${baseURL}${publicProfile.data.public_profile_picture}`);
     }
-  }, [publicProfile.data, setValue]);
+  }, [publicProfile.data, setValue, baseURL]);
 
   useEffect(() => {
     if (publicProfile.error || publicProfile.success) {
@@ -104,13 +100,13 @@ function PublicProfile() {
   }, [publicProfile.error, publicProfile.success]);
 
   return (
-    <>
+    <section>
       <Breadcrumb title="Dein öffentliches Profil" items={breadcrumpConfig.publicProfile} sx={{ margin: '30px 0' }} />
-      <Grid container>
+      <Grid container component="article">
         <Grid size={12}>
           <StyledCard sx={{ padding: { xs: '5px', sm: '24px' } }}>
             <CardContent component="form" onSubmit={handleSubmit(onSubmit)}>
-              <Typography variant="h5" mb={1}>
+              <Typography variant="h5" component="h2" mb={1}>
                 Öffentliches Profil
               </Typography>
               <Typography color="textSecondary">Erstelle hier dein öffentliches Profil, es ist für andere registrierte Benutzer sichtbar. Du kannst es jederzeit anpassen.</Typography>
@@ -119,7 +115,7 @@ function PublicProfile() {
                 <Typography component="label" htmlFor="profile_picture" sx={{ color: 'white', fontSize: 20, display: 'block', mb: 1 }}>
                   Profilbild
                 </Typography>
-                <Avatar src={previewImage ?? publicProfileImageUrl} alt="Publicprofile image" sx={{ width: 150, height: 150, margin: '0 auto' }} />
+                <Avatar src={previewImage ?? publicProfileUrl} alt="Publicprofile image" sx={{ width: 150, height: 150, margin: '0 auto' }} />
                 <Stack sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
                   <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
                     Bild auswählen
@@ -129,6 +125,7 @@ function PublicProfile() {
                       defaultValue={null}
                       render={({ field }) => (
                         <VisuallyHiddenInput
+                          noValidate
                           type="file"
                           accept="image/*"
                           ref={field.ref}
@@ -230,7 +227,7 @@ function PublicProfile() {
           </StyledCard>
         </Grid>
       </Grid>
-    </>
+    </section>
   );
 }
 

@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import breadcrumbImg from 'src/assets/images/breadcrumb/ChatBc.png';
 import { useTheme } from '@mui/material/styles';
 
-const Breadcrumb = ({ subtitle, items, title }) => {
+const Breadcrumb = ({ title, items }) => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
@@ -22,20 +22,18 @@ const Breadcrumb = ({ subtitle, items, title }) => {
       }}
     >
       <Grid size={{ xs: 12, md: 10 }} mb={1}>
-        <Typography variant="h4" color="textPrimary" sx={{ fontSize: smDown ? '1.5rem' : '2rem' }}>
+        <Typography variant="h4" component="h1" color="textPrimary" sx={{ fontSize: smDown ? '1.5rem' : '2rem' }}>
           {title}
-        </Typography>
-        <Typography color="textPrimary" variant="h6" fontWeight={400} mt={0.8} mb={0} sx={{ fontSize: smDown ? '1.5rem' : '2rem' }}>
-          {subtitle}
         </Typography>
         <Breadcrumbs
           separator={<IconCircle size="5" fill="textPrimary" fillOpacity={'0.9'} style={{ margin: '0 5px' }} />}
           sx={{ alignItems: 'center', mt: items ? '10px' : '' }}
           aria-label="breadcrumb"
+          component="nav"
         >
           {items
             ? items.map(item => (
-                <div key={item.title}>
+                <Box key={item.title}>
                   {item.to ? (
                     <Link underline="none" color="textPrimary" component={NavLink} to={item.to}>
                       {item.title}
@@ -43,7 +41,7 @@ const Breadcrumb = ({ subtitle, items, title }) => {
                   ) : (
                     <Typography color="textPrimary">{item.title}</Typography>
                   )}
-                </div>
+                </Box>
               ))
             : ''}
         </Breadcrumbs>

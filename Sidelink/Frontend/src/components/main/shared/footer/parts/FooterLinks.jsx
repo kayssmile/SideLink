@@ -10,10 +10,10 @@ const FooterLinks = () => {
   return (
     <>
       {footerLinks.map((footerItem, i) => (
-        <Grid size={{ xs: 12, sm: 3 }} key={i} component="ul">
+        <Grid size={{ xs: 12, sm: 3 }} key={i} component="nav" aria-label="Footer Navigation">
           {footerItem.elements.map((element, index) =>
             element.title ? (
-              <Box component="li" key={index}>
+              <Box key={index}>
                 <Typography
                   component="h3"
                   key={index}
@@ -23,7 +23,7 @@ const FooterLinks = () => {
                 </Typography>
               </Box>
             ) : location.pathname === '/board' && element.to.includes('category') ? (
-              <Box component="li" key={index}>
+              <Box key={index}>
                 <Typography
                   sx={{
                     display: 'block',
@@ -38,7 +38,7 @@ const FooterLinks = () => {
                 </Typography>
               </Box>
             ) : (
-              <Box component="li" key={index}>
+              <Box key={index}>
                 <Box component={RouterNavLink} to={element.to}>
                   <Typography
                     component="h4"

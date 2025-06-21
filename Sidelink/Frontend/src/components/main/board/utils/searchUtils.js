@@ -38,16 +38,17 @@ function filterServicesByCategory(publicServices, category) {
 }
 
 function filterServicesBySubCategories(publicServices, subCategories) {
-  let result = [];
-  publicServices.forEach(publicService => {
-    subCategories.forEach(subCategory_filter => {
-      for (const sub_category of publicService.sub_categories_details) {
-        if (sub_category.name === subCategory_filter) {
-          result.push(publicService);
+  let result = publicServices.filter(publicService => {
+    let matches = false;
+    publicService.sub_categories_details.forEach(subCategory => {
+      for (const subCategoryFilterName of subCategories) {
+        if (subCategoryFilterName === subCategory.name) {
+          matches = true;
           break;
         }
       }
     });
+    return matches;
   });
   return result;
 }
@@ -79,16 +80,11 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
   let subCategoryFilter = activeFilters.find(filter => filter.type === 'subCategories');
   let regionFilter = activeFilters.find(filter => filter.type === 'region');
   let serviceTypeFilter = activeFilters.find(filter => filter.type === 'type');
-
   /*
    * Check if category filter is active, if true we filter services by category
    */
   if (categoryFilter) {
-    publicServices.forEach(publicService => {
-      if (publicService.category_details === categoryFilter.value) {
-        result.push(publicService);
-      }
-    });
+    result = filterServicesByCategory(publicServices, categoryFilter.value);
     isAnyFilterActive = true;
   }
 
@@ -98,29 +94,9 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
    */
   if (subCategoryFilter) {
     if (isAnyFilterActive) {
-      result = result.filter(publicService => {
-        let matches = false;
-        publicService.sub_categories_details.forEach(subCategory => {
-          for (const subCategoryFilterName of subCategoryFilter.value) {
-            if (subCategoryFilterName === subCategory.name) {
-              matches = true;
-              break;
-            }
-          }
-        });
-        return matches;
-      });
+      result = filterServicesBySubCategories(result, subCategoryFilter.value);
     } else {
-      publicServices.forEach(publicService => {
-        publicService.sub_categories_details.forEach(subCategory => {
-          for (const subCategoryFilterName of subCategoryFilter.value) {
-            if (subCategoryFilterName === subCategory.name) {
-              result.push(publicService);
-              break;
-            }
-          }
-        });
-      });
+      result = filterServicesBySubCategories(publicServices, subCategoryFilter.value);
       isAnyFilterActive = true;
     }
   }
@@ -132,11 +108,7 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
     if (isAnyFilterActive) {
       result = result.filter(publicService => publicService.region_details === regionFilter.value);
     } else {
-      publicServices.forEach(publicService => {
-        if (publicService.region_details === regionFilter.value) {
-          result.push(publicService);
-        }
-      });
+      result = filterServicesByRegion(publicServices, regionFilter.value);
       isAnyFilterActive = true;
     }
   }
@@ -148,11 +120,7 @@ function filterServicesByActiveMaskFilters(publicServices, activeFilters) {
     if (isAnyFilterActive) {
       result = result.filter(publicService => publicService.service_type === serviceTypeFilter.value);
     } else {
-      publicServices.forEach(publicService => {
-        if (publicService.service_type === serviceTypeFilter.value) {
-          result.push(publicService);
-        }
-      });
+      result = filterServicesByType(publicServices, serviceTypeFilter.value);
     }
   }
   return result;

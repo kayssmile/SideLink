@@ -5,10 +5,9 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { checkAuth } from 'src/services/AuthService';
 import { logoutService } from 'src/services/LogoutService';
-import { getToken } from 'src/components/shared/utils/TokenUtils';
 import { basicErrorMessageLink } from 'src/components/shared/utils/ErrorHandling';
 import { toggleInfoModal } from 'src/store/usermanagment/UserManagment';
-import { basicDelRequest } from 'src/services/BasicRequests';
+import { genericAuthRequest } from 'src/services/GenericRequests';
 import Modal from 'src/components/shared/Modal';
 import StyledCard from 'src/components/dashboard/shared/StyledCard';
 
@@ -36,21 +35,14 @@ const AccountDelete = () => {
         dispatch(toggleInfoModal());
         return setDeleteAccount({ loading: false, error: null, success: false });
       }
-      const token = getToken();
-      if (!token) {
-        throw new Error('Authentication token not available');
-      }
-      const response = await basicDelRequest(token);
-      if (response.status === 204) {
-        setDeleteAccount({ loading: false, success: true, error: null });
-      } else {
-        throw new Error(`Unexpected response status: ${response.status}`);
-      }
+      await genericAuthRequest({ method: 'delete', url: '/api/auth/registered-user/' });
+      setDeleteAccount({ loading: false, success: true, error: null });
     } catch (error) {
+      console.error('Error deleting account:', error);
       setDeleteAccount({
         loading: false,
         success: false,
-        error: error instanceof Error ? { detail: error.message } : { detail: 'An unknown error occurred' },
+        error: { detail: error.detail ? error.detail : 'An unknown error occurred' },
       });
     }
   };
@@ -64,14 +56,16 @@ const AccountDelete = () => {
   }, [deleteAccount, dispatch, navigate]);
 
   return (
-    <Grid container>
+    <Grid container component="article">
       <Grid size={12}>
         <StyledCard variant={'outlined'} sx={{ height: '100%', border: 'none', boxShadow: 'none' }}>
           <CardContent sx={{ padding: { xs: '5px', sm: '16px' }, paddingTop: { xs: '20px' } }}>
-            <Typography variant="h5" mb={1}>
+            <Typography variant="h5" component="h2" mb={1}>
               Account
             </Typography>
-            <Typography color="textSecondary">Deinen Account löschen</Typography>
+            <Typography component="h3" color="textSecondary">
+              Deinen Account löschen
+            </Typography>
             {deleteAccount.error ? basicErrorMessageLink(deleteAccount.error) : deleteAccount.success ? <Typography color="success">Account erfolgreich gelöscht</Typography> : null}
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>

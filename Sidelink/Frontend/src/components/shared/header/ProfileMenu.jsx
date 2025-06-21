@@ -8,6 +8,7 @@ import Logout from 'src/components/shared/header/Logout';
 import MenuItem from './parts/MenuItem';
 
 const ProfileMenu = () => {
+  const themeMode = useSelector(state => state.publicData.themeMode);
   const theme = useTheme();
   const xbs = useMediaQuery(theme.breakpoints.down('xbs'));
 
@@ -23,9 +24,13 @@ const ProfileMenu = () => {
   };
 
   return (
-    <Box>
+    <>
       <Button size="large" color="inherit" aria-controls="msgs-menu" aria-haspopup="true" onClick={handleProfileMenu}>
-        <Typography variant="subtitle2" sx={{ color: 'white', fontWeight: 600, marginRight: 2, fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
+        <Typography
+          variant="subtitle2"
+          component="div"
+          sx={{ color: themeMode === 'dark' ? 'white' : 'yellow', fontWeight: 600, marginRight: 2, fontSize: { xs: '0.8rem', sm: '0.9rem' }, maxWidth: '300px' }}
+        >
           {`Guten Tag, ${dashboardData.user?.first_name} ${dashboardData.user?.last_name}`}
         </Typography>
 
@@ -43,33 +48,36 @@ const ProfileMenu = () => {
         sx={{
           '& .MuiMenu-paper': {
             width: '360px',
+            padding: '1rem',
           },
         }}
       >
-        <Box p={3}>
-          <Stack direction="row" pb={3} spacing={2} alignItems="center">
-            <Box>
-              <Typography variant="subtitle1" color="textSecondary" fontWeight={600}>
-                {dashboardData.user?.first_name} {dashboardData.user?.last_name}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {dashboardData.user?.profession}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary" display="flex" alignItems="center" gap={1}>
-                <IconMail width={15} height={15} />
-                {dashboardData.user?.email}
-              </Typography>
-            </Box>
-          </Stack>
+        <Stack direction="row" component="li" key="user-info" pb={3} spacing={2} alignItems="center">
+          <Box component="aside">
+            <Typography variant="subtitle1" color="textSecondary" fontWeight={600}>
+              {dashboardData.user?.first_name} {dashboardData.user?.last_name}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              {dashboardData.user?.profession}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary" display="flex" alignItems="center" gap={1}>
+              <IconMail width={15} height={15} />
+              {dashboardData.user?.email}
+            </Typography>
+          </Box>
+        </Stack>
 
-          <Divider />
-          {profileMenuConfiguration.map(menuItem => (
-            <MenuItem menuItem={menuItem} key={menuItem.title} />
-          ))}
+        <Divider />
+        {profileMenuConfiguration.map(menuItem => (
+          <li key={menuItem.title}>
+            <MenuItem menuItem={menuItem} />
+          </li>
+        ))}
+        <Box component="li" key="logout">
           <Logout usage="profilemenu" />
         </Box>
       </Menu>
-    </Box>
+    </>
   );
 };
 

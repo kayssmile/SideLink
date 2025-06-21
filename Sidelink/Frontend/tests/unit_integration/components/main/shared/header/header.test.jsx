@@ -4,7 +4,6 @@ import { ThemeProvider } from '@emotion/react';
 import { darkTheme } from 'src/config/Theme.js';
 import { renderWithPublicDataReducer } from '@tests/utils/RenderWithRedux';
 import { renderWithAllReducers } from '@tests/utils/RenderWithRedux';
-
 import { MemoryRouter } from 'react-router-dom';
 
 const renderComponent = preloadedState => {

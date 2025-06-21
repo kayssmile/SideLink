@@ -159,7 +159,7 @@ function EditPublicService({ service, handleCancel, modalState, type }) {
           </Box>
 
           <Box mt={1} sx={{ display: 'flex', justifyContent: 'end' }}>
-            {publicServices.success ? (
+            {publicServices.success || publicServices.error ? (
               <Button variant="contained" color="primary" onClick={handleCancel} sx={{ height: '45px', marginTop: '2rem', color: 'white', fontSize: '1rem', width: { xs: '100%', sm: '200px' } }}>
                 Schliessen
               </Button>

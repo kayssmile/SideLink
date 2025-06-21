@@ -1,7 +1,5 @@
 import { screen } from '@testing-library/react';
-
 import renderWithProviders from '/tests/unit_integration/utils/RenderWithProviders.jsx';
-
 import NavItem from 'src/components/dashboard/shared/header/sidebar/parts/NavItem';
 
 const renderNavItemComponent = (item, level) => {

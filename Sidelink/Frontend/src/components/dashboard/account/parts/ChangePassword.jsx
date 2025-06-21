@@ -59,13 +59,13 @@ const ChangePassword = () => {
   }, [changePassword.error, changePassword.success]);
 
   return (
-    <Grid size={{ xs: 12, xl: 6 }}>
+    <Grid size={{ xs: 12, xl: 6 }} component="article">
       <StyledCard component="form" onSubmit={handleSubmit(onSubmit)} variant={'outlined'} sx={{ height: '100%' }}>
         <CardContent>
-          <Typography variant="h5" mb={1}>
+          <Typography variant="h5" component="h2" mb={1}>
             Password
           </Typography>
-          <Typography color="textSecondary" mb={3}>
+          <Typography color="textSecondary" component="h3" mb={3}>
             Ändere dein Passwort hier
           </Typography>
           <Box>

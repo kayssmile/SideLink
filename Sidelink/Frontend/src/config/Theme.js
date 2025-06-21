@@ -2,6 +2,9 @@ import { createTheme } from '@mui/material/styles';
 
 const darkTheme = createTheme({
   palette: {
+    primary: {
+      main: '#1976d2',
+    },
     colors: {
       main: '#293345',
       white: '#ffffff',
@@ -46,6 +49,9 @@ const darkTheme = createTheme({
 
 const lightTheme = createTheme({
   palette: {
+    primary: {
+      main: '#1976d2',
+    },
     colors: {
       main: '#293345',
       white: '#ffffff',
@@ -56,12 +62,12 @@ const lightTheme = createTheme({
       hover: '#0202f7',
     },
     text: {
-      primary: '#000000',
+      primary: '#ffffff',
       secondary: '#7C8FAC',
       dark: '#000',
     },
     background: {
-      main: '#465675',
+      main: '#293345',
       primary: '#253662',
       secondary: '#5D87FF',
       third: 'rgb(28, 69, 93)',
@@ -89,9 +95,3 @@ const lightTheme = createTheme({
 });
 
 export { darkTheme, lightTheme };
-
-/*
-font-size / mobile : 1.2rem
-font-size / tablet : 1.4rem
-font-size / desktop : 1.5rem
-*/

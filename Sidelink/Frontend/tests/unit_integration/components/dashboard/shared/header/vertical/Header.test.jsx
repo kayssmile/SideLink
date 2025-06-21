@@ -1,10 +1,8 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
-
 import { darkTheme } from 'src/config/theme.js';
 import { renderWithAllReducers } from '@tests/utils/RenderWithRedux.jsx';
-
 import Header from 'src/components/dashboard/shared/header/vertical/Header.jsx';
 
 const renderHeaderComponent = preloadedState => {
@@ -40,7 +38,6 @@ describe('Header component', () => {
     renderHeaderComponent({ dashboard: mockDashboardState, publicData: mockPublicData });
     expect(screen.getByTestId('dashboard-header')).toBeInTheDocument();
     expect(screen.getByTestId('dashboard-header-hamburger')).toBeInTheDocument();
-    screen.debug();
     expect(screen.getByText('Jungle Banana')).toBeInTheDocument();
   });
 

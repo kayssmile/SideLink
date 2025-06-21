@@ -147,7 +147,9 @@ const publicProfileSchema = yup.object().shape({
    */
   profile_picture: yup
     .mixed()
+    .nullable()
     .test('fileLength', 'Dateiname ist zu lang max. 100 Zeichen', value => {
+      console.log('value', value);
       if (!value || value.length === 0) return true;
       return value && value[0].name.length < 100;
     })

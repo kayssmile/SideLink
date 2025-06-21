@@ -9,7 +9,7 @@ import AccountMenu from 'src/components/main/shared/header/parts/AccountMenu';
 const MobileSidebar = () => {
   const dispatch = useDispatch();
   return (
-    <>
+    <nav>
       <Box p={3} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <Logo />
         <IconButton sx={{ color: theme => theme.palette.colors.white, marginTop: '-45px', marginRight: '-10px' }} onClick={() => dispatch(toggleMobileSidebar())}>
@@ -17,7 +17,7 @@ const MobileSidebar = () => {
         </IconButton>
       </Box>
 
-      <Box p={3}>
+      <Box p={3} component="ul">
         <Navigations />
       </Box>
 
@@ -33,7 +33,7 @@ const MobileSidebar = () => {
       >
         <AccountMenu />
       </Box>
-    </>
+    </nav>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useTheme, Container, styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { ScrollToTop } from 'src/components/shared/utils/utils';
+import ScrollToTop from 'src/components/shared/utils/ScrollToTop';
 import Header from 'src/components/main/shared/header/Header';
 import Footer from 'src/components/main/shared/footer/Footer';
 import InfoModal from 'src/components/shared/InfoModal';

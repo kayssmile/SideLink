@@ -17,10 +17,10 @@ const OverviewPublicServices = ({ type }) => {
     <Grid container>
       <Grid size={12}>
         <StyledCard variant={'outlined'} sx={{ height: '100%', border: 'none', boxShadow: 'none' }}>
-          <Typography variant="h5" mb={1}>
+          <Typography variant="h5" component="h2" mb={1}>
             Übersicht
           </Typography>
-          <Typography color="textSecondary" mb={3}>
+          <Typography color="textSecondary" mb={3} component="h3">
             {type === 'offer' ? 'Dienstleistungen Deine Angebote' : 'Dienstleistungen Deine Suche'}
           </Typography>
           <CardContent sx={{ height: '40vh', overflow: 'auto', overflowX: 'hidden', padding: { xs: '0', sm: '16px' } }}>

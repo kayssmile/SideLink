@@ -24,7 +24,7 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
 
   return (
     <Dialog open={modalState} onClose={handleCancel} aria-labelledby="delete-service-title">
-      <DialogTitle id="edit-service-title" sx={{ color: 'black', margin: '1rem 0', textAlign: 'center' }}>
+      <DialogTitle id="delete-service-title" sx={{ color: 'black', margin: '1rem 0', textAlign: 'center' }}>
         Bestätigung erforderlich
       </DialogTitle>
       <DialogContent>
@@ -41,7 +41,7 @@ function DeletePublicService({ service, handleCancel, handleCancelWithSuccess, m
         )}
       </DialogContent>
       <DialogActions sx={{ padding: '2rem 2rem' }}>
-        {publicServices.success | publicServices.error ? (
+        {publicServices.success || publicServices.error ? (
           <Button onClick={handleCancelWithSuccess} variant="outlined" size="large">
             Schliessen
           </Button>

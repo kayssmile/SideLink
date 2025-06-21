@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordResetSchema } from 'src/config/Schemas';
-import { basicPostRequest } from 'src/services/BasicRequests';
+import { basicPostRequest } from 'src/services/GenericRequests';
 import { basicFormErrorMessage } from 'src/components/shared/utils/ErrorHandling';
 import Logo from 'src/components/shared/logo/Logo';
 import { StyledTextField } from 'src/components/shared/forms/Formelements';

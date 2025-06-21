@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import Registration from 'src/components/main/authentication/Registration';
 import { ThemeProvider } from '@emotion/react';
 import { darkTheme } from 'src/config/Theme.js';
@@ -53,7 +53,6 @@ describe('Registration Component', () => {
 
   it('renders registration form', () => {
     renderRegistrationComponent({ userManagment: mockStateInitial });
-
     expect(screen.getByText('Registration.')).toBeInTheDocument();
     expect(screen.getByText('Welcome to SideLink')).toBeInTheDocument();
     expect(screen.getByLabelText('Vorname *')).toBeInTheDocument();
@@ -73,7 +72,6 @@ describe('Registration Component', () => {
   it('shows validation errors for empty fields', async () => {
     renderRegistrationComponent({ userManagment: mockStateInitial });
     fireEvent.click(screen.getByRole('button', { name: 'Registrieren' }));
-
     await waitFor(() => {
       expect(screen.getAllByText(/ist erforderlich/).length).toBeGreaterThan(0);
     });
@@ -96,7 +94,6 @@ describe('Registration Component', () => {
 
   it('submits form with valid data', async () => {
     renderRegistrationComponent({ userManagment: mockStateInitial });
-
     fireEvent.change(screen.getByLabelText('Vorname *'), { target: { value: 'Max' } });
     fireEvent.change(screen.getByLabelText('Nachname *'), { target: { value: 'Mustermann' } });
     fireEvent.change(screen.getByLabelText('Beruf *'), { target: { value: 'Developer' } });
@@ -108,9 +105,7 @@ describe('Registration Component', () => {
     fireEvent.change(screen.getByLabelText('Email *'), { target: { value: 'test@test.com' } });
     fireEvent.change(screen.getByLabelText('Password *'), { target: { value: 'Password123!' } });
     fireEvent.click(screen.getByRole('checkbox'));
-
     fireEvent.click(screen.getByRole('button', { name: 'Registrieren' }));
-
     await waitFor(() => {
       expect(mockDispatch).toHaveBeenCalledTimes(1);
     });

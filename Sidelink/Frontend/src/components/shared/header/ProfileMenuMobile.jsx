@@ -13,6 +13,7 @@ const ProfileMenuMobile = () => {
   return (
     <>
       <Stack
+        component="ul"
         sx={{
           display: 'flex',
           alignItems: 'flex-start',
@@ -21,13 +22,13 @@ const ProfileMenuMobile = () => {
           marginBottom: '10px',
         }}
       >
-        <Typography variant="subtitle1" color="white" fontWeight={600}>
+        <Typography variant="subtitle1" component="li" color="white" fontWeight={600}>
           {dashboardData.user?.first_name} {dashboardData.user?.last_name}
         </Typography>
-        <Typography variant="subtitle1" color="white">
+        <Typography variant="subtitle1" component="li" color="white">
           {dashboardData.user?.profession}
         </Typography>
-        <Typography variant="subtitle1" color="white" display="flex" alignItems="center" gap={1}>
+        <Typography variant="subtitle1" component="li" color="white" display="flex" alignItems="center" gap={1}>
           <IconMail width={15} height={15} />
           {dashboardData.user?.email}
         </Typography>

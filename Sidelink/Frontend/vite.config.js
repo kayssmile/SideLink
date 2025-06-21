@@ -19,7 +19,7 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    reporters: ['default', 'verbose'],
+    silent: false,
     environment: 'jsdom',
     setupFiles: './tests/unit_integration/setupTests.js',
     coverage: {

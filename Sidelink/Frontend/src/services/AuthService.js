@@ -2,19 +2,17 @@ import { axiosInstanceBasicAuth } from 'src/api/AxiosInstance';
 import { getToken, setToken, removeToken, getRefreshToken, setRefreshToken, removeRefreshToken, isTokenExpired } from 'src/components/shared/utils/TokenUtils';
 
 async function checkAuth() {
-  let accessToken = getToken();
-  let refreshToken = getRefreshToken();
+  const accessToken = getToken();
+  const refreshToken = getRefreshToken();
   if (!accessToken) return false;
   if (isTokenExpired(accessToken)) {
     if (refreshToken && !isTokenExpired(refreshToken)) {
       try {
-        console.log('Token expired, refreshing...');
-        refresh = await refreshAccessToken(refreshToken);
-
+        const refresh = await refreshAccessToken(refreshToken);
         return refresh;
       } catch (error) {
-        console.log('Error refreshing token:', error);
         removeToken();
+        removeRefreshToken();
         return false;
       }
     } else {
@@ -37,4 +35,4 @@ async function refreshAccessToken(refreshToken) {
   }
 }
 
-export { checkAuth, refreshAccessToken };
+export { checkAuth };

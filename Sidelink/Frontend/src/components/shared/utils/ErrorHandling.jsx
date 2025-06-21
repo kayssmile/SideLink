@@ -31,7 +31,7 @@ const basicFormErrorMessage = error => {
       <Typography
         component="span"
         sx={{
-          color: 'white',
+          color: 'green',
           textDecoration: 'underline',
           a: { color: 'inherit' },
         }}

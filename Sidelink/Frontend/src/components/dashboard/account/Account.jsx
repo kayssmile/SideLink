@@ -23,11 +23,11 @@ const Account = () => {
     <>
       <Breadcrumb title="Account Verwaltung" items={breadcrumpConfig.account} sx={{ margin: '30px 0' }} />
 
-      <Box sx={{ maxWidth: '100%' }}>
+      <Box sx={{ maxWidth: '100%' }} component="section">
         <Grid container spacing={3}>
           <Grid size={12}>
             <StyledCard>
-              <Box sx={{ position: 'relative', display: 'inline-block', maxWidth: 'calc(100vw - 32px)' }}>
+              <Box sx={{ position: 'relative', display: 'inline-block', maxWidth: 'calc(100vw - 32px)' }} component="nav">
                 <Tabs
                   value={activeTab}
                   onChange={handleChange}

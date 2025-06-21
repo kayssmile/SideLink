@@ -1,21 +1,11 @@
-import { axiosInstanceAuth } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getToken } from 'src/components/shared/utils/TokenUtils';
+import { genericAuthRequest } from 'src/services/GenericRequests';
 
-const putPublicService = createAsyncThunk('publicservice/putPublicService', async (newPublicServiceData, { rejectWithValue }) => {
+const putPublicService = createAsyncThunk('publicservice/putPublicService', async (newServiceData, { rejectWithValue }) => {
   try {
-    const token = getToken();
-    if (!token) {
-      throw new Error('Token nicht gefunden');
-    }
-    const { data } = await axiosInstanceAuth(token).put(`/api/public-service/`, newPublicServiceData);
-    return data;
+    return await genericAuthRequest({ method: 'put', url: `/api/public-service/`, data: newServiceData });
   } catch (error) {
-    const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
-    return rejectWithValue({
-      status: error.response?.status || 500,
-      detail: errorMessage,
-    });
+    return rejectWithValue(error);
   }
 });
 

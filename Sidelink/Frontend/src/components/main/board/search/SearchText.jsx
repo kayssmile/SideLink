@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { debounce } from 'lodash';
 import { useTheme, useMediaQuery, IconButton, TextField, InputAdornment } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,27 +21,6 @@ function SearchText() {
    * New search starts after 300ms break
    * If searchmask is active we filter services by active mask filters otherwise we filter services by search value
    */
-  /*
-  const handleNewSearchValue = useMemo(
-    () =>
-      debounce(newSearchValue => {
-        let newSerachEngineData = [];
-        console.log('ourmaskinmemo', checkActiveMaskFilters(searchMask));
-        console.log('is any filter active', isAnyMaskFilterActive(searchMask));
-        if (isAnyMaskFilterActive(searchMask)) {
-          console.log('search mask active', checkActiveMaskFilters(searchMask));
-
-          const activeFilters = checkActiveMaskFilters(searchMask);
-          newSerachEngineData = filterServicesByActiveMaskFilters(publicServices, activeFilters);
-          newSerachEngineData = filterServicesBySearch(newSerachEngineData, newSearchValue);
-        } else {
-          newSerachEngineData = filterServicesBySearch(publicServices, newSearchValue);
-        }
-        dispatch(setSearchEngineData(newSerachEngineData));
-      }, 300),
-    []
-  ); */
-
   const handleNewSearchValue = debounce(newSearchValue => {
     let newSerachEngineData = [];
     if (isAnyMaskFilterActive(searchMask)) {

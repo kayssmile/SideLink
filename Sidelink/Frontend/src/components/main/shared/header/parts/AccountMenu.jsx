@@ -9,19 +9,15 @@ const AccountMenu = () => {
   const isLoggedIn = dashboardData.user.email;
   const xlUp = useMediaQuery(theme => theme.breakpoints.up('xl'));
 
-  return (
-    <>
-      {isLoggedIn && xlUp ? (
-        <ProfileMenu />
-      ) : isLoggedIn && !xlUp ? (
-        <ProfileMenuMobile />
-      ) : (
-        <Button color="primary" variant="contained" component={Link} to="/login">
-          Log In
-        </Button>
-      )}
-    </>
-  );
+  if (!isLoggedIn) {
+    return (
+      <Button color="primary" variant="contained" component={Link} to="/login">
+        Log In
+      </Button>
+    );
+  }
+
+  return xlUp ? <ProfileMenu /> : <ProfileMenuMobile />;
 };
 
 export default AccountMenu;

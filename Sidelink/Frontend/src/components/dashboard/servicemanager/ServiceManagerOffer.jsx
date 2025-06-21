@@ -5,7 +5,7 @@ import PublicServiceMenu from './parts/PublicServiceMenu';
 function ServiceManagerOffer() {
   return (
     <>
-      <Breadcrumb title="Dienstleistungen Meine Angebote" items={breadcrumpConfig.serviceOffer} sx={{ margin: '30px 0' }} />
+      <Breadcrumb title="Dienstleistungen Angebote" items={breadcrumpConfig.serviceOffer} sx={{ margin: '30px 0' }} />
       <PublicServiceMenu type="offer" />
     </>
   );

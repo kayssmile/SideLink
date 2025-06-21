@@ -58,13 +58,13 @@ const ChangeEmail = () => {
   }, [changeEmail.error, changeEmail.success]);
 
   return (
-    <Grid size={{ xs: 12, xl: 6 }}>
+    <Grid size={{ xs: 12, xl: 6 }} component="article">
       <StyledCard component="form" onSubmit={handleSubmit(onSubmit)} variant={'outlined'} sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         <CardContent>
-          <Typography variant="h5" mb={1}>
+          <Typography variant="h5" component="h2" mb={1}>
             Email
           </Typography>
-          <Typography color="textSecondary" mb={3}>
+          <Typography color="textSecondary" component="h3" mb={3}>
             Ändere deine E-Mail-Adresse hier
           </Typography>
           <Box>
@@ -101,7 +101,7 @@ const ChangeEmail = () => {
               marginLeft: { xs: '1rem', sm: 'auto' },
             }}
           >
-            {changeEmail.success ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Speichern'}
+            {changeEmail.loading ? <CircularProgress size="25px" sx={{ color: 'white' }} /> : 'Speichern'}
           </Button>
         </Box>
         {confirmModal && (

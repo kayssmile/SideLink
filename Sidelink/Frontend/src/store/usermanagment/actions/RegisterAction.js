@@ -1,16 +1,11 @@
-import { axiosInstanceBasic } from 'src/api/AxiosInstance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { genericRequest } from 'src/services/GenericRequests';
 
 const registerUser = createAsyncThunk('auth/registerUser', async (newData, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstanceBasic.post('/api/auth/register/', newData);
-    return data;
+    return await genericRequest({ method: 'post', url: '/api/auth/register/', data: newData });
   } catch (error) {
-    const errorMessage = error.response?.data?.error || error.message || 'Ein unbekannter Fehler ist aufgetreten';
-    return rejectWithValue({
-      status: error.response?.status || 500,
-      detail: errorMessage,
-    });
+    return rejectWithValue(error);
   }
 });
 

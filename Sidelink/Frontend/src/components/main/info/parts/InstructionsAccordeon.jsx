@@ -1,13 +1,17 @@
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Stack, useTheme, Box } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Stack, useTheme, Box, styled } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
 
 function InstructionsAccordion() {
   const theme = useTheme();
 
+  const StyledTypography = styled(Typography)({
+    fontSize: '1.2rem',
+  });
+
   return (
     <Stack spacing={3} sx={{ padding: { xs: '2rem 0', xl: '0 0' } }}>
-      <Accordion>
+      <Accordion component="article">
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} aria-controls="panel1-content" sx={{ backgroundColor: theme.palette.form.background }}>
           <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: { xs: '1.1rem', md: '1.3rem' }, fontWeight: '600' }}>
             Wie funktioniert alles?
@@ -15,34 +19,24 @@ function InstructionsAccordion() {
         </AccordionSummary>
         <AccordionDetails sx={{ backgroundColor: theme.palette.background.lightgrey, padding: '2rem' }}>
           <Box component="ul" sx={{ pl: 3, color: theme.palette.text.dark, margin: '0 0' }}>
-            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
-              Registriere dich kostenlos über{' '}
-              <Link to={'/registration'} underline="hover" color="primary">
-                Registration
-              </Link>
-              .
-            </Typography>
-            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
-              Logge dich anschließend hier ein:{' '}
-              <Link to={'/login'} underline="hover" color="primary">
-                Login
-              </Link>
-              .
-            </Typography>
-            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
+            <StyledTypography component="li">
+              Registriere dich kostenlos über <Link to={'/registration'}>Registration</Link>.
+            </StyledTypography>
+            <StyledTypography component="li">
+              Logge dich anschließend hier ein: <Link to={'/login'}>Login</Link>.
+            </StyledTypography>
+            <StyledTypography component="li">
               Im Dashboard angekommen, erstelle dein <strong>öffentliches Profil</strong>. Es hilft anderen, dich zu finden und mehr über deine Angebote oder Suchen zu erfahren.
-            </Typography>
-            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
+            </StyledTypography>
+            <StyledTypography component="li">
               Lege direkt los mit deinem ersten <strong>Service</strong> – dieser wird automatisch auf der Plattform sichtbar und ist bereit für Anfragen.
-            </Typography>
-            <Typography component="li" sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
-              Du kannst jederzeit Änderungen vornehmen und Services aktualisieren – ganz flexibel.{' '}
-            </Typography>
+            </StyledTypography>
+            <StyledTypography component="li">Du kannst jederzeit Änderungen vornehmen und Services aktualisieren – ganz flexibel. </StyledTypography>
           </Box>
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      <Accordion component="article">
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} aria-controls="panel2-content" sx={{ backgroundColor: theme.palette.form.background }}>
           <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: { xs: '1.1rem', md: '1.3rem' }, fontWeight: '600' }}>
             Begin – Dein öffentliches Profil
@@ -60,7 +54,7 @@ function InstructionsAccordion() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion>
+      <Accordion component="article">
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} aria-controls="panel3-content" sx={{ backgroundColor: theme.palette.form.background }}>
           <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', color: theme.palette.text.primary, fontSize: { xs: '1.1rem', md: '1.3rem' }, fontWeight: '600' }}>
             Complete – Services erstellen & anbieten
@@ -68,7 +62,7 @@ function InstructionsAccordion() {
         </AccordionSummary>
         <AccordionDetails sx={{ backgroundColor: theme.palette.background.lightgrey, padding: '2rem' }}>
           <Typography sx={{ color: theme.palette.text.dark, fontSize: '1.2rem' }}>
-            Erstelle individuelle Services mit Titel, Beschreibung, Preis und Ortsangabe. Deine Angebote erscheinen automatisch auf der Plattform und können direkt angefragt werden.
+            Erstelle individuelle Services mit Titel, Beschreibung und Ortsangabe. Deine Angebote erscheinen automatisch auf der Plattform und können direkt angefragt werden.
             <br />
             <strong>Service gespeichert? Dann ist er öffentlich sichtbar.</strong>
             <br />

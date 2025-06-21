@@ -1,8 +1,7 @@
 import icon1 from 'src/assets/images/svgs/icon-account.svg';
 import ddIcon3 from 'src/assets/images/svgs/icon-dd-invoice.svg';
 import settingsIcon from 'src/assets/images/svgs/settings.svg';
-
-import { IconPoint, IconCurrencyDollar, IconUserCircle, IconUserCheck, IconChartHistogram } from '@tabler/icons-react';
+import { IconPoint, IconCurrencyDollar, IconUserCircle, IconUserCheck, IconChartHistogram, IconHomeShare } from '@tabler/icons-react';
 
 const navLinks = [
   {
@@ -132,6 +131,11 @@ const sideBarMenuItems = [
     title: 'Auswertungen',
     icon: IconChartHistogram,
     to: '/dashboard/analytics',
+  },
+  {
+    title: 'Zur Startseite',
+    icon: IconHomeShare,
+    to: '/home',
   },
 ];
 

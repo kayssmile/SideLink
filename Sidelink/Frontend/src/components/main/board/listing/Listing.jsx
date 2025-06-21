@@ -67,8 +67,13 @@ function Listing() {
     }
   }, [publicProfiles.success, selectedService, dispatch, navigate]);
 
+  useEffect(() => {
+    setPage(0);
+  }, [searchEngineData]);
+
   return (
     <Box component="article">
+      <h3 className="visually-hidden-seo">Suchergebnisse</h3>
       <Scrollbar>
         <TableContainer component={Paper} sx={{ backgroundColor: theme.palette.background.main, boxShadow: 'none' }}>
           <Table sx={{ minWidth: 500, backgroundColor: theme.palette.background.main, marginTop: { xs: '1rem', lg: '2rem' } }} aria-label="Tabelle Suche und Angebote">

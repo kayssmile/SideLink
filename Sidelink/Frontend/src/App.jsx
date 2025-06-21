@@ -4,7 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkTheme, lightTheme } from 'src/config/Theme.js';
 import { checkAuth } from 'src/services/AuthService';
-import { basicPostRequest } from 'src/services/BasicRequests';
+import { basicPostRequest } from 'src/services/GenericRequests';
 import getDashboardData from 'src/store/dashboard/shared/actions/GetDashboardDataAction';
 import getPublicData from 'src/store/publicdata/actions/GetPublicDataAction';
 import router from 'src/routes/Router';

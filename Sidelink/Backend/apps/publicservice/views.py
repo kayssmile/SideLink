@@ -60,7 +60,7 @@ class PublicServiceView(APIView):
                 description="Public service successfully deleted",
             ),
             400: OpenApiResponse(
-                description="Bad Request if Id is not provided",    
+                description="Bad Request if id is not provided",    
             ),
             401: OpenApiResponse(description="Unauthorized"),
             404: OpenApiResponse(

@@ -7,13 +7,13 @@ function ServicePreview({ title, category_details, sub_categories_details, regio
   return (
     <TableRow sx={{ '&:hover': { backgroundColor: theme.palette.background.primary }, cursor: 'pointer' }} onClick={onClick}>
       <TableCell sx={{ borderColor: theme.palette.border.main }}>
-        <Typography variant="h5" color={'white'} sx={{ opacity: '1', fontSize: '1rem', fontWeight: '500' }}>
+        <Typography variant="h4" color={'white'} sx={{ opacity: '1', fontSize: '1rem', fontWeight: '500' }}>
           {title}
         </Typography>
       </TableCell>
 
       <TableCell sx={{ borderColor: theme.palette.border.main }}>
-        <Chip label={category_details} color="primary" size="small" sx={{ marginLeft: '0', '&.MuiChip-root': { borderRadius: '6px' } }} />
+        <Chip label={category_details} component="h5" color="primary" size="small" sx={{ margin: '0 0', fontWeight: 'normal', '&.MuiChip-root': { borderRadius: '6px' } }} />
       </TableCell>
 
       <TableCell sx={{ borderColor: theme.palette.border.main }}>

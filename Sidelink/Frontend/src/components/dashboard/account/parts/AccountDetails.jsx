@@ -37,7 +37,6 @@ const AccountDetails = () => {
     try {
       if (await checkAuth()) {
         data.region = data.region_name;
-        console.log('Account Details submitted:', data);
         dispatch(patchAccountDetails(data));
       } else {
         dispatch(toggleInfoModal());
@@ -69,14 +68,14 @@ const AccountDetails = () => {
   }, [dashboardData, setValue]);
 
   return (
-    <Grid container>
+    <Grid container component="article">
       <Grid size={12}>
         <StyledCard variant={'outlined'} sx={{ height: '100%', border: 'none', boxShadow: 'none' }}>
           <CardContent component="form" onSubmit={handleSubmit(onSubmit)} sx={{ padding: { xs: '5px', sm: '16px' }, paddingTop: { xs: '20px' } }}>
-            <Typography variant="h5" mb={1}>
+            <Typography variant="h5" component="h2" mb={1}>
               Account
             </Typography>
-            <Typography color="textSecondary" mb={3}>
+            <Typography color="textSecondary" component="h3" mb={3}>
               Ändere deine Accountdaten hier
             </Typography>
 

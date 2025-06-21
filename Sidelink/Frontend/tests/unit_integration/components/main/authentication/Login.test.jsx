@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import Login from 'src/components/main/authentication/Login';
 import { ThemeProvider } from '@emotion/react';
 import { darkTheme } from 'src/config/Theme.js';
@@ -74,7 +74,6 @@ describe('Login Component', () => {
 
   it('renders login form', () => {
     renderLoginComponent({ userManagment: mockStateLoggedOut });
-    screen.debug();
     expect(screen.getByText('Login')).toBeInTheDocument();
     expect(screen.getByLabelText('Email *')).toBeInTheDocument();
     expect(screen.getByLabelText('Password *')).toBeInTheDocument();
@@ -86,7 +85,6 @@ describe('Login Component', () => {
   it('shows validation errors for empty fields', async () => {
     renderLoginComponent({ userManagment: mockStateLoggedOut });
     fireEvent.click(screen.getByRole('button', { name: 'Login' }));
-
     await waitFor(() => {
       expect(screen.getByText('Ungültige E-Mail')).toBeInTheDocument();
       expect(screen.getByText('Mindestens 6 Zeichen')).toBeInTheDocument();
@@ -117,17 +115,17 @@ describe('Login Component', () => {
     });
   });
 
-  it('laods dashboard data on success', async () => {
+  it('loads dashboard data on success', async () => {
     renderLoginComponent({ userManagment: mockStateSuccess });
     await waitFor(() => {
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
   });
 
   it('redirects to dashboard on successful login', async () => {
-    renderLoginComponent({ dashboard: dashboardData });
+    renderLoginComponent({ dashboard: dashboardData, userManagment: mockStateSuccess });
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
+      expect(mockNavigate).toHaveBeenCalledWith('/dashboard/publicprofile');
     });
   });
 });

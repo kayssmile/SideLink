@@ -62,6 +62,6 @@ describe('ProfileMenu Component', () => {
     const logoutButton = screen.getByText('Logout');
     fireEvent.click(logoutButton);
     const state = store.getState();
-    expect(state.userManagment.userInfo).toBe(null);
+    expect(state.dashboard.dashboardData.user.email).toBe(undefined);
   });
 });

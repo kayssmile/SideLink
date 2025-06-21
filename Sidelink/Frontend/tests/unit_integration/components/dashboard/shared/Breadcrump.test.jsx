@@ -1,7 +1,5 @@
 import { screen } from '@testing-library/react';
-
 import renderWithProviders from '/tests/unit_integration/utils/RenderWithProviders.jsx';
-
 import Breadcrumb from 'src/components/dashboard/shared/Breadcrumb';
 
 const renderComponent = (subtitle, items, title) => {
@@ -24,7 +22,6 @@ describe('Breadcrump Component', () => {
       'Title'
     );
     expect(screen.getByText('Title')).toBeInTheDocument();
-    expect(screen.getByText('Subtitle')).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Public Profile')).toBeInTheDocument();
   });

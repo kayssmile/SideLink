@@ -50,3 +50,4 @@ dist-ssr
 /coverage/
 __snapshots__/
 .coverage
+coverage

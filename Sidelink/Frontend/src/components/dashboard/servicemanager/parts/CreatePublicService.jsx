@@ -53,11 +53,10 @@ const CreatePublicService = ({ type }) => {
   };
 
   useEffect(() => {
-    if (publicServices.error) {
-      setConfirmModal(true);
-    }
+    if (!publicServices.error && !publicServices.success) return;
+
+    setConfirmModal(true);
     if (publicServices.success) {
-      setConfirmModal(true);
       reset();
       setValue('region', null);
       setValue('category', null);
@@ -66,14 +65,14 @@ const CreatePublicService = ({ type }) => {
   }, [publicServices.error, publicServices.success, reset, setValue]);
 
   return (
-    <Grid container>
+    <Grid container component="article">
       <Grid size={12}>
         <StyledCard variant={'outlined'} component="form" onSubmit={handleSubmit(onSubmit)} sx={{ border: 'none', boxShadow: 'none' }}>
           <CardContent sx={{ padding: 0 }}>
-            <Typography variant="h5" mb={1}>
+            <Typography variant="h5" component="h2" mb={1}>
               {type === 'offer' ? 'Neues Angebot erstellen' : 'Neue Suchanfrage erstellen'}
             </Typography>
-            <Typography color="textSecondary" mb={1}>
+            <Typography color="textSecondary" mb={1} component="h3">
               {type === 'offer' ? 'Das neue Angebot ist öffentlich sichtbar !' : 'Die neue Suche ist öffentlich sichtbar !'}
             </Typography>
             <Box>
