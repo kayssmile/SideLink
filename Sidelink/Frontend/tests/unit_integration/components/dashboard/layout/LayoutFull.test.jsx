@@ -6,6 +6,8 @@ import { MemoryRouter } from 'react-router-dom';
 import store from 'src/store/Store';
 import { Provider } from 'react-redux';
 
+window.scrollTo = vi.fn();
+
 describe('LayoutFull Component', () => {
   const renderComponent = () => {
     return render(

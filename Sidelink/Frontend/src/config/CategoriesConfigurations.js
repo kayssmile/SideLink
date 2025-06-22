@@ -1,7 +1,7 @@
 const categoriesConfiguration = [
   {
     name: 'Haushalt',
-    subcategories: ['Reinigung', 'Bügeln', 'Wäsche waschen', 'Organisation & Ordnung', 'Haushaltshilfe auf Zeit'],
+    subcategories: ['Reinigung', 'Bügeln', 'Wäsche waschen', 'Haushaltshilfe auf Zeit'],
   },
   {
     name: 'Handwerk',
@@ -49,7 +49,7 @@ const categoriesConfiguration = [
   },
   {
     name: 'Einkauf & Besorgungen',
-    subcategories: ['Einkaufsservice', 'Apothekengänge', 'Paketannahme & Versand', 'Warenabholung'],
+    subcategories: ['Einkaufsservice', 'Apothekengänge', 'Warenabholung'],
   },
   {
     name: 'Wellness & Gesundheit',

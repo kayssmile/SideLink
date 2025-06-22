@@ -5,6 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import { MemoryRouter } from 'react-router-dom';
 import { renderWithAllReducers } from '@tests/utils/RenderWithRedux';
 
+window.scrollTo = vi.fn();
 describe('LayoutMain Component', () => {
   const renderComponent = preloadedState => {
     return renderWithAllReducers(
