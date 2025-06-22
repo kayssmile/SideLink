@@ -21,7 +21,7 @@ const Sidebar = () => {
       sx={{
         width: toggleWidth,
         position: 'relative',
-        transition: 'width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms', // 'width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms'
+        transition: 'width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
         flexShrink: 0,
       }}
     >

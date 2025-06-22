@@ -47,6 +47,9 @@ const darkTheme = createTheme({
   },
 });
 
+/*
+ * Prepared for light theme
+ */
 const lightTheme = createTheme({
   palette: {
     primary: {
@@ -67,7 +70,7 @@ const lightTheme = createTheme({
       dark: '#000',
     },
     background: {
-      main: '#293345',
+      main: '#434e63',
       primary: '#253662',
       secondary: '#5D87FF',
       third: 'rgb(28, 69, 93)',

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Box, useMediaQuery, Switch, Slide, FormControlLabel } from '@mui/material';
+import { Box, Switch, Slide, FormControlLabel } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import SerachText from './SearchText';
 import SearchRegion from './SearchRegion';
@@ -7,12 +7,12 @@ import SearchType from './SearchType';
 import SearchCategories from './SearchCategories';
 
 function SearchMask() {
-  const smDown = useMediaQuery(theme => theme.breakpoints.down('sm'));
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(localStorage.getItem('showFilters') === 'true' || false);
   const containerRef = useRef(null);
 
   const handleChange = () => {
     setChecked(prev => !prev);
+    localStorage.setItem('showFilters', !checked);
   };
 
   return (

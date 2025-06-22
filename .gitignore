@@ -48,6 +48,8 @@ dist-ssr
 
 # Test coverage directory
 /coverage/
-__snapshots__/
-.coverage
 coverage
+.coverage
+**/.coverage        
+/__snapshots__/
+**/__snapshots__/

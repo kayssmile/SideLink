@@ -1,0 +1,2574 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add category",
+    "content_type": 6,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change category",
+    "content_type": 6,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete category",
+    "content_type": 6,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view category",
+    "content_type": 6,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add contact message",
+    "content_type": 7,
+    "codename": "add_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change contact message",
+    "content_type": 7,
+    "codename": "change_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete contact message",
+    "content_type": 7,
+    "codename": "delete_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view contact message",
+    "content_type": 7,
+    "codename": "view_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add region",
+    "content_type": 8,
+    "codename": "add_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change region",
+    "content_type": 8,
+    "codename": "change_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete region",
+    "content_type": 8,
+    "codename": "delete_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view region",
+    "content_type": 8,
+    "codename": "view_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add location",
+    "content_type": 9,
+    "codename": "add_location"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change location",
+    "content_type": 9,
+    "codename": "change_location"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete location",
+    "content_type": 9,
+    "codename": "delete_location"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view location",
+    "content_type": 9,
+    "codename": "view_location"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add sub category",
+    "content_type": 10,
+    "codename": "add_subcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change sub category",
+    "content_type": 10,
+    "codename": "change_subcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete sub category",
+    "content_type": 10,
+    "codename": "delete_subcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view sub category",
+    "content_type": 10,
+    "codename": "view_subcategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add registered user",
+    "content_type": 11,
+    "codename": "add_registereduser"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change registered user",
+    "content_type": 11,
+    "codename": "change_registereduser"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete registered user",
+    "content_type": 11,
+    "codename": "delete_registereduser"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view registered user",
+    "content_type": 11,
+    "codename": "view_registereduser"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add public service",
+    "content_type": 12,
+    "codename": "add_publicservice"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change public service",
+    "content_type": 12,
+    "codename": "change_publicservice"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete public service",
+    "content_type": 12,
+    "codename": "delete_publicservice"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view public service",
+    "content_type": 12,
+    "codename": "view_publicservice"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add public profile",
+    "content_type": 13,
+    "codename": "add_publicprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change public profile",
+    "content_type": 13,
+    "codename": "change_publicprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete public profile",
+    "content_type": 13,
+    "codename": "delete_publicprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view public profile",
+    "content_type": 13,
+    "codename": "view_publicprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add analytics data entry",
+    "content_type": 14,
+    "codename": "add_analyticsdataentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change analytics data entry",
+    "content_type": 14,
+    "codename": "change_analyticsdataentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete analytics data entry",
+    "content_type": 14,
+    "codename": "delete_analyticsdataentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view analytics data entry",
+    "content_type": 14,
+    "codename": "view_analyticsdataentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add profile",
+    "content_type": 15,
+    "codename": "add_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change profile",
+    "content_type": 15,
+    "codename": "change_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete profile",
+    "content_type": 15,
+    "codename": "delete_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view profile",
+    "content_type": 15,
+    "codename": "view_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add request",
+    "content_type": 16,
+    "codename": "add_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change request",
+    "content_type": 16,
+    "codename": "change_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete request",
+    "content_type": 16,
+    "codename": "delete_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view request",
+    "content_type": 16,
+    "codename": "view_request"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add response",
+    "content_type": 17,
+    "codename": "add_response"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change response",
+    "content_type": 17,
+    "codename": "change_response"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete response",
+    "content_type": 17,
+    "codename": "delete_response"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view response",
+    "content_type": 17,
+    "codename": "view_response"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add sql query",
+    "content_type": 18,
+    "codename": "add_sqlquery"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change sql query",
+    "content_type": 18,
+    "codename": "change_sqlquery"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete sql query",
+    "content_type": 18,
+    "codename": "delete_sqlquery"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view sql query",
+    "content_type": 18,
+    "codename": "view_sqlquery"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "core",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "core",
+    "model": "contactmessage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "core",
+    "model": "region"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "core",
+    "model": "location"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "core",
+    "model": "subcategory"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "usermanagment",
+    "model": "registereduser"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "publicservice",
+    "model": "publicservice"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "publicprofile",
+    "model": "publicprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "analytics",
+    "model": "analyticsdataentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "silk",
+    "model": "profile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "silk",
+    "model": "request"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "silk",
+    "model": "response"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "silk",
+    "model": "sqlquery"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7h6s9ik2udr2rf8fom833q2x0kxxnud1",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8CoNL934DAWaQqoGktCvjv2uTLnR7zzn3xULc1hq2QUuYkZ2ZZKffLcX8oLYDvMd26zz3ti5z4rvCDzr4tSM9L4f7d1DjqN9aWEIyklSRqP2kY1FQkkGR5SQFWowEmJRUWbvsSzYOEEAZUg60sJ69P_QlN9U:1uOCcx:_keAmnrxNXfWxYh5ZAVlx-8KCCGrm0brB4kwWL6D0CM",
+    "expire_date": "2025-06-22T09:47:43.845Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "lxf18kkwpgm7y8s45ckfr11ffyypkgy0",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8CoNL934DAWaQqoGktCvjv2uTLnR7zzn3xULc1hq2QUuYkZ2ZZKffLcX8oLYDvMd26zz3ti5z4rvCDzr4tSM9L4f7d1DjqN9aWEIyklSRqP2kY1FQkkGR5SQFWowEmJRUWbvsSzYOEEAZUg60sJ69P_QlN9U:1uMACd:12vDdsyA3iyU7knQHhOKuSJZnBP8Rx2iI2gl3r7cNjM",
+    "expire_date": "2025-06-16T18:48:07.939Z"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.449Z",
+    "updated_at": "2025-06-01T18:28:40.449Z",
+    "name": "Haushalt"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.480Z",
+    "updated_at": "2025-06-01T18:28:40.480Z",
+    "name": "Handwerk"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.506Z",
+    "updated_at": "2025-06-01T18:28:40.506Z",
+    "name": "Umzug"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.532Z",
+    "updated_at": "2025-06-01T18:28:40.532Z",
+    "name": "Garten"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.554Z",
+    "updated_at": "2025-06-01T18:28:40.554Z",
+    "name": "IT &amp; Technik"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.579Z",
+    "updated_at": "2025-06-01T18:28:40.579Z",
+    "name": "Kinderbetreuung"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.597Z",
+    "updated_at": "2025-06-01T18:28:40.597Z",
+    "name": "Seniorenhilfe"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.618Z",
+    "updated_at": "2025-06-01T18:28:40.618Z",
+    "name": "Tiere &amp; Tierbetreuung"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 9,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.635Z",
+    "updated_at": "2025-06-01T18:28:40.635Z",
+    "name": "Reparatur &amp; Montage"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.657Z",
+    "updated_at": "2025-06-01T18:28:40.657Z",
+    "name": "Reisen &amp; Mobilität"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 11,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.675Z",
+    "updated_at": "2025-06-01T18:28:40.675Z",
+    "name": "Bildung &amp; Coaching"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 12,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.698Z",
+    "updated_at": "2025-06-01T18:28:40.698Z",
+    "name": "Kreativ &amp; Medien"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 13,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.720Z",
+    "updated_at": "2025-06-01T18:28:40.720Z",
+    "name": "Einkauf &amp; Besorgungen"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 14,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.738Z",
+    "updated_at": "2025-06-01T18:28:40.738Z",
+    "name": "Wellness &amp; Gesundheit"
+  }
+},
+{
+  "model": "core.category",
+  "pk": 15,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.756Z",
+    "updated_at": "2025-06-01T18:28:40.756Z",
+    "name": "Bau &amp; Renovierung"
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.456Z",
+    "updated_at": "2025-06-01T18:28:40.456Z",
+    "name": "Reinigung",
+    "category": 1
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.463Z",
+    "updated_at": "2025-06-01T18:28:40.463Z",
+    "name": "Bügeln",
+    "category": 1
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.469Z",
+    "updated_at": "2025-06-01T18:28:40.469Z",
+    "name": "Wäsche waschen",
+    "category": 1
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.477Z",
+    "updated_at": "2025-06-01T18:28:40.477Z",
+    "name": "Haushaltshilfe auf Zeit",
+    "category": 1
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.484Z",
+    "updated_at": "2025-06-01T18:28:40.484Z",
+    "name": "Malerarbeiten",
+    "category": 2
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.488Z",
+    "updated_at": "2025-06-01T18:28:40.488Z",
+    "name": "Reparaturen",
+    "category": 2
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.494Z",
+    "updated_at": "2025-06-01T18:28:40.494Z",
+    "name": "Montagen",
+    "category": 2
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 9,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.498Z",
+    "updated_at": "2025-06-01T18:28:40.498Z",
+    "name": "Elektrik",
+    "category": 2
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.502Z",
+    "updated_at": "2025-06-01T18:28:40.502Z",
+    "name": "Sanitär",
+    "category": 2
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 11,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.510Z",
+    "updated_at": "2025-06-01T18:28:40.510Z",
+    "name": "Umzugshelfer",
+    "category": 3
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 12,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.515Z",
+    "updated_at": "2025-06-01T18:28:40.515Z",
+    "name": "Möbeltransport",
+    "category": 3
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 13,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.519Z",
+    "updated_at": "2025-06-01T18:28:40.519Z",
+    "name": "Entrümpelung",
+    "category": 3
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 14,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.522Z",
+    "updated_at": "2025-06-01T18:28:40.522Z",
+    "name": "Packhilfe",
+    "category": 3
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 15,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.526Z",
+    "updated_at": "2025-06-01T18:28:40.526Z",
+    "name": "Einlagerung",
+    "category": 3
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 16,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.536Z",
+    "updated_at": "2025-06-01T18:28:40.536Z",
+    "name": "Rasen mähen",
+    "category": 4
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 17,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.539Z",
+    "updated_at": "2025-06-01T18:28:40.540Z",
+    "name": "Hecke schneiden",
+    "category": 4
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 18,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.543Z",
+    "updated_at": "2025-06-01T18:28:40.543Z",
+    "name": "Gartenpflege",
+    "category": 4
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 19,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.547Z",
+    "updated_at": "2025-06-01T18:28:40.547Z",
+    "name": "Laub entfernen",
+    "category": 4
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 20,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.550Z",
+    "updated_at": "2025-06-01T18:28:40.550Z",
+    "name": "Pflanzenpflege",
+    "category": 4
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 21,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.559Z",
+    "updated_at": "2025-06-01T18:28:40.559Z",
+    "name": "Computerhilfe",
+    "category": 5
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 22,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.563Z",
+    "updated_at": "2025-06-01T18:28:40.563Z",
+    "name": "Netzwerkinstallation",
+    "category": 5
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 23,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.567Z",
+    "updated_at": "2025-06-01T18:28:40.567Z",
+    "name": "Smart Home Einrichtung",
+    "category": 5
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 24,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.572Z",
+    "updated_at": "2025-06-01T18:28:40.572Z",
+    "name": "Software-Installation",
+    "category": 5
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 25,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.576Z",
+    "updated_at": "2025-06-01T18:28:40.576Z",
+    "name": "Technikberatung",
+    "category": 5
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 26,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.582Z",
+    "updated_at": "2025-06-01T18:28:40.582Z",
+    "name": "Babysitten",
+    "category": 6
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 27,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.586Z",
+    "updated_at": "2025-06-01T18:28:40.586Z",
+    "name": "Hausaufgabenhilfe",
+    "category": 6
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 28,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.589Z",
+    "updated_at": "2025-06-01T18:28:40.589Z",
+    "name": "Abhol-/Bringdienste",
+    "category": 6
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 29,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.593Z",
+    "updated_at": "2025-06-01T18:28:40.593Z",
+    "name": "Spielbetreuung",
+    "category": 6
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 30,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.601Z",
+    "updated_at": "2025-06-01T18:28:40.601Z",
+    "name": "Begleitung",
+    "category": 7
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 31,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.604Z",
+    "updated_at": "2025-06-01T18:28:40.604Z",
+    "name": "Besorgungen",
+    "category": 7
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 32,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.607Z",
+    "updated_at": "2025-06-01T18:28:40.607Z",
+    "name": "Haushaltshilfe",
+    "category": 7
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 33,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.610Z",
+    "updated_at": "2025-06-01T18:28:40.610Z",
+    "name": "Gesellschaft leisten",
+    "category": 7
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 34,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.614Z",
+    "updated_at": "2025-06-01T18:28:40.614Z",
+    "name": "Pflegehilfe (nicht medizinisch)",
+    "category": 7
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 35,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.621Z",
+    "updated_at": "2025-06-01T18:28:40.621Z",
+    "name": "Gassi gehen",
+    "category": 8
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 36,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.624Z",
+    "updated_at": "2025-06-01T18:28:40.624Z",
+    "name": "Fütterung",
+    "category": 8
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 37,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.627Z",
+    "updated_at": "2025-06-01T18:28:40.628Z",
+    "name": "Tierpflege",
+    "category": 8
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 38,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.632Z",
+    "updated_at": "2025-06-01T18:28:40.632Z",
+    "name": "Urlaubsbetreuung",
+    "category": 8
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 39,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.638Z",
+    "updated_at": "2025-06-01T18:28:40.638Z",
+    "name": "Möbelmontage",
+    "category": 9
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 40,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.642Z",
+    "updated_at": "2025-06-01T18:28:40.642Z",
+    "name": "Fahrradreparatur",
+    "category": 9
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 41,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.646Z",
+    "updated_at": "2025-06-01T18:28:40.646Z",
+    "name": "Elektrogeräte",
+    "category": 9
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 42,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.650Z",
+    "updated_at": "2025-06-01T18:28:40.650Z",
+    "name": "Schlüsselnotdienst",
+    "category": 9
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 43,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.654Z",
+    "updated_at": "2025-06-01T18:28:40.654Z",
+    "name": "Smartphone / Tablet Reparatur",
+    "category": 9
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 44,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.660Z",
+    "updated_at": "2025-06-01T18:28:40.660Z",
+    "name": "Flughafentransfer",
+    "category": 10
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 45,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.665Z",
+    "updated_at": "2025-06-01T18:28:40.665Z",
+    "name": "Fahrdienste",
+    "category": 10
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 46,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.668Z",
+    "updated_at": "2025-06-01T18:28:40.668Z",
+    "name": "Fahrgemeinschaften",
+    "category": 10
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 47,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.671Z",
+    "updated_at": "2025-06-01T18:28:40.671Z",
+    "name": "Reisebegleitung",
+    "category": 10
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 48,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.680Z",
+    "updated_at": "2025-06-01T18:28:40.680Z",
+    "name": "Nachhilfe",
+    "category": 11
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 49,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.683Z",
+    "updated_at": "2025-06-01T18:28:40.683Z",
+    "name": "Sprachkurse",
+    "category": 11
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 50,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.687Z",
+    "updated_at": "2025-06-01T18:28:40.687Z",
+    "name": "Lernhilfe",
+    "category": 11
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 51,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.689Z",
+    "updated_at": "2025-06-01T18:28:40.689Z",
+    "name": "Karriere-Coaching",
+    "category": 11
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 52,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.694Z",
+    "updated_at": "2025-06-01T18:28:40.694Z",
+    "name": "Mentoring",
+    "category": 11
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 53,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.701Z",
+    "updated_at": "2025-06-01T18:28:40.701Z",
+    "name": "Fotografie",
+    "category": 12
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 54,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.705Z",
+    "updated_at": "2025-06-01T18:28:40.705Z",
+    "name": "Videobearbeitung",
+    "category": 12
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 55,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.709Z",
+    "updated_at": "2025-06-01T18:28:40.709Z",
+    "name": "Texterstellung",
+    "category": 12
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 56,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.713Z",
+    "updated_at": "2025-06-01T18:28:40.713Z",
+    "name": "Grafikdesign",
+    "category": 12
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 57,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.717Z",
+    "updated_at": "2025-06-01T18:28:40.717Z",
+    "name": "Social Media Betreuung",
+    "category": 12
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 58,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.724Z",
+    "updated_at": "2025-06-01T18:28:40.724Z",
+    "name": "Einkaufsservice",
+    "category": 13
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 59,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.727Z",
+    "updated_at": "2025-06-01T18:28:40.727Z",
+    "name": "Apothekengänge",
+    "category": 13
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 61,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.735Z",
+    "updated_at": "2025-06-01T18:28:40.735Z",
+    "name": "Warenabholung",
+    "category": 13
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 62,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.741Z",
+    "updated_at": "2025-06-01T18:28:40.741Z",
+    "name": "Massage",
+    "category": 14
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 63,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.745Z",
+    "updated_at": "2025-06-01T18:28:40.745Z",
+    "name": "Yoga / Meditation",
+    "category": 14
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 64,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.750Z",
+    "updated_at": "2025-06-01T18:28:40.750Z",
+    "name": "Ernährungsberatung",
+    "category": 14
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 65,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.754Z",
+    "updated_at": "2025-06-01T18:28:40.754Z",
+    "name": "Mental Health Unterstützung",
+    "category": 14
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 66,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.759Z",
+    "updated_at": "2025-06-01T18:28:40.759Z",
+    "name": "Trockenbau",
+    "category": 15
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 67,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.764Z",
+    "updated_at": "2025-06-01T18:28:40.764Z",
+    "name": "Bodenverlegung",
+    "category": 15
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 68,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.767Z",
+    "updated_at": "2025-06-01T18:28:40.767Z",
+    "name": "Fliesenlegen",
+    "category": 15
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 69,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.771Z",
+    "updated_at": "2025-06-01T18:28:40.771Z",
+    "name": "Maurerarbeiten",
+    "category": 15
+  }
+},
+{
+  "model": "core.subcategory",
+  "pk": 70,
+  "fields": {
+    "created_at": "2025-06-01T18:28:40.775Z",
+    "updated_at": "2025-06-01T18:28:40.775Z",
+    "name": "Innenausbau",
+    "category": 15
+  }
+},
+{
+  "model": "core.region",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.829Z",
+    "updated_at": "2025-06-01T18:28:33.829Z",
+    "name": "Aargau"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.836Z",
+    "updated_at": "2025-06-01T18:28:33.836Z",
+    "name": "Appenzell Ausserrhoden"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.840Z",
+    "updated_at": "2025-06-01T18:28:33.840Z",
+    "name": "Appenzell Innerrhoden"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.845Z",
+    "updated_at": "2025-06-01T18:28:33.845Z",
+    "name": "Basel-Landschaft"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.849Z",
+    "updated_at": "2025-06-01T18:28:33.849Z",
+    "name": "Basel-Stadt"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.852Z",
+    "updated_at": "2025-06-01T18:28:33.852Z",
+    "name": "Bern"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.856Z",
+    "updated_at": "2025-06-01T18:28:33.856Z",
+    "name": "Freiburg"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.859Z",
+    "updated_at": "2025-06-01T18:28:33.859Z",
+    "name": "Genf"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 9,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.862Z",
+    "updated_at": "2025-06-01T18:28:33.862Z",
+    "name": "Glarus"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.865Z",
+    "updated_at": "2025-06-01T18:28:33.865Z",
+    "name": "Graubünden"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 11,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.868Z",
+    "updated_at": "2025-06-01T18:28:33.868Z",
+    "name": "Jura"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 12,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.871Z",
+    "updated_at": "2025-06-01T18:28:33.871Z",
+    "name": "Luzern"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 13,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.874Z",
+    "updated_at": "2025-06-01T18:28:33.874Z",
+    "name": "Neuenburg"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 14,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.879Z",
+    "updated_at": "2025-06-01T18:28:33.879Z",
+    "name": "Nidwalden"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 15,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.881Z",
+    "updated_at": "2025-06-01T18:28:33.881Z",
+    "name": "Obwalden"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 16,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.883Z",
+    "updated_at": "2025-06-01T18:28:33.883Z",
+    "name": "Schaffhausen"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 17,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.887Z",
+    "updated_at": "2025-06-01T18:28:33.887Z",
+    "name": "Schwyz"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 18,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.891Z",
+    "updated_at": "2025-06-01T18:28:33.891Z",
+    "name": "Solothurn"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 19,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.894Z",
+    "updated_at": "2025-06-01T18:28:33.895Z",
+    "name": "St. Gallen"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 20,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.899Z",
+    "updated_at": "2025-06-01T18:28:33.899Z",
+    "name": "Tessin"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 21,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.903Z",
+    "updated_at": "2025-06-01T18:28:33.903Z",
+    "name": "Thurgau"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 22,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.906Z",
+    "updated_at": "2025-06-01T18:28:33.906Z",
+    "name": "Uri"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 23,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.910Z",
+    "updated_at": "2025-06-01T18:28:33.910Z",
+    "name": "Waadt"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 24,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.914Z",
+    "updated_at": "2025-06-01T18:28:33.914Z",
+    "name": "Wallis"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 25,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.917Z",
+    "updated_at": "2025-06-01T18:28:33.917Z",
+    "name": "Zug"
+  }
+},
+{
+  "model": "core.region",
+  "pk": 26,
+  "fields": {
+    "created_at": "2025-06-01T18:28:33.921Z",
+    "updated_at": "2025-06-01T18:28:33.921Z",
+    "name": "Zürich"
+  }
+},
+{
+  "model": "core.location",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-01T18:34:28.434Z",
+    "updated_at": "2025-06-01T18:34:28.434Z",
+    "name": "Bern Stadt",
+    "region": 6
+  }
+},
+{
+  "model": "core.location",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.785Z",
+    "updated_at": "2025-06-01T18:35:19.785Z",
+    "name": "Musterhuasen",
+    "region": 5
+  }
+},
+{
+  "model": "core.location",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-06T16:59:09.808Z",
+    "updated_at": "2025-06-06T16:59:09.808Z",
+    "name": "Züri - Stadt",
+    "region": 26
+  }
+},
+{
+  "model": "core.location",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-06-06T17:08:46.090Z",
+    "updated_at": "2025-06-06T17:08:46.090Z",
+    "name": "Bern",
+    "region": 6
+  }
+},
+{
+  "model": "core.location",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-06-06T17:15:02.356Z",
+    "updated_at": "2025-06-06T17:15:02.356Z",
+    "name": "Sankt Gallen",
+    "region": 19
+  }
+},
+{
+  "model": "core.location",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-06-06T17:49:48.021Z",
+    "updated_at": "2025-06-06T17:49:48.021Z",
+    "name": "Appenzell",
+    "region": 2
+  }
+},
+{
+  "model": "core.location",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-06-06T17:57:44.761Z",
+    "updated_at": "2025-06-06T17:57:44.761Z",
+    "name": "Langenthal",
+    "region": 6
+  }
+},
+{
+  "model": "core.location",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-06-06T18:03:13.436Z",
+    "updated_at": "2025-06-06T18:03:13.436Z",
+    "name": "Weltweit",
+    "region": 2
+  }
+},
+{
+  "model": "core.location",
+  "pk": 9,
+  "fields": {
+    "created_at": "2025-06-09T15:40:01.109Z",
+    "updated_at": "2025-06-09T15:40:01.109Z",
+    "name": "ui",
+    "region": 5
+  }
+},
+{
+  "model": "core.location",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-06-09T16:17:28.976Z",
+    "updated_at": "2025-06-09T16:17:28.976Z",
+    "name": "City",
+    "region": 1
+  }
+},
+{
+  "model": "core.location",
+  "pk": 11,
+  "fields": {
+    "created_at": "2025-06-09T16:38:43.440Z",
+    "updated_at": "2025-06-09T16:38:43.440Z",
+    "name": "Sankt Gallen",
+    "region": 15
+  }
+},
+{
+  "model": "usermanagment.registereduser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$A5CxxU0mc0T4rJrSaX4VwN$17L+2YYmdzGzMjF3uqBvIeRz6/95N+SxMkBYwoHuvZM=",
+    "last_login": "2025-06-09T17:45:53.134Z",
+    "created_at": "2025-06-01T18:29:16.063Z",
+    "updated_at": "2025-06-04T20:45:02.336Z",
+    "first_name": "Super",
+    "last_name": "Administrator",
+    "email": "admin@sidelink.ch",
+    "profession": "Verwaltung",
+    "phone_number": "12345678",
+    "street_address": "Adminstrasse 2",
+    "postal_code": "1234",
+    "location": "Web",
+    "region": 1,
+    "public_profile": 1,
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usermanagment.registereduser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$ZIVgQFo328nKY040X8iMyW$rW6N9tlz2Z7dnCl7+sRn+g44hhqwCNSnFu07Zr8ElgQ=",
+    "last_login": "2025-06-01T18:30:25.480Z",
+    "created_at": "2025-06-01T18:30:10.799Z",
+    "updated_at": "2025-06-04T20:39:52.556Z",
+    "first_name": "Max",
+    "last_name": "Mustermann",
+    "email": "max.mustermann@sidelink.ch",
+    "profession": "Muster sein",
+    "phone_number": "12345678",
+    "street_address": "Musterstrasse 1",
+    "postal_code": "1234",
+    "location": "Musterstadt",
+    "region": 2,
+    "public_profile": 2,
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usermanagment.registereduser",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$ZIVgQFo328nKY040X8iMyW$rW6N9tlz2Z7dnCl7+sRn+g44hhqwCNSnFu07Zr8ElgQ=",
+    "last_login": "2025-06-01T18:30:25.480Z",
+    "created_at": "2025-06-01T18:30:10.799Z",
+    "updated_at": "2025-06-04T20:39:52.562Z",
+    "first_name": "Max",
+    "last_name": "Mustermann",
+    "email": "max.mustermann@sidelink.de",
+    "profession": "Muster sein",
+    "phone_number": "12345678",
+    "street_address": "Musterstrasse 1",
+    "postal_code": "1234",
+    "location": "Musterstadt",
+    "region": 3,
+    "public_profile": 3,
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usermanagment.registereduser",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$b2RLbXpAIDP5PKhUrA3XMT$jmHvhuC707gdMD6/oXdtrfFPd7s5ckSfd2A78dN8O18=",
+    "last_login": "2025-06-06T20:00:34.400Z",
+    "created_at": "2025-06-06T17:55:28.799Z",
+    "updated_at": "2025-06-06T17:55:28.804Z",
+    "first_name": "kay",
+    "last_name": "hertenstein",
+    "email": "kay@sidelink.ch",
+    "profession": "Developer",
+    "phone_number": "0764673359",
+    "street_address": "Brennofenstrasse 2",
+    "postal_code": "4914",
+    "location": "Roggwil",
+    "region": 4,
+    "public_profile": 4,
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-01T18:34:28.464Z",
+    "updated_at": "2025-06-09T10:26:20.662Z",
+    "service_type": "offer",
+    "is_active": true,
+    "category": 5,
+    "region": 9,
+    "location": 1,
+    "additional_location_info": "ca. im Umkreis von 50km",
+    "title": "IT Support",
+    "description": "Gerne helfe cih bei allen möglochen Problemen was die IT betrifft.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      22
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 3,
+    "region": 9,
+    "location": 2,
+    "additional_location_info": "ca 20km",
+    "title": "Hilfe beim Umzug",
+    "description": "Ich habe bald einen Umzug und suche tatkräftige Hilfe um meinen Umtzug möglichst schnell zu erledigen.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      11,
+      13
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 9,
+    "region": 5,
+    "location": 2,
+    "additional_location_info": "ca 20km",
+    "title": "Hilfe beim Umzug",
+    "description": "Ich habe bald einen Umzug und suche tatkräftige Hilfe um meinen Umtzug möglichst schnell zu erledigen.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      12
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 8,
+    "region": 8,
+    "location": 2,
+    "additional_location_info": "innerhalb von 15km",
+    "title": "Umzugshelfer gesucht",
+    "description": "Ich suche zuverlässige Helfer für meinen Umzug am Wochenende.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      35,
+      37
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 9,
+    "region": 8,
+    "location": 2,
+    "additional_location_info": "im Raum Basel",
+    "title": "Transporthilfe für Möbel",
+    "description": "Ich brauche Hilfe beim Tragen und Transportieren von Möbelstücken.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      40,
+      41
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 10,
+    "region": 7,
+    "location": 2,
+    "additional_location_info": "ca. 10km Umkreis",
+    "title": "Hilfe beim Packen",
+    "description": "Ich suche Unterstützung beim Einpacken meiner Wohnung.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      44,
+      45
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 11,
+    "region": 7,
+    "location": 2,
+    "additional_location_info": "nur Samstag verfügbar",
+    "title": "Kisten schleppen",
+    "description": "Ich brauche Hilfe beim Tragen vieler Umzugskartons.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      49,
+      50
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 12,
+    "region": 6,
+    "location": 2,
+    "additional_location_info": "Nähe Bahnhof",
+    "title": "Keller ausräumen",
+    "description": "Ich suche Hilfe beim Entrümpeln meines Kellers vor dem Umzug.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      55,
+      57
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 9,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 13,
+    "region": 5,
+    "location": 1,
+    "additional_location_info": "Zürcher Umgebung",
+    "title": "Einlagerungshilfe gesucht",
+    "description": "Ich suche jemanden, der mir beim Einlagern von Gegenständen hilft.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      58,
+      59
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 14,
+    "region": 4,
+    "location": 1,
+    "additional_location_info": "flexibel in der Woche",
+    "title": "Umzug in Etappen",
+    "description": "Ich plane einen Umzug in mehreren Etappen und suche Hilfe.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      63,
+      64
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 11,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-01T18:35:19.811Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 15,
+    "region": 3,
+    "location": 1,
+    "additional_location_info": "im Radius von 25km",
+    "title": "Möbelaufbau nach Umzug",
+    "description": "Ich suche Hilfe beim Aufbau meiner Möbel nach dem Umzug.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      66,
+      67
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 12,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-09T10:27:51.426Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 15,
+    "region": 2,
+    "location": 1,
+    "additional_location_info": "Abends oder Wochenende",
+    "title": "Abtransport von Sperrmüll",
+    "description": "Ich brauche Hilfe beim Entsorgen von Sperrmüll nach dem Umzug.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      70
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 13,
+  "fields": {
+    "created_at": "2025-06-01T18:35:19.811Z",
+    "updated_at": "2025-06-09T10:28:28.520Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 3,
+    "region": 1,
+    "location": 1,
+    "additional_location_info": "Zielort in Basel",
+    "title": "Fahrer für Umzug gesucht",
+    "description": "Ich suche jemanden mit Transporter, der mir beim Umzug hilft.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      11
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 14,
+  "fields": {
+    "created_at": "2025-06-06T17:00:25.647Z",
+    "updated_at": "2025-06-09T16:29:42.813Z",
+    "service_type": "offer",
+    "is_active": true,
+    "category": 5,
+    "region": 26,
+    "location": 3,
+    "additional_location_info": "Im Raum Züri - Stadt",
+    "title": "IT Hilfe",
+    "description": "Sehr geehrte Damen und Herren,\n\nwir bieten Ihnen professionelle Unterstützung in allen Fragen rund um Ihre IT-Infrastruktur. Ob kleine Störungen, größere Ausfälle oder die kontinuierliche Wartung Ihrer Systeme – wir sind für Sie da.",
+    "user": 1,
+    "public_profile_id": 1,
+    "sub_categories": [
+      21,
+      22,
+      23
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 15,
+  "fields": {
+    "created_at": "2025-06-06T17:08:46.113Z",
+    "updated_at": "2025-06-09T16:29:23.239Z",
+    "service_type": "offer",
+    "is_active": true,
+    "category": 5,
+    "region": 6,
+    "location": 4,
+    "additional_location_info": "Agglomeration Bern",
+    "title": "Online Marketing",
+    "description": "Sehr geehrte Damen und Herren,\n\nwir unterstützen Sie dabei, Ihr Unternehmen online optimal zu positionieren – strategisch, zielgerichtet und messbar. Mit modernen Online-Marketing-Maßnahmen sorgen wir dafür, dass Sie Ihre Zielgruppe erreichen und Ihre Umsätze steigern.",
+    "user": 1,
+    "public_profile_id": 1,
+    "sub_categories": []
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 16,
+  "fields": {
+    "created_at": "2025-06-06T17:11:03.618Z",
+    "updated_at": "2025-06-09T16:37:30.087Z",
+    "service_type": "offer",
+    "is_active": true,
+    "category": 1,
+    "region": 6,
+    "location": 4,
+    "additional_location_info": "Agglomeration Bern",
+    "title": "Bite Umzugshilfe",
+    "description": "Biete flexible möglichkeit bei einem bevorstehendem Umzug",
+    "user": 1,
+    "public_profile_id": 1,
+    "sub_categories": [
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 17,
+  "fields": {
+    "created_at": "2025-06-06T17:15:02.387Z",
+    "updated_at": "2025-06-09T16:38:43.459Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 2,
+    "region": 15,
+    "location": 11,
+    "additional_location_info": "Stadt St.Gallen im Umkreis von ca. 30km",
+    "title": "Ich Suche Hilfe um mein Haus neu zu malen",
+    "description": "Ich renoviere aktuell mein Haus und brauche Hilfe beim neuanstrich meiner Wände",
+    "user": 1,
+    "public_profile_id": 1,
+    "sub_categories": [
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 18,
+  "fields": {
+    "created_at": "2025-06-06T17:49:48.050Z",
+    "updated_at": "2025-06-09T16:54:36.730Z",
+    "service_type": "offer",
+    "is_active": true,
+    "category": 2,
+    "region": 2,
+    "location": 6,
+    "additional_location_info": "Agglomeration Appenzell",
+    "title": "Genre Hälfe ich Ihnen bei Gartenarbeiten",
+    "description": "Ich helfe und unterstütze gerne in verschiedenen Gartenarbeiten.",
+    "user": 1,
+    "public_profile_id": 1,
+    "sub_categories": [
+      7,
+      8
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 19,
+  "fields": {
+    "created_at": "2025-06-06T17:57:44.787Z",
+    "updated_at": "2025-06-06T17:57:44.787Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 3,
+    "region": 6,
+    "location": 7,
+    "additional_location_info": "Im Umkreis von Langenthal",
+    "title": "Einlagerungsmöglichkeit gesucht",
+    "description": "Wegen des anstehenden Umzugs suche ich die Möglichkeit diverses Material einzulagern.",
+    "user": 2,
+    "public_profile_id": 2,
+    "sub_categories": [
+      12,
+      15
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 20,
+  "fields": {
+    "created_at": "2025-06-06T18:03:13.457Z",
+    "updated_at": "2025-06-09T10:29:31.075Z",
+    "service_type": "search",
+    "is_active": true,
+    "category": 12,
+    "region": 2,
+    "location": 8,
+    "additional_location_info": "Im digitalen raum",
+    "title": "Ich suche einen Fotografen",
+    "description": "Anlässlich meiner Heirat, suche ich einen Fotografen der mir meine Fotos bearbeitet",
+    "user": 3,
+    "public_profile_id": 3,
+    "sub_categories": [
+      53
+    ]
+  }
+},
+{
+  "model": "publicservice.publicservice",
+  "pk": 22,
+  "fields": {
+    "created_at": "2025-06-09T16:17:29.000Z",
+    "updated_at": "2025-06-09T16:17:29.000Z",
+    "service_type": "offer",
+    "is_active": true,
+    "category": 2,
+    "region": 1,
+    "location": 10,
+    "additional_location_info": "Agglomeration Aargau",
+    "title": "Ich kann Handwerkliche Tätigkeiten übernehmen",
+    "description": "Ich bin das Handwerkliche Mastermind",
+    "user": 1,
+    "public_profile_id": 1,
+    "sub_categories": [
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "publicprofile.publicprofile",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-06-01T18:29:16.068Z",
+    "updated_at": "2025-06-09T16:39:34.659Z",
+    "user": 1,
+    "showed_name": "Admin",
+    "description": "Admin",
+    "contact_info": "Admin@sidelink.ch",
+    "public_profile_picture": ""
+  }
+},
+{
+  "model": "publicprofile.publicprofile",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-06-01T18:30:10.803Z",
+    "updated_at": "2025-06-01T18:33:39.227Z",
+    "user": 2,
+    "showed_name": "Max Mustermann",
+    "description": "Max Mustermann – Experte für digitale Lösungen\nMax Mustermann ist ein erfahrener Fachmann im Bereich Softwareentwicklung und digitale Transformation. Mit einem starken Fokus auf benutzerzentriertem Design und effizienten Technologien unterstützt er Unternehmen dabei, moderne Webanwendungen und skalierbare Systeme zu entwickeln. Seine Leidenschaft gilt innovativen Lösungen, die echten Mehrwert schaffen.",
+    "contact_info": "Name: Max Mustermann\n\nTelefon: +49 170 1234567\n\nE-Mail: max.mustermann@example.com\n\nAdresse: Musterstraße 12, 12345 Musterstadt, Deutschland\n\nWebsite: www.maxmustermann.de\n\nLinkedIn: linkedin.com/in/max-mustermann\n\nTwitter: @MaxMustermann",
+    "public_profile_picture": ""
+  }
+},
+{
+  "model": "publicprofile.publicprofile",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-06-01T18:30:10.803Z",
+    "updated_at": "2025-06-01T18:33:39.227Z",
+    "user": 3,
+    "showed_name": "Max Mustermann",
+    "description": "Max Mustermann – Experte für digitale Lösungen\nMax Mustermann ist ein erfahrener Fachmann im Bereich Softwareentwicklung und digitale Transformation. Mit einem starken Fokus auf benutzerzentriertem Design und effizienten Technologien unterstützt er Unternehmen dabei, moderne Webanwendungen und skalierbare Systeme zu entwickeln. Seine Leidenschaft gilt innovativen Lösungen, die echten Mehrwert schaffen.",
+    "contact_info": "Name: Max Mustermann\n\nTelefon: +49 170 1234567\n\nE-Mail: max.mustermann@example.com\n\nAdresse: Musterstraße 12, 12345 Musterstadt, Deutschland\n\nWebsite: www.maxmustermann.de\n\nLinkedIn: linkedin.com/in/max-mustermann\n\nTwitter: @MaxMustermann",
+    "public_profile_picture": ""
+  }
+},
+{
+  "model": "publicprofile.publicprofile",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-06-06T17:55:28.802Z",
+    "updated_at": "2025-06-06T17:55:28.802Z",
+    "user": 4,
+    "showed_name": null,
+    "description": null,
+    "contact_info": null,
+    "public_profile_picture": ""
+  }
+}
+]

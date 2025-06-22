@@ -35,7 +35,7 @@ const publicServices = [
       { id: 72, name: 'Smart Home Einrichtung' },
       { id: 73, name: 'Netzwerkinstallation' },
     ],
-    title: 'IT Support',
+    title: 'Umzugshilfe',
     updated_at: '2025-06-01T20:34:28.464000+02:00',
     user: 2,
   },

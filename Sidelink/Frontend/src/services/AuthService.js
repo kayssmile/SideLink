@@ -10,7 +10,7 @@ async function checkAuth() {
       try {
         const refresh = await refreshAccessToken(refreshToken);
         return refresh;
-      } catch (error) {
+      } catch {
         removeToken();
         removeRefreshToken();
         return false;
