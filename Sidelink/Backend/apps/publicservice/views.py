@@ -29,8 +29,8 @@ class PublicServiceView(APIView):
         tags=["Public Service"]
     )
     def post(self, request):
-        # Util function to check if the category, sub_category, region, and location exist in the database, if not create them. Provides flexibility for frontend changes.
-        data = DbService.check_exist_or_create(request)
+        db_service = DbService(request, required_fields=['category', 'region', 'location'])
+        data = db_service.check_all()        
         try:
             user = request.user
             public_profile = user.public_profile
@@ -99,7 +99,8 @@ class PublicServiceView(APIView):
         tags=["Public Service"]
     )
     def put(self, request):
-        data = DbService.check_exist_or_create(request)
+        db_service = DbService(request, required_fields=['category', 'region', 'location'])
+        data = db_service.check_all()
         try:
             public_service = PublicService.objects.get(id=request.data.get('public_service_id'))
         except PublicService.DoesNotExist:

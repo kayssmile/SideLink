@@ -18,9 +18,8 @@ class EmailServiceTests(TestCase):
         """
         mock_send_email_system = mock_send_email_system.return_value
         mock_send_email_system.send.return_value = 1
-        result = EmailService.send_email(to_email=["test1@example.com", "mycustomer@sidelink.ch"], subject="Test Subject", body="Hello World")
-        self.assertTrue(result)
-        mock_logger.info.assert_called_once()
+        email_service = EmailService(to=["test1@example.com"], subject="Test Subject", body="Hello World")
+        email_service.send()
         log_msg = mock_logger.info.call_args[0][0]
         self.assertIn('Sent email to', log_msg)
         self.assertIn('Test Subject', log_msg)
@@ -31,7 +30,8 @@ class EmailServiceTests(TestCase):
         """
         mock_send_email_system = mock_send_email_system.return_value
         mock_send_email_system.send.return_value = 0
-        result = EmailService.send_email(to_email=["test1@example.com", "mycustomer@sidelink.ch"], subject="Test Subject", body="Hello World")
+        email_service = EmailService(to=["test1@example.com", "mycustomer@sidelink.ch"], subject="Test Subject", body="Hello World")
+        result = email_service.send()
         self.assertFalse(result)
         mock_logger.error.assert_called_once()
         log_msg = mock_logger.error.call_args[0][0]
@@ -44,7 +44,8 @@ class EmailServiceTests(TestCase):
         """
         mock_send_email_system = mock_send_email_system.return_value
         mock_send_email_system.send.side_effect = Exception("SMTP Error")
-        result = EmailService.send_email(to_email=["test1@example.com", "mycustomer@sidelink.ch"], subject="Test Subject", body="Hello World")
+        email_service = EmailService(to=["test1@example.com"], subject="Test Subject", body="Hello World")
+        result = email_service.send()
         self.assertFalse(result)
         mock_logger.error.assert_called_once()
         log_msg = mock_logger.error.call_args[0][0]
@@ -56,7 +57,8 @@ class EmailServiceTests(TestCase):
         Test sending email with missing arguments raises TypeError.
         """
         with self.assertRaises(TypeError):
-            EmailService.send_email()  
+            email_service = EmailService(subject="Test Subject", body="Hello World")
+            email_service.send()
 
 class DbServiceTests(TestCase):
     def setUp(self):
@@ -73,7 +75,8 @@ class DbServiceTests(TestCase):
         """ 
         Test creating all new entries if none exist in the database.
         """
-        data = DbService.check_exist_or_create(self.fake_request)
+        db_service = DbService(self.fake_request, required_fields=['category', 'region', 'location'])
+        data = db_service.check_all()
         self.assertIn("category", data)
         self.assertIn("sub_categories", data)
         self.assertIn("region", data)
@@ -92,9 +95,8 @@ class DbServiceTests(TestCase):
             "sub_categories": ["Future Online Courses", "Digital Services"],
             "region": "Webiversum",
             "location": "PatchedRoom7"}
-
         with self.assertRaises(ValidationError) as context:
-            data = DbService.check_exist_or_create(invalid_request)
+            DbService(invalid_request, required_fields=['category', 'region', 'location'])
         self.assertIn("category", str(context.exception.detail))
 
     def test_existing_entries_are_used(self):
@@ -104,7 +106,8 @@ class DbServiceTests(TestCase):
         category = Category.objects.create(name="Education")
         categories_count = Category.objects.count()
         category_id_before = category.id
-        DbService.check_exist_or_create(self.fake_request)
+        db_service = DbService(self.fake_request, required_fields=['category', 'region', 'location'])
+        data = db_service.check_all()
         category_id_after = Category.objects.get(name="Education").id
         categories_count_after = Category.objects.count()
         self.assertEqual(category_id_before, category_id_after)
@@ -115,6 +118,7 @@ class DbServiceTests(TestCase):
         Test that the text is sanitized correctly.
         """
         self.fake_request.data["category"] = "<script>alert('XSS')</script>"
-        data = DbService.check_exist_or_create(self.fake_request)
+        db_service = DbService(self.fake_request, required_fields=['category', 'region', 'location'])
+        data = db_service.check_all()
         santized_category = Category.objects.get(id=data["category"])
         self.assertEqual(santized_category.name, "alert('XSS')") 

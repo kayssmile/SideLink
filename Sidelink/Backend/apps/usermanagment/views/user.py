@@ -28,8 +28,9 @@ class RegisterUserView(APIView):
     def post(self, request):
         if RegisteredUser.objects.filter(email=request.data.get('email')).exists():
             return Response({"error": "A user with this email already exists"}, status=status.HTTP_400_BAD_REQUEST)
-        data = DbService.check_exist_or_create_region(request)
-        serializer = RegisteredUserSerializer(data=data)
+        db_service = DbService(request, required_fields=['region'])
+        db_service.check_region() 
+        serializer = RegisteredUserSerializer(data=db_service.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -83,12 +84,14 @@ class RegisteredUserView(APIView):
                 {"error": "A user with this email already exists"},
                 status=status.HTTP_400_BAD_REQUEST
                 )
-        data = DbService.check_exist_or_create_region(request) if request.data.get('region') else request.data.copy()
+        data = request.data.copy()
+        if request.data.get('region'):
+            db_service = DbService(request, required_fields=['region'])
+            db_service.check_region()
+            data = db_service.data       
         serializer = CustomUserSerializer(user, data=data, partial=True)
-        print(data)
         if serializer.is_valid():
             serializer.save()
-            print("Serializer data:", serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

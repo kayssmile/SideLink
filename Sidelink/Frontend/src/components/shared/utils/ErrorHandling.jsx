@@ -26,7 +26,7 @@ const basicFormErrorMessage = error => {
     );
   }
   return (
-    <Typography color="error" sx={{ textAlign: 'center', mb: '1rem' }}>
+    <Typography color="error" sx={{ textAlign: 'center', mb: '1rem', width: '100%' }}>
       Technische Störungen, bitte versuche es später nochmals oder{' '}
       <Typography
         component="span"

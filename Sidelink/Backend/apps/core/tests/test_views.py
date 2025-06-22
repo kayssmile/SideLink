@@ -1,9 +1,8 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from unittest import mock
+from unittest.mock import patch
 from django.urls import reverse
-from django.conf import settings
 from apps.usermanagment.models import RegisteredUser
 from apps.publicservice.models import PublicService
 
@@ -71,27 +70,29 @@ class ContactMessageTests(APITestCase):
             "message": "Dies ist eine Nachricht"
         }
 
-    @mock.patch("apps.core.services.email_service.EmailService.send_email")
-    def test_process_message_success(self, mock_send_email):
+    # To prevent logging we mock the logger
+    @patch('apps.core.services.email_service.logger')
+    @patch('apps.core.services.email_service.EmailMessage')
+    def test_process_message_success(self, mock_send_email_system, mock_logger):
         """
         Test successful contact message and email sending.
         """
-        mock_send_email.return_value = True
-        settings.ADMIN_EMAIL = "admin@example.com"
+        mock_send_email_system = mock_send_email_system.return_value
+        mock_send_email_system.send.return_value = 1
         response = self.client.post(self.url, self.valid_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        mock_send_email.assert_called_once()
 
-    @mock.patch("apps.core.services.email_service.EmailService.send_email")
-    def test_process_message_email_fail(self, mock_send_email):
+    @patch('apps.core.services.email_service.logger')
+    @patch('apps.core.services.email_service.EmailMessage')
+    def test_process_message_email_fail(self, mock_send_email_system, mock_logger):
         """
         Test failure when email sending fails.
         """
-        mock_send_email.return_value = False
-        settings.ADMIN_EMAIL = "admin@example.com"
+        mock_send_email_system = mock_send_email_system.return_value
+        mock_send_email_system.send.return_value = 0
         response = self.client.post(self.url, self.valid_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
-        self.assertEqual(response.data['message'], "Email could not be sent.")
+        self.assertEqual(response.data['message'], "Email could not be sent.") 
 
     def test_process_message_invalid_payload(self):
         """

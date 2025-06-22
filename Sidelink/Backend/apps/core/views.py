@@ -12,7 +12,7 @@ from apps.publicservice.models import PublicService
 from apps.usermanagment.serializers import CustomUserSerializer
 from apps.publicprofile.serializers import PublicProfileSerializer
 from apps.publicservice.serializers import PublicServiceSerializer
-from apps.core.services import email_service
+from apps.core.services.email_service import EmailService
 from .serializers import ContactMessageSerializer
 
 
@@ -140,9 +140,10 @@ def get_public_data(request):
 def process_message(request):
     serializer = ContactMessageSerializer(data=request.data)
     if serializer.is_valid():
+        email_body = "\n".join(f"{key}: {value}" for key, value in serializer.validated_data.items() if key != 'honeypot')
+        email_service = EmailService(to=[settings.ADMIN_EMAIL, serializer.validated_data['email']], subject='Kontakt Anfrage über Sidelink', body=email_body)
+        sent_message = email_service.send()
         serializer.save()
-        admin_email = settings.ADMIN_EMAIL
-        sent_message = email_service.EmailService.send_email(to_email=admin_email, subject=serializer.validated_data['subject'], body=serializer.validated_data['message'])
         if not sent_message:
             return Response({"message": "Email could not be sent."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

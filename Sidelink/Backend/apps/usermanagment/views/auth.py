@@ -100,7 +100,8 @@ class ForgotPasswordView(APIView):
             # Construct the password reset link
             reset_link = f"{client_url}/password-reset/{uid}/{token}/"
             # Send the email with the reset link
-            sent_message = EmailService.send_email(to_email=user.email, subject="Passwort zurücksetzen", body=f"Klicke auf den folgenden Link, um dein Passwort zurückzusetzen: {reset_link}")
+            email_service = EmailService(to=user.email, subject="Passwort zurücksetzen", body=f"Klicke auf den folgenden Link, um dein Passwort zurückzusetzen: {reset_link}")
+            sent_message = email_service.send()
             if not sent_message:
                 return Response({"message": "Email not sent"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)    
         except RegisteredUser.DoesNotExist:

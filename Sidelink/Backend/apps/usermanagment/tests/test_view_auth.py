@@ -100,14 +100,18 @@ class ForgotPasswordViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(mail.outbox), 0)
 
-    @patch("apps.core.services.email_service.EmailService.send_email", return_value=False)
-    def test_forgot_passwort_email_failed(self, mock_send_email):
+    # To prevent real logging we mock the logger
+    @patch('apps.core.services.email_service.logger')
+    # to prevent real email sending, we mock the EmailMessage class
+    @patch('apps.core.services.email_service.EmailMessage')
+    def test_forgot_passwort_email_failed(self, mock_send_email_system, mock_logger):
         """Test password forgot with email sending failure."""
+        mock_send_email_system = mock_send_email_system.return_value
+        mock_send_email_system.send.return_value = 0
         url = reverse('forgot_password')
         data = {"email": "auth@example.com"}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
-        mock_send_email.assert_called_once()
 
 class PasswortResetViewTest(APITestCase):
     def setUp(self):
